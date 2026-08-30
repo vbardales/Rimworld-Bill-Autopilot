@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ModMetaData>
+  <name>Bill Autopilot</name>
+  <author>nelim</author>
+  <packageId>nelim.billautopilot</packageId>
+  <supportedVersions>
+    <li>1.6</li>
+  </supportedVersions>
+  <description>Say once what a workbench is for, and stop rewriting its bill list.
+
+Put a workbench type on autopilot and it takes every recipe it can do. A bill goes up when there is work to do, and comes down once the shelf is full — so the tab shows what is left to make, not a wall of configuration you have to scroll past.
+
+WHEN A RECIPE IS UNLOCKED
+
+The point of the mod. Finish the research, and the recipe joins its workbench on its own, as a suspended bill plus a letter naming it. Unsuspend it to accept, delete it to refuse — the autopilot will not offer it again. Nothing is ever spent behind your back.
+
+WHAT YOU SET
+
+- Per workbench type, so a bench you build later is already configured.
+- A default for every recipe: keep a stock of N, or always.
+- Butchering, smelting, cremation and anything else the game cannot count get their own setting, since "keep N in stock" is impossible for them.
+- Any recipe can override the default, or be left out entirely.
+
+Change a bill's target in the bills tab and the autopilot keeps it: adjusting the bill IS adjusting the profile.
+
+WHY NOT "DO 1 TIME"
+
+A standing order that says "make one" would be remade the moment it finished, forever. "Keep 1 in stock" gives you what people usually want from it, and stops on its own.
+
+WORKS WITH
+
+Nothing is replaced in the bills tab, so mods that redraw it keep working — tested against Nice Bill Tab, Better Workbench Management, Categorized Bill Dropdown and Choose Your Recipe. Bills placed by hand always win over the autopilot: put one up yourself and it steps aside for that recipe.
+
+Can be added to a game in progress. Removing it leaves ordinary bills behind, which you can delete like any other.
+
+Interface in English and French. Every control is reachable with a pointer, no keyboard needed — designed with the Steam Deck in mind.
+
+IF I GO QUIET
+
+If I do not answer within a reasonable time after being contacted, anyone may freely update this or any other of my mods, including publishing a continuation of it. All credit must be preserved.
+
+AI-GENERATED
+
+This mod's code was written with Claude Code (Anthropic), under human direction, review and testing. Stated openly: designing with these tools is my job.
+
+THANKS
+
+Claude Code (Anthropic). Andreas Pardeike for Harmony.
+
+This mod is MIT licensed.</description>
+  <modDependencies>
+    <li>
+      <packageId>brrainz.harmony</packageId>
+      <displayName>Harmony</displayName>
+      <steamWorkshopUrl>steam://url/CommunityFilePage/2009463077</steamWorkshopUrl>
+      <downloadUrl>https://github.com/pardeike/HarmonyRimWorld/releases/latest</downloadUrl>
+    </li>
+  </modDependencies>
+  <loadAfter>
+    <li>brrainz.harmony</li>
+    <li>Ludeon.RimWorld</li>
+    <li>Ludeon.RimWorld.Royalty</li>
+    <li>Ludeon.RimWorld.Ideology</li>
+    <li>Ludeon.RimWorld.Biotech</li>
+    <li>Ludeon.RimWorld.Anomaly</li>
+    <li>Ludeon.RimWorld.Odyssey</li>
+  </loadAfter>
+</ModMetaData>

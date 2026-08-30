@@ -1,0 +1,15 @@
+<Project>
+
+  <PropertyGroup>
+    <!--
+      Les intermediaires de compilation sortent du dossier du mod. L'uploader Workshop de RimWorld
+      envoie le dossier entier (SteamUGC.SetItemContent sur la racine, aucune exclusion possible) :
+      un .build/ pose dans le mod est invisible pour git mais part quand meme sur le Workshop, avec
+      l'Assembly-CSharp.dll publicisee de 5,8 Mo qu'il contient. Doit rester dans un
+      Directory.Build.props : la restauration NuGet lit cette propriete avant le csproj.
+    -->
+    <BaseIntermediateOutputPath>$(MSBuildThisFileDirectory)..\..\.build\obj\BillAutopilot\</BaseIntermediateOutputPath>
+    <BaseOutputPath>$(MSBuildThisFileDirectory)..\..\.build\bin\BillAutopilot\</BaseOutputPath>
+  </PropertyGroup>
+
+</Project>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <BillAutopilot.Settings.Intro>Pick which workbench types run on autopilot. For each one, the mod keeps bills alive on its own: a bill appears when there is work to do and steps aside once it is done, so the tab stays short. Recipes unlocked later are added by themselves.</BillAutopilot.Settings.Intro>
+  <BillAutopilot.Settings.Notify>Announce newly unlocked recipes</BillAutopilot.Settings.Notify>
+  <BillAutopilot.Settings.NotifyDesc>A recipe unlocked after a workbench was put on autopilot arrives as a suspended bill, so it never spends anything behind your back. This sends a letter listing them.</BillAutopilot.Settings.NotifyDesc>
+  <BillAutopilot.Settings.MaxBills>At most {0} automatic bills per workbench</BillAutopilot.Settings.MaxBills>
+  <BillAutopilot.Settings.Configure>Configure...</BillAutopilot.Settings.Configure>
+  <BillAutopilot.Settings.SummaryOff>{0} recipes</BillAutopilot.Settings.SummaryOff>
+  <BillAutopilot.Settings.SummaryMaintain>{0} recipes, keep {1}, {2} overridden</BillAutopilot.Settings.SummaryMaintain>
+  <BillAutopilot.Settings.SummaryAlways>{0} recipes, always on, {1} overridden</BillAutopilot.Settings.SummaryAlways>
+
+  <BillAutopilot.Profile.Enabled>Autopilot on for this workbench type</BillAutopilot.Profile.Enabled>
+  <BillAutopilot.Profile.EnabledDesc>Applies to every workbench of this kind, the ones you build later included.</BillAutopilot.Profile.EnabledDesc>
+  <BillAutopilot.Profile.DefaultMode>Default for every recipe</BillAutopilot.Profile.DefaultMode>
+  <BillAutopilot.Profile.Target>Keep in stock</BillAutopilot.Profile.Target>
+  <BillAutopilot.Profile.Floor>Start again at</BillAutopilot.Profile.Floor>
+  <BillAutopilot.Profile.Uncountable>Recipes with no countable product</BillAutopilot.Profile.Uncountable>
+  <BillAutopilot.Profile.UncountableDesc>Butchering, smelting, cremation, surgery and anything else the game cannot count: "keep in stock" is impossible for them, so they follow this setting instead.</BillAutopilot.Profile.UncountableDesc>
+  <BillAutopilot.Profile.UncountableRecipe>The game cannot count what this recipe produces, so it follows the setting for uncountable recipes.</BillAutopilot.Profile.UncountableRecipe>
+  <BillAutopilot.Profile.OverridesOnly>Overridden recipes only</BillAutopilot.Profile.OverridesOnly>
+  <BillAutopilot.Profile.ClearOverrides>Clear the {0} overrides</BillAutopilot.Profile.ClearOverrides>
+
+  <BillAutopilot.Mode.Maintain>Keep in stock</BillAutopilot.Mode.Maintain>
+  <BillAutopilot.Mode.Always>Always</BillAutopilot.Mode.Always>
+  <BillAutopilot.Mode.Excluded>Never</BillAutopilot.Mode.Excluded>
+  <BillAutopilot.Mode.Inherit>Default ({0})</BillAutopilot.Mode.Inherit>
+  <BillAutopilot.Mode.InheritShort>Default</BillAutopilot.Mode.InheritShort>
+
+  <BillAutopilot.Gizmo.Toggle>Bill autopilot</BillAutopilot.Gizmo.Toggle>
+  <BillAutopilot.Gizmo.ToggleDesc>Run every {0} on autopilot: bills are put up and taken down on their own, and recipes unlocked later join in.</BillAutopilot.Gizmo.ToggleDesc>
+  <BillAutopilot.Gizmo.Configure>Autopilot profile</BillAutopilot.Gizmo.Configure>
+  <BillAutopilot.Gizmo.ConfigureDesc>Set what the autopilot does on every {0}, recipe by recipe.</BillAutopilot.Gizmo.ConfigureDesc>
+
+  <BillAutopilot.NewRecipeLine>{0} — {1}</BillAutopilot.NewRecipeLine>
+  <BillAutopilot.NewRecipeLetterTitle>{0} new recipes available</BillAutopilot.NewRecipeLetterTitle>
+  <BillAutopilot.NewRecipeLetterBody>The autopilot has put these up as suspended bills. Unsuspend the ones you want; delete the ones you do not, and it will leave them alone from now on.\n\n{0}</BillAutopilot.NewRecipeLetterBody>
+  <BillAutopilot.DriftCaptured>{0} kept as an override on the {1} profile.</BillAutopilot.DriftCaptured>
+  <BillAutopilot.RecipeExcluded>{0} will no longer be put up on a {1}.</BillAutopilot.RecipeExcluded>
+
+</LanguageData>

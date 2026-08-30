@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <BillAutopilot.Settings.Intro>Choisissez les types d'établi à mettre sous pilote automatique. Sur chacun, le mod tient les travaux tout seul : un travail apparaît quand il y a de quoi faire et s'efface une fois la tâche remplie, si bien que l'onglet reste court. Les recettes débloquées plus tard s'ajoutent d'elles-mêmes.</BillAutopilot.Settings.Intro>
+  <BillAutopilot.Settings.Notify>Signaler les nouvelles recettes</BillAutopilot.Settings.Notify>
+  <BillAutopilot.Settings.NotifyDesc>Une recette débloquée après la mise sous pilote arrive en travail suspendu : elle ne dépense donc jamais rien à votre insu. Ceci envoie une lettre qui les récapitule.</BillAutopilot.Settings.NotifyDesc>
+  <BillAutopilot.Settings.MaxBills>Au plus {0} travaux automatiques par établi</BillAutopilot.Settings.MaxBills>
+  <BillAutopilot.Settings.Configure>Configurer...</BillAutopilot.Settings.Configure>
+  <BillAutopilot.Settings.SummaryOff>{0} recettes</BillAutopilot.Settings.SummaryOff>
+  <BillAutopilot.Settings.SummaryMaintain>{0} recettes, maintenir {1}, {2} surchargées</BillAutopilot.Settings.SummaryMaintain>
+  <BillAutopilot.Settings.SummaryAlways>{0} recettes, toujours actives, {1} surchargées</BillAutopilot.Settings.SummaryAlways>
+
+  <BillAutopilot.Profile.Enabled>Pilote automatique actif sur ce type d'établi</BillAutopilot.Profile.Enabled>
+  <BillAutopilot.Profile.EnabledDesc>Vaut pour tous les établis de ce type, y compris ceux que vous construirez ensuite.</BillAutopilot.Profile.EnabledDesc>
+  <BillAutopilot.Profile.DefaultMode>Par défaut, pour chaque recette</BillAutopilot.Profile.DefaultMode>
+  <BillAutopilot.Profile.Target>Maintenir un stock de</BillAutopilot.Profile.Target>
+  <BillAutopilot.Profile.Floor>Relancer à</BillAutopilot.Profile.Floor>
+  <BillAutopilot.Profile.Uncountable>Recettes au produit non comptable</BillAutopilot.Profile.Uncountable>
+  <BillAutopilot.Profile.UncountableDesc>Découpe, fonte, crémation, chirurgie et tout ce que le jeu ne sait pas compter : « maintenir un stock » leur est impossible, elles suivent donc ce réglage.</BillAutopilot.Profile.UncountableDesc>
+  <BillAutopilot.Profile.UncountableRecipe>Le jeu ne sait pas compter ce que produit cette recette : elle suit le réglage des recettes non comptables.</BillAutopilot.Profile.UncountableRecipe>
+  <BillAutopilot.Profile.OverridesOnly>Seulement les recettes surchargées</BillAutopilot.Profile.OverridesOnly>
+  <BillAutopilot.Profile.ClearOverrides>Effacer les {0} surcharges</BillAutopilot.Profile.ClearOverrides>
+
+  <BillAutopilot.Mode.Maintain>Maintenir un stock</BillAutopilot.Mode.Maintain>
+  <BillAutopilot.Mode.Always>Toujours</BillAutopilot.Mode.Always>
+  <BillAutopilot.Mode.Excluded>Jamais</BillAutopilot.Mode.Excluded>
+  <BillAutopilot.Mode.Inherit>Par défaut ({0})</BillAutopilot.Mode.Inherit>
+  <BillAutopilot.Mode.InheritShort>Par défaut</BillAutopilot.Mode.InheritShort>
+
+  <BillAutopilot.Gizmo.Toggle>Pilote automatique</BillAutopilot.Gizmo.Toggle>
+  <BillAutopilot.Gizmo.ToggleDesc>Mettre tous les établis « {0} » sous pilote automatique : les travaux se posent et se retirent seuls, et les recettes débloquées ensuite s'y ajoutent.</BillAutopilot.Gizmo.ToggleDesc>
+  <BillAutopilot.Gizmo.Configure>Profil du pilote</BillAutopilot.Gizmo.Configure>
+  <BillAutopilot.Gizmo.ConfigureDesc>Régler, recette par recette, ce que fait le pilote sur tous les établis « {0} ».</BillAutopilot.Gizmo.ConfigureDesc>
+
+  <BillAutopilot.NewRecipeLine>{0} — {1}</BillAutopilot.NewRecipeLine>
+  <BillAutopilot.NewRecipeLetterTitle>{0} nouvelles recettes disponibles</BillAutopilot.NewRecipeLetterTitle>
+  <BillAutopilot.NewRecipeLetterBody>Le pilote les a posées en travaux suspendus. Réactivez celles que vous voulez ; supprimez les autres, il ne les proposera plus.\n\n{0}</BillAutopilot.NewRecipeLetterBody>
+  <BillAutopilot.DriftCaptured>{0} retenue comme surcharge du profil « {1} ».</BillAutopilot.DriftCaptured>
+  <BillAutopilot.RecipeExcluded>{0} ne sera plus posée sur un établi « {1} ».</BillAutopilot.RecipeExcluded>
+
+</LanguageData>
