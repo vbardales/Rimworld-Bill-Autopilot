@@ -22,13 +22,43 @@ namespace BillAutopilot
     /// <summary>
     /// Etat propre a la partie : quelles bills appartiennent au pilote, et quelles recettes ont deja
     /// ete vues. La configuration, elle, vit dans les reglages du mod et vaut pour toutes les parties.
+    ///
+    /// **Ce n'est volontairement pas un GameComponent.** Le jeu ecrit un composant sous la forme
+    /// `&lt;li Class="BillAutopilot..."&gt;` : retirer le mod rendrait cette classe introuvable et
+    /// chaque chargement de la sauvegarde cracherait un "Can't load abstract class Verse.GameComponent".
+    /// Nos noeuds sont donc greffes dans `&lt;game&gt;` par un postfix sur Game.ExposeSmallComponents,
+    /// sans attribut Class : sans le mod, personne ne les lit et le jeu les ignore en silence.
     /// </summary>
-    public class BillAutopilotGameComponent : GameComponent
+    public class BillAutopilotState
     {
-        public static BillAutopilotGameComponent Current =>
-            Verse.Current.Game?.GetComponent<BillAutopilotGameComponent>();
+        private static Game owner;
+        private static BillAutopilotState instance;
 
-        /// <summary>loadID de la bill -> reglages appliques a sa creation.</summary>
+        /// <summary>
+        /// L'etat suit l'objet Game : nouvelle partie comme chargement en construisent un neuf, donc
+        /// rien ne fuit d'une partie a l'autre sans qu'on ait a s'accrocher au cycle de vie.
+        /// </summary>
+        public static BillAutopilotState Current
+        {
+            get
+            {
+                var game = Verse.Current.Game;
+                if (game == null) return null;
+
+                if (owner != game)
+                {
+                    owner = game;
+                    instance = new BillAutopilotState();
+                }
+                return instance;
+            }
+        }
+
+        /// <summary>
+        /// loadID de la bill -> reglages appliques a sa creation. Deep-saved, mais sans attribut
+        /// Class : Scribe_Deep n'en ecrit un que si le type reel differe du type declare. Ne pas
+        /// elargir le type de valeur du dictionnaire, sous peine de reintroduire l'attribut.
+        /// </summary>
         private Dictionary<int, BillStamp> stamps = new Dictionary<int, BillStamp>();
 
         /// <summary>"DefEtabli/DefRecette" des recettes deja rencontrees : ce qui n'y est pas est neuf.</summary>
@@ -50,7 +80,7 @@ namespace BillAutopilot
         private int lastRefillTick = -99999;
         private bool dirty = true;
 
-        public BillAutopilotGameComponent(Game game)
+        public BillAutopilotState()
         {
             RecipeProbe.Reset();
         }
@@ -130,7 +160,7 @@ namespace BillAutopilot
 
         public void MarkDirty() => dirty = true;
 
-        public override void GameComponentTick()
+        public void Tick()
         {
             var settings = BillAutopilotMod.Settings;
             int interval = settings.syncIntervalTicks < 60 ? 60 : settings.syncIntervalTicks;
@@ -162,6 +192,8 @@ namespace BillAutopilot
         {
             queue.Clear();
             var maps = Find.Maps;
+            if (maps == null) return;
+
             for (int m = 0; m < maps.Count; m++)
             {
                 var map = maps[m];
@@ -175,12 +207,19 @@ namespace BillAutopilot
             }
         }
 
-        public override void ExposeData()
+        // --- Sauvegarde --------------------------------------------------------------------------
+
+        /// <summary>
+        /// Appele depuis un postfix sur Game.ExposeSmallComponents, donc a l'interieur du noeud
+        /// &lt;game&gt;, a l'ecriture comme a la lecture. Prefixes explicites : on est chez le jeu,
+        /// pas chez nous.
+        /// </summary>
+        public void ExposeData()
         {
-            Scribe_Collections.Look(ref stamps, "stamps", LookMode.Value, LookMode.Deep);
-            Scribe_Collections.Look(ref known, "known", LookMode.Value);
-            Scribe_Collections.Look(ref pending, "pending", LookMode.Value);
-            Scribe_Collections.Look(ref seeded, "seeded", LookMode.Value);
+            Scribe_Collections.Look(ref stamps, "billAutopilotStamps", LookMode.Value, LookMode.Deep);
+            Scribe_Collections.Look(ref known, "billAutopilotKnown", LookMode.Value);
+            Scribe_Collections.Look(ref pending, "billAutopilotPending", LookMode.Value);
+            Scribe_Collections.Look(ref seeded, "billAutopilotSeeded", LookMode.Value);
 
             if (stamps == null) stamps = new Dictionary<int, BillStamp>();
             if (known == null) known = new HashSet<string>();

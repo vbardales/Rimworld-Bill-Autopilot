@@ -62,8 +62,15 @@ La DLL sort dans `Mod/Assemblies/`. Une jonction NTFS relie
 - `RecipeProbe` — compte le stock d'un produit sans laisser de trace : `RecipeWorkerCounter` exige
   une `Bill_Production` et remonte à la carte par `billStack.billGiver`, on garde donc une bill
   témoin par recette dans une pile détachée.
-- `BillAutopilotGameComponent` — état de la partie : quelles bills nous appartiennent (par `loadID`)
-  et quelles recettes ont déjà été vues. La configuration, elle, vit dans les réglages du mod.
+- `BillAutopilotState` — état de la partie : quelles bills nous appartiennent (par `loadID`) et
+  quelles recettes ont déjà été vues. La configuration, elle, vit dans les réglages du mod.
+  **Ce n'est délibérément pas un `GameComponent`** : le jeu écrit un composant sous la forme
+  `<li Class="...">`, et retirer le mod ferait échouer chaque chargement sur
+  `Can't load abstract class Verse.GameComponent`. L'état est donc greffé dans le nœud `<game>` par
+  un postfix sur `Game.ExposeSmallComponents` — le seul point commun aux deux chemins, `ExposeData`
+  refusant `LoadingVars`. Des nœuds nommés sans attribut `Class` ne sont lus par personne une fois le
+  mod parti : le jeu les ignore en silence. Le battement, lui, vient d'un postfix sur
+  `TickManager.DoSingleTick`.
 - `BillAutopilotSettings` — lu dans le constructeur du `Mod`, donc **avant** le chargement des defs :
   aucun `Scribe_Defs` n'y est possible, d'où l'énumération `AutoMode` plutôt qu'un
   `BillRepeatModeDef`.

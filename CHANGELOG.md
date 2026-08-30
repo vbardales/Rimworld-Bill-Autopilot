@@ -14,3 +14,5 @@ Première version.
 - Recette débloquée après coup : travail suspendu + lettre récapitulative.
 - Plafond de travaux automatiques par établi, pour laisser de la place sous la limite de 15 du jeu.
 - Interface en anglais et en français, entièrement au pointeur (Steam Deck).
+- Rien n'est écrit dans la sauvegarde sous forme de classe du mod : le retirer d'une partie en cours
+  ne produit aucune erreur au chargement.

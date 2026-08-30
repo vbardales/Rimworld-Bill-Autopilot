@@ -6,13 +6,42 @@ using Verse;
 
 namespace BillAutopilot
 {
+    /// <summary>
+    /// Notre etat se greffe dans le noeud &lt;game&gt; de la sauvegarde plutot que dans un
+    /// GameComponent : un composant s'ecrit avec un attribut Class, et retirer le mod ferait alors
+    /// echouer chaque chargement sur "Can't load abstract class Verse.GameComponent". Des noeuds
+    /// nommes, eux, ne sont lus par personne une fois le mod parti - le jeu les ignore en silence.
+    ///
+    /// ExposeSmallComponents est le seul point commun aux deux chemins : Game.ExposeData l'appelle a
+    /// la sauvegarde, Game.LoadGame au chargement (ExposeData refuse LoadingVars).
+    /// </summary>
+    [HarmonyPatch(typeof(Game), "ExposeSmallComponents")]
+    internal static class Patch_Game_ExposeSmallComponents
+    {
+        private static void Postfix()
+        {
+            BillAutopilotState.Current?.ExposeData();
+        }
+    }
+
+    /// <summary>Le battement du pilote, qui vivait dans GameComponentTick.</summary>
+    [HarmonyPatch(typeof(TickManager), nameof(TickManager.DoSingleTick))]
+    internal static class Patch_TickManager_DoSingleTick
+    {
+        private static void Postfix()
+        {
+            if (Current.ProgramState != ProgramState.Playing) return;
+            BillAutopilotState.Current?.Tick();
+        }
+    }
+
     /// <summary>Une recherche terminee peut debloquer des recettes : on repasse sur tous les etablis.</summary>
     [HarmonyPatch(typeof(ResearchManager), nameof(ResearchManager.FinishProject))]
     internal static class Patch_ResearchManager_FinishProject
     {
         private static void Postfix()
         {
-            BillAutopilotGameComponent.Current?.MarkDirty();
+            BillAutopilotState.Current?.MarkDirty();
         }
     }
 
@@ -27,7 +56,7 @@ namespace BillAutopilot
         {
             if (AutoBillSync.SuppressDeleteCapture) return;
 
-            var state = BillAutopilotGameComponent.Current;
+            var state = BillAutopilotState.Current;
             if (state == null || bill?.recipe == null || !state.IsAuto(bill)) return;
 
             state.Disown(bill);
@@ -100,7 +129,7 @@ namespace BillAutopilot
                     var written = settings.ProfileForWriting(table.def);
                     written.enabled = !written.enabled;
                     BillAutopilotMod.Instance.WriteSettings();
-                    BillAutopilotGameComponent.Current?.MarkDirty();
+                    BillAutopilotState.Current?.MarkDirty();
                 },
             };
 

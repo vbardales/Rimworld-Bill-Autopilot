@@ -20,7 +20,7 @@ namespace BillAutopilot
 
         public static void Sync(Building_WorkTable table)
         {
-            var state = BillAutopilotGameComponent.Current;
+            var state = BillAutopilotState.Current;
             if (state == null) return;
 
             var profile = BillAutopilotMod.Settings.ProfileFor(table.def);
@@ -185,7 +185,7 @@ namespace BillAutopilot
 
         // --- Ecriture ----------------------------------------------------------------------------
 
-        private static void Create(BillAutopilotGameComponent state, Building_WorkTable table,
+        private static void Create(BillAutopilotState state, Building_WorkTable table,
             RecipeDef recipe, BenchProfile profile, AutoMode mode, bool suspended)
         {
             if (!(recipe.MakeNewBill() is Bill_Production bill)) return;
@@ -218,7 +218,7 @@ namespace BillAutopilot
             bill.unpauseWhenYouHave = stamp.floorCount;
         }
 
-        private static void Remove(BillAutopilotGameComponent state, BillStack stack, Bill bill)
+        private static void Remove(BillAutopilotState state, BillStack stack, Bill bill)
         {
             SuppressDeleteCapture = true;
             try
@@ -232,7 +232,7 @@ namespace BillAutopilot
             state.Disown(bill);
         }
 
-        public static void DropAll(BillAutopilotGameComponent state, BillStack stack)
+        public static void DropAll(BillAutopilotState state, BillStack stack)
         {
             var bills = stack.Bills;
             for (int i = bills.Count - 1; i >= 0; i--)
@@ -246,7 +246,7 @@ namespace BillAutopilot
         /// On l'inscrit comme surcharge de la recette, sinon le reglage serait perdu au prochain
         /// retrait de la bill. Regler dans l'onglet, c'est regler le profil.
         /// </summary>
-        private static void CaptureDrift(BillAutopilotGameComponent state, ThingDef bench,
+        private static void CaptureDrift(BillAutopilotState state, ThingDef bench,
             RecipeDef recipe, Bill_Production bill, BenchProfile profile)
         {
             var stamp = state.StampOf(bill);

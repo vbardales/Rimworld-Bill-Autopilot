@@ -32,7 +32,7 @@ WORKS WITH
 
 Nothing is replaced in the bills tab, so mods that redraw it keep working — tested against Nice Bill Tab, Better Workbench Management, Categorized Bill Dropdown and Choose Your Recipe. Bills placed by hand always win over the autopilot: put one up yourself and it steps aside for that recipe.
 
-Can be added to a game in progress. Removing it leaves ordinary bills behind, which you can delete like any other.
+Can be added to a game in progress, and taken back out of one. Nothing it stores is written to your save as a class of its own, so removing it raises no load error the way a mod with its own game component does — the bills it had put up simply stay behind as ordinary bills, yours to keep or delete.
 
 Interface in English and French. Every control is reachable with a pointer, no keyboard needed — designed with the Steam Deck in mind.
 

@@ -87,7 +87,7 @@ namespace BillAutopilot
             if (afterClick != enabled)
             {
                 Settings.ProfileForWriting(bench).enabled = afterClick;
-                BillAutopilotGameComponent.Current?.MarkDirty();
+                BillAutopilotState.Current?.MarkDirty();
             }
 
             var summaryRect = new Rect(rect.x + rect.width * 0.5f, rect.y, rect.width * 0.28f, rect.height);
@@ -119,7 +119,7 @@ namespace BillAutopilot
         public override void WriteSettings()
         {
             base.WriteSettings();
-            BillAutopilotGameComponent.Current?.MarkDirty();
+            BillAutopilotState.Current?.MarkDirty();
         }
     }
 }

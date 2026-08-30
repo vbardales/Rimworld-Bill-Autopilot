@@ -48,7 +48,7 @@ namespace BillAutopilot
         private static void Save()
         {
             BillAutopilotMod.Instance.WriteSettings();
-            BillAutopilotGameComponent.Current?.MarkDirty();
+            BillAutopilotState.Current?.MarkDirty();
         }
 
         public override void DoWindowContents(Rect inRect)
