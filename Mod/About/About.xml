@@ -6,6 +6,7 @@
   <supportedVersions>
     <li>1.6</li>
   </supportedVersions>
+  <url>https://github.com/vbardales/Rimworld-Bill-Autopilot</url>
   <description>Say once what a workbench is for, and stop rewriting its bill list.
 
 Put a workbench type on autopilot and it takes every recipe it can do. A bill goes up when there is work to do, and comes down once the shelf is full — so the tab shows what is left to make, not a wall of configuration you have to scroll past.
