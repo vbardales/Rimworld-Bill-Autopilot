@@ -1,108 +1,107 @@
 # Bill Autopilot
 
-Mod RimWorld 1.6. On dit une fois à quoi sert un établi, et on arrête de réécrire sa liste de
-travaux à chaque déblocage.
+A RimWorld 1.6 mod. Say once what a workbench is for, and stop rewriting its bill list every time
+something is unlocked.
 
-## Ce que ça fait
+## What it does
 
-Un type d'établi mis sous pilote automatique prend **toutes** les recettes qu'il sait faire. Le mod
-pose un travail quand il y a de quoi faire, et le retire une fois le stock rempli : l'onglet montre
-donc ce qu'il reste à produire, pas quarante lignes de configuration à faire défiler.
+A workbench type put on autopilot takes on **every** recipe it knows how to make. The mod puts a
+bill up when there is something to do and takes it down once the stock is full, so the tab shows
+what is left to produce rather than forty lines of configuration to scroll through.
 
-Quand une recherche débloque une nouvelle recette, elle rejoint son établi toute seule, **en travail
-suspendu**, avec une lettre qui la nomme. La réactiver l'accepte, la supprimer la refuse — et le
-pilote ne la reproposera plus. Rien n'est jamais dépensé à votre insu.
+When research unlocks a new recipe, it joins its workbench on its own, **as a suspended bill**,
+with a letter naming it. Unsuspending it accepts the recipe, deleting it refuses it — and the
+autopilot will not offer it again. Nothing is ever spent behind your back.
 
-## Les réglages
+## Settings
 
-Tout se règle **par type d'établi** : un établi construit plus tard est déjà configuré. Accessible
-depuis les réglages du mod, ou depuis le gizmo « Profil du pilote » sur l'établi sélectionné.
+Everything is set **per workbench type**: a bench built later is already configured. Reachable from
+the mod settings, or from the "Autopilot profile" gizmo on the selected bench.
 
-- **Mode par défaut** : *Maintenir un stock de N*, ou *Toujours*.
-- **Cible** et **seuil de relance** : le travail apparaît quand on descend au seuil, disparaît quand
-  la cible est atteinte. L'écart entre les deux évite qu'il clignote à chaque unité produite.
-- **Recettes au produit non comptable** (découpe, fonte, crémation, chirurgie) : le jeu ne sait pas
-  les compter, « maintenir un stock » leur est donc impossible. Elles ont leur propre réglage,
-  *Jamais* par défaut.
-- **Surcharge par recette** : hériter, maintenir un stock différent, toujours, ou jamais.
-- **Plafond de travaux automatiques par établi** (8 par défaut) : le jeu n'accepte que 15 travaux
-  par établi et masque le bouton « Ajouter » au-delà. Le plafond garde de la place pour les vôtres.
+- **Default mode**: *Keep a stock of N*, or *Always*.
+- **Target** and **restart threshold**: the bill appears when stock falls to the threshold and
+  disappears when the target is reached. The gap between the two keeps it from flickering on every
+  unit produced.
+- **Recipes with an uncountable product** (butchering, smelting, cremation, surgery): the game
+  cannot count these, so "keep a stock" is impossible for them. They get their own setting,
+  *Never* by default.
+- **Per-recipe override**: inherit, keep a different stock, always, or never.
+- **Cap on automatic bills per bench** (8 by default): the game accepts only 15 bills per bench and
+  hides the "Add" button beyond that. The cap leaves room for your own.
 
-**Régler un travail dans l'onglet, c'est régler le profil.** Changez la cible d'un travail
-automatique et le mod l'inscrit comme surcharge de la recette, au lieu de la perdre au prochain
-retrait du travail.
+**Adjusting a bill in the tab adjusts the profile.** Change the target of an automatic bill and the
+mod records it as an override for that recipe, instead of losing it the next time the bill comes
+down.
 
-## Ce qu'il ne fait pas
+## What it does not do
 
-- Pas de mode « x1 » comme consigne permanente : un ordre qui dit « en faire un » serait reposé dès
-  qu'il se termine, sans fin. *Maintenir un stock de 1* donne l'effet recherché et s'arrête tout seul.
-- Rien n'est redessiné dans l'onglet des travaux : les mods qui le remplacent continuent de
-  fonctionner. Conçu à côté de Nice Bill Tab, Better Workbench Management, Categorized Bill Dropdown
-  et Choose Your Recipe.
-- Un travail posé à la main l'emporte toujours : le pilote se retire de cette recette tant qu'il
-  existe.
+- No "x1" as a standing order: an instruction saying "make one" would be put back as soon as it
+  finished, endlessly. *Keep a stock of 1* gives the intended effect and stops on its own.
+- Nothing is redrawn in the bills tab, so mods that replace it keep working. Designed alongside
+  Nice Bill Tab, Better Workbench Management, Categorized Bill Dropdown and Choose Your Recipe.
+- A hand-placed bill always wins: the autopilot stands back from that recipe for as long as it
+  exists.
 
-## Ce qu'il reprend des autres mods
+## What it picks up from other mods
 
-Détecté tout seul, rien n'est requis. Tout passe par la réflexion : mod absent, comportement inchangé.
+All detected on its own, none required. Everything goes through reflection: mod absent, behaviour
+unchanged.
 
-**Better Workbench Management** (`falconne.BWM`, assembly `ImprovedWorkbenches`) greffe sur chaque
-`Bill_Production` une `ExtendedBillData` — nom, `CountAway`, filtre de produits additionnels — rangée
-dans un `WorldComponent`, et pose un préfixe sur `BillStack.Delete` qui l'efface avec le travail. Le
-pilote retirant et reposant des travaux en permanence, tout cela partirait à chaque stock rempli.
-D'où quatre points :
+**Better Workbench Management** (`falconne.BWM`, assembly `ImprovedWorkbenches`) attaches an
+`ExtendedBillData` to every `Bill_Production` — name, `CountAway`, additional product filter — kept
+in a `WorldComponent`, and puts a prefix on `BillStack.Delete` that erases it along with the bill.
+Since the autopilot removes and re-places bills constantly, all of that would be lost every time a
+stock filled up. Hence four measures:
 
-- **Relevé avant retrait, restitué après pose.** Le relevé vit dans `BillMemory`, rangé par
-  « DefÉtabli/DefRecette » — la maille du profil.
-- **Travaux liés préservés.** On mémorise les `loadID` des compagnons ; à la repose, on se raccroche
-  au premier encore vivant, et `LinkBills` rattache au groupe existant.
-- **Restriction d'établi appliquée.** Le crochet de BWM sur `BillUtility.MakeNewBill` lit
-  `Find.Selector.SingleSelectedThing` pour savoir de quel établi il s'agit : depuis un tick, ça ne
-  veut rien dire. On la pose nous-mêmes, pour la bonne table.
-- **Comptage aligné.** Son postfix sur `RecipeWorkerCounter.CountProducts` sort si le travail n'a pas
-  de données étendues — ce qui est le cas de notre témoin. On lui greffe donc le même relevé avant de
-  mesurer, sinon le seuil qui déclenche et le nombre affiché par le travail ne parlent pas de la même
-  chose. Le plafond de travaux vient aussi de son `GetMaxBills()` : 15, ou 125 avec No Max Bills.
+- **Read before removal, restored after placement.** The reading lives in `BillMemory`, keyed by
+  "BenchDef/RecipeDef" — the granularity of the profile.
+- **Linked bills preserved.** The `loadID`s of the companion bills are remembered; on re-placement
+  the first still-living one is picked up again, and `LinkBills` reattaches to the existing group.
+- **Workbench restriction applied.** BWM's hook on `BillUtility.MakeNewBill` reads
+  `Find.Selector.SingleSelectedThing` to know which bench is meant, which means nothing when the
+  call comes from a tick. So the mod sets it itself, for the right table.
+- **Counting aligned.** Its postfix on `RecipeWorkerCounter.CountProducts` bails out if the bill has
+  no extended data — which is exactly the case for the probe bill. The same reading is therefore
+  grafted on before measuring; otherwise the threshold that triggers and the number the bill shows
+  would not be talking about the same thing. The bill cap comes from its `GetMaxBills()` too: 15, or
+  125 with No Max Bills.
 
-**Nice Bill Tab - Expansion** (`HICON.NiceBillTabExpansion`) : son `HiddenRecipeStore.IsHidden` ne
-filtre que son menu d'ajout. Une recette masquée est tenue pour exclue.
+**Nice Bill Tab - Expansion** (`HICON.NiceBillTabExpansion`): its `HiddenRecipeStore.IsHidden` only
+filters its own add menu. A hidden recipe is treated as excluded.
 
-**Choose Your Recipe** (`zal.chooseyourrecipe`) : rien à faire. Il retire les recettes désactivées de
-`def.allRecipesCached`, donc elles ne sont déjà plus dans le `AllRecipes` que nous parcourons.
+**Choose Your Recipe** (`zal.chooseyourrecipe`): nothing to do. It removes disabled recipes from
+`def.allRecipesCached`, so they are already gone from the `AllRecipes` being walked.
 
-À la **première activation** d'un type d'établi, toutes ses recettes déjà débloquées sont acceptées
-en silence — c'est bien ce que « je veux toutes les recettes » veut dire, mais sur un atelier
-d'usinage cela lance beaucoup de production d'un coup. Réglez la cible avant d'activer.
+On the **first activation** of a workbench type, every already-unlocked recipe is accepted
+silently — which is what "I want all the recipes" means, but on a machining table that starts a
+great deal of production at once. Set the target before switching it on.
 
-## Construire
+## How it works
 
-```bash
-dotnet build BillAutopilot/Source/BillAutopilot.csproj -c Release
-```
-
-La DLL sort dans `Mod/Assemblies/`. Une jonction NTFS relie
-`RimWorld\Mods\BillAutopilot` à `BillAutopilot/Mod` : la compilation suffit, aucune copie.
-
-## Comment ça marche
-
-- `AutoBillSync` — le moteur. Un passage par établi décide, recette par recette, s'il faut poser ou
-  retirer un travail.
-- `RecipeProbe` — compte le stock d'un produit sans laisser de trace : `RecipeWorkerCounter` exige
-  une `Bill_Production` et remonte à la carte par `billStack.billGiver`, on garde donc une bill
-  témoin par recette dans une pile détachée.
-- `BillAutopilotState` — état de la partie : quelles bills nous appartiennent (par `loadID`) et
-  quelles recettes ont déjà été vues. La configuration, elle, vit dans les réglages du mod.
-  **Ce n'est délibérément pas un `GameComponent`** : le jeu écrit un composant sous la forme
-  `<li Class="...">`, et retirer le mod ferait échouer chaque chargement sur
-  `Can't load abstract class Verse.GameComponent`. L'état est donc greffé dans le nœud `<game>` par
-  un postfix sur `Game.ExposeSmallComponents` — le seul point commun aux deux chemins, `ExposeData`
-  refusant `LoadingVars`. Des nœuds nommés sans attribut `Class` ne sont lus par personne une fois le
-  mod parti : le jeu les ignore en silence. Le battement, lui, vient d'un postfix sur
+- `AutoBillSync` — the engine. One pass per bench decides, recipe by recipe, whether to put a bill
+  up or take it down.
+- `RecipeProbe` — counts the stock of a product without leaving a trace: `RecipeWorkerCounter`
+  demands a `Bill_Production` and reaches the map through `billStack.billGiver`, so one probe bill
+  per recipe is kept in a detached stack.
+- `BillAutopilotState` — the per-game state: which bills are ours (by `loadID`) and which recipes
+  have already been seen. The configuration itself lives in the mod settings.
+  **This is deliberately not a `GameComponent`**: the game writes a component as
+  `<li Class="...">`, and removing the mod would make every load fail on
+  `Can't load abstract class Verse.GameComponent`. The state is therefore grafted into the `<game>`
+  node by a postfix on `Game.ExposeSmallComponents` — the only point common to both paths, since
+  `ExposeData` refuses `LoadingVars`. Named nodes with no `Class` attribute are read by nobody once
+  the mod is gone: the game ignores them silently. The heartbeat comes from a postfix on
   `TickManager.DoSingleTick`.
-- `BillAutopilotSettings` — lu dans le constructeur du `Mod`, donc **avant** le chargement des defs :
-  aucun `Scribe_Defs` n'y est possible, d'où l'énumération `AutoMode` plutôt qu'un
-  `BillRepeatModeDef`.
+- `BillAutopilotSettings` — read in the `Mod` constructor, therefore **before** defs are loaded: no
+  `Scribe_Defs` is possible there, hence the `AutoMode` enum rather than a `BillRepeatModeDef`.
+
+## Build
+
+    dotnet build Source/BillAutopilot.csproj -c Release
+
+The assembly lands in `Mod/Assemblies/`. Reference assemblies come from NuGet
+(`Krafs.Rimworld.Ref`), so no RimWorld installation is needed to compile.
 
 ## Licence
 
-MIT. Voir `LICENSE`.
+MIT. See `LICENSE`.
