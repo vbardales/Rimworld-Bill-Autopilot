@@ -17,7 +17,12 @@ namespace BillAutopilot
     internal static class HiddenRecipesCompat
     {
         private static bool probed;
-        private static MethodInfo isHidden;
+        /// <summary>
+        /// Un delegue, pas un MethodInfo : ce test tombe sur CHAQUE recette de CHAQUE etabli a chaque
+        /// passage de synchro. Un Invoke par reflexion y couterait cent fois le prix d'un appel direct,
+        /// soixante fois par tick sur un atelier bien fourni.
+        /// </summary>
+        private static Func<Building_WorkTable, RecipeDef, bool> isHidden;
 
         private static void Probe()
         {
@@ -35,11 +40,17 @@ namespace BillAutopilot
                         var store = assembly.GetType("NiceBillTabExpansion.HiddenRecipeStore")
                                     ?? FindByName(assembly, "HiddenRecipeStore");
 
-                        isHidden = store?.GetMethod("IsHidden",
+                        var method = store?.GetMethod("IsHidden",
                             BindingFlags.Static | BindingFlags.Public,
                             null,
                             new[] { typeof(Building_WorkTable), typeof(RecipeDef) },
                             null);
+
+                        if (method != null)
+                        {
+                            isHidden = (Func<Building_WorkTable, RecipeDef, bool>)Delegate.CreateDelegate(
+                                typeof(Func<Building_WorkTable, RecipeDef, bool>), method);
+                        }
 
                         if (isHidden != null)
                         {
@@ -73,7 +84,7 @@ namespace BillAutopilot
 
             try
             {
-                return (bool)isHidden.Invoke(null, new object[] { table, recipe });
+                return isHidden(table, recipe);
             }
             catch
             {
