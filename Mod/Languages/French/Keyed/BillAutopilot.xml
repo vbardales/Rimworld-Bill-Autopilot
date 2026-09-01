@@ -4,7 +4,7 @@
   <BillAutopilot.Settings.Intro>Choisissez les types d'établi à mettre sous pilote automatique. Sur chacun, le mod tient les travaux tout seul : un travail apparaît quand il y a de quoi faire et s'efface une fois la tâche remplie, si bien que l'onglet reste court. Les recettes débloquées plus tard s'ajoutent d'elles-mêmes.</BillAutopilot.Settings.Intro>
   <BillAutopilot.Settings.Notify>Signaler les nouvelles recettes</BillAutopilot.Settings.Notify>
   <BillAutopilot.Settings.NotifyDesc>Une recette débloquée après la mise sous pilote arrive en travail suspendu : elle ne dépense donc jamais rien à votre insu. Ceci envoie une lettre qui les récapitule.</BillAutopilot.Settings.NotifyDesc>
-  <BillAutopilot.Settings.MaxBills>Au plus {0} travaux automatiques par établi</BillAutopilot.Settings.MaxBills>
+  <BillAutopilot.Settings.MaxBills>Au plus {0} travaux automatiques par établi (le jeu en accepte {1})</BillAutopilot.Settings.MaxBills>
   <BillAutopilot.Settings.Configure>Configurer...</BillAutopilot.Settings.Configure>
   <BillAutopilot.Settings.SummaryOff>{0} recettes</BillAutopilot.Settings.SummaryOff>
   <BillAutopilot.Settings.SummaryMaintain>{0} recettes, maintenir {1}, {2} surchargées</BillAutopilot.Settings.SummaryMaintain>

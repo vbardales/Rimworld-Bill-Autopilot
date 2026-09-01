@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using RimWorld;
+using UnityEngine;
 using Verse;
 
 namespace BillAutopilot
@@ -55,7 +56,11 @@ namespace BillAutopilot
 
             var recipes = table.def.AllRecipes;
             var handled = new HashSet<RecipeDef>();
-            int budget = BillAutopilotMod.Settings.maxAutoBillsPerTable - autos.Count;
+            // Notre plafond, mais jamais au-dela de celui du jeu : 15 en vanilla, 125 quand Better
+            // Workbench Management voit No Max Bills. Au-dela, le bouton "Ajouter" disparait.
+            int cap = Mathf.Min(BillAutopilotMod.Settings.maxAutoBillsPerTable,
+                BetterWorkbenchesCompat.MaxBills - manual.Count);
+            int budget = cap - autos.Count;
 
             for (int i = 0; i < recipes.Count; i++)
             {
@@ -65,10 +70,13 @@ namespace BillAutopilot
                 autos.TryGetValue(recipe, out var existing);
 
                 // Une bill posee a la main l'emporte toujours : le pilote se retire de cette recette.
-                bool available = recipe.AvailableNow && recipe.AvailableOnNow(table);
+                // Une recette masquee ailleurs (Nice Bill Tab - Expansion) est traitee comme exclue :
+                // la masquer, c'est dire qu'on n'en veut pas ici.
+                bool available = recipe.AvailableNow && recipe.AvailableOnNow(table)
+                                 && !HiddenRecipesCompat.IsHidden(table, recipe);
                 if (!available || manual.Contains(recipe))
                 {
-                    if (existing != null) Remove(state, stack, existing);
+                    if (existing != null) Remove(state, stack, table.def, recipe, existing);
                     continue;
                 }
 
@@ -77,7 +85,7 @@ namespace BillAutopilot
 
                 if (mode == AutoMode.Excluded)
                 {
-                    if (existing != null) Remove(state, stack, existing);
+                    if (existing != null) Remove(state, stack, table.def, recipe, existing);
                     continue;
                 }
 
@@ -117,11 +125,11 @@ namespace BillAutopilot
 
                     if (ShouldRetire(table, recipe, existing, profile, mode))
                     {
-                        Remove(state, stack, existing);
+                        Remove(state, stack, table.def, recipe, existing);
                         budget++;
                     }
                 }
-                else if (budget > 0 && ShouldMaterialise(table, recipe, profile, mode))
+                else if (budget > 0 && ShouldMaterialise(state, table, recipe, profile, mode))
                 {
                     Create(state, table, recipe, profile, mode, suspended: false);
                     budget--;
@@ -131,19 +139,22 @@ namespace BillAutopilot
             // Nos bills dont la recette a quitte l'etabli (mod retire, def repatchee).
             foreach (var pair in autos)
             {
-                if (!handled.Contains(pair.Key)) Remove(state, stack, pair.Value);
+                if (!handled.Contains(pair.Key)) Remove(state, stack, table.def, pair.Key, pair.Value);
             }
         }
 
         // --- Decisions ---------------------------------------------------------------------------
 
-        private static bool ShouldMaterialise(Building_WorkTable table, RecipeDef recipe,
-            BenchProfile profile, AutoMode mode)
+        private static bool ShouldMaterialise(BillAutopilotState state, Building_WorkTable table,
+            RecipeDef recipe, BenchProfile profile, AutoMode mode)
         {
             if (mode == AutoMode.Always) return true;
             if (mode != AutoMode.Maintain) return false;
 
-            if (!RecipeProbe.TryCount(table, recipe, out int count)) return false;
+            // La bill temoin compte comme comptera la vraie : sinon le seuil qui declenche et celui
+            // qu'affiche la bill parlent de deux nombres differents.
+            var memory = state.MemoryFor(table.def, recipe);
+            if (!RecipeProbe.TryCount(table, recipe, memory, out int count)) return false;
 
             int target = profile.TargetFor(recipe);
             int floor = profile.FloorFor(recipe);
@@ -157,7 +168,12 @@ namespace BillAutopilot
         {
             if (mode == AutoMode.Always) return false;
             if (IsBusy(table.Map, bill)) return false;
-            if (!RecipeProbe.TryCount(table, recipe, out int count)) return false;
+
+            // Ici la vraie bill existe : on mesure avec ce qu'elle porte, pas avec un souvenir.
+            if (!RecipeProbe.TryCount(table, recipe, BetterWorkbenchesCompat.Capture(bill), out int count))
+            {
+                return false;
+            }
 
             return count >= profile.TargetFor(recipe);
         }
@@ -202,6 +218,19 @@ namespace BillAutopilot
 
             table.billStack.AddBill(bill);
             state.Claim(bill, stamp);
+
+            // La restriction d'etabli de Better Workbench Management : son propre crochet la pose
+            // depuis l'etabli SELECTIONNE, ce qui ne veut rien dire quand on cree depuis un tick.
+            BetterWorkbenchesCompat.ApplyWorktableRestriction(table, bill);
+
+            // Puis on rend a la bill ce que la precedente portait : nom, comptage elargi, filtre de
+            // produits, appartenance a un groupe de bills liees.
+            var memory = state.MemoryFor(table.def, recipe);
+            if (memory != null)
+            {
+                if (memory.name != null) bill.playerCustomName = memory.name;
+                BetterWorkbenchesCompat.Restore(bill, memory);
+            }
         }
 
         private static void Apply(Bill_Production bill, BillStamp stamp)
@@ -218,8 +247,27 @@ namespace BillAutopilot
             bill.unpauseWhenYouHave = stamp.floorCount;
         }
 
-        private static void Remove(BillAutopilotState state, BillStack stack, Bill bill)
+        /// <summary>
+        /// Retirer une bill automatique. On releve d'abord ce que les autres mods lui avaient pose :
+        /// Better Workbench Management prefixe BillStack.Delete pour effacer ses donnees etendues et
+        /// sortir la bill de son groupe de liens. Sans ce releve, un nom, un comptage elargi ou un lien
+        /// disparaitrait a chaque fois qu'un stock se remplit.
+        /// </summary>
+        private static void Remove(BillAutopilotState state, BillStack stack, ThingDef bench,
+            RecipeDef recipe, Bill bill)
         {
+            if (bench != null && recipe != null && bill is Bill_Production production)
+            {
+                var memory = BetterWorkbenchesCompat.Capture(production);
+
+                if (production.playerCustomName != null)
+                {
+                    if (memory == null) memory = new BillMemory();
+                    memory.name = production.playerCustomName;
+                }
+                state.Remember(bench, recipe, memory);
+            }
+
             SuppressDeleteCapture = true;
             try
             {
@@ -234,10 +282,11 @@ namespace BillAutopilot
 
         public static void DropAll(BillAutopilotState state, BillStack stack)
         {
+            var bench = (stack.billGiver as Thing)?.def;
             var bills = stack.Bills;
             for (int i = bills.Count - 1; i >= 0; i--)
             {
-                if (state.IsAuto(bills[i])) Remove(state, stack, bills[i]);
+                if (state.IsAuto(bills[i])) Remove(state, stack, bench, bills[i].recipe, bills[i]);
             }
         }
 

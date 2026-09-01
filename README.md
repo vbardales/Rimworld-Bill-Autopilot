@@ -42,6 +42,34 @@ retrait du travail.
 - Un travail posé à la main l'emporte toujours : le pilote se retire de cette recette tant qu'il
   existe.
 
+## Ce qu'il reprend des autres mods
+
+Détecté tout seul, rien n'est requis. Tout passe par la réflexion : mod absent, comportement inchangé.
+
+**Better Workbench Management** (`falconne.BWM`, assembly `ImprovedWorkbenches`) greffe sur chaque
+`Bill_Production` une `ExtendedBillData` — nom, `CountAway`, filtre de produits additionnels — rangée
+dans un `WorldComponent`, et pose un préfixe sur `BillStack.Delete` qui l'efface avec le travail. Le
+pilote retirant et reposant des travaux en permanence, tout cela partirait à chaque stock rempli.
+D'où quatre points :
+
+- **Relevé avant retrait, restitué après pose.** Le relevé vit dans `BillMemory`, rangé par
+  « DefÉtabli/DefRecette » — la maille du profil.
+- **Travaux liés préservés.** On mémorise les `loadID` des compagnons ; à la repose, on se raccroche
+  au premier encore vivant, et `LinkBills` rattache au groupe existant.
+- **Restriction d'établi appliquée.** Le crochet de BWM sur `BillUtility.MakeNewBill` lit
+  `Find.Selector.SingleSelectedThing` pour savoir de quel établi il s'agit : depuis un tick, ça ne
+  veut rien dire. On la pose nous-mêmes, pour la bonne table.
+- **Comptage aligné.** Son postfix sur `RecipeWorkerCounter.CountProducts` sort si le travail n'a pas
+  de données étendues — ce qui est le cas de notre témoin. On lui greffe donc le même relevé avant de
+  mesurer, sinon le seuil qui déclenche et le nombre affiché par le travail ne parlent pas de la même
+  chose. Le plafond de travaux vient aussi de son `GetMaxBills()` : 15, ou 125 avec No Max Bills.
+
+**Nice Bill Tab - Expansion** (`HICON.NiceBillTabExpansion`) : son `HiddenRecipeStore.IsHidden` ne
+filtre que son menu d'ajout. Une recette masquée est tenue pour exclue.
+
+**Choose Your Recipe** (`zal.chooseyourrecipe`) : rien à faire. Il retire les recettes désactivées de
+`def.allRecipesCached`, donc elles ne sont déjà plus dans le `AllRecipes` que nous parcourons.
+
 À la **première activation** d'un type d'établi, toutes ses recettes déjà débloquées sont acceptées
 en silence — c'est bien ce que « je veux toutes les recettes » veut dire, mais sur un atelier
 d'usinage cela lance beaucoup de production d'un coup. Réglez la cible avant d'activer.

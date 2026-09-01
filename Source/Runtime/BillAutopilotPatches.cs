@@ -62,6 +62,9 @@ namespace BillAutopilot
             state.Disown(bill);
             state.Accept(__instance.def, bill.recipe);
 
+            // Refus explicite : le souvenir de ce que portait la bill n'a plus lieu d'etre.
+            state.Forget(__instance.def, bill.recipe);
+
             var profile = BillAutopilotMod.Settings.ProfileFor(__instance.def);
             if (profile == null) return;
 

@@ -30,7 +30,13 @@ A standing order that says "make one" would be remade the moment it finished, fo
 
 WORKS WITH
 
-Nothing is replaced in the bills tab, so mods that redraw it keep working — tested against Nice Bill Tab, Better Workbench Management, Categorized Bill Dropdown and Choose Your Recipe. Bills placed by hand always win over the autopilot: put one up yourself and it steps aside for that recipe.
+Nothing is replaced in the bills tab, so mods that redraw it keep working. Bills placed by hand always win over the autopilot: put one up yourself and it steps aside for that recipe.
+
+Detected automatically, none required.
+
+- Better Workbench Management: what it adds to a bill survives the autopilot taking that bill down and putting it back up — custom name, counting away from the home map, extra products counted toward the target, and membership of a linked bill set, which is rejoined rather than lost. Its workbench restriction is applied to bills the autopilot creates, which its own hook cannot do since that hook reads the selected workbench. Its wider counting rules are used when deciding whether a stock is full, so the threshold and the bill's own display agree. Its raised bill ceiling is honoured too, when No Max Bills is present.
+- Nice Bill Tab - Expansion: a recipe you hide on a workbench is treated as one you do not want, and the autopilot leaves it alone.
+- Choose Your Recipe: nothing needed. It removes disabled recipes from the workbench itself, so the autopilot never sees them.
 
 Can be added to a game in progress, and taken back out of one. Nothing it stores is written to your save as a class of its own, so removing it raises no load error the way a mod with its own game component does — the bills it had put up simply stay behind as ordinary bills, yours to keep or delete.
 
@@ -65,5 +71,10 @@ This mod is MIT licensed.</description>
     <li>Ludeon.RimWorld.Biotech</li>
     <li>Ludeon.RimWorld.Anomaly</li>
     <li>Ludeon.RimWorld.Odyssey</li>
+    <!-- Integrations optionnelles : on se branche dessus, donc on charge apres. -->
+    <li>falconne.BWM</li>
+    <li>Andromeda.NiceBillTab</li>
+    <li>HICON.NiceBillTabExpansion</li>
+    <li>zal.chooseyourrecipe</li>
   </loadAfter>
 </ModMetaData>

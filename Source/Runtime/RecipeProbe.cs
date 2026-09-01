@@ -52,8 +52,13 @@ namespace BillAutopilot
             }
         }
 
-        /// <summary>Stock actuel du produit de la recette, sur la carte de l'etabli.</summary>
-        public static bool TryCount(Building_WorkTable table, RecipeDef recipe, out int count)
+        /// <summary>
+        /// Stock actuel du produit de la recette, sur la carte de l'etabli. <paramref name="memory"/>
+        /// porte ce que les autres mods ajoutent au comptage (inventaires, produits additionnels) :
+        /// sans lui, le temoin compterait a la facon vanilla pendant que la vraie bill compte autrement.
+        /// </summary>
+        public static bool TryCount(Building_WorkTable table, RecipeDef recipe, BillMemory memory,
+            out int count)
         {
             count = 0;
             var probe = GetProbe(recipe);
@@ -62,6 +67,7 @@ namespace BillAutopilot
             var previousStack = probe.billStack;
             ProbeStack.billGiver = table;
             probe.billStack = ProbeStack;
+            BetterWorkbenchesCompat.PrimeProbe(probe, memory);
             try
             {
                 if (!recipe.WorkerCounter.CanCountProducts(probe)) return false;

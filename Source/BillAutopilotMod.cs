@@ -48,11 +48,14 @@ namespace BillAutopilot
             listing.CheckboxLabeled("BillAutopilot.Settings.Notify".Translate(),
                 ref Settings.notifyNewRecipes, "BillAutopilot.Settings.NotifyDesc".Translate());
 
+            // Le plafond du jeu : 15, ou 125 quand Better Workbench Management voit No Max Bills.
+            int gameMax = BetterWorkbenchesCompat.MaxBills;
+
             var capRow = listing.GetRect(28f);
             Widgets.Label(capRow.LeftPart(0.6f),
-                "BillAutopilot.Settings.MaxBills".Translate(Settings.maxAutoBillsPerTable));
+                "BillAutopilot.Settings.MaxBills".Translate(Settings.maxAutoBillsPerTable, gameMax));
             Settings.maxAutoBillsPerTable = Mathf.RoundToInt(Widgets.HorizontalSlider(
-                capRow.RightPart(0.4f), Settings.maxAutoBillsPerTable, 1f, 15f, middleAlignment: true));
+                capRow.RightPart(0.4f), Settings.maxAutoBillsPerTable, 1f, gameMax, middleAlignment: true));
 
             listing.GapLine(6f);
             listing.End();

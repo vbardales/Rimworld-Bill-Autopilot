@@ -4,7 +4,7 @@
   <BillAutopilot.Settings.Intro>Pick which workbench types run on autopilot. For each one, the mod keeps bills alive on its own: a bill appears when there is work to do and steps aside once it is done, so the tab stays short. Recipes unlocked later are added by themselves.</BillAutopilot.Settings.Intro>
   <BillAutopilot.Settings.Notify>Announce newly unlocked recipes</BillAutopilot.Settings.Notify>
   <BillAutopilot.Settings.NotifyDesc>A recipe unlocked after a workbench was put on autopilot arrives as a suspended bill, so it never spends anything behind your back. This sends a letter listing them.</BillAutopilot.Settings.NotifyDesc>
-  <BillAutopilot.Settings.MaxBills>At most {0} automatic bills per workbench</BillAutopilot.Settings.MaxBills>
+  <BillAutopilot.Settings.MaxBills>At most {0} automatic bills per workbench (the game allows {1})</BillAutopilot.Settings.MaxBills>
   <BillAutopilot.Settings.Configure>Configure...</BillAutopilot.Settings.Configure>
   <BillAutopilot.Settings.SummaryOff>{0} recipes</BillAutopilot.Settings.SummaryOff>
   <BillAutopilot.Settings.SummaryMaintain>{0} recipes, keep {1}, {2} overridden</BillAutopilot.Settings.SummaryMaintain>

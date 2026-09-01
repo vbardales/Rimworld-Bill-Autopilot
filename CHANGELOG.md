@@ -16,3 +16,9 @@ Première version.
 - Interface en anglais et en français, entièrement au pointeur (Steam Deck).
 - Rien n'est écrit dans la sauvegarde sous forme de classe du mod : le retirer d'une partie en cours
   ne produit aucune erreur au chargement.
+- Better Workbench Management : ce qu'il pose sur un travail survit au cycle retirer/reposer — nom,
+  comptage hors-carte, produits additionnels, appartenance à un groupe de travaux liés. Sa
+  restriction d'établi s'applique aux travaux du pilote, ses règles de comptage servent aux seuils,
+  et son plafond de travaux remplace le 15 du jeu.
+- Nice Bill Tab - Expansion : une recette masquée sur un établi est tenue pour exclue.
+- Choose Your Recipe : déjà respecté sans rien faire, il retire les recettes désactivées de l'établi.

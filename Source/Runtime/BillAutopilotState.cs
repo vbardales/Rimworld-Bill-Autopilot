@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using RimWorld;
 using Verse;
 
@@ -74,6 +75,12 @@ namespace BillAutopilot
         /// <summary>Types d'etabli dont le stock initial de recettes a deja ete absorbe.</summary>
         private HashSet<string> seeded = new HashSet<string>();
 
+        /// <summary>
+        /// "DefEtabli/DefRecette" -> ce que les autres mods avaient pose sur la bill retiree. C'est ce
+        /// qui permet au cycle retirer/reposer de ne rien perdre.
+        /// </summary>
+        private Dictionary<string, BillMemory> memories = new Dictionary<string, BillMemory>();
+
         private List<string> pendingNews = new List<string>();
 
         private readonly Queue<Building_WorkTable> queue = new Queue<Building_WorkTable>();
@@ -110,6 +117,20 @@ namespace BillAutopilot
 
         public void Accept(ThingDef bench, RecipeDef recipe) => pending.Remove(Key(bench, recipe));
 
+        // --- Memoire des bills retirees ----------------------------------------------------------
+
+        public BillMemory MemoryFor(ThingDef bench, RecipeDef recipe) =>
+            memories.TryGetValue(Key(bench, recipe), out var memory) ? memory : null;
+
+        public void Remember(ThingDef bench, RecipeDef recipe, BillMemory memory)
+        {
+            var key = Key(bench, recipe);
+            if (memory == null) memories.Remove(key);
+            else memories[key] = memory;
+        }
+
+        public void Forget(ThingDef bench, RecipeDef recipe) => memories.Remove(Key(bench, recipe));
+
         /// <summary>
         /// A l'activation d'un type d'etabli, tout ce qui est deja debloque est absorbe en silence :
         /// "je veux toutes les recettes" veut dire celles d'aujourd'hui, sans quarante lignes suspendues
@@ -133,6 +154,9 @@ namespace BillAutopilot
             var prefix = bench.defName + "/";
             known.RemoveWhere(k => k.StartsWith(prefix));
             pending.RemoveWhere(k => k.StartsWith(prefix));
+
+            var stale = memories.Keys.Where(k => k.StartsWith(prefix)).ToList();
+            foreach (var key in stale) memories.Remove(key);
         }
 
         // --- Notifications -----------------------------------------------------------------------
@@ -220,7 +244,9 @@ namespace BillAutopilot
             Scribe_Collections.Look(ref known, "billAutopilotKnown", LookMode.Value);
             Scribe_Collections.Look(ref pending, "billAutopilotPending", LookMode.Value);
             Scribe_Collections.Look(ref seeded, "billAutopilotSeeded", LookMode.Value);
+            Scribe_Collections.Look(ref memories, "billAutopilotMemories", LookMode.Value, LookMode.Deep);
 
+            if (memories == null) memories = new Dictionary<string, BillMemory>();
             if (stamps == null) stamps = new Dictionary<int, BillStamp>();
             if (known == null) known = new HashSet<string>();
             if (pending == null) pending = new HashSet<string>();
