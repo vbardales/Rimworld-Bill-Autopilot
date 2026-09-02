@@ -1,24 +1,25 @@
 # Changelog
 
-## 0.1.0 — non publié
+## 0.1.0 — unreleased
 
-Première version.
+First version.
 
-- Pilote automatique par type d'établi : le mod pose un travail quand il y a de quoi faire et le
-  retire une fois la cible atteinte.
-- Modes *Maintenir un stock* et *Toujours*, avec cible et seuil de relance.
-- Réglage séparé pour les recettes au produit non comptable (découpe, fonte, crémation, chirurgie),
-  que le jeu ne sait pas compter.
-- Surcharge par recette, écrite aussi quand on ajuste un travail automatique dans l'onglet.
-- Supprimer un travail automatique exclut sa recette du pilote.
-- Recette débloquée après coup : travail suspendu + lettre récapitulative.
-- Plafond de travaux automatiques par établi, pour laisser de la place sous la limite de 15 du jeu.
-- Interface en anglais et en français, entièrement au pointeur (Steam Deck).
-- Rien n'est écrit dans la sauvegarde sous forme de classe du mod : le retirer d'une partie en cours
-  ne produit aucune erreur au chargement.
-- Better Workbench Management : ce qu'il pose sur un travail survit au cycle retirer/reposer — nom,
-  comptage hors-carte, produits additionnels, appartenance à un groupe de travaux liés. Sa
-  restriction d'établi s'applique aux travaux du pilote, ses règles de comptage servent aux seuils,
-  et son plafond de travaux remplace le 15 du jeu.
-- Nice Bill Tab - Expansion : une recette masquée sur un établi est tenue pour exclue.
-- Choose Your Recipe : déjà respecté sans rien faire, il retire les recettes désactivées de l'établi.
+- Autopilot per workbench type: the mod puts a bill up when there is something to do and takes it
+  down once the target is reached.
+- *Keep a stock* and *Always* modes, with a target and a restart threshold.
+- A separate setting for recipes with an uncountable product (butchering, smelting, cremation,
+  surgery), which the game cannot count.
+- Per-recipe override, also written when you adjust an automatic bill in the tab.
+- Deleting an automatic bill excludes its recipe from the autopilot.
+- Recipe unlocked later: suspended bill plus a summary letter.
+- A cap on automatic bills per bench, to leave room under the game's limit of 15.
+- Interface in English and French, fully pointer-driven (Steam Deck).
+- Nothing is written to the save as a class belonging to the mod: removing it from an ongoing game
+  produces no load error.
+- Better Workbench Management: what it attaches to a bill survives the remove/replace cycle — name,
+  off-map counting, additional products, membership of a linked bill group. Its workbench
+  restriction applies to autopilot bills, its counting rules feed the thresholds, and its bill cap
+  replaces the game's 15.
+- Nice Bill Tab - Expansion: a recipe hidden on a bench is treated as excluded.
+- Choose Your Recipe: already respected with no work, since it removes disabled recipes from the
+  bench.
