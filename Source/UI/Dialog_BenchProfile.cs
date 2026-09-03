@@ -113,11 +113,7 @@ namespace BillAutopilot
             bool enabled = profile.enabled;
             listing.CheckboxLabeled("BillAutopilot.Profile.Enabled".Translate(), ref enabled,
                 "BillAutopilot.Profile.EnabledDesc".Translate());
-            if (enabled != profile.enabled)
-            {
-                profile.enabled = enabled;
-                Save();
-            }
+            if (enabled != profile.enabled) BenchActivation.Toggle(bench, enabled);
 
             listing.GapLine(4f);
 

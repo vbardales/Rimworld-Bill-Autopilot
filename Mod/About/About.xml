@@ -22,6 +22,8 @@ WHAT YOU SET
 - Butchering, smelting, cremation and anything else the game cannot count get their own setting, since "keep N in stock" is impossible for them.
 - Any recipe can override the default, or be left out entirely.
 
+Switching a workbench type on asks first, naming how many recipes it is about to take and at what target — the one moment where a lot of production can start at once.
+
 Change a bill's target in the bills tab and the autopilot keeps it: adjusting the bill IS adjusting the profile.
 
 WHY NOT "DO 1 TIME"

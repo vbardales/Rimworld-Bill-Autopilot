@@ -129,10 +129,7 @@ namespace BillAutopilot
                 isActive = () => settings.IsEnabled(table.def),
                 toggleAction = delegate
                 {
-                    var written = settings.ProfileForWriting(table.def);
-                    written.enabled = !written.enabled;
-                    BillAutopilotMod.Instance.WriteSettings();
-                    BillAutopilotState.Current?.MarkDirty();
+                    BenchActivation.Toggle(table.def, !settings.IsEnabled(table.def));
                 },
             };
 

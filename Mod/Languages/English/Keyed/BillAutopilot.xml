@@ -10,6 +10,17 @@
   <BillAutopilot.Settings.SummaryMaintain>{0} recipes, keep {1}, {2} overridden</BillAutopilot.Settings.SummaryMaintain>
   <BillAutopilot.Settings.SummaryAlways>{0} recipes, always on, {1} overridden</BillAutopilot.Settings.SummaryAlways>
 
+  <BillAutopilot.Confirm.Title>Autopilot: {0}</BillAutopilot.Confirm.Title>
+  <BillAutopilot.Confirm.BodyMaintain>The autopilot will take charge of {0} recipes on every {1}, keeping {2} of each in stock.
+
+It starts as soon as you confirm, so anything you are short of will be queued at once — on a big workbench that is a lot of production and a lot of materials. Set the target first if {2} is not what you want.
+
+Recipes unlocked later will arrive suspended, and will never spend anything without your say-so.</BillAutopilot.Confirm.BodyMaintain>
+  <BillAutopilot.Confirm.BodyAlways>The autopilot will take charge of {0} recipes on every {1}, and run each of them without end.
+
+In this mode a bill never stops on its own, so it will keep consuming materials for as long as there are any. "Keep a stock" is the safer default.
+
+Recipes unlocked later will arrive suspended, and will never spend anything without your say-so.</BillAutopilot.Confirm.BodyAlways>
   <BillAutopilot.Profile.Enabled>Autopilot on for this workbench type</BillAutopilot.Profile.Enabled>
   <BillAutopilot.Profile.EnabledDesc>Applies to every workbench of this kind, the ones you build later included.</BillAutopilot.Profile.EnabledDesc>
   <BillAutopilot.Profile.DefaultMode>Default for every recipe</BillAutopilot.Profile.DefaultMode>

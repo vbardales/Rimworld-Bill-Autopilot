@@ -87,11 +87,7 @@ namespace BillAutopilot
             var checkRect = new Rect(rect.x + 4f, rect.y, rect.width * 0.5f, rect.height);
             bool afterClick = enabled;
             Widgets.CheckboxLabeled(checkRect, bench.LabelCap, ref afterClick);
-            if (afterClick != enabled)
-            {
-                Settings.ProfileForWriting(bench).enabled = afterClick;
-                BillAutopilotState.Current?.MarkDirty();
-            }
+            if (afterClick != enabled) BenchActivation.Toggle(bench, afterClick);
 
             var summaryRect = new Rect(rect.x + rect.width * 0.5f, rect.y, rect.width * 0.28f, rect.height);
             GUI.color = new Color(1f, 1f, 1f, 0.6f);

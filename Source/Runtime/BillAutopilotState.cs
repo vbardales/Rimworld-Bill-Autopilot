@@ -136,6 +136,9 @@ namespace BillAutopilot
         /// "je veux toutes les recettes" veut dire celles d'aujourd'hui, sans quarante lignes suspendues
         /// d'un coup. Seul ce qui se debloque ENSUITE se signale.
         /// </summary>
+        /// <summary>Ce type d'etabli a-t-il deja absorbe son stock initial dans cette partie ?</summary>
+        public bool IsSeeded(ThingDef bench) => bench != null && seeded.Contains(bench.defName);
+
         public void SeedIfNeeded(ThingDef bench)
         {
             if (!seeded.Add(bench.defName)) return;

@@ -28,3 +28,5 @@ First version.
 - The recipe list in a bench profile is grouped by product category, each group collapsible, with a
   collapse-all button. No search field: it would summon the virtual keyboard on a Steam Deck.
 - A startup line in the log naming which companion mods were found and the bill cap in force.
+- Switching a workbench type on for the first time asks for confirmation, naming how many recipes
+  the autopilot is about to take and at what target. Switching it back on later does not ask again.

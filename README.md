@@ -82,9 +82,11 @@ the autopilot correctly reads them as placed by hand.
 **Choose Your Recipe** (`zal.chooseyourrecipe`): nothing to do. It removes disabled recipes from
 `def.allRecipesCached`, so they are already gone from the `AllRecipes` being walked.
 
-On the **first activation** of a workbench type, every already-unlocked recipe is accepted
-silently — which is what "I want all the recipes" means, but on a machining table that starts a
-great deal of production at once. Set the target before switching it on.
+On the **first activation** of a workbench type, every already-unlocked recipe is accepted at
+once — which is what "I want all the recipes" means, but on a machining table that starts a great
+deal of production. So it asks first, naming how many recipes it is about to take and at what
+target. Switching the same bench back on later does not ask again: its opening stock of recipes has
+already been absorbed, and nothing more is taken silently.
 
 ## How it works
 

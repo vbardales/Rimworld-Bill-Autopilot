@@ -10,6 +10,17 @@
   <BillAutopilot.Settings.SummaryMaintain>{0} recettes, maintenir {1}, {2} surchargées</BillAutopilot.Settings.SummaryMaintain>
   <BillAutopilot.Settings.SummaryAlways>{0} recettes, toujours actives, {1} surchargées</BillAutopilot.Settings.SummaryAlways>
 
+  <BillAutopilot.Confirm.Title>Pilote automatique : {0}</BillAutopilot.Confirm.Title>
+  <BillAutopilot.Confirm.BodyMaintain>Le pilote va prendre en charge {0} recettes sur chaque établi « {1} », en maintenant un stock de {2} de chacune.
+
+Il démarre dès que vous confirmez : tout ce qui vous manque sera mis en file d’un coup — sur un grand établi, cela fait beaucoup de production et beaucoup de matériaux. Réglez la cible d’abord si {2} ne vous convient pas.
+
+Les recettes débloquées plus tard arriveront suspendues, et ne dépenseront jamais rien sans votre accord.</BillAutopilot.Confirm.BodyMaintain>
+  <BillAutopilot.Confirm.BodyAlways>Le pilote va prendre en charge {0} recettes sur chaque établi « {1} », et fera tourner chacune sans fin.
+
+Dans ce mode un travail ne s’arrête jamais de lui-même : il consommera des matériaux tant qu’il y en aura. « Maintenir un stock » est le réglage prudent.
+
+Les recettes débloquées plus tard arriveront suspendues, et ne dépenseront jamais rien sans votre accord.</BillAutopilot.Confirm.BodyAlways>
   <BillAutopilot.Profile.Enabled>Pilote automatique actif sur ce type d'établi</BillAutopilot.Profile.Enabled>
   <BillAutopilot.Profile.EnabledDesc>Vaut pour tous les établis de ce type, y compris ceux que vous construirez ensuite.</BillAutopilot.Profile.EnabledDesc>
   <BillAutopilot.Profile.DefaultMode>Par défaut, pour chaque recette</BillAutopilot.Profile.DefaultMode>
