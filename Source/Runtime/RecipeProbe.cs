@@ -46,7 +46,7 @@ namespace BillAutopilot
             catch (Exception e)
             {
                 Log.WarningOnce(
-                    "[Bill Autopilot] CanCountProducts a echoue sur " + recipe.defName + " : " + e.Message,
+                    "[Bill Autopilot] CanCountProducts failed on " + recipe.defName + ": " + e.Message,
                     recipe.shortHash ^ 0x5A11);
                 return false;
             }
@@ -77,7 +77,7 @@ namespace BillAutopilot
             catch (Exception e)
             {
                 Log.WarningOnce(
-                    "[Bill Autopilot] CountProducts a echoue sur " + recipe.defName + " : " + e.Message,
+                    "[Bill Autopilot] CountProducts failed on " + recipe.defName + ": " + e.Message,
                     recipe.shortHash ^ 0x5A12);
                 return false;
             }

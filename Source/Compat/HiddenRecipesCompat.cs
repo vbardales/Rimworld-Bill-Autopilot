@@ -54,8 +54,8 @@ namespace BillAutopilot
 
                         if (isHidden != null)
                         {
-                            Log.Message("[Bill Autopilot] Nice Bill Tab - Expansion detecte : "
-                                        + "ses recettes masquees seront tenues pour exclues.");
+                            Log.Message("[Bill Autopilot] Nice Bill Tab - Expansion found: "
+                                        + "its hidden recipes will be treated as excluded.");
                         }
                         return;
                     }
@@ -64,7 +64,7 @@ namespace BillAutopilot
             catch (Exception e)
             {
                 isHidden = null;
-                Log.Warning("[Bill Autopilot] Impossible de lire les recettes masquees : " + e.Message);
+                Log.Warning("[Bill Autopilot] Could not read hidden recipes: " + e.Message);
             }
         }
 

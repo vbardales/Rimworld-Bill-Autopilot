@@ -96,14 +96,14 @@ namespace BillAutopilot
 
                 if (active)
                 {
-                    Log.Message("[Bill Autopilot] Better Workbench Management detecte : "
-                                + "donnees etendues, liens et restrictions d'etabli seront preserves.");
+                    Log.Message("[Bill Autopilot] Better Workbench Management found: extended bill "
+                                + "data, links and workbench restrictions will be preserved.");
                 }
             }
             catch (Exception e)
             {
                 active = false;
-                Log.Warning("[Bill Autopilot] Impossible de se brancher sur Better Workbench Management : " + e.Message);
+                Log.Warning("[Bill Autopilot] Could not hook into Better Workbench Management: " + e.Message);
             }
         }
 
@@ -161,7 +161,7 @@ namespace BillAutopilot
             }
             catch (Exception e)
             {
-                Log.WarningOnce("[Bill Autopilot] Releve BWM impossible : " + e.Message, 0x5A21);
+                Log.WarningOnce("[Bill Autopilot] Could not read Better Workbench Management data: " + e.Message, 0x5A21);
                 return null;
             }
         }
@@ -209,7 +209,7 @@ namespace BillAutopilot
             }
             catch (Exception e)
             {
-                Log.WarningOnce("[Bill Autopilot] Restauration BWM impossible : " + e.Message, 0x5A22);
+                Log.WarningOnce("[Bill Autopilot] Could not restore Better Workbench Management data: " + e.Message, 0x5A22);
             }
         }
 
@@ -331,7 +331,7 @@ namespace BillAutopilot
             }
             catch (Exception e)
             {
-                Log.WarningOnce("[Bill Autopilot] Restriction d'etabli non appliquee : " + e.Message, 0x5A23);
+                Log.WarningOnce("[Bill Autopilot] Workbench restriction not applied: " + e.Message, 0x5A23);
             }
         }
 

@@ -14,13 +14,13 @@ namespace BillAutopilot
     {
         static BillAutopilotStartup()
         {
-            Log.Message("[Bill Autopilot] Integrations : "
+            Log.Message("[Bill Autopilot] Integrations: "
                         + "Better Workbench Management " + Found(BetterWorkbenchesCompat.Active)
-                        + ", recettes masquees (Nice Bill Tab - Expansion) "
+                        + ", hidden recipes (Nice Bill Tab - Expansion) "
                         + Found(HiddenRecipesCompat.Available)
-                        + ". Plafond de travaux par etabli : " + BetterWorkbenchesCompat.MaxBills + ".");
+                        + ". Bill cap per workbench: " + BetterWorkbenchesCompat.MaxBills + ".");
         }
 
-        private static string Found(bool present) => present ? "detecte" : "absent";
+        private static string Found(bool present) => present ? "found" : "not found";
     }
 }
