@@ -72,7 +72,7 @@ This mod is MIT licensed.</description>
     <li>Ludeon.RimWorld.Biotech</li>
     <li>Ludeon.RimWorld.Anomaly</li>
     <li>Ludeon.RimWorld.Odyssey</li>
-    <!-- Integrations optionnelles : on se branche dessus, donc on charge apres. -->
+    <!-- Optional integrations: we hook onto them, so we load after. -->
     <li>falconne.BWM</li>
     <li>Andromeda.NiceBillTab</li>
     <li>HICON.NiceBillTabExpansion</li>
