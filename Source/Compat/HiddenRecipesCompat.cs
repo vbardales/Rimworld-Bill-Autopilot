@@ -77,6 +77,15 @@ namespace BillAutopilot
             return null;
         }
 
+        public static bool Available
+        {
+            get
+            {
+                Probe();
+                return isHidden != null;
+            }
+        }
+
         public static bool IsHidden(Building_WorkTable table, RecipeDef recipe)
         {
             Probe();
