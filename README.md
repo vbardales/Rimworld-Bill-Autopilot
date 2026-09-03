@@ -69,6 +69,16 @@ stock filled up. Hence four measures:
 **Nice Bill Tab - Expansion** (`HICON.NiceBillTabExpansion`): its `HiddenRecipeStore.IsHidden` only
 filters its own add menu. A hidden recipe is treated as excluded.
 
+**Dubs Mint Menus** (`dubwise.dubsmintmenus`): its bill menu does not take the tab over — its
+`BillStack.DoListing` patch is a `void` prefix that only adjusts the rect — so nothing needs
+reconciling there. Its **bench templates** do. `MakeBenchTemplate` photographs *every* bill on the
+bench, autopilot bills included: a template made from an autopiloted bench would capture whatever
+the autopilot happened to have up, and re-applying it later would put those recipes back as manual
+bills, retiring the autopilot from them for good. A postfix takes our bills back out of the template
+the moment it is created. Applying a template needs nothing: `ApplyTemplateToBench` clones with
+`InitializeAfterClone()`, so the placed bills carry fresh ids that are absent from our stamps, and
+the autopilot correctly reads them as placed by hand.
+
 **Choose Your Recipe** (`zal.chooseyourrecipe`): nothing to do. It removes disabled recipes from
 `def.allRecipesCached`, so they are already gone from the `AllRecipes` being walked.
 

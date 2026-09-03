@@ -23,3 +23,8 @@ First version.
 - Nice Bill Tab - Expansion: a recipe hidden on a bench is treated as excluded.
 - Choose Your Recipe: already respected with no work, since it removes disabled recipes from the
   bench.
+- Dubs Mint Menus: autopilot bills are kept out of a bench template, which would otherwise capture
+  the autopilot's current queue and, once re-applied, retire the autopilot from those recipes.
+- The recipe list in a bench profile is grouped by product category, each group collapsible, with a
+  collapse-all button. No search field: it would summon the virtual keyboard on a Steam Deck.
+- A startup line in the log naming which companion mods were found and the bill cap in force.

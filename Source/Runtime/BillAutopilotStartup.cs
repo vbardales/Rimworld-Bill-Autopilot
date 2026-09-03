@@ -14,10 +14,15 @@ namespace BillAutopilot
     {
         static BillAutopilotStartup()
         {
+            // Ce patch-ci vise l'assembly d'un autre mod : il ne peut pas etre pose par attribut, et
+            // il attend que tout soit charge - d'ou sa place ici plutot que dans PatchAll().
+            DubsMintMenusCompat.Install(BillAutopilotMod.HarmonyInstance);
+
             Log.Message("[Bill Autopilot] Integrations: "
                         + "Better Workbench Management " + Found(BetterWorkbenchesCompat.Active)
                         + ", hidden recipes (Nice Bill Tab - Expansion) "
                         + Found(HiddenRecipesCompat.Available)
+                        + ", Dubs Mint Menus " + Found(DubsMintMenusCompat.Active)
                         + ". Bill cap per workbench: " + BetterWorkbenchesCompat.MaxBills + ".");
         }
 

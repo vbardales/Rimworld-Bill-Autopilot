@@ -19,6 +19,9 @@
   <BillAutopilot.Profile.UncountableDesc>Butchering, smelting, cremation, surgery and anything else the game cannot count: "keep in stock" is impossible for them, so they follow this setting instead.</BillAutopilot.Profile.UncountableDesc>
   <BillAutopilot.Profile.UncountableRecipe>The game cannot count what this recipe produces, so it follows the setting for uncountable recipes.</BillAutopilot.Profile.UncountableRecipe>
   <BillAutopilot.Profile.OverridesOnly>Overridden recipes only</BillAutopilot.Profile.OverridesOnly>
+  <BillAutopilot.Profile.Uncategorised>Other</BillAutopilot.Profile.Uncategorised>
+  <BillAutopilot.Profile.CollapseAll>Collapse all</BillAutopilot.Profile.CollapseAll>
+  <BillAutopilot.Profile.ExpandAll>Expand all</BillAutopilot.Profile.ExpandAll>
   <BillAutopilot.Profile.ClearOverrides>Clear the {0} overrides</BillAutopilot.Profile.ClearOverrides>
 
   <BillAutopilot.Mode.Maintain>Keep in stock</BillAutopilot.Mode.Maintain>
@@ -36,6 +39,7 @@
   <BillAutopilot.NewRecipeLetterTitle>{0} new recipes available</BillAutopilot.NewRecipeLetterTitle>
   <BillAutopilot.NewRecipeLetterBody>The autopilot has put these up as suspended bills. Unsuspend the ones you want; delete the ones you do not, and it will leave them alone from now on.\n\n{0}</BillAutopilot.NewRecipeLetterBody>
   <BillAutopilot.DriftCaptured>{0} kept as an override on the {1} profile.</BillAutopilot.DriftCaptured>
+  <BillAutopilot.TemplateStripped>{0} autopilot bills were left out of the template: it keeps what you put on the bench, not what the autopilot had up at that moment.</BillAutopilot.TemplateStripped>
   <BillAutopilot.RecipeExcluded>{0} will no longer be put up on a {1}.</BillAutopilot.RecipeExcluded>
 
 </LanguageData>
