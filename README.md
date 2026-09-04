@@ -37,8 +37,9 @@ down.
 
 - No "x1" as a standing order: an instruction saying "make one" would be put back as soon as it
   finished, endlessly. *Keep a stock of 1* gives the intended effect and stops on its own.
-- Nothing is redrawn in the bills tab, so mods that replace it keep working. Designed alongside
-  Nice Bill Tab, Better Workbench Management, Categorized Bill Dropdown and Choose Your Recipe.
+- Nothing is redrawn in the bills tab, so mods that replace it keep working — Nice Bill Tab, Dubs
+  Mint Menus and Categorized Bill Dropdown all own parts of it and are left alone. What the autopilot
+  actively picks up from its neighbours is listed further down.
 - A hand-placed bill always wins: the autopilot stands back from that recipe for as long as it
   exists.
 

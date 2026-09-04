@@ -39,11 +39,22 @@ namespace BillAutopilot
 
         public override void DoSettingsWindowContents(Rect inRect)
         {
-            var header = new Rect(inRect.x, inRect.y, inRect.width, 122f);
+            var header = new Rect(inRect.x, inRect.y, inRect.width, 176f);
             var listing = new Listing_Standard();
             listing.Begin(header);
 
             listing.Label("BillAutopilot.Settings.Intro".Translate());
+
+            // Ce que le mod a trouve autour de lui. Le journal le dit deja au demarrage, mais on ne
+            // va pas lire un journal pour savoir si une integration a pris : ca se voit ici.
+            var integrations = listing.GetRect(24f);
+            GUI.color = new Color(1f, 1f, 1f, 0.7f);
+            Widgets.Label(integrations, "BillAutopilot.Settings.Integrations".Translate(
+                Detected("Better Workbench Management", BetterWorkbenchesCompat.Active),
+                Detected("Dubs Mint Menus", DubsMintMenusCompat.Active),
+                Detected("Nice Bill Tab - Expansion", HiddenRecipesCompat.Available)));
+            GUI.color = Color.white;
+            TooltipHandler.TipRegion(integrations, "BillAutopilot.Settings.IntegrationsDesc".Translate());
 
             listing.CheckboxLabeled("BillAutopilot.Settings.Notify".Translate(),
                 ref Settings.notifyNewRecipes, "BillAutopilot.Settings.NotifyDesc".Translate());
@@ -99,6 +110,13 @@ namespace BillAutopilot
             {
                 Find.WindowStack.Add(new Dialog_BenchProfile(bench));
             }
+        }
+
+        private static string Detected(string name, bool present)
+        {
+            return name + " " + (present
+                ? "BillAutopilot.Settings.Detected".Translate()
+                : "BillAutopilot.Settings.NotDetected".Translate());
         }
 
         private static string Summary(ThingDef bench, BenchProfile profile)
