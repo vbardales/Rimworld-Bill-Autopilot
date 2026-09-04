@@ -21,8 +21,11 @@ WHAT YOU SET
 - A default for every recipe: keep a stock of N, or always.
 - Butchering, smelting, cremation and anything else the game cannot count get their own setting, since "keep N in stock" is impossible for them.
 - Any recipe can override the default, or be left out entirely.
+- A cap on how many automatic bills may stand on one bench at a time, so there is always room for bills of your own.
 
-Switching a workbench type on asks first, naming how many recipes it is about to take and at what target — the one moment where a lot of production can start at once.
+The recipe list is grouped by product category, each group collapsible, with a filter for the ones you have overridden. No search field: every control is meant to be reachable with a pointer alone.
+
+Switching a workbench type on asks first, naming how many recipes it is about to take and at what target — the one moment where a lot of production can start at once. Switching it back on later does not ask again.
 
 Change a bill's target in the bills tab and the autopilot keeps it: adjusting the bill IS adjusting the profile.
 
@@ -34,7 +37,7 @@ WORKS WITH
 
 Nothing is replaced in the bills tab, so mods that redraw it keep working. Bills placed by hand always win over the autopilot: put one up yourself and it steps aside for that recipe.
 
-Detected automatically, none required.
+Detected automatically, none required — the settings screen names the ones it found. Every call into a neighbour is wrapped, so the worst case is a lost feature, never a broken game.
 
 - Better Workbench Management: what it adds to a bill survives the autopilot taking that bill down and putting it back up — custom name, counting away from the home map, extra products counted toward the target, and membership of a linked bill set, which is rejoined rather than lost. Its workbench restriction is applied to bills the autopilot creates, which its own hook cannot do since that hook reads the selected workbench. Its wider counting rules are used when deciding whether a stock is full, so the threshold and the bill's own display agree. Its raised bill ceiling is honoured too, when No Max Bills is present.
 - Nice Bill Tab - Expansion: a recipe you hide on a workbench is treated as one you do not want, and the autopilot leaves it alone.
