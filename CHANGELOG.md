@@ -3,7 +3,7 @@
 Format inspired by [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 This file serves the repository and the writing of Steam patch notes; RimWorld does not display it in game.
 
-## [1.0.0] — unreleased
+## [1.0.0] - unreleased
 
 ### Added
 
@@ -11,8 +11,8 @@ This file serves the repository and the writing of Steam patch notes; RimWorld d
   when there is something to do and takes it down once the target is reached, keeping the tab short.
 - *Keep a stock* and *Always* modes, with a target and a restart threshold. The gap between the two
   stops a bill from flickering on every unit produced.
-- A separate setting for recipes with an uncountable product — butchering, smelting, cremation,
-  surgery — for which the game cannot count and "keep a stock" is impossible.
+- A separate setting for recipes with an uncountable product (butchering, smelting, cremation,
+  surgery) for which the game cannot count and "keep a stock" is impossible.
 - Per-recipe override, also recorded when you adjust an automatic bill directly in the tab.
 - Deleting an automatic bill excludes its recipe from the autopilot, so the gesture means something.
 - A recipe unlocked after a bench went on autopilot arrives as a suspended bill, with a letter
@@ -34,14 +34,14 @@ This file serves the repository and the writing of Steam patch notes; RimWorld d
 Detected on its own, none required. Every call into a neighbour is wrapped: the worst case is a lost
 feature, never a broken game.
 
-- **Better Workbench Management** — what it attaches to a bill survives the remove/replace cycle:
-  name, off-map counting, additional products, and membership of a linked bill group, which is
-  rejoined rather than lost. Its workbench restriction is applied to autopilot bills, which its own
+- **Better Workbench Management**: what it attaches to a bill survives the remove/replace cycle
+  (name, off-map counting, additional products, and membership of a linked bill group, which is
+  rejoined rather than lost). Its workbench restriction is applied to autopilot bills, which its own
   hook cannot do. Its counting rules feed the thresholds, so they agree with what the bill displays.
   Its raised bill ceiling replaces the game's 15 when No Max Bills is present.
-- **Dubs Mint Menus** — autopilot bills are kept out of a bench template, which would otherwise
+- **Dubs Mint Menus**: autopilot bills are kept out of a bench template, which would otherwise
   capture the autopilot's passing queue and, once re-applied, retire the autopilot from those
   recipes for good.
-- **Nice Bill Tab - Expansion** — a recipe hidden on a bench is treated as excluded.
-- **Choose Your Recipe** — respected with no work needed, since it removes disabled recipes from the
+- **Nice Bill Tab - Expansion**: a recipe hidden on a bench is treated as excluded.
+- **Choose Your Recipe**: respected with no work needed, since it removes disabled recipes from the
   bench itself.

@@ -17,7 +17,7 @@
   <BillAutopilot.Confirm.Title>Pilote automatique : {0}</BillAutopilot.Confirm.Title>
   <BillAutopilot.Confirm.BodyMaintain>Le pilote va prendre en charge {0} recettes sur chaque établi « {1} », en maintenant un stock de {2} de chacune.
 
-Il démarre dès que vous confirmez : tout ce qui vous manque sera mis en file d’un coup — sur un grand établi, cela fait beaucoup de production et beaucoup de matériaux. Réglez la cible d’abord si {2} ne vous convient pas.
+Il démarre dès que vous confirmez : tout ce qui vous manque sera mis en file d’un coup : sur un grand établi, cela fait beaucoup de production et beaucoup de matériaux. Réglez la cible d’abord si {2} ne vous convient pas.
 
 Les recettes débloquées plus tard arriveront suspendues, et ne dépenseront jamais rien sans votre accord.</BillAutopilot.Confirm.BodyMaintain>
   <BillAutopilot.Confirm.BodyAlways>Le pilote va prendre en charge {0} recettes sur chaque établi « {1} », et fera tourner chacune sans fin.
@@ -50,7 +50,7 @@ Les recettes débloquées plus tard arriveront suspendues, et ne dépenseront ja
   <BillAutopilot.Gizmo.Configure>Profil du pilote</BillAutopilot.Gizmo.Configure>
   <BillAutopilot.Gizmo.ConfigureDesc>Régler, recette par recette, ce que fait le pilote sur tous les établis « {0} ».</BillAutopilot.Gizmo.ConfigureDesc>
 
-  <BillAutopilot.NewRecipeLine>{0} — {1}</BillAutopilot.NewRecipeLine>
+  <BillAutopilot.NewRecipeLine>{0} - {1}</BillAutopilot.NewRecipeLine>
   <BillAutopilot.NewRecipeLetterTitle>{0} nouvelles recettes disponibles</BillAutopilot.NewRecipeLetterTitle>
   <BillAutopilot.NewRecipeLetterBody>Le pilote les a posées en travaux suspendus. Réactivez celles que vous voulez ; supprimez les autres, il ne les proposera plus.\n\n{0}</BillAutopilot.NewRecipeLetterBody>
   <BillAutopilot.DriftCaptured>{0} retenue comme surcharge du profil « {1} ».</BillAutopilot.DriftCaptured>

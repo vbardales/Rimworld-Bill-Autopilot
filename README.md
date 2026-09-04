@@ -10,19 +10,19 @@ bill up when there is something to do and takes it down once the stock is full, 
 what is left to produce rather than forty lines of configuration to scroll through.
 
 When research unlocks a new recipe, it joins its workbench on its own, **as a suspended bill**,
-with a letter naming it. Unsuspending it accepts the recipe, deleting it refuses it — and the
+with a letter naming it. Unsuspending it accepts the recipe, deleting it refuses it, and the
 autopilot will not offer it again. Nothing is ever spent behind your back.
 
 ## Switching a bench type on
 
-The **first** activation of a workbench type accepts every already-unlocked recipe at once — which
+The **first** activation of a workbench type accepts every already-unlocked recipe at once, which
 is what "I want all the recipes" means, but on a machining table that starts a great deal of
 production. So it asks first, naming how many recipes it is about to take and at what target.
 
 Switching the same bench back on later does not ask again: its opening stock of recipes has already
 been absorbed, and nothing more can be taken silently. Switching off never asks.
 
-The three switches — mod settings, profile window, and the gizmo on a selected bench — all go
+The three switches (mod settings, profile window, and the gizmo on a selected bench) all go
 through the same path, so the question appears wherever you flip it.
 
 ## Settings
@@ -39,7 +39,7 @@ the mod settings, or from the "Autopilot profile" gizmo on the selected bench.
   *Never* by default.
 - **Per-recipe override**: inherit, keep a different stock, always, or never.
 - **Cap on automatic bills per bench** (8 by default). The game accepts 15 bills per bench and hides
-  the "Add" button beyond that — or 125 when Better Workbench Management sees No Max Bills, in which
+  the "Add" button beyond that, or 125 when Better Workbench Management sees No Max Bills, in which
   case the slider follows. The cap leaves room for bills of your own.
 
 The recipe list of a profile is **grouped by product category**, each group collapsible by clicking
@@ -58,7 +58,7 @@ down.
 
 - No "x1" as a standing order: an instruction saying "make one" would be put back as soon as it
   finished, endlessly. *Keep a stock of 1* gives the intended effect and stops on its own.
-- Nothing is redrawn in the bills tab, so mods that replace it keep working — Nice Bill Tab, Dubs
+- Nothing is redrawn in the bills tab, so mods that replace it keep working: Nice Bill Tab, Dubs
   Mint Menus and Categorized Bill Dropdown all own parts of it and are left alone. What the autopilot
   actively picks up from its neighbours is listed below.
 - A hand-placed bill always wins: the autopilot stands back from that recipe for as long as it
@@ -71,26 +71,26 @@ unchanged. Every call into a neighbour is wrapped, so the worst case is a lost f
 broken game.
 
 **Better Workbench Management** (`falconne.BWM`, assembly `ImprovedWorkbenches`) attaches an
-`ExtendedBillData` to every `Bill_Production` — name, `CountAway`, additional product filter — kept
+`ExtendedBillData` to every `Bill_Production` (name, `CountAway`, additional product filter) kept
 in a `WorldComponent`, and puts a prefix on `BillStack.Delete` that erases it along with the bill.
 Since the autopilot removes and re-places bills constantly, all of that would be lost every time a
 stock filled up. Hence four measures:
 
 - **Read before removal, restored after placement.** The reading lives in `BillMemory`, keyed by
-  "BenchDef/RecipeDef" — the granularity of the profile.
+  "BenchDef/RecipeDef", the granularity of the profile.
 - **Linked bills preserved.** The `loadID`s of the companion bills are remembered; on re-placement
   the first still-living one is picked up again, and `LinkBills` reattaches to the existing group.
 - **Workbench restriction applied.** BWM's hook on `BillUtility.MakeNewBill` reads
   `Find.Selector.SingleSelectedThing` to know which bench is meant, which means nothing when the
   call comes from a tick. So the mod sets it itself, for the right table.
 - **Counting aligned.** Its postfix on `RecipeWorkerCounter.CountProducts` bails out if the bill has
-  no extended data — which is exactly the case for the probe bill. The same reading is therefore
+  no extended data, which is exactly the case for the probe bill. The same reading is therefore
   grafted on before measuring; otherwise the threshold that triggers and the number the bill shows
   would not be talking about the same thing. The bill cap comes from its `GetMaxBills()` too: 15, or
   125 with No Max Bills.
 
-**Dubs Mint Menus** (`dubwise.dubsmintmenus`): its bill menu does not take the tab over — its
-`BillStack.DoListing` patch is a `void` prefix that only adjusts the rect — so nothing needs
+**Dubs Mint Menus** (`dubwise.dubsmintmenus`): its bill menu does not take the tab over (its
+`BillStack.DoListing` patch is a `void` prefix that only adjusts the rect), so nothing needs
 reconciling there. Its **bench templates** do. `MakeBenchTemplate` photographs *every* bill on the
 bench, autopilot bills included: a template made from an autopiloted bench would capture whatever
 the autopilot happened to have up, and re-applying it later would put those recipes back as manual
@@ -109,29 +109,29 @@ reflection each time.
 
 ## How it works
 
-- `AutoBillSync` — the engine. One pass per bench decides, recipe by recipe, whether to put a bill
+- `AutoBillSync`: the engine. One pass per bench decides, recipe by recipe, whether to put a bill
   up or take it down.
-- `RecipeProbe` — counts the stock of a product without leaving a trace: `RecipeWorkerCounter`
+- `RecipeProbe`: counts the stock of a product without leaving a trace. `RecipeWorkerCounter`
   demands a `Bill_Production` and reaches the map through `billStack.billGiver`, so one probe bill
   per recipe is kept in a detached stack.
-- `BillAutopilotState` — the per-game state: which bills are ours (by `loadID`), which recipes have
-  already been seen, and what neighbouring mods had attached to a bill we took down. The
-  configuration itself lives in the mod settings.
+- `BillAutopilotState`: the per-game state, meaning which bills are ours (by `loadID`), which
+  recipes have already been seen, and what neighbouring mods had attached to a bill we took down.
+  The configuration itself lives in the mod settings.
   **This is deliberately not a `GameComponent`**: the game writes a component as
   `<li Class="...">`, and removing the mod would make every load fail on
   `Can't load abstract class Verse.GameComponent`. The state is therefore grafted into the `<game>`
-  node by a postfix on `Game.ExposeSmallComponents` — the only point common to both paths, since
+  node by a postfix on `Game.ExposeSmallComponents`, the only point common to both paths, since
   `ExposeData` refuses `LoadingVars`. Named nodes with no `Class` attribute are read by nobody once
   the mod is gone: the game ignores them silently. The heartbeat comes from a postfix on
   `TickManager.DoSingleTick`.
-- `BillMemory` — what another mod had put on a bill, held from the moment the autopilot takes it
+- `BillMemory`: what another mod had put on a bill, held from the moment the autopilot takes it
   down to the moment it puts it back.
-- `BenchActivation` — the single path by which a profile is switched on or off, so the confirmation
+- `BenchActivation`: the single path by which a profile is switched on or off, so the confirmation
   cannot be bypassed by one of the three switches.
-- `Compat/` — one bridge per neighbouring mod, all by reflection.
-- `BillAutopilotStartup` — installs the patch aimed at another mod's assembly, which cannot be
+- `Compat/`: one bridge per neighbouring mod, all by reflection.
+- `BillAutopilotStartup`: installs the patch aimed at another mod's assembly, which cannot be
   declared by attribute, and writes the line naming what was found.
-- `BillAutopilotSettings` — read in the `Mod` constructor, therefore **before** defs are loaded: no
+- `BillAutopilotSettings`: read in the `Mod` constructor, therefore **before** defs are loaded. No
   `Scribe_Defs` is possible there, hence the `AutoMode` enum rather than a `BillRepeatModeDef`.
 
 ## Build

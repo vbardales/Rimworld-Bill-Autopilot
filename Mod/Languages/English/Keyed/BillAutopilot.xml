@@ -17,7 +17,7 @@
   <BillAutopilot.Confirm.Title>Autopilot: {0}</BillAutopilot.Confirm.Title>
   <BillAutopilot.Confirm.BodyMaintain>The autopilot will take charge of {0} recipes on every {1}, keeping {2} of each in stock.
 
-It starts as soon as you confirm, so anything you are short of will be queued at once — on a big workbench that is a lot of production and a lot of materials. Set the target first if {2} is not what you want.
+It starts as soon as you confirm, so anything you are short of will be queued at once: on a big workbench that is a lot of production and a lot of materials. Set the target first if {2} is not what you want.
 
 Recipes unlocked later will arrive suspended, and will never spend anything without your say-so.</BillAutopilot.Confirm.BodyMaintain>
   <BillAutopilot.Confirm.BodyAlways>The autopilot will take charge of {0} recipes on every {1}, and run each of them without end.
@@ -50,7 +50,7 @@ Recipes unlocked later will arrive suspended, and will never spend anything with
   <BillAutopilot.Gizmo.Configure>Autopilot profile</BillAutopilot.Gizmo.Configure>
   <BillAutopilot.Gizmo.ConfigureDesc>Set what the autopilot does on every {0}, recipe by recipe.</BillAutopilot.Gizmo.ConfigureDesc>
 
-  <BillAutopilot.NewRecipeLine>{0} — {1}</BillAutopilot.NewRecipeLine>
+  <BillAutopilot.NewRecipeLine>{0} - {1}</BillAutopilot.NewRecipeLine>
   <BillAutopilot.NewRecipeLetterTitle>{0} new recipes available</BillAutopilot.NewRecipeLetterTitle>
   <BillAutopilot.NewRecipeLetterBody>The autopilot has put these up as suspended bills. Unsuspend the ones you want; delete the ones you do not, and it will leave them alone from now on.\n\n{0}</BillAutopilot.NewRecipeLetterBody>
   <BillAutopilot.DriftCaptured>{0} kept as an override on the {1} profile.</BillAutopilot.DriftCaptured>
