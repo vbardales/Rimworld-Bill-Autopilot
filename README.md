@@ -99,6 +99,19 @@ the moment it is created. Applying a template needs nothing: `ApplyTemplateToBen
 `InitializeAfterClone()`, so the placed bills carry fresh ids that are absent from our stamps, and
 the autopilot correctly reads them as placed by hand.
 
+**Everybody Gets One** (`Memegoddess.EverybodyGetsOne`) adds three `BillRepeatModeDef`s:
+`TD_PersonCount` (one per person, plus X), `TD_XPerPerson` and `TD_WithSurplusIng`. Two consequences,
+both of which apply to *any* mod that adds a repeat mode:
+
+- **A foreign mode is never flattened.** The drift capture used to read anything that was not
+  `Forever` as "keep a stock", which would have quietly turned "one per colonist" into a flat target.
+  It now leaves an unrecognised mode alone, and `BillMemory` carries its `defName` across the
+  remove/replace cycle so it comes back with the bill.
+- **Its owner is asked, not second-guessed.** Whether there is work to do under such a mode is
+  decided by calling `ShouldDoNow()`, which the owning mod prefixes: "one per colonist" depends on
+  how many colonists there are, "with surplus" on the ingredient stock, and neither is something to
+  reimplement. On the way in, the probe bill is dressed in that mode before being asked.
+
 **Nice Bill Tab - Expansion** (`HICON.NiceBillTabExpansion`): its `HiddenRecipeStore.IsHidden` only
 filters its own add menu. A hidden recipe is treated as excluded. The check runs on every recipe of
 every bench on every sync pass, so it is bound once into a delegate rather than invoked by

@@ -154,6 +154,18 @@ namespace BillAutopilot
             // La bill temoin compte comme comptera la vraie : sinon le seuil qui declenche et celui
             // qu'affiche la bill parlent de deux nombres differents.
             var memory = state.MemoryFor(table.def, recipe);
+
+            // Si la bill retiree portait le mode d'un autre mod, c'est lui qui dira s'il y a de
+            // nouveau du travail : nos comparaisons ne veulent rien dire dans son bareme.
+            var foreign = memory?.repeatModeDefName == null
+                ? null
+                : DefDatabase<BillRepeatModeDef>.GetNamedSilentFail(memory.repeatModeDefName);
+            if (foreign != null)
+            {
+                return RecipeProbe.TryShouldDoNow(table, recipe, memory, foreign,
+                    profile.TargetFor(recipe), profile.FloorFor(recipe), out bool due) && due;
+            }
+
             if (!RecipeProbe.TryCount(table, recipe, memory, out int count)) return false;
 
             int target = profile.TargetFor(recipe);
@@ -169,6 +181,11 @@ namespace BillAutopilot
             if (mode == AutoMode.Always) return false;
             if (IsBusy(table.Map, bill)) return false;
 
+            // Mode venu d'un autre mod : ses seuils ne sont pas les notres - "un par personne" depend
+            // du nombre de colons, "avec surplus" du stock d'ingredients. Lui seul sait quand c'est
+            // plein, alors on le lui demande au lieu de comparer nos propres nombres.
+            if (IsForeignMode(bill.repeatMode)) return !bill.ShouldDoNow();
+
             // Ici la vraie bill existe : on mesure avec ce qu'elle porte, pas avec un souvenir.
             if (!RecipeProbe.TryCount(table, recipe, BetterWorkbenchesCompat.Capture(bill), out int count))
             {
@@ -176,6 +193,18 @@ namespace BillAutopilot
             }
 
             return count >= profile.TargetFor(recipe);
+        }
+
+        /// <summary>
+        /// Un mode de repetition qui n'est ni le notre ni celui du jeu : pose par un autre mod, donc
+        /// interprete par lui seul.
+        /// </summary>
+        private static bool IsForeignMode(BillRepeatModeDef mode)
+        {
+            return mode != null
+                   && mode != BillRepeatModeDefOf.TargetCount
+                   && mode != BillRepeatModeDefOf.Forever
+                   && mode != BillRepeatModeDefOf.RepeatCount;
         }
 
         private static bool IsBusy(Map map, Bill bill)
@@ -229,6 +258,14 @@ namespace BillAutopilot
             if (memory != null)
             {
                 if (memory.name != null) bill.playerCustomName = memory.name;
+
+                // Le mode d'un autre mod reprend sa place, avec les compteurs qu'il interprete a sa
+                // facon : "+X par personne" chez Everybody Gets One, un surplus d'ingredients ailleurs.
+                var remembered = memory.repeatModeDefName == null
+                    ? null
+                    : DefDatabase<BillRepeatModeDef>.GetNamedSilentFail(memory.repeatModeDefName);
+                if (remembered != null) bill.repeatMode = remembered;
+
                 BetterWorkbenchesCompat.Restore(bill, memory);
             }
         }
@@ -265,6 +302,17 @@ namespace BillAutopilot
                     if (memory == null) memory = new BillMemory();
                     memory.name = production.playerCustomName;
                 }
+
+                // Un mode de repetition venu d'un autre mod se retient tel quel : c'est un choix de
+                // la joueuse que rien d'autre ne rattraperait.
+                var mode = production.repeatMode;
+                if (mode != null && mode != BillRepeatModeDefOf.TargetCount
+                                 && mode != BillRepeatModeDefOf.Forever)
+                {
+                    if (memory == null) memory = new BillMemory();
+                    memory.repeatModeDefName = mode.defName;
+                }
+
                 state.Remember(bench, recipe, memory);
             }
 
@@ -304,6 +352,15 @@ namespace BillAutopilot
             // RepeatCount ("x1") n'a pas de sens pour une consigne permanente : la bill se recreerait
             // sans fin une fois terminee. On la laisse telle quelle et on n'enregistre rien.
             if (bill.repeatMode == BillRepeatModeDefOf.RepeatCount) return;
+
+            // Un mode venu d'ailleurs - Everybody Gets One en ajoute trois - n'est ni TargetCount ni
+            // Forever. Le ramener a l'un des notres detruirait le choix de la joueuse en silence :
+            // on le laisse tel quel, et le releve fait au retrait le reposera.
+            if (bill.repeatMode != BillRepeatModeDefOf.TargetCount
+                && bill.repeatMode != BillRepeatModeDefOf.Forever)
+            {
+                return;
+            }
 
             var actualMode = bill.repeatMode == BillRepeatModeDefOf.Forever ? AutoMode.Always : AutoMode.Maintain;
             bool modeChanged = actualMode != stamp.mode;

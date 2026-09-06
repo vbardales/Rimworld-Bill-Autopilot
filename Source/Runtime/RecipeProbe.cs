@@ -53,6 +53,52 @@ namespace BillAutopilot
         }
 
         /// <summary>
+        /// Y a-t-il du travail selon un mode de repetition pose par un autre mod ? On habille la bill
+        /// temoin de ce mode et on appelle ShouldDoNow : le mod qui possede le mode a un prefixe
+        /// dessus, et repond avec son propre bareme. Cela evite de reimplementer "un par personne" ou
+        /// "avec surplus", et vaudra pour tout mode qu'un autre mod ajoutera demain.
+        /// </summary>
+        public static bool TryShouldDoNow(Building_WorkTable table, RecipeDef recipe, BillMemory memory,
+            BillRepeatModeDef mode, int targetCount, int floorCount, out bool due)
+        {
+            due = false;
+            var probe = GetProbe(recipe);
+            if (probe == null || table?.Map == null || mode == null) return false;
+
+            var previousStack = probe.billStack;
+            var previousMode = probe.repeatMode;
+            ProbeStack.billGiver = table;
+            probe.billStack = ProbeStack;
+            BetterWorkbenchesCompat.PrimeProbe(probe, memory);
+            try
+            {
+                probe.repeatMode = mode;
+                probe.targetCount = targetCount;
+                probe.unpauseWhenYouHave = floorCount;
+                probe.pauseWhenSatisfied = true;
+                probe.paused = false;
+                probe.suspended = false;
+
+                due = probe.ShouldDoNow();
+                return true;
+            }
+            catch (Exception e)
+            {
+                Log.WarningOnce(
+                    "[Bill Autopilot] ShouldDoNow failed for " + recipe.defName + " under repeat mode "
+                    + mode.defName + ": " + e.Message,
+                    recipe.shortHash ^ 0x5A13);
+                return false;
+            }
+            finally
+            {
+                probe.repeatMode = previousMode;
+                probe.billStack = previousStack;
+                ProbeStack.billGiver = null;
+            }
+        }
+
+        /// <summary>
         /// Stock actuel du produit de la recette, sur la carte de l'etabli. <paramref name="memory"/>
         /// porte ce que les autres mods ajoutent au comptage (inventaires, produits additionnels) :
         /// sans lui, le temoin compterait a la facon vanilla pendant que la vraie bill compte autrement.

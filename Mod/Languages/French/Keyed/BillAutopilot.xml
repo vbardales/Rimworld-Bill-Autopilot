@@ -17,7 +17,7 @@
   <BillAutopilot.Confirm.Title>Pilote automatique : {0}</BillAutopilot.Confirm.Title>
   <BillAutopilot.Confirm.BodyMaintain>Le pilote va prendre en charge {0} recettes sur chaque établi « {1} », en maintenant un stock de {2} de chacune.
 
-Il démarre dès que vous confirmez : tout ce qui vous manque sera mis en file d’un coup : sur un grand établi, cela fait beaucoup de production et beaucoup de matériaux. Réglez la cible d’abord si {2} ne vous convient pas.
+Il démarre dès que vous confirmez, et tout ce qui vous manque sera mis en file d’un coup : sur un grand établi, cela fait beaucoup de production et beaucoup de matériaux. Réglez la cible d’abord si {2} ne vous convient pas.
 
 Les recettes débloquées plus tard arriveront suspendues, et ne dépenseront jamais rien sans votre accord.</BillAutopilot.Confirm.BodyMaintain>
   <BillAutopilot.Confirm.BodyAlways>Le pilote va prendre en charge {0} recettes sur chaque établi « {1} », et fera tourner chacune sans fin.

@@ -42,6 +42,9 @@ feature, never a broken game.
 - **Dubs Mint Menus**: autopilot bills are kept out of a bench template, which would otherwise
   capture the autopilot's passing queue and, once re-applied, retire the autopilot from those
   recipes for good.
+- **Everybody Gets One**: its repeat modes (one per person, X per person, with surplus) survive the
+  remove/replace cycle, and it is asked whether there is work rather than having its thresholds
+  guessed at. The same holds for any other mod that adds a repeat mode.
 - **Nice Bill Tab - Expansion**: a recipe hidden on a bench is treated as excluded.
 - **Choose Your Recipe**: respected with no work needed, since it removes disabled recipes from the
   bench itself.

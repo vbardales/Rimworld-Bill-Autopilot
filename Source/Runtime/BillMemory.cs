@@ -14,6 +14,13 @@ namespace BillAutopilot
     /// </summary>
     public class BillMemory : IExposable
     {
+        /// <summary>
+        /// Mode de repetition pose par un autre mod, s'il n'est ni TargetCount ni Forever. Everybody
+        /// Gets One en ajoute trois (TD_PersonCount, TD_XPerPerson, TD_WithSurplusIng), et d'autres
+        /// mods peuvent en ajouter : on retient le defName sans chercher a savoir ce qu'il veut dire.
+        /// </summary>
+        public string repeatModeDefName;
+
         /// <summary>Better Workbench Management : compter aussi hors de la carte d'origine.</summary>
         public bool countAway;
 
@@ -28,6 +35,7 @@ namespace BillAutopilot
 
         public void ExposeData()
         {
+            Scribe_Values.Look(ref repeatModeDefName, "repeatMode");
             Scribe_Values.Look(ref countAway, "countAway", defaultValue: false);
             Scribe_Values.Look(ref name, "name");
             Scribe_Deep.Look(ref productFilter, "productFilter");
