@@ -2,7 +2,7 @@
 <LanguageData>
 
   <BillAutopilot.Settings.Intro>Choisissez les types d'établi à mettre sous pilote automatique. Sur chacun, le mod tient les travaux tout seul : un travail apparaît quand il y a de quoi faire et s'efface une fois la tâche remplie, si bien que l'onglet reste court. Les recettes débloquées plus tard s'ajoutent d'elles-mêmes.</BillAutopilot.Settings.Intro>
-  <BillAutopilot.Settings.Integrations>Trouvés autour : {0}, {1}, {2}.</BillAutopilot.Settings.Integrations>
+  <BillAutopilot.Settings.Integrations>Trouvés autour : {0}, {1}, {2}, {3}.</BillAutopilot.Settings.Integrations>
   <BillAutopilot.Settings.IntegrationsDesc>Aucun n’est requis. Chacun est détecté tout seul, et ce que le pilote en reprend est décrit sur la page du mod.</BillAutopilot.Settings.IntegrationsDesc>
   <BillAutopilot.Settings.Detected>détecté</BillAutopilot.Settings.Detected>
   <BillAutopilot.Settings.NotDetected>absent</BillAutopilot.Settings.NotDetected>

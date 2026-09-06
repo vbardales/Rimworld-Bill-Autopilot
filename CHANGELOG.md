@@ -45,6 +45,9 @@ feature, never a broken game.
 - **Everybody Gets One**: its repeat modes (one per person, X per person, with surplus) survive the
   remove/replace cycle, and it is asked whether there is work rather than having its thresholds
   guessed at. The same holds for any other mod that adds a repeat mode.
+- **Nice Bill Tab**: its cached bill list is told to rebuild whenever the autopilot puts a bill up or
+  takes one down, without which it would keep drawing bills that no longer exist and its
+  drag-and-drop would reinsert deleted ones.
 - **Nice Bill Tab - Expansion**: a recipe hidden on a bench is treated as excluded.
 - **Choose Your Recipe**: respected with no work needed, since it removes disabled recipes from the
   bench itself.

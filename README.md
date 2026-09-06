@@ -112,6 +112,14 @@ both of which apply to *any* mod that adds a repeat mode:
   how many colonists there are, "with surplus" on the ingredient stock, and neither is something to
   reimplement. On the way in, the probe bill is dressed in that mode before being asked.
 
+**Nice Bill Tab** (`Andromeda.NiceBillTab`) replaces the bills tab wholesale, via a blocking prefix
+on `ITab_Bills.FillTab`, and keeps the displayed list in a static field rebuilt only when
+`TabBillsDrawer.shouldRefreshFilter` is raised. All of its own paths raise it: add, delete,
+drag-and-drop. The autopilot adds and removes bills outside its interface, so without a word its
+list would keep bills that no longer exist, still drawn, and its drag-and-drop would reinsert a
+deleted bill into the stack, since it reorders from that list. The mod therefore raises that same
+flag after every bill it puts up or takes down.
+
 **Nice Bill Tab - Expansion** (`HICON.NiceBillTabExpansion`): its `HiddenRecipeStore.IsHidden` only
 filters its own add menu. A hidden recipe is treated as excluded. The check runs on every recipe of
 every bench on every sync pass, so it is bound once into a delegate rather than invoked by
@@ -141,7 +149,8 @@ reflection each time.
   down to the moment it puts it back.
 - `BenchActivation`: the single path by which a profile is switched on or off, so the confirmation
   cannot be bypassed by one of the three switches.
-- `Compat/`: one bridge per neighbouring mod, all by reflection.
+- `Compat/`: one bridge per neighbouring mod, all by reflection. Two shapes: reading what a mod
+  attached to a bill so it survives the cycle, and telling a mod that the bill list moved under it.
 - `BillAutopilotStartup`: installs the patch aimed at another mod's assembly, which cannot be
   declared by attribute, and writes the line naming what was found.
 - `BillAutopilotSettings`: read in the `Mod` constructor, therefore **before** defs are loaded. No

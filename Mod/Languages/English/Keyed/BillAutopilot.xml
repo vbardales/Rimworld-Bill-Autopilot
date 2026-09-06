@@ -2,7 +2,7 @@
 <LanguageData>
 
   <BillAutopilot.Settings.Intro>Pick which workbench types run on autopilot. For each one, the mod keeps bills alive on its own: a bill appears when there is work to do and steps aside once it is done, so the tab stays short. Recipes unlocked later are added by themselves.</BillAutopilot.Settings.Intro>
-  <BillAutopilot.Settings.Integrations>Found around it: {0}, {1}, {2}.</BillAutopilot.Settings.Integrations>
+  <BillAutopilot.Settings.Integrations>Found around it: {0}, {1}, {2}, {3}.</BillAutopilot.Settings.Integrations>
   <BillAutopilot.Settings.IntegrationsDesc>None of these is required. Each is detected on its own, and what the autopilot picks up from it is described on the mod page.</BillAutopilot.Settings.IntegrationsDesc>
   <BillAutopilot.Settings.Detected>found</BillAutopilot.Settings.Detected>
   <BillAutopilot.Settings.NotDetected>not found</BillAutopilot.Settings.NotDetected>

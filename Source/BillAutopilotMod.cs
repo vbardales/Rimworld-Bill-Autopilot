@@ -47,11 +47,12 @@ namespace BillAutopilot
 
             // Ce que le mod a trouve autour de lui. Le journal le dit deja au demarrage, mais on ne
             // va pas lire un journal pour savoir si une integration a pris : ca se voit ici.
-            var integrations = listing.GetRect(24f);
+            var integrations = listing.GetRect(48f);
             GUI.color = new Color(1f, 1f, 1f, 0.7f);
             Widgets.Label(integrations, "BillAutopilot.Settings.Integrations".Translate(
                 Detected("Better Workbench Management", BetterWorkbenchesCompat.Active),
                 Detected("Dubs Mint Menus", DubsMintMenusCompat.Active),
+                Detected("Nice Bill Tab", NiceBillTabCompat.Active),
                 Detected("Nice Bill Tab - Expansion", HiddenRecipesCompat.Available)));
             GUI.color = Color.white;
             TooltipHandler.TipRegion(integrations, "BillAutopilot.Settings.IntegrationsDesc".Translate());

@@ -247,6 +247,7 @@ namespace BillAutopilot
 
             table.billStack.AddBill(bill);
             state.Claim(bill, stamp);
+            NiceBillTabCompat.NotifyBillsChanged();
 
             // La restriction d'etabli de Better Workbench Management : son propre crochet la pose
             // depuis l'etabli SELECTIONNE, ce qui ne veut rien dire quand on cree depuis un tick.
@@ -326,6 +327,7 @@ namespace BillAutopilot
                 SuppressDeleteCapture = false;
             }
             state.Disown(bill);
+            NiceBillTabCompat.NotifyBillsChanged();
         }
 
         public static void DropAll(BillAutopilotState state, BillStack stack)
