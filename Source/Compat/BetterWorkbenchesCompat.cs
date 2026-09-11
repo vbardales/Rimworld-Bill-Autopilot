@@ -216,8 +216,8 @@ namespace BillAutopilot
         {
             if (linkBills == null || memory.linkedTo.Count == 0) return;
 
-            // On se raccroche au premier compagnon encore vivant : LinkBills rattache au groupe
-            // existing group if there is one, and only creates a new one otherwise.
+            // We hook onto the first companion still alive: LinkBills joins the existing group if there
+            // is one, and only creates a new one otherwise.
             var anchor = FindLiveBill(memory.linkedTo);
             if (anchor != null) linkBills.Invoke(storage, new object[] { anchor, bill });
         }

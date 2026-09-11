@@ -62,7 +62,7 @@ namespace BillAutopilot
             }
         }
 
-        /// <summary>A appeler apres toute pose ou tout retrait de bill fait hors de son interface.</summary>
+        /// <summary>Call after any bill put up or taken down outside its own interface.</summary>
         public static void NotifyBillsChanged()
         {
             Probe();
