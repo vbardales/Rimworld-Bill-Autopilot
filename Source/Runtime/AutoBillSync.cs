@@ -149,17 +149,19 @@ namespace BillAutopilot
             RecipeDef recipe, BenchProfile profile, AutoMode mode)
         {
             if (mode == AutoMode.Always) return true;
-            if (mode != AutoMode.Maintain) return false;
+            if (mode != AutoMode.Maintain && mode != AutoMode.Custom) return false;
 
             // La bill temoin compte comme comptera la vraie : sinon le seuil qui declenche et celui
             // qu'affiche la bill parlent de deux nombres differents.
             var memory = state.MemoryFor(table.def, recipe);
 
-            // Si la bill retiree portait le mode d'un autre mod, c'est lui qui dira s'il y a de
-            // nouveau du travail : nos comparaisons ne veulent rien dire dans son bareme.
-            var foreign = memory?.repeatModeDefName == null
-                ? null
-                : DefDatabase<BillRepeatModeDef>.GetNamedSilentFail(memory.repeatModeDefName);
+            // Un mode d'un autre mod, qu'il vienne du profil ou de la bill qu'on avait retiree : c'est
+            // lui qui dira s'il y a de nouveau du travail, nos comparaisons ne veulent rien dire dans
+            // son bareme.
+            var foreign = mode == AutoMode.Custom
+                ? profile.RepeatModeFor(recipe)
+                : Resolve(memory?.repeatModeDefName);
+
             if (foreign != null)
             {
                 return RecipeProbe.TryShouldDoNow(table, recipe, memory, foreign,
@@ -199,6 +201,13 @@ namespace BillAutopilot
         /// Un mode de repetition qui n'est ni le notre ni celui du jeu : pose par un autre mod, donc
         /// interprete par lui seul.
         /// </summary>
+        private static BillRepeatModeDef Resolve(string defName)
+        {
+            return string.IsNullOrEmpty(defName)
+                ? null
+                : DefDatabase<BillRepeatModeDef>.GetNamedSilentFail(defName);
+        }
+
         private static bool IsForeignMode(BillRepeatModeDef mode)
         {
             return mode != null
@@ -238,6 +247,9 @@ namespace BillAutopilot
             var stamp = new BillStamp
             {
                 mode = mode,
+                repeatModeDefName = mode == AutoMode.Custom
+                    ? profile.RepeatModeFor(recipe)?.defName
+                    : null,
                 targetCount = profile.TargetFor(recipe),
                 floorCount = profile.FloorFor(recipe),
             };
@@ -277,6 +289,25 @@ namespace BillAutopilot
             {
                 bill.repeatMode = BillRepeatModeDefOf.Forever;
                 return;
+            }
+
+            // Un mode venu d'un autre mod se pose tel quel. Les deux compteurs le suivent : chez
+            // Everybody Gets One ils veulent dire "+X par personne" ou "X par personne", ailleurs
+            // autre chose. On les transmet sans les interpreter.
+            if (stamp.mode == AutoMode.Custom)
+            {
+                var custom = stamp.repeatModeDefName == null
+                    ? null
+                    : DefDatabase<BillRepeatModeDef>.GetNamedSilentFail(stamp.repeatModeDefName);
+
+                if (custom != null)
+                {
+                    bill.repeatMode = custom;
+                    bill.targetCount = stamp.targetCount;
+                    bill.pauseWhenSatisfied = true;
+                    bill.unpauseWhenYouHave = stamp.floorCount;
+                    return;
+                }
             }
 
             bill.repeatMode = BillRepeatModeDefOf.TargetCount;
@@ -356,11 +387,27 @@ namespace BillAutopilot
             if (bill.repeatMode == BillRepeatModeDefOf.RepeatCount) return;
 
             // Un mode venu d'ailleurs - Everybody Gets One en ajoute trois - n'est ni TargetCount ni
-            // Forever. Le ramener a l'un des notres detruirait le choix de la joueuse en silence :
-            // on le laisse tel quel, et le releve fait au retrait le reposera.
-            if (bill.repeatMode != BillRepeatModeDefOf.TargetCount
-                && bill.repeatMode != BillRepeatModeDefOf.Forever)
+            // Forever. Le ramener a l'un des notres detruirait le choix de la joueuse en silence : on
+            // l'inscrit tel quel dans le profil, comme n'importe quel autre reglage fait dans l'onglet.
+            if (IsForeignMode(bill.repeatMode))
             {
+                if (stamp.repeatModeDefName == bill.repeatMode.defName) return;
+
+                var custom = profile.RuleForWriting(recipe);
+                custom.mode = AutoMode.Custom;
+                custom.repeatMode = bill.repeatMode.defName;
+                custom.targetCount = bill.targetCount;
+                custom.floorCount = bill.unpauseWhenYouHave;
+
+                stamp.mode = AutoMode.Custom;
+                stamp.repeatModeDefName = bill.repeatMode.defName;
+                stamp.targetCount = bill.targetCount;
+                stamp.floorCount = bill.unpauseWhenYouHave;
+
+                BillAutopilotMod.Instance.WriteSettings();
+                Messages.Message(
+                    "BillAutopilot.DriftCaptured".Translate(recipe.LabelCap, bench.LabelCap),
+                    MessageTypeDefOf.SilentInput, historical: false);
                 return;
             }
 

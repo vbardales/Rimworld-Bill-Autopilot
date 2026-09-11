@@ -9,12 +9,17 @@ namespace BillAutopilot
     public class BillStamp : IExposable
     {
         public AutoMode mode = AutoMode.Maintain;
+
+        /// <summary>defName du mode de repetition quand <see cref="mode"/> vaut Custom.</summary>
+        public string repeatModeDefName;
+
         public int targetCount = -1;
         public int floorCount = -1;
 
         public void ExposeData()
         {
             Scribe_Values.Look(ref mode, "mode", AutoMode.Maintain);
+            Scribe_Values.Look(ref repeatModeDefName, "repeatMode");
             Scribe_Values.Look(ref targetCount, "targetCount", -1);
             Scribe_Values.Look(ref floorCount, "floorCount", -1);
         }

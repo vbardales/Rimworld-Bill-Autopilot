@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using RimWorld;
 using Verse;
 
 namespace BillAutopilot
@@ -23,12 +24,24 @@ namespace BillAutopilot
 
         /// <summary>Jamais : le pilote automatique ignore cette recette.</summary>
         Excluded = 3,
+
+        /// <summary>
+        /// Un mode de repetition pose par un autre mod, nomme a cote par son defName. Everybody Gets
+        /// One en ajoute trois ; d'autres mods peuvent en ajouter. Le pilote ne cherche jamais a
+        /// savoir ce qu'ils veulent dire : il les pose, et demande a leur proprietaire s'il y a du
+        /// travail.
+        /// </summary>
+        Custom = 4,
     }
 
     /// <summary>Surcharge posee sur une recette precise, pour un type d'etabli donne.</summary>
     public class RecipeRule : IExposable
     {
         public AutoMode mode = AutoMode.Inherit;
+
+        /// <summary>defName du mode quand <see cref="mode"/> vaut Custom. Une chaine, pas un Def :
+        /// les reglages sont lus avant le chargement des defs.</summary>
+        public string repeatMode;
 
         /// <summary>-1 : herite de l'etabli.</summary>
         public int targetCount = -1;
@@ -41,6 +54,7 @@ namespace BillAutopilot
         public void ExposeData()
         {
             Scribe_Values.Look(ref mode, "mode", AutoMode.Inherit);
+            Scribe_Values.Look(ref repeatMode, "repeatMode");
             Scribe_Values.Look(ref targetCount, "targetCount", -1);
             Scribe_Values.Look(ref floorCount, "floorCount", -1);
         }
@@ -54,8 +68,11 @@ namespace BillAutopilot
 
         public bool enabled;
 
-        /// <summary>Mode applique aux recettes sans surcharge. Seuls Maintain et Always ont un sens ici.</summary>
+        /// <summary>Mode applique aux recettes sans surcharge. Maintain, Always ou Custom.</summary>
         public AutoMode defaultMode = AutoMode.Maintain;
+
+        /// <summary>defName du mode quand <see cref="defaultMode"/> vaut Custom.</summary>
+        public string defaultRepeatMode;
 
         public int targetCount = DefaultTargetCount;
         public int floorCount = DefaultFloorCount;
@@ -97,8 +114,26 @@ namespace BillAutopilot
         {
             var rule = RuleFor(recipe);
             var mode = rule != null && rule.mode != AutoMode.Inherit ? rule.mode : defaultMode;
+
+            // Un mode d'un autre mod dont le mod est parti : on retombe sur le notre plutot que de
+            // poser une bill sans mode.
+            if (mode == AutoMode.Custom && RepeatModeFor(recipe) == null) mode = AutoMode.Maintain;
+
+            // Le repli des recettes non comptables ne vaut que pour "maintenir un stock" : c'est le
+            // seul de nos modes qui exige de savoir compter. Un mode etranger decide pour lui-meme.
             if (mode == AutoMode.Maintain && !countable) mode = uncountableMode;
             return mode;
+        }
+
+        /// <summary>Le mode de repetition a poser quand le mode effectif est Custom, ou null.</summary>
+        public BillRepeatModeDef RepeatModeFor(RecipeDef recipe)
+        {
+            var rule = RuleFor(recipe);
+            var name = rule != null && rule.mode != AutoMode.Inherit ? rule.repeatMode : defaultRepeatMode;
+
+            return string.IsNullOrEmpty(name)
+                ? null
+                : DefDatabase<BillRepeatModeDef>.GetNamedSilentFail(name);
         }
 
         public int TargetFor(RecipeDef recipe)
@@ -122,6 +157,7 @@ namespace BillAutopilot
         {
             Scribe_Values.Look(ref enabled, "enabled", defaultValue: false);
             Scribe_Values.Look(ref defaultMode, "defaultMode", AutoMode.Maintain);
+            Scribe_Values.Look(ref defaultRepeatMode, "defaultRepeatMode");
             Scribe_Values.Look(ref targetCount, "targetCount", DefaultTargetCount);
             Scribe_Values.Look(ref floorCount, "floorCount", DefaultFloorCount);
             Scribe_Values.Look(ref uncountableMode, "uncountableMode", AutoMode.Excluded);

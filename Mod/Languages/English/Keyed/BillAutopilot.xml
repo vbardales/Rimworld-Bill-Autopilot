@@ -20,6 +20,7 @@
 It starts as soon as you confirm, so anything you are short of will be queued at once: on a big workbench that is a lot of production and a lot of materials. Set the target first if {2} is not what you want.
 
 Recipes unlocked later will arrive suspended, and will never spend anything without your say-so.</BillAutopilot.Confirm.BodyMaintain>
+  <BillAutopilot.Confirm.BodyCustom>The autopilot will take charge of {0} recipes on every {1}, each set to "{2}", a repeat mode from another mod.\n\nIt starts as soon as you confirm, and that mod decides on its own when a bill has work to do. On a big workbench that can be a lot of production at once.\n\nRecipes unlocked later will arrive suspended, and will never spend anything without your say-so.</BillAutopilot.Confirm.BodyCustom>
   <BillAutopilot.Confirm.BodyAlways>The autopilot will take charge of {0} recipes on every {1}, and run each of them without end.
 
 In this mode a bill never stops on its own, so it will keep consuming materials for as long as there are any. "Keep a stock" is the safer default.
@@ -33,6 +34,9 @@ Recipes unlocked later will arrive suspended, and will never spend anything with
   <BillAutopilot.Profile.Uncountable>Recipes with no countable product</BillAutopilot.Profile.Uncountable>
   <BillAutopilot.Profile.UncountableDesc>Butchering, smelting, cremation, surgery and anything else the game cannot count: "keep in stock" is impossible for them, so they follow this setting instead.</BillAutopilot.Profile.UncountableDesc>
   <BillAutopilot.Profile.UncountableRecipe>The game cannot count what this recipe produces, so it follows the setting for uncountable recipes.</BillAutopilot.Profile.UncountableRecipe>
+  <BillAutopilot.Profile.CustomCount>Count</BillAutopilot.Profile.CustomCount>
+  <BillAutopilot.Profile.CustomFloor>Second count</BillAutopilot.Profile.CustomFloor>
+  <BillAutopilot.Profile.CustomCountDesc>This repeat mode comes from another mod, which reads these two numbers its own way: "one per person, plus X", "X per person", a surplus of ingredients. The autopilot passes them on without interpreting them, and asks that mod whether there is work to do.</BillAutopilot.Profile.CustomCountDesc>
   <BillAutopilot.Profile.OverridesOnly>Overridden recipes only</BillAutopilot.Profile.OverridesOnly>
   <BillAutopilot.Profile.Uncategorised>Other</BillAutopilot.Profile.Uncategorised>
   <BillAutopilot.Profile.CollapseAll>Collapse all</BillAutopilot.Profile.CollapseAll>
@@ -42,6 +46,7 @@ Recipes unlocked later will arrive suspended, and will never spend anything with
   <BillAutopilot.Mode.Maintain>Keep in stock</BillAutopilot.Mode.Maintain>
   <BillAutopilot.Mode.Always>Always</BillAutopilot.Mode.Always>
   <BillAutopilot.Mode.Excluded>Never</BillAutopilot.Mode.Excluded>
+  <BillAutopilot.Mode.Custom>Another mod</BillAutopilot.Mode.Custom>
   <BillAutopilot.Mode.Inherit>Default ({0})</BillAutopilot.Mode.Inherit>
   <BillAutopilot.Mode.InheritShort>Default</BillAutopilot.Mode.InheritShort>
 

@@ -120,33 +120,47 @@ namespace BillAutopilot
             // Mode par defaut.
             var modeRow = listing.GetRect(RowHeight);
             Widgets.Label(modeRow.LeftPart(0.45f), "BillAutopilot.Profile.DefaultMode".Translate());
+
+            var defaultForeign = profile.defaultMode == AutoMode.Custom
+                ? DefDatabase<BillRepeatModeDef>.GetNamedSilentFail(profile.defaultRepeatMode ?? "")
+                : null;
+
             if (Widgets.ButtonText(
                     new Rect(modeRow.x + modeRow.width * 0.45f, modeRow.y, ModeButtonWidth, RowHeight - 4f),
-                    ModeLabel(profile.defaultMode)))
+                    defaultForeign != null ? defaultForeign.LabelCap.RawText : ModeLabel(profile.defaultMode)))
             {
-                OpenModeMenu(new[] { AutoMode.Maintain, AutoMode.Always }, mode =>
-                {
-                    profile.defaultMode = mode;
-                    Save();
-                });
+                OpenBenchModeMenu(profile);
             }
 
-            if (profile.defaultMode == AutoMode.Maintain)
+            if (profile.defaultMode == AutoMode.Maintain || profile.defaultMode == AutoMode.Custom)
             {
-                DrawCountRow(listing, "BillAutopilot.Profile.Target".Translate(), profile.targetCount,
+                // Sous un mode etranger, "maintenir un stock de" serait faux : chez Everybody Gets One
+                // ces nombres valent "+X par personne" ou "X par personne", ailleurs un surplus
+                // d'ingredients. On les nomme neutrement et on laisse l'infobulle le dire.
+                bool foreign = profile.defaultMode == AutoMode.Custom;
+                string targetLabel = foreign
+                    ? "BillAutopilot.Profile.CustomCount".Translate()
+                    : "BillAutopilot.Profile.Target".Translate();
+                string floorLabel = foreign
+                    ? "BillAutopilot.Profile.CustomFloor".Translate()
+                    : "BillAutopilot.Profile.Floor".Translate();
+
+                DrawCountRow(listing, targetLabel, profile.targetCount,
                     value =>
                     {
-                        profile.targetCount = Mathf.Max(1, value);
+                        profile.targetCount = Mathf.Max(foreign ? 0 : 1, value);
                         if (profile.floorCount > profile.targetCount) profile.floorCount = profile.targetCount;
                         Save();
-                    });
+                    },
+                    foreign ? "BillAutopilot.Profile.CustomCountDesc".Translate() : null);
 
-                DrawCountRow(listing, "BillAutopilot.Profile.Floor".Translate(), profile.floorCount,
+                DrawCountRow(listing, floorLabel, profile.floorCount,
                     value =>
                     {
                         profile.floorCount = Mathf.Clamp(value, 0, profile.targetCount);
                         Save();
-                    });
+                    },
+                    foreign ? "BillAutopilot.Profile.CustomCountDesc".Translate() : null);
             }
             else
             {
@@ -172,10 +186,12 @@ namespace BillAutopilot
             listing.End();
         }
 
-        private void DrawCountRow(Listing_Standard listing, string label, int value, System.Action<int> setter)
+        private void DrawCountRow(Listing_Standard listing, string label, int value, System.Action<int> setter,
+            string tooltip = null)
         {
             var row = listing.GetRect(RowHeight);
             Widgets.Label(row.LeftPart(0.45f), label + " : " + value);
+            if (tooltip != null) TooltipHandler.TipRegion(row, tooltip);
 
             float x = row.x + row.width * 0.45f;
             foreach (int step in new[] { -10, -1, 1, 10 })
@@ -296,25 +312,31 @@ namespace BillAutopilot
 
             float x = rect.x + rect.width * 0.5f;
 
-            string buttonLabel = rule == null || rule.mode == AutoMode.Inherit
-                ? "BillAutopilot.Mode.Inherit".Translate(ModeLabel(effective))
-                : ModeLabel(rule.mode);
+            var ruleForeign = rule != null && rule.mode == AutoMode.Custom
+                ? DefDatabase<BillRepeatModeDef>.GetNamedSilentFail(rule.repeatMode ?? "")
+                : null;
+
+            string buttonLabel;
+            if (rule == null || rule.mode == AutoMode.Inherit)
+            {
+                buttonLabel = "BillAutopilot.Mode.Inherit".Translate(EffectiveLabel(profile, recipe, effective));
+            }
+            else
+            {
+                buttonLabel = ruleForeign != null ? ruleForeign.LabelCap.RawText : ModeLabel(rule.mode);
+            }
 
             if (Widgets.ButtonText(new Rect(x, rect.y + 1f, ModeButtonWidth, rect.height - 4f), buttonLabel))
             {
-                OpenModeMenu(new[] { AutoMode.Inherit, AutoMode.Maintain, AutoMode.Always, AutoMode.Excluded },
-                    mode =>
-                    {
-                        if (mode == AutoMode.Inherit) profile.ClearRule(recipe);
-                        else profile.RuleForWriting(recipe).mode = mode;
-                        Save();
-                    },
-                    effective);
+                OpenRecipeModeMenu(profile, recipe, effective);
             }
             x += ModeButtonWidth + 6f;
 
-            bool maintains = (rule != null && rule.mode == AutoMode.Maintain)
-                             || ((rule == null || rule.mode == AutoMode.Inherit) && effective == AutoMode.Maintain);
+            // Les deux compteurs se montrent aussi sous un mode etranger : ce sont eux qu'il lira,
+            // meme s'il leur donne un autre sens.
+            bool maintains = (rule != null && (rule.mode == AutoMode.Maintain || rule.mode == AutoMode.Custom))
+                             || ((rule == null || rule.mode == AutoMode.Inherit)
+                                 && (effective == AutoMode.Maintain || effective == AutoMode.Custom));
 
             if (maintains)
             {
@@ -340,6 +362,98 @@ namespace BillAutopilot
             }
         }
 
+        /// <summary>
+        /// Les modes de repetition ajoutes par d'autres mods. Les trois du jeu sont exclus : deux sont
+        /// deja les notres, et "x fois" n'a pas de sens en consigne permanente.
+        /// </summary>
+        private static IEnumerable<BillRepeatModeDef> ForeignModes()
+        {
+            return DefDatabase<BillRepeatModeDef>.AllDefsListForReading
+                .Where(def => def != BillRepeatModeDefOf.TargetCount
+                              && def != BillRepeatModeDefOf.Forever
+                              && def != BillRepeatModeDefOf.RepeatCount)
+                .OrderBy(def => def.LabelCap.RawText);
+        }
+
+        /// <summary>Le libelle du mode qui s'applique reellement, nom du mode etranger compris.</summary>
+        private static string EffectiveLabel(BenchProfile profile, RecipeDef recipe, AutoMode effective)
+        {
+            if (effective != AutoMode.Custom) return ModeLabel(effective);
+
+            var def = profile.RepeatModeFor(recipe);
+            return def != null ? def.LabelCap.RawText : ModeLabel(AutoMode.Maintain);
+        }
+
+        /// <summary>Le menu d'une recette : herite, les notres, ceux d'ailleurs, et jamais.</summary>
+        private static void OpenRecipeModeMenu(BenchProfile profile, RecipeDef recipe, AutoMode effective)
+        {
+            var options = new List<FloatMenuOption>
+            {
+                new FloatMenuOption(
+                    "BillAutopilot.Mode.Inherit".Translate(EffectiveLabel(profile, recipe, effective)).Resolve(),
+                    () => { profile.ClearRule(recipe); Save(); }),
+            };
+
+            foreach (var mode in new[] { AutoMode.Maintain, AutoMode.Always, AutoMode.Excluded })
+            {
+                var captured = mode;
+                options.Add(new FloatMenuOption(ModeLabel(captured), () =>
+                {
+                    var written = profile.RuleForWriting(recipe);
+                    written.mode = captured;
+                    written.repeatMode = null;
+                    Save();
+                }));
+            }
+
+            foreach (var def in ForeignModes())
+            {
+                var captured = def;
+                options.Add(new FloatMenuOption(captured.LabelCap, () =>
+                {
+                    var written = profile.RuleForWriting(recipe);
+                    written.mode = AutoMode.Custom;
+                    written.repeatMode = captured.defName;
+                    Save();
+                }));
+            }
+
+            Find.WindowStack.Add(new FloatMenu(options));
+        }
+
+        /// <summary>Le menu du mode par defaut : les notres, puis ceux qu'un autre mod a ajoutes.</summary>
+        private static void OpenBenchModeMenu(BenchProfile profile)
+        {
+            var options = new List<FloatMenuOption>
+            {
+                new FloatMenuOption(ModeLabel(AutoMode.Maintain), () =>
+                {
+                    profile.defaultMode = AutoMode.Maintain;
+                    profile.defaultRepeatMode = null;
+                    Save();
+                }),
+                new FloatMenuOption(ModeLabel(AutoMode.Always), () =>
+                {
+                    profile.defaultMode = AutoMode.Always;
+                    profile.defaultRepeatMode = null;
+                    Save();
+                }),
+            };
+
+            foreach (var def in ForeignModes())
+            {
+                var captured = def;
+                options.Add(new FloatMenuOption(captured.LabelCap, () =>
+                {
+                    profile.defaultMode = AutoMode.Custom;
+                    profile.defaultRepeatMode = captured.defName;
+                    Save();
+                }));
+            }
+
+            Find.WindowStack.Add(new FloatMenu(options));
+        }
+
         private static void OpenModeMenu(IEnumerable<AutoMode> modes, System.Action<AutoMode> setter,
             AutoMode inheritedFrom = AutoMode.Maintain)
         {
@@ -359,6 +473,7 @@ namespace BillAutopilot
                 case AutoMode.Maintain: return "BillAutopilot.Mode.Maintain".Translate();
                 case AutoMode.Always: return "BillAutopilot.Mode.Always".Translate();
                 case AutoMode.Excluded: return "BillAutopilot.Mode.Excluded".Translate();
+                case AutoMode.Custom: return "BillAutopilot.Mode.Custom".Translate();
                 default: return "BillAutopilot.Mode.InheritShort".Translate();
             }
         }

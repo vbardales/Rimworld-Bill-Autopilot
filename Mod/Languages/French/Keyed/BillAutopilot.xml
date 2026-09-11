@@ -20,6 +20,7 @@
 Il démarre dès que vous confirmez, et tout ce qui vous manque sera mis en file d’un coup : sur un grand établi, cela fait beaucoup de production et beaucoup de matériaux. Réglez la cible d’abord si {2} ne vous convient pas.
 
 Les recettes débloquées plus tard arriveront suspendues, et ne dépenseront jamais rien sans votre accord.</BillAutopilot.Confirm.BodyMaintain>
+  <BillAutopilot.Confirm.BodyCustom>Le pilote va prendre en charge {0} recettes sur chaque établi « {1} », chacune réglée sur « {2} », un mode de répétition venu d’un autre mod.\n\nIl démarre dès que vous confirmez, et c’est ce mod qui décide seul quand un travail a de quoi faire. Sur un grand établi, cela peut faire beaucoup de production d’un coup.\n\nLes recettes débloquées plus tard arriveront suspendues, et ne dépenseront jamais rien sans votre accord.</BillAutopilot.Confirm.BodyCustom>
   <BillAutopilot.Confirm.BodyAlways>Le pilote va prendre en charge {0} recettes sur chaque établi « {1} », et fera tourner chacune sans fin.
 
 Dans ce mode un travail ne s’arrête jamais de lui-même : il consommera des matériaux tant qu’il y en aura. « Maintenir un stock » est le réglage prudent.
@@ -33,6 +34,9 @@ Les recettes débloquées plus tard arriveront suspendues, et ne dépenseront ja
   <BillAutopilot.Profile.Uncountable>Recettes au produit non comptable</BillAutopilot.Profile.Uncountable>
   <BillAutopilot.Profile.UncountableDesc>Découpe, fonte, crémation, chirurgie et tout ce que le jeu ne sait pas compter : « maintenir un stock » leur est impossible, elles suivent donc ce réglage.</BillAutopilot.Profile.UncountableDesc>
   <BillAutopilot.Profile.UncountableRecipe>Le jeu ne sait pas compter ce que produit cette recette : elle suit le réglage des recettes non comptables.</BillAutopilot.Profile.UncountableRecipe>
+  <BillAutopilot.Profile.CustomCount>Nombre</BillAutopilot.Profile.CustomCount>
+  <BillAutopilot.Profile.CustomFloor>Second nombre</BillAutopilot.Profile.CustomFloor>
+  <BillAutopilot.Profile.CustomCountDesc>Ce mode de répétition vient d’un autre mod, qui lit ces deux nombres à sa façon : « un par personne, plus X », « X par personne », un surplus d’ingrédients. Le pilote les transmet sans les interpréter, et lui demande s’il y a du travail.</BillAutopilot.Profile.CustomCountDesc>
   <BillAutopilot.Profile.OverridesOnly>Seulement les recettes surchargées</BillAutopilot.Profile.OverridesOnly>
   <BillAutopilot.Profile.Uncategorised>Divers</BillAutopilot.Profile.Uncategorised>
   <BillAutopilot.Profile.CollapseAll>Tout replier</BillAutopilot.Profile.CollapseAll>
@@ -42,6 +46,7 @@ Les recettes débloquées plus tard arriveront suspendues, et ne dépenseront ja
   <BillAutopilot.Mode.Maintain>Maintenir un stock</BillAutopilot.Mode.Maintain>
   <BillAutopilot.Mode.Always>Toujours</BillAutopilot.Mode.Always>
   <BillAutopilot.Mode.Excluded>Jamais</BillAutopilot.Mode.Excluded>
+  <BillAutopilot.Mode.Custom>Autre mod</BillAutopilot.Mode.Custom>
   <BillAutopilot.Mode.Inherit>Par défaut ({0})</BillAutopilot.Mode.Inherit>
   <BillAutopilot.Mode.InheritShort>Par défaut</BillAutopilot.Mode.InheritShort>
 

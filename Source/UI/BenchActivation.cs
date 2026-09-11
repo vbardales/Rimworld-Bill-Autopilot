@@ -36,9 +36,23 @@ namespace BillAutopilot
 
             int count = RecipesTaken(bench, profile);
 
-            TaggedString text = profile.defaultMode == AutoMode.Always
-                ? "BillAutopilot.Confirm.BodyAlways".Translate(count, bench.LabelCap)
-                : "BillAutopilot.Confirm.BodyMaintain".Translate(count, bench.LabelCap, profile.targetCount);
+            TaggedString text;
+            if (profile.defaultMode == AutoMode.Always)
+            {
+                text = "BillAutopilot.Confirm.BodyAlways".Translate(count, bench.LabelCap);
+            }
+            else if (profile.defaultMode == AutoMode.Custom)
+            {
+                // Sous un mode d'un autre mod, annoncer une cible serait faux : on nomme le mode.
+                var mode = DefDatabase<BillRepeatModeDef>.GetNamedSilentFail(profile.defaultRepeatMode ?? "");
+                text = mode != null
+                    ? "BillAutopilot.Confirm.BodyCustom".Translate(count, bench.LabelCap, mode.LabelCap)
+                    : "BillAutopilot.Confirm.BodyMaintain".Translate(count, bench.LabelCap, profile.targetCount);
+            }
+            else
+            {
+                text = "BillAutopilot.Confirm.BodyMaintain".Translate(count, bench.LabelCap, profile.targetCount);
+            }
 
             Find.WindowStack.Add(Dialog_MessageBox.CreateConfirmation(
                 text,
