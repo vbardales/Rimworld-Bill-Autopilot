@@ -8,8 +8,8 @@ using Verse.Sound;
 namespace BillAutopilot
 {
     /// <summary>
-    /// Le profil d'un type d'etabli. Tout se fait au pointeur, sans saisie de texte : la partie se
-    /// joue sur Steam Deck, ou un champ de texte impose le clavier virtuel.
+    /// The profile of one workbench type. Everything is done with a pointer, with no text entry: the
+    /// game is played on a Steam Deck, where a text field summons the virtual keyboard.
     /// </summary>
     public class Dialog_BenchProfile : Window
     {
@@ -17,7 +17,7 @@ namespace BillAutopilot
         private const float ModeButtonWidth = 150f;
         private const float CountButtonWidth = 36f;
 
-        /// <summary>Un groupe de recettes : la categorie du produit, et ce qu'elle contient.</summary>
+        /// <summary>A group of recipes: the product category, and what it holds.</summary>
         private sealed class RecipeGroup
         {
             public string label;
@@ -25,8 +25,8 @@ namespace BillAutopilot
         }
 
         /// <summary>
-        /// Categories repliees, partagees entre les ouvertures de la fenetre : sur un atelier de
-        /// soixante recettes, retrouver tout deplie a chaque fois serait une punition.
+        /// Collapsed categories, shared across openings of the window: on a workshop of sixty recipes,
+        /// finding everything expanded again every time would be a punishment.
         /// </summary>
         private static readonly HashSet<string> Collapsed = new HashSet<string>();
 
@@ -54,8 +54,8 @@ namespace BillAutopilot
             Mathf.Min(720f, UI.screenHeight - 80f));
 
         /// <summary>
-        /// Regroupe par categorie du produit. Les recettes sans produit - decoupe, cremation,
-        /// chirurgie - tombent dans un groupe a part, place en dernier.
+        /// Groups by product category. Recipes with no product (butchering, cremation, surgery) fall into
+        /// a group of their own, placed last.
         /// </summary>
         private static List<RecipeGroup> BuildGroups(ThingDef bench)
         {
@@ -70,7 +70,7 @@ namespace BillAutopilot
                     label = g.Key,
                     recipes = g.OrderBy(r => r.LabelCap.RawText).ToList(),
                 })
-                // Le groupe fourre-tout ferme la marche, les autres par ordre alphabetique.
+                // The catch-all group brings up the rear, the others in alphabetical order.
                 .OrderBy(g => g.label == other ? 1 : 0)
                 .ThenBy(g => g.label)
                 .ToList();
@@ -117,7 +117,7 @@ namespace BillAutopilot
 
             listing.GapLine(4f);
 
-            // Mode par defaut.
+            // Default mode.
             var modeRow = listing.GetRect(RowHeight);
             Widgets.Label(modeRow.LeftPart(0.45f), "BillAutopilot.Profile.DefaultMode".Translate());
 
@@ -134,9 +134,9 @@ namespace BillAutopilot
 
             if (profile.defaultMode == AutoMode.Maintain || profile.defaultMode == AutoMode.Custom)
             {
-                // Sous un mode etranger, "maintenir un stock de" serait faux : chez Everybody Gets One
-                // ces nombres valent "+X par personne" ou "X par personne", ailleurs un surplus
-                // d'ingredients. On les nomme neutrement et on laisse l'infobulle le dire.
+                // Under a foreign mode, "keep a stock of" would be wrong: in Everybody Gets One these numbers
+                // mean "+X per person" or "X per person", elsewhere an ingredient surplus. They are
+                // named neutrally and the tooltip says the rest.
                 bool foreign = profile.defaultMode == AutoMode.Custom;
                 string targetLabel = foreign
                     ? "BillAutopilot.Profile.CustomCount".Translate()
@@ -167,7 +167,7 @@ namespace BillAutopilot
                 listing.Gap(RowHeight * 2f);
             }
 
-            // Recettes que le jeu ne sait pas compter.
+            // Recipes the game cannot count.
             var uncountableRow = listing.GetRect(RowHeight);
             Widgets.Label(uncountableRow.LeftPart(0.45f), "BillAutopilot.Profile.Uncountable".Translate());
             TooltipHandler.TipRegion(uncountableRow, "BillAutopilot.Profile.UncountableDesc".Translate());
@@ -211,8 +211,8 @@ namespace BillAutopilot
             Widgets.CheckboxLabeled(toolbar.LeftPart(0.32f),
                 "BillAutopilot.Profile.OverridesOnly".Translate(), ref showOverridesOnly);
 
-            // Tout plier / tout deplier : sans clavier ni recherche, c'est la seule facon de
-            // traverser vite un etabli de soixante recettes.
+            // Collapse all / expand all: with no keyboard and no search, it is the only way to cross a
+            // sixty-recipe workbench quickly.
             bool anyOpen = groups.Any(g => !Collapsed.Contains(g.label));
             if (Widgets.ButtonText(
                     new Rect(toolbar.xMax - 380f, toolbar.y, 150f, RowHeight - 4f),
@@ -332,8 +332,8 @@ namespace BillAutopilot
             }
             x += ModeButtonWidth + 6f;
 
-            // Les deux compteurs se montrent aussi sous un mode etranger : ce sont eux qu'il lira,
-            // meme s'il leur donne un autre sens.
+            // Both counters show under a foreign mode too: they are what it will read, even if it gives
+            // them another meaning.
             bool maintains = (rule != null && (rule.mode == AutoMode.Maintain || rule.mode == AutoMode.Custom))
                              || ((rule == null || rule.mode == AutoMode.Inherit)
                                  && (effective == AutoMode.Maintain || effective == AutoMode.Custom));
@@ -363,8 +363,8 @@ namespace BillAutopilot
         }
 
         /// <summary>
-        /// Les modes de repetition ajoutes par d'autres mods. Les trois du jeu sont exclus : deux sont
-        /// deja les notres, et "x fois" n'a pas de sens en consigne permanente.
+        /// Repeat modes added by other mods. The game's three are excluded: two are already ours, and
+        /// "do X times" makes no sense as a standing order.
         /// </summary>
         private static IEnumerable<BillRepeatModeDef> ForeignModes()
         {
@@ -375,7 +375,7 @@ namespace BillAutopilot
                 .OrderBy(def => def.LabelCap.RawText);
         }
 
-        /// <summary>Le libelle du mode qui s'applique reellement, nom du mode etranger compris.</summary>
+        /// <summary>The label of the mode that actually applies, a foreign mode's name included.</summary>
         private static string EffectiveLabel(BenchProfile profile, RecipeDef recipe, AutoMode effective)
         {
             if (effective != AutoMode.Custom) return ModeLabel(effective);
@@ -384,7 +384,7 @@ namespace BillAutopilot
             return def != null ? def.LabelCap.RawText : ModeLabel(AutoMode.Maintain);
         }
 
-        /// <summary>Le menu d'une recette : herite, les notres, ceux d'ailleurs, et jamais.</summary>
+        /// <summary>A recipe's menu: inherit, ours, those from elsewhere, and never.</summary>
         private static void OpenRecipeModeMenu(BenchProfile profile, RecipeDef recipe, AutoMode effective)
         {
             var options = new List<FloatMenuOption>
@@ -421,7 +421,7 @@ namespace BillAutopilot
             Find.WindowStack.Add(new FloatMenu(options));
         }
 
-        /// <summary>Le menu du mode par defaut : les notres, puis ceux qu'un autre mod a ajoutes.</summary>
+        /// <summary>The default mode menu: ours, then those another mod has added.</summary>
         private static void OpenBenchModeMenu(BenchProfile profile)
         {
             var options = new List<FloatMenuOption>

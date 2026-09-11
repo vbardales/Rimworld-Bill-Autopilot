@@ -7,13 +7,13 @@ using Verse;
 namespace BillAutopilot
 {
     /// <summary>
-    /// Notre etat se greffe dans le noeud &lt;game&gt; de la sauvegarde plutot que dans un
-    /// GameComponent : un composant s'ecrit avec un attribut Class, et retirer le mod ferait alors
-    /// echouer chaque chargement sur "Can't load abstract class Verse.GameComponent". Des noeuds
-    /// nommes, eux, ne sont lus par personne une fois le mod parti - le jeu les ignore en silence.
+    /// Our state is grafted into the save's &lt;game&gt; node rather than into a GameComponent: a
+    /// component is written with a Class attribute, and removing the mod would then make every load
+    /// fail on "Can't load abstract class Verse.GameComponent". Named nodes, on the other hand, are
+    /// read by nobody once the mod is gone, and the game ignores them silently.
     ///
-    /// ExposeSmallComponents est le seul point commun aux deux chemins : Game.ExposeData l'appelle a
-    /// la sauvegarde, Game.LoadGame au chargement (ExposeData refuse LoadingVars).
+    /// ExposeSmallComponents is the only point common to both paths: Game.ExposeData calls it on save,
+    /// Game.LoadGame on load (ExposeData refuses LoadingVars).
     /// </summary>
     [HarmonyPatch(typeof(Game), "ExposeSmallComponents")]
     internal static class Patch_Game_ExposeSmallComponents
@@ -24,7 +24,7 @@ namespace BillAutopilot
         }
     }
 
-    /// <summary>Le battement du pilote, qui vivait dans GameComponentTick.</summary>
+    /// <summary>The autopilot's heartbeat, which used to live in GameComponentTick.</summary>
     [HarmonyPatch(typeof(TickManager), nameof(TickManager.DoSingleTick))]
     internal static class Patch_TickManager_DoSingleTick
     {
@@ -35,7 +35,7 @@ namespace BillAutopilot
         }
     }
 
-    /// <summary>Une recherche terminee peut debloquer des recettes : on repasse sur tous les etablis.</summary>
+    /// <summary>A finished research project may unlock recipes, so every workbench is revisited.</summary>
     [HarmonyPatch(typeof(ResearchManager), nameof(ResearchManager.FinishProject))]
     internal static class Patch_ResearchManager_FinishProject
     {
@@ -46,8 +46,8 @@ namespace BillAutopilot
     }
 
     /// <summary>
-    /// Supprimer une bill automatique dans l'onglet, c'est refuser la recette : sans cela le pilote
-    /// la reposerait au passage suivant, et le geste n'aurait aucun effet.
+    /// Deleting an automatic bill in the tab means refusing the recipe: without this the autopilot
+    /// would put it back on the next pass, and the gesture would have no effect at all.
     /// </summary>
     [HarmonyPatch(typeof(Building_WorkTable), nameof(Building_WorkTable.Notify_BillDeleted))]
     internal static class Patch_BuildingWorkTable_NotifyBillDeleted
@@ -62,7 +62,7 @@ namespace BillAutopilot
             state.Disown(bill);
             state.Accept(__instance.def, bill.recipe);
 
-            // Refus explicite : le souvenir de ce que portait la bill n'a plus lieu d'etre.
+            // An explicit refusal: the memory of what the bill carried has no reason to survive.
             state.Forget(__instance.def, bill.recipe);
 
             var profile = BillAutopilotMod.Settings.ProfileFor(__instance.def);
@@ -78,9 +78,9 @@ namespace BillAutopilot
     }
 
     /// <summary>
-    /// Ouvrir l'onglet des bills declenche une synchronisation : ce qu'on regarde est a jour, sans
-    /// attendre le passage periodique. Priorite haute pour passer avant les mods qui remplacent
-    /// entierement l'onglet (Nice Bill Tab) en renvoyant false depuis leur propre prefixe.
+    /// Opening the bills tab triggers a sync, so what is on screen is up to date without waiting for
+    /// the periodic pass. High priority, to run before the mods that replace the tab wholesale
+    /// (Nice Bill Tab) by returning false from a prefix of their own.
     /// </summary>
     [HarmonyPatch(typeof(ITab_Bills), "FillTab")]
     internal static class Patch_ITabBills_FillTab
@@ -92,8 +92,8 @@ namespace BillAutopilot
         [HarmonyPriority(Priority.First)]
         private static void Prefix()
         {
-            // Une fois par frame de mise en page, et cadence en temps reel : jeu en pause, les ticks
-            // n'avancent plus et un verrou en ticks laisserait passer chaque frame.
+            // Once per layout frame, paced in real time: with the game paused the ticks stop advancing and
+            // a tick-based lock would let every frame through.
             if (Event.current.type != EventType.Layout) return;
 
             float now = Time.realtimeSinceStartup;
@@ -107,7 +107,7 @@ namespace BillAutopilot
         }
     }
 
-    /// <summary>Interrupteur et acces au profil directement sur l'etabli selectionne.</summary>
+    /// <summary>Switch and profile access directly on the selected workbench.</summary>
     [HarmonyPatch(typeof(Building), nameof(Building.GetGizmos))]
     internal static class Patch_Building_GetGizmos
     {

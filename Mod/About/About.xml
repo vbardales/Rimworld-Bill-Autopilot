@@ -19,6 +19,7 @@ WHAT YOU SET
 
 - Per workbench type, so a bench you build later is already configured.
 - A default for every recipe: keep a stock of N, or always.
+- Or a repeat mode from another mod, when one is installed: "one per colonist" and the like can be set as the default for a whole bench.
 - Butchering, smelting, cremation and anything else the game cannot count get their own setting, since "keep N in stock" is impossible for them.
 - Any recipe can override the default, or be left out entirely.
 - A cap on how many automatic bills may stand on one bench at a time, so there is always room for bills of your own.

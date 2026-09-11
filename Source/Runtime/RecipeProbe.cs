@@ -6,11 +6,11 @@ using Verse;
 namespace BillAutopilot
 {
     /// <summary>
-    /// Compte les produits d'une recette sans laisser de trace dans la partie.
-    /// RecipeWorkerCounter ne sait travailler que sur une Bill_Production (il y lit hpRange,
-    /// qualityRange, includeEquipped...) et remonte a la carte par billStack.billGiver. On garde donc
-    /// une bill temoin par recette, dans une pile detachee dont on rebranche le donneur avant chaque
-    /// mesure. Ces bills ne rejoignent jamais un etabli : elles ne sont pas sauvegardees.
+    /// Counts a recipe's products without leaving a trace in the game.
+    /// RecipeWorkerCounter only knows how to work on a Bill_Production (it reads hpRange,
+    /// qualityRange, includeEquipped from it) and reaches the map through billStack.billGiver. One
+    /// probe bill per recipe is therefore kept in a detached stack whose giver is reattached before
+    /// each measurement. These bills never join a workbench, so they are never saved.
     /// </summary>
     internal static class RecipeProbe
     {
@@ -33,7 +33,7 @@ namespace BillAutopilot
             return probe;
         }
 
-        /// <summary>Le jeu sait-il compter le produit de cette recette ? Faux pour la decoupe, la fonte...</summary>
+        /// <summary>Can the game count this recipe's product? False for butchering, smelting and the like.</summary>
         public static bool CanCount(RecipeDef recipe)
         {
             var probe = GetProbe(recipe);
@@ -53,10 +53,10 @@ namespace BillAutopilot
         }
 
         /// <summary>
-        /// Y a-t-il du travail selon un mode de repetition pose par un autre mod ? On habille la bill
-        /// temoin de ce mode et on appelle ShouldDoNow : le mod qui possede le mode a un prefixe
-        /// dessus, et repond avec son propre bareme. Cela evite de reimplementer "un par personne" ou
-        /// "avec surplus", et vaudra pour tout mode qu'un autre mod ajoutera demain.
+        /// Is there work to do under a repeat mode set by another mod? The probe bill is dressed in
+        /// that mode and asked ShouldDoNow: the mod that owns the mode has a prefix on it, and answers
+        /// by its own yardstick. This avoids reimplementing "one per person" or "with surplus", and
+        /// will hold for any mode another mod adds tomorrow.
         /// </summary>
         public static bool TryShouldDoNow(Building_WorkTable table, RecipeDef recipe, BillMemory memory,
             BillRepeatModeDef mode, int targetCount, int floorCount, out bool due)
@@ -99,9 +99,9 @@ namespace BillAutopilot
         }
 
         /// <summary>
-        /// Stock actuel du produit de la recette, sur la carte de l'etabli. <paramref name="memory"/>
-        /// porte ce que les autres mods ajoutent au comptage (inventaires, produits additionnels) :
-        /// sans lui, le temoin compterait a la facon vanilla pendant que la vraie bill compte autrement.
+        /// The current stock of the recipe's product, on the workbench's map. <paramref name="memory"/>
+        /// carries what other mods add to the count (inventories, extra products): without it the probe
+        /// would count the vanilla way while the real bill counts another way.
         /// </summary>
         public static bool TryCount(Building_WorkTable table, RecipeDef recipe, BillMemory memory,
             out int count)

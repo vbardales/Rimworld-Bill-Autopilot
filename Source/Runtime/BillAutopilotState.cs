@@ -5,12 +5,12 @@ using Verse;
 
 namespace BillAutopilot
 {
-    /// <summary>Ce qu'une bill automatique valait au moment ou le pilote l'a posee.</summary>
+    /// <summary>What an automatic bill was worth at the moment the autopilot put it up.</summary>
     public class BillStamp : IExposable
     {
         public AutoMode mode = AutoMode.Maintain;
 
-        /// <summary>defName du mode de repetition quand <see cref="mode"/> vaut Custom.</summary>
+        /// <summary>defName of the repeat mode when <see cref="mode"/> is Custom.</summary>
         public string repeatModeDefName;
 
         public int targetCount = -1;
@@ -26,14 +26,14 @@ namespace BillAutopilot
     }
 
     /// <summary>
-    /// Etat propre a la partie : quelles bills appartiennent au pilote, et quelles recettes ont deja
-    /// ete vues. La configuration, elle, vit dans les reglages du mod et vaut pour toutes les parties.
+    /// Per-game state: which bills belong to the autopilot, and which recipes have already been seen.
+    /// The configuration itself lives in the mod settings and holds for every game.
     ///
-    /// **Ce n'est volontairement pas un GameComponent.** Le jeu ecrit un composant sous la forme
-    /// `&lt;li Class="BillAutopilot..."&gt;` : retirer le mod rendrait cette classe introuvable et
-    /// chaque chargement de la sauvegarde cracherait un "Can't load abstract class Verse.GameComponent".
-    /// Nos noeuds sont donc greffes dans `&lt;game&gt;` par un postfix sur Game.ExposeSmallComponents,
-    /// sans attribut Class : sans le mod, personne ne les lit et le jeu les ignore en silence.
+    /// **This is deliberately not a GameComponent.** The game writes a component as
+    /// `&lt;li Class="BillAutopilot..."&gt;`: removing the mod would make that class unfindable, and
+    /// every load of the save would spit out "Can't load abstract class Verse.GameComponent". Our
+    /// nodes are therefore grafted into `&lt;game&gt;` by a postfix on Game.ExposeSmallComponents,
+    /// with no Class attribute: without the mod nobody reads them and the game ignores them silently.
     /// </summary>
     public class BillAutopilotState
     {
@@ -41,8 +41,8 @@ namespace BillAutopilot
         private static BillAutopilotState instance;
 
         /// <summary>
-        /// L'etat suit l'objet Game : nouvelle partie comme chargement en construisent un neuf, donc
-        /// rien ne fuit d'une partie a l'autre sans qu'on ait a s'accrocher au cycle de vie.
+        /// The state follows the Game object: a new game and a load each build a fresh one, so nothing
+        /// leaks from one game to the next without having to hook into the lifecycle.
         /// </summary>
         public static BillAutopilotState Current
         {
@@ -61,28 +61,28 @@ namespace BillAutopilot
         }
 
         /// <summary>
-        /// loadID de la bill -> reglages appliques a sa creation. Deep-saved, mais sans attribut
-        /// Class : Scribe_Deep n'en ecrit un que si le type reel differe du type declare. Ne pas
-        /// elargir le type de valeur du dictionnaire, sous peine de reintroduire l'attribut.
+        /// Bill loadID -> the settings applied when it was created. Deep-saved, but with no Class
+        /// attribute: Scribe_Deep only writes one when the real type differs from the declared type.
+        /// Do not widen the dictionary value type, or the attribute comes back.
         /// </summary>
         private Dictionary<int, BillStamp> stamps = new Dictionary<int, BillStamp>();
 
-        /// <summary>"DefEtabli/DefRecette" des recettes deja rencontrees : ce qui n'y est pas est neuf.</summary>
+        /// <summary>"BenchDef/RecipeDef" of recipes already met: anything absent from it is new.</summary>
         private HashSet<string> known = new HashSet<string>();
 
         /// <summary>
-        /// Recettes signalees mais pas encore acceptees. Tant qu'une recette y figure, AUCUN etabli du
-        /// type ne la lance : sans cela le premier etabli poserait la bill suspendue et le deuxieme se
-        /// mettrait a produire, la question posee restant sans reponse.
+        /// Recipes announced but not yet accepted. While a recipe is listed here, NO workbench of that
+        /// type starts it: without this the first bench would put up the suspended bill and the second
+        /// would start producing, leaving the question asked but unanswered.
         /// </summary>
         private HashSet<string> pending = new HashSet<string>();
 
-        /// <summary>Types d'etabli dont le stock initial de recettes a deja ete absorbe.</summary>
+        /// <summary>Workbench types whose opening stock of recipes has already been absorbed.</summary>
         private HashSet<string> seeded = new HashSet<string>();
 
         /// <summary>
-        /// "DefEtabli/DefRecette" -> ce que les autres mods avaient pose sur la bill retiree. C'est ce
-        /// qui permet au cycle retirer/reposer de ne rien perdre.
+        /// "BenchDef/RecipeDef" -> what other mods had put on the bill that was taken down. This is what
+        /// lets the remove/replace cycle lose nothing.
         /// </summary>
         private Dictionary<string, BillMemory> memories = new Dictionary<string, BillMemory>();
 
@@ -97,7 +97,7 @@ namespace BillAutopilot
             RecipeProbe.Reset();
         }
 
-        // --- Appartenance ------------------------------------------------------------------------
+        // --- Ownership ------------------------------------------------------------------------
 
         public bool IsAuto(Bill bill) => bill != null && stamps.ContainsKey(bill.loadID);
 
@@ -108,7 +108,7 @@ namespace BillAutopilot
 
         public void Disown(Bill bill) => stamps.Remove(bill.loadID);
 
-        // --- Recettes deja vues ------------------------------------------------------------------
+        // --- Recipes already seen ------------------------------------------------------------------
 
         private static string Key(ThingDef bench, RecipeDef recipe) => bench.defName + "/" + recipe.defName;
 
@@ -122,7 +122,7 @@ namespace BillAutopilot
 
         public void Accept(ThingDef bench, RecipeDef recipe) => pending.Remove(Key(bench, recipe));
 
-        // --- Memoire des bills retirees ----------------------------------------------------------
+        // --- Memory of bills taken down ----------------------------------------------------------
 
         public BillMemory MemoryFor(ThingDef bench, RecipeDef recipe) =>
             memories.TryGetValue(Key(bench, recipe), out var memory) ? memory : null;
@@ -136,14 +136,14 @@ namespace BillAutopilot
 
         public void Forget(ThingDef bench, RecipeDef recipe) => memories.Remove(Key(bench, recipe));
 
-        /// <summary>
-        /// A l'activation d'un type d'etabli, tout ce qui est deja debloque est absorbe en silence :
-        /// "je veux toutes les recettes" veut dire celles d'aujourd'hui, sans quarante lignes suspendues
-        /// d'un coup. Seul ce qui se debloque ENSUITE se signale.
-        /// </summary>
-        /// <summary>Ce type d'etabli a-t-il deja absorbe son stock initial dans cette partie ?</summary>
+        /// <summary>Has this workbench type already absorbed its opening stock in this game?</summary>
         public bool IsSeeded(ThingDef bench) => bench != null && seeded.Contains(bench.defName);
 
+        /// <summary>
+        /// When a workbench type is switched on, everything already unlocked is absorbed in silence:
+        /// "I want all the recipes" means today's, without forty suspended lines at once. Only what is
+        /// unlocked AFTERWARDS announces itself.
+        /// </summary>
         public void SeedIfNeeded(ThingDef bench)
         {
             if (!seeded.Add(bench.defName)) return;
@@ -155,7 +155,7 @@ namespace BillAutopilot
             }
         }
 
-        /// <summary>Oublie tout d'un type d'etabli : le prochain passage refera une absorption complete.</summary>
+        /// <summary>Forgets everything about a workbench type: the next pass absorbs its stock afresh.</summary>
         public void ForgetBench(ThingDef bench)
         {
             seeded.Remove(bench.defName);
@@ -188,7 +188,7 @@ namespace BillAutopilot
             pendingNews.Clear();
         }
 
-        // --- Boucle ------------------------------------------------------------------------------
+        // --- Loop ------------------------------------------------------------------------------
 
         public void MarkDirty() => dirty = true;
 
@@ -205,7 +205,7 @@ namespace BillAutopilot
                 dirty = false;
             }
 
-            // Un etabli par tick : l'intervalle est un budget, pas une salve.
+            // One workbench per tick: the interval is a budget, not a burst.
             if (queue.Count > 0)
             {
                 var table = queue.Dequeue();
@@ -239,12 +239,11 @@ namespace BillAutopilot
             }
         }
 
-        // --- Sauvegarde --------------------------------------------------------------------------
+        // --- Saving --------------------------------------------------------------------------
 
         /// <summary>
-        /// Appele depuis un postfix sur Game.ExposeSmallComponents, donc a l'interieur du noeud
-        /// &lt;game&gt;, a l'ecriture comme a la lecture. Prefixes explicites : on est chez le jeu,
-        /// pas chez nous.
+        /// Called from a postfix on Game.ExposeSmallComponents, therefore inside the &lt;game&gt; node, on
+        /// write as on read. Explicit prefixes on the node names: this is the game's house, not ours.
         /// </summary>
         public void ExposeData()
         {

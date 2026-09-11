@@ -5,13 +5,13 @@ using Verse;
 namespace BillAutopilot
 {
     /// <summary>
-    /// Le seul chemin par lequel un profil d'etabli s'allume ou s'eteint - reglages, fenetre de
-    /// profil, gizmo sur l'etabli.
+    /// The only path by which a bench profile is switched on or off: settings, profile window, gizmo on
+    /// the workbench.
     ///
-    /// Pourquoi ce detour : cocher un type d'etabli accepte en silence TOUTES ses recettes deja
-    /// debloquees. Sur un atelier d'usinage, cela lance vingt-cinq productions d'un coup. C'est
-    /// ecrit dans la description du mod, mais personne ne la lit avant de cocher une case : on le dit
-    /// donc au moment ou ca se decide, avec le nombre exact et la cible.
+    /// Why the detour: ticking a workbench type silently accepts ALL of its already-unlocked recipes.
+    /// On a machining table that starts twenty-five productions at once. It is written in the mod's
+    /// description, but nobody reads that before ticking a box, so it is said at the moment it is
+    /// decided, with the exact count and the target.
     /// </summary>
     internal static class BenchActivation
     {
@@ -25,8 +25,8 @@ namespace BillAutopilot
                 return;
             }
 
-            // Deja passe par la dans cette partie : le stock initial est absorbe, plus rien ne sera
-            // pris en silence. Rallumer apres une pause ne merite pas de question.
+            // Already been through this in this game: the opening stock is absorbed, nothing more can be
+            // taken silently. Switching back on after a pause does not deserve a question.
             var state = BillAutopilotState.Current;
             if (state != null && state.IsSeeded(bench))
             {
@@ -43,7 +43,7 @@ namespace BillAutopilot
             }
             else if (profile.defaultMode == AutoMode.Custom)
             {
-                // Sous un mode d'un autre mod, annoncer une cible serait faux : on nomme le mode.
+                // Under a mode from another mod, announcing a target would be wrong, so the mode is named.
                 var mode = DefDatabase<BillRepeatModeDef>.GetNamedSilentFail(profile.defaultRepeatMode ?? "");
                 text = mode != null
                     ? "BillAutopilot.Confirm.BodyCustom".Translate(count, bench.LabelCap, mode.LabelCap)
@@ -69,9 +69,9 @@ namespace BillAutopilot
         }
 
         /// <summary>
-        /// Combien de recettes le pilote prendrait en charge. Le test de comptabilite est fait a la
-        /// main plutot que par RecipeProbe : cette fenetre s'ouvre aussi depuis le menu principal, ou
-        /// il n'y a pas de partie pour fabriquer une bill temoin.
+        /// How many recipes the autopilot would take charge of. The countability test is done by hand
+        /// rather than through RecipeProbe: this window also opens from the main menu, where there is
+        /// no game in which to build a probe bill.
         /// </summary>
         private static int RecipesTaken(ThingDef bench, BenchProfile profile)
         {

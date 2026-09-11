@@ -6,13 +6,13 @@ using Verse;
 namespace BillAutopilot
 {
     /// <summary>
-    /// Le moteur. Pour chaque etabli, il fait exister une bill quand il y a du travail, et la retire
-    /// quand il n'y en a plus. La liste de l'onglet reste donc courte : elle montre ce qu'il reste a
-    /// faire, pas la configuration - celle-ci vit dans le profil du type d'etabli.
+    /// The engine. For each workbench it makes a bill exist when there is work, and takes it down when
+    /// there is none. The tab list therefore stays short: it shows what is left to make, not the
+    /// configuration, which lives in the workbench type's profile.
     /// </summary>
     public static class AutoBillSync
     {
-        /// <summary>Vrai pendant nos propres suppressions : Notify_BillDeleted ne doit pas les prendre pour un refus.</summary>
+        /// <summary>True during our own deletions: Notify_BillDeleted must not read them as a refusal.</summary>
         public static bool SuppressDeleteCapture;
 
         private static readonly HashSet<Bill> BusyBills = new HashSet<Bill>();
@@ -35,7 +35,7 @@ namespace BillAutopilot
 
             state.SeedIfNeeded(table.def);
 
-            // Inventaire de la pile : nos bills d'un cote, celles posees a la main de l'autre.
+            // Taking stock of the pile: ours on one side, the hand-placed ones on the other.
             var autos = new Dictionary<RecipeDef, Bill_Production>();
             var manual = new HashSet<RecipeDef>();
             var bills = stack.Bills;
@@ -56,8 +56,8 @@ namespace BillAutopilot
 
             var recipes = table.def.AllRecipes;
             var handled = new HashSet<RecipeDef>();
-            // Notre plafond, mais jamais au-dela de celui du jeu : 15 en vanilla, 125 quand Better
-            // Workbench Management voit No Max Bills. Au-dela, le bouton "Ajouter" disparait.
+            // Our cap, but never beyond the game's: 15 in vanilla, 125 when Better Workbench Management
+            // sees No Max Bills. Past that, the "Add" button disappears.
             int cap = Mathf.Min(BillAutopilotMod.Settings.maxAutoBillsPerTable,
                 BetterWorkbenchesCompat.MaxBills - manual.Count);
             int budget = cap - autos.Count;
@@ -69,9 +69,9 @@ namespace BillAutopilot
 
                 autos.TryGetValue(recipe, out var existing);
 
-                // Une bill posee a la main l'emporte toujours : le pilote se retire de cette recette.
-                // Une recette masquee ailleurs (Nice Bill Tab - Expansion) est traitee comme exclue :
-                // la masquer, c'est dire qu'on n'en veut pas ici.
+                // A hand-placed bill always wins: the autopilot stands back from that recipe. A recipe hidden
+                // elsewhere (Nice Bill Tab - Expansion) counts as excluded: hiding it says you do not
+                // want it here.
                 bool available = recipe.AvailableNow && recipe.AvailableOnNow(table)
                                  && !HiddenRecipesCompat.IsHidden(table, recipe);
                 if (!available || manual.Contains(recipe))
@@ -89,7 +89,7 @@ namespace BillAutopilot
                     continue;
                 }
 
-                // Recette jamais vue sur ce type d'etabli : elle arrive suspendue, et se signale.
+                // A recipe never seen on this workbench type: it arrives suspended, and announces itself.
                 if (!state.IsKnown(table.def, recipe))
                 {
                     if (existing != null)
@@ -98,7 +98,7 @@ namespace BillAutopilot
                         continue;
                     }
 
-                    // Plus de place : on ne la marque pas comme vue, elle se representera au passage suivant.
+                    // No room left: it is not marked as seen, so it comes back on the next pass.
                     if (budget <= 0) continue;
 
                     state.MarkKnown(table.def, recipe);
@@ -109,7 +109,7 @@ namespace BillAutopilot
                     continue;
                 }
 
-                // Signalee mais pas encore acceptee : on attend que la joueuse reactive la bill.
+                // Announced but not yet accepted: wait for the player to unsuspend the bill.
                 if (state.IsPending(table.def, recipe))
                 {
                     if (existing == null || existing.suspended) continue;
@@ -118,7 +118,7 @@ namespace BillAutopilot
 
                 if (existing != null)
                 {
-                    // Suspendue par la joueuse : on n'y touche pas, ni pour la relancer ni pour la retirer.
+                    // Suspended by the player: leave it alone, neither restarted nor removed.
                     if (existing.suspended) continue;
 
                     CaptureDrift(state, table.def, recipe, existing, profile);
@@ -136,7 +136,7 @@ namespace BillAutopilot
                 }
             }
 
-            // Nos bills dont la recette a quitte l'etabli (mod retire, def repatchee).
+            // Our bills whose recipe has left the workbench (mod removed, def repatched).
             foreach (var pair in autos)
             {
                 if (!handled.Contains(pair.Key)) Remove(state, stack, table.def, pair.Key, pair.Value);
@@ -151,13 +151,13 @@ namespace BillAutopilot
             if (mode == AutoMode.Always) return true;
             if (mode != AutoMode.Maintain && mode != AutoMode.Custom) return false;
 
-            // La bill temoin compte comme comptera la vraie : sinon le seuil qui declenche et celui
-            // qu'affiche la bill parlent de deux nombres differents.
+            // The probe bill counts the way the real one will: otherwise the threshold that fires and the
+            // number the bill displays are talking about two different figures.
             var memory = state.MemoryFor(table.def, recipe);
 
-            // Un mode d'un autre mod, qu'il vienne du profil ou de la bill qu'on avait retiree : c'est
-            // lui qui dira s'il y a de nouveau du travail, nos comparaisons ne veulent rien dire dans
-            // son bareme.
+            // A mode from another mod, whether from the profile or from the bill we took down: it is the one
+            // that says whether there is work again, since our comparisons mean nothing in its
+            // yardstick.
             var foreign = mode == AutoMode.Custom
                 ? profile.RepeatModeFor(recipe)
                 : Resolve(memory?.repeatModeDefName);
@@ -173,7 +173,7 @@ namespace BillAutopilot
             int target = profile.TargetFor(recipe);
             int floor = profile.FloorFor(recipe);
 
-            // La bande basse declenche, la cible arrete : sans cet ecart la bill clignoterait a chaque unite.
+            // The low band fires, the target stops: without that gap the bill would flicker on every unit.
             return count <= floor && count < target;
         }
 
@@ -183,12 +183,12 @@ namespace BillAutopilot
             if (mode == AutoMode.Always) return false;
             if (IsBusy(table.Map, bill)) return false;
 
-            // Mode venu d'un autre mod : ses seuils ne sont pas les notres - "un par personne" depend
-            // du nombre de colons, "avec surplus" du stock d'ingredients. Lui seul sait quand c'est
-            // plein, alors on le lui demande au lieu de comparer nos propres nombres.
+            // A mode from another mod: its thresholds are not ours. "One per person" depends on how many
+            // colonists there are, "with surplus" on the ingredient stock. It alone knows when things
+            // are full, so it is asked instead of comparing numbers of our own.
             if (IsForeignMode(bill.repeatMode)) return !bill.ShouldDoNow();
 
-            // Ici la vraie bill existe : on mesure avec ce qu'elle porte, pas avec un souvenir.
+            // Here the real bill exists: measure with what it carries, not with a memory.
             if (!RecipeProbe.TryCount(table, recipe, BetterWorkbenchesCompat.Capture(bill), out int count))
             {
                 return false;
@@ -198,8 +198,8 @@ namespace BillAutopilot
         }
 
         /// <summary>
-        /// Un mode de repetition qui n'est ni le notre ni celui du jeu : pose par un autre mod, donc
-        /// interprete par lui seul.
+        /// A repeat mode that is neither ours nor the game's: set by another mod, and therefore read by
+        /// that mod alone.
         /// </summary>
         private static BillRepeatModeDef Resolve(string defName)
         {
@@ -237,7 +237,7 @@ namespace BillAutopilot
             return BusyBills.Contains(bill);
         }
 
-        // --- Ecriture ----------------------------------------------------------------------------
+        // --- Writing ----------------------------------------------------------------------------
 
         private static void Create(BillAutopilotState state, Building_WorkTable table,
             RecipeDef recipe, BenchProfile profile, AutoMode mode, bool suspended)
@@ -261,19 +261,19 @@ namespace BillAutopilot
             state.Claim(bill, stamp);
             NiceBillTabCompat.NotifyBillsChanged();
 
-            // La restriction d'etabli de Better Workbench Management : son propre crochet la pose
-            // depuis l'etabli SELECTIONNE, ce qui ne veut rien dire quand on cree depuis un tick.
+            // Better Workbench Management's workbench restriction: its own hook applies it from the SELECTED
+            // bench, which means nothing when creating from a tick.
             BetterWorkbenchesCompat.ApplyWorktableRestriction(table, bill);
 
-            // Puis on rend a la bill ce que la precedente portait : nom, comptage elargi, filtre de
-            // produits, appartenance a un groupe de bills liees.
+            // Then the bill is given back what its predecessor carried: name, widened counting, product
+            // filter, membership of a linked bill group.
             var memory = state.MemoryFor(table.def, recipe);
             if (memory != null)
             {
                 if (memory.name != null) bill.playerCustomName = memory.name;
 
-                // Le mode d'un autre mod reprend sa place, avec les compteurs qu'il interprete a sa
-                // facon : "+X par personne" chez Everybody Gets One, un surplus d'ingredients ailleurs.
+                // A mode from another mod takes its place again, with the counters it reads its own way:
+                // "+X per person" in Everybody Gets One, an ingredient surplus elsewhere.
                 var remembered = memory.repeatModeDefName == null
                     ? null
                     : DefDatabase<BillRepeatModeDef>.GetNamedSilentFail(memory.repeatModeDefName);
@@ -291,9 +291,9 @@ namespace BillAutopilot
                 return;
             }
 
-            // Un mode venu d'un autre mod se pose tel quel. Les deux compteurs le suivent : chez
-            // Everybody Gets One ils veulent dire "+X par personne" ou "X par personne", ailleurs
-            // autre chose. On les transmet sans les interpreter.
+            // A mode from another mod is set as is. Both counters follow it: in Everybody Gets One they mean
+            // "+X per person" or "X per person", elsewhere something else. They are passed on without
+            // being interpreted.
             if (stamp.mode == AutoMode.Custom)
             {
                 var custom = stamp.repeatModeDefName == null
@@ -317,10 +317,10 @@ namespace BillAutopilot
         }
 
         /// <summary>
-        /// Retirer une bill automatique. On releve d'abord ce que les autres mods lui avaient pose :
-        /// Better Workbench Management prefixe BillStack.Delete pour effacer ses donnees etendues et
-        /// sortir la bill de son groupe de liens. Sans ce releve, un nom, un comptage elargi ou un lien
-        /// disparaitrait a chaque fois qu'un stock se remplit.
+        /// Takes an automatic bill down. What other mods had put on it is read first: Better Workbench
+        /// Management prefixes BillStack.Delete to erase its extended data and pull the bill out of its
+        /// link group. Without that reading, a name, a widened count or a link would vanish every time
+        /// a stock filled up.
         /// </summary>
         private static void Remove(BillAutopilotState state, BillStack stack, ThingDef bench,
             RecipeDef recipe, Bill bill)
@@ -335,8 +335,8 @@ namespace BillAutopilot
                     memory.name = production.playerCustomName;
                 }
 
-                // Un mode de repetition venu d'un autre mod se retient tel quel : c'est un choix de
-                // la joueuse que rien d'autre ne rattraperait.
+                // A repeat mode from another mod is kept as is: it is a choice of the player's that nothing
+                // else would catch.
                 var mode = production.repeatMode;
                 if (mode != null && mode != BillRepeatModeDefOf.TargetCount
                                  && mode != BillRepeatModeDefOf.Forever)
@@ -372,9 +372,9 @@ namespace BillAutopilot
         }
 
         /// <summary>
-        /// La joueuse a change le mode ou les compteurs d'une bill automatique dans l'onglet ?
-        /// On l'inscrit comme surcharge de la recette, sinon le reglage serait perdu au prochain
-        /// retrait de la bill. Regler dans l'onglet, c'est regler le profil.
+        /// Has the player changed the mode or the counters of an automatic bill in the tab? It is recorded
+        /// as an override on the recipe, otherwise the setting would be lost the next time the bill came
+        /// down. Adjusting in the tab is adjusting the profile.
         /// </summary>
         private static void CaptureDrift(BillAutopilotState state, ThingDef bench,
             RecipeDef recipe, Bill_Production bill, BenchProfile profile)
@@ -382,13 +382,13 @@ namespace BillAutopilot
             var stamp = state.StampOf(bill);
             if (stamp == null) return;
 
-            // RepeatCount ("x1") n'a pas de sens pour une consigne permanente : la bill se recreerait
-            // sans fin une fois terminee. On la laisse telle quelle et on n'enregistre rien.
+            // RepeatCount ("x1") makes no sense as a standing order: the bill would be recreated endlessly
+            // once finished. It is left as it is and nothing is recorded.
             if (bill.repeatMode == BillRepeatModeDefOf.RepeatCount) return;
 
-            // Un mode venu d'ailleurs - Everybody Gets One en ajoute trois - n'est ni TargetCount ni
-            // Forever. Le ramener a l'un des notres detruirait le choix de la joueuse en silence : on
-            // l'inscrit tel quel dans le profil, comme n'importe quel autre reglage fait dans l'onglet.
+            // A mode from elsewhere (Everybody Gets One adds three) is neither TargetCount nor Forever.
+            // Flattening it to one of ours would destroy the player's choice in silence, so it is
+            // recorded as is in the profile, like any other setting made in the tab.
             if (IsForeignMode(bill.repeatMode))
             {
                 if (stamp.repeatModeDefName == bill.repeatMode.defName) return;

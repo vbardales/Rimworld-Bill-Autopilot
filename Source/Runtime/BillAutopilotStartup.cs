@@ -3,19 +3,19 @@ using Verse;
 namespace BillAutopilot
 {
     /// <summary>
-    /// Annonce au demarrage ce que le mod a trouve autour de lui.
+    /// Announces at startup what the mod found around it.
     ///
-    /// Sans cela, les sondes de compatibilite ne se declenchent qu'au premier passage de synchro sur
-    /// un etabli dont le profil est actif : tant qu'aucun profil n'est coche, le journal ne dit rien
-    /// et on ne peut pas savoir si l'integration s'est branchee. Ici, la ligne est toujours ecrite.
+    /// Without this, the compatibility probes only fire on the first sync pass over a workbench whose
+    /// profile is switched on: as long as no profile is ticked the log says nothing, and there is no
+    /// way to tell whether an integration took. Here the line is always written.
     /// </summary>
     [StaticConstructorOnStartup]
     internal static class BillAutopilotStartup
     {
         static BillAutopilotStartup()
         {
-            // Ce patch-ci vise l'assembly d'un autre mod : il ne peut pas etre pose par attribut, et
-            // il attend que tout soit charge - d'ou sa place ici plutot que dans PatchAll().
+            // This patch aims at another mod's assembly: it cannot be declared by attribute, and it
+            // waits for everything to be loaded, hence its place here rather than in PatchAll().
             DubsMintMenusCompat.Install(BillAutopilotMod.HarmonyInstance);
 
             Log.Message("[Bill Autopilot] Integrations: "

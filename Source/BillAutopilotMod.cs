@@ -30,7 +30,7 @@ namespace BillAutopilot
 
         public override string SettingsCategory() => "Bill Autopilot";
 
-        /// <summary>Tous les etablis a bills du jeu, ceux des mods compris.</summary>
+        /// <summary>Every bill-taking workbench in the game, those from mods included.</summary>
         private List<ThingDef> Benches =>
             benchCache ?? (benchCache = DefDatabase<ThingDef>.AllDefsListForReading
                 .Where(def => def.IsWorkTable && def.AllRecipes != null && def.AllRecipes.Count > 0)
@@ -45,8 +45,8 @@ namespace BillAutopilot
 
             listing.Label("BillAutopilot.Settings.Intro".Translate());
 
-            // Ce que le mod a trouve autour de lui. Le journal le dit deja au demarrage, mais on ne
-            // va pas lire un journal pour savoir si une integration a pris : ca se voit ici.
+            // What the mod found around it. The log already says so at startup, but nobody reads a log to
+            // find out whether an integration took: it shows here.
             var integrations = listing.GetRect(48f);
             GUI.color = new Color(1f, 1f, 1f, 0.7f);
             Widgets.Label(integrations, "BillAutopilot.Settings.Integrations".Translate(
@@ -60,7 +60,7 @@ namespace BillAutopilot
             listing.CheckboxLabeled("BillAutopilot.Settings.Notify".Translate(),
                 ref Settings.notifyNewRecipes, "BillAutopilot.Settings.NotifyDesc".Translate());
 
-            // Le plafond du jeu : 15, ou 125 quand Better Workbench Management voit No Max Bills.
+            // The game's cap: 15, or 125 when Better Workbench Management sees No Max Bills.
             int gameMax = BetterWorkbenchesCompat.MaxBills;
 
             var capRow = listing.GetRect(28f);

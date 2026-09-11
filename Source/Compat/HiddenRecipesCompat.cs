@@ -6,21 +6,21 @@ using Verse;
 namespace BillAutopilot
 {
     /// <summary>
-    /// Recettes masquees ailleurs, que le pilote ne doit pas reposer dans le dos de la joueuse.
+    /// Recipes hidden elsewhere, which the autopilot must not put back behind the player's back.
     ///
-    /// Nice Bill Tab - Expansion (HICON.NiceBillTabExpansion) masque des recettes par etabli, mais
-    /// seulement dans son menu d'ajout : rien n'empeche un mod d'en poser une. On lui demande donc.
+    /// Nice Bill Tab - Expansion (HICON.NiceBillTabExpansion) hides recipes per workbench, but only in
+    /// its own add menu: nothing stops a mod from putting one up. So it is asked.
     ///
-    /// Choose Your Recipe, lui, n'a besoin de rien : il retire les recettes desactivees de
-    /// def.allRecipesCached, donc elles ne figurent deja plus dans AllRecipes que nous parcourons.
+    /// Choose Your Recipe needs nothing: it removes disabled recipes from def.allRecipesCached, so
+    /// they are already gone from the AllRecipes we walk.
     /// </summary>
     internal static class HiddenRecipesCompat
     {
         private static bool probed;
         /// <summary>
-        /// Un delegue, pas un MethodInfo : ce test tombe sur CHAQUE recette de CHAQUE etabli a chaque
-        /// passage de synchro. Un Invoke par reflexion y couterait cent fois le prix d'un appel direct,
-        /// soixante fois par tick sur un atelier bien fourni.
+        /// A delegate, not a MethodInfo: this test lands on EVERY recipe of EVERY workbench on every
+        /// sync pass. A reflection Invoke would cost a hundred times a direct call there, sixty times
+        /// a tick on a well-stocked workshop.
         /// </summary>
         private static Func<Building_WorkTable, RecipeDef, bool> isHidden;
 

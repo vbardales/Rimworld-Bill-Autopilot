@@ -8,15 +8,14 @@ using Verse;
 namespace BillAutopilot
 {
     /// <summary>
-    /// Pont vers Better Workbench Management (assembly ImprovedWorkbenches, packageId falconne.BWM).
-    /// Dependance souple : tout passe par la reflexion, et chaque accesseur rend une valeur neutre
-    /// quand le mod est absent.
+    /// Bridge to Better Workbench Management (assembly ImprovedWorkbenches, packageId falconne.BWM).
+    /// Soft dependency: everything goes through reflection, and every accessor returns a neutral value
+    /// when the mod is absent.
     ///
-    /// Pourquoi c'est necessaire : BWM greffe sur chaque Bill_Production une ExtendedBillData (nom,
-    /// CountAway, filtre de produits additionnels) rangee dans un WorldComponent, et pose un prefixe
-    /// sur BillStack.Delete qui la supprime avec la bill. Le pilote, lui, retire et repose des bills
-    /// en permanence : sans ce pont, tout ce que la joueuse regle via BWM disparaitrait des que le
-    /// stock se remplit.
+    /// Why it is needed: BWM attaches an ExtendedBillData to every Bill_Production (name, CountAway,
+    /// additional product filter) kept in a WorldComponent, and puts a prefix on BillStack.Delete that
+    /// erases it along with the bill. The autopilot removes and re-places bills constantly, so without
+    /// this bridge everything the player sets through BWM would vanish the moment a stock filled up.
     /// </summary>
     internal static class BetterWorkbenchesCompat
     {
@@ -119,16 +118,16 @@ namespace BillAutopilot
             return null;
         }
 
-        /// <summary>Les deux magasins sont des WorldComponent : on les prend a la source, sans passer par Main.</summary>
+        /// <summary>Both stores are WorldComponents, so they are taken at the source, without going through Main.</summary>
         private static object ExtendedStorage =>
             extendedStorageType == null ? null : Find.World?.GetComponent(extendedStorageType);
 
         private static object RestrictionStorage =>
             restrictionStorageType == null ? null : Find.World?.GetComponent(restrictionStorageType);
 
-        // --- Donnees etendues --------------------------------------------------------------------
+        // --- Extended data --------------------------------------------------------------------
 
-        /// <summary>Releve ce que BWM sait d'une bill, juste avant qu'on la retire.</summary>
+        /// <summary>Reads what BWM knows about a bill, just before it is taken down.</summary>
         public static BillMemory Capture(Bill_Production bill)
         {
             if (!Active || bill == null) return null;
@@ -175,13 +174,13 @@ namespace BillAutopilot
 
             foreach (var other in bills)
             {
-                // Les compagnons, pas la bill qu'on retire : c'est a eux qu'on se raccrochera.
+                // The companions, not the bill being removed: they are what we will reattach to.
                 if (other is Bill sibling && sibling != bill) memory.linkedTo.Add(sibling.loadID);
             }
             if (memory.linkedTo.Count > 0) anything = true;
         }
 
-        /// <summary>Repose sur une bill neuve ce qu'on avait releve sur celle qu'elle remplace.</summary>
+        /// <summary>Puts back on a fresh bill what was read from the one it replaces.</summary>
         public static void Restore(Bill_Production bill, BillMemory memory)
         {
             if (!Active || bill == null || memory == null) return;
@@ -218,7 +217,7 @@ namespace BillAutopilot
             if (linkBills == null || memory.linkedTo.Count == 0) return;
 
             // On se raccroche au premier compagnon encore vivant : LinkBills rattache au groupe
-            // existant s'il y en a un, et n'en cree un nouveau que sinon.
+            // existing group if there is one, and only creates a new one otherwise.
             var anchor = FindLiveBill(memory.linkedTo);
             if (anchor != null) linkBills.Invoke(storage, new object[] { anchor, bill });
         }
@@ -248,7 +247,7 @@ namespace BillAutopilot
             return null;
         }
 
-        /// <summary>Une bill liee n'est jamais orpheline : on evite de la retirer sans l'avoir relevee.</summary>
+        /// <summary>A linked bill is never an orphan: avoid removing one without having read it first.</summary>
         public static bool IsLinked(Bill_Production bill)
         {
             if (!Active || bill == null || getBillSetContaining == null) return false;
@@ -275,17 +274,17 @@ namespace BillAutopilot
             }
             catch
             {
-                // Sans consequence : BWM nettoie de toute facon a la suppression.
+                // Harmless: BWM cleans up on deletion anyway.
             }
         }
 
-        // --- Comptage ----------------------------------------------------------------------------
+        // --- Counting ----------------------------------------------------------------------------
 
         /// <summary>
-        /// BWN n'augmente le comptage (inventaires, hors-carte, produits additionnels) que si la bill
-        /// a des donnees etendues. Notre bill temoin n'en a pas : elle compterait a la facon vanilla
-        /// pendant que la vraie bill compte autrement, et les seuils ne parleraient plus de la meme
-        /// chose. On lui greffe donc le meme releve avant de mesurer.
+        /// BWM only widens the count (inventories, off-map, extra products) if the bill has extended
+        /// data. Our probe bill has none: it would count the vanilla way while the real bill counts
+        /// another way, and the thresholds would no longer be talking about the same thing. So the
+        /// same reading is grafted on before measuring.
         /// </summary>
         public static void PrimeProbe(Bill_Production probe, BillMemory memory)
         {
@@ -305,13 +304,13 @@ namespace BillAutopilot
             }
             catch
             {
-                // Le comptage retombe sur la mesure vanilla : moins fidele, jamais faux.
+                // Counting falls back to the vanilla measure: less faithful, never wrong.
             }
         }
 
-        // --- Divers ------------------------------------------------------------------------------
+        // --- Odds and ends ------------------------------------------------------------------------------
 
-        /// <summary>La restriction posee sur l'etabli, que BWM n'applique qu'a la bill creee a la main.</summary>
+        /// <summary>The restriction set on the workbench, which BWM only applies to a hand-made bill.</summary>
         public static void ApplyWorktableRestriction(Building_WorkTable table, Bill_Production bill)
         {
             if (!Active || getRestrictionForTable == null || setRestrictionToBill == null) return;
@@ -335,7 +334,7 @@ namespace BillAutopilot
             }
         }
 
-        /// <summary>15 en vanilla ; 125 quand BWM voit No Max Bills.</summary>
+        /// <summary>15 in vanilla; 125 when BWM sees No Max Bills.</summary>
         public static int MaxBills
         {
             get

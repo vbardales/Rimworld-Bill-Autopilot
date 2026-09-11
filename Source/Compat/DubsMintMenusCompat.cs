@@ -9,22 +9,21 @@ using Verse;
 namespace BillAutopilot
 {
     /// <summary>
-    /// Pont vers Dubs Mint Menus (assembly DubsMintMenus, packageId dubwise.dubsmintmenus).
+    /// Bridge to Dubs Mint Menus (assembly DubsMintMenus, packageId dubwise.dubsmintmenus).
     ///
-    /// Son menu des travaux ne prend pas la main sur l'onglet - son patch de BillStack.DoListing est
-    /// un prefixe void qui ajuste le rectangle - donc rien a reconcilier de ce cote. En revanche il
-    /// offre des **modeles d'etabli** : MakeBenchTemplate photographie TOUS les travaux presents sur
-    /// un etabli, les notres compris.
+    /// Its bill menu does not take the tab over (its BillStack.DoListing patch is a void prefix that
+    /// only adjusts the rect), so nothing needs reconciling there. Its **bench templates** do:
+    /// MakeBenchTemplate photographs EVERY bill standing on a workbench, ours included.
     ///
-    /// Le piege : un modele fabrique depuis un etabli sous pilote capture la file du moment ;
-    /// reapplique plus tard, il repose ces travaux comme poses a la main, et le pilote s'efface
-    /// definitivement sur ces recettes sans rien dire. On retire donc nos travaux du modele juste
-    /// apres sa creation - ce que la joueuse voulait enregistrer, c'est ce qu'elle a mis, pas ce que
-    /// le pilote passait par la.
+    /// The trap: a template made from an autopiloted bench captures whatever the queue happened to
+    /// hold; re-applied later, it puts those bills back as hand-placed ones, and the autopilot retires
+    /// from those recipes for good without a word. So our bills are taken out of the template right
+    /// after it is created: what the player meant to record is what she put there, not what the
+    /// autopilot happened to be doing.
     ///
-    /// Appliquer un modele, en revanche, ne demande rien : ApplyTemplateToBench clone avec
-    /// InitializeAfterClone(), les travaux poses ont donc un identifiant neuf, absent de nos
-    /// empreintes, et le pilote les voit comme poses a la main. C'est le comportement voulu.
+    /// Applying a template, on the other hand, needs nothing: ApplyTemplateToBench clones with
+    /// InitializeAfterClone(), so the placed bills carry fresh ids, absent from our stamps, and the
+    /// autopilot reads them as placed by hand. That is the intended behaviour.
     /// </summary>
     internal static class DubsMintMenusCompat
     {
@@ -35,8 +34,8 @@ namespace BillAutopilot
         public static bool Active => active;
 
         /// <summary>
-        /// Pose le postfix. Appele depuis le constructeur statique de demarrage : l'assembly de Dubs
-        /// Mint Menus est chargee bien avant, et on est sur le thread principal.
+        /// Installs the postfix. Called from the startup static constructor: the Dubs Mint Menus assembly
+        /// is loaded well before that, and we are on the main thread.
         /// </summary>
         public static void Install(Harmony harmony)
         {
@@ -90,7 +89,7 @@ namespace BillAutopilot
         }
 
         /// <summary>
-        /// Le parametre porte le meme nom que dans la methode d'origine : Harmony l'apparie par nom.
+        /// The parameter carries the same name as in the original method: Harmony matches it by name.
         /// </summary>
         public static void AfterMakeBenchTemplate(IBillGiver p)
         {
@@ -107,7 +106,7 @@ namespace BillAutopilot
                 }
                 if (ours.Count == 0) return;
 
-                // Le modele qui vient d'etre cree est le dernier de la liste.
+                // The template just created is the last one in the list.
                 if (!(templatesProperty.GetValue(null) is IList templates) || templates.Count == 0) return;
                 if (!(templateBillsField.GetValue(templates[templates.Count - 1]) is IList templateBills)) return;
 

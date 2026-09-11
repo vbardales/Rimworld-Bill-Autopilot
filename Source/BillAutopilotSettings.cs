@@ -6,47 +6,46 @@ using Verse;
 namespace BillAutopilot
 {
     /// <summary>
-    /// Ce qu'une recette doit faire sous pilote automatique.
-    /// Volontairement independant de <see cref="RimWorld.BillRepeatModeDef"/> : les reglages du mod sont
-    /// lus dans le constructeur de <see cref="Mod"/>, donc AVANT le chargement des defs. Un
-    /// Scribe_Defs y resoudrait sur une DefDatabase vide.
+    /// What a recipe should do under the autopilot.
+    /// Deliberately independent of <see cref="RimWorld.BillRepeatModeDef"/>: the mod settings are read
+    /// in the <see cref="Mod"/> constructor, therefore BEFORE defs are loaded. A Scribe_Defs there
+    /// would resolve against an empty DefDatabase.
     /// </summary>
     public enum AutoMode : byte
     {
-        /// <summary>Suit le mode par defaut de l'etabli. Valable uniquement pour une regle de recette.</summary>
+        /// <summary>Follows the bench default. Only valid on a recipe rule.</summary>
         Inherit = 0,
 
-        /// <summary>Maintenir un stock : la bill apparait quand on descend au plancher, disparait une fois la cible atteinte.</summary>
+        /// <summary>Keep a stock: the bill appears on falling to the threshold, and goes once the target is reached.</summary>
         Maintain = 1,
 
-        /// <summary>Toujours : la bill reste en place et tourne sans fin.</summary>
+        /// <summary>Always: the bill stays up and runs without end.</summary>
         Always = 2,
 
-        /// <summary>Jamais : le pilote automatique ignore cette recette.</summary>
+        /// <summary>Never: the autopilot ignores this recipe.</summary>
         Excluded = 3,
 
         /// <summary>
-        /// Un mode de repetition pose par un autre mod, nomme a cote par son defName. Everybody Gets
-        /// One en ajoute trois ; d'autres mods peuvent en ajouter. Le pilote ne cherche jamais a
-        /// savoir ce qu'ils veulent dire : il les pose, et demande a leur proprietaire s'il y a du
-        /// travail.
+        /// A repeat mode set by another mod, named alongside by its defName. Everybody Gets One adds
+        /// three; other mods may add more. The autopilot never tries to work out what they mean: it
+        /// sets them, and asks their owner whether there is work to do.
         /// </summary>
         Custom = 4,
     }
 
-    /// <summary>Surcharge posee sur une recette precise, pour un type d'etabli donne.</summary>
+    /// <summary>An override set on one recipe, for one workbench type.</summary>
     public class RecipeRule : IExposable
     {
         public AutoMode mode = AutoMode.Inherit;
 
-        /// <summary>defName du mode quand <see cref="mode"/> vaut Custom. Une chaine, pas un Def :
-        /// les reglages sont lus avant le chargement des defs.</summary>
+        /// <summary>defName of the mode when <see cref="mode"/> is Custom. A string, not a Def: the
+        /// settings are read before defs are loaded.</summary>
         public string repeatMode;
 
-        /// <summary>-1 : herite de l'etabli.</summary>
+        /// <summary>-1: inherits from the bench.</summary>
         public int targetCount = -1;
 
-        /// <summary>-1 : herite de l'etabli.</summary>
+        /// <summary>-1: inherits from the bench.</summary>
         public int floorCount = -1;
 
         public bool IsDefault => mode == AutoMode.Inherit && targetCount < 0 && floorCount < 0;
@@ -60,7 +59,7 @@ namespace BillAutopilot
         }
     }
 
-    /// <summary>Profil d'un type d'etabli. Global : tous les etablis de ce ThingDef le partagent.</summary>
+    /// <summary>The profile of one workbench type. Global: every bench of that ThingDef shares it.</summary>
     public class BenchProfile : IExposable
     {
         public const int DefaultTargetCount = 50;
@@ -68,19 +67,19 @@ namespace BillAutopilot
 
         public bool enabled;
 
-        /// <summary>Mode applique aux recettes sans surcharge. Maintain, Always ou Custom.</summary>
+        /// <summary>Mode applied to recipes with no override. Maintain, Always or Custom.</summary>
         public AutoMode defaultMode = AutoMode.Maintain;
 
-        /// <summary>defName du mode quand <see cref="defaultMode"/> vaut Custom.</summary>
+        /// <summary>defName of the mode when <see cref="defaultMode"/> is Custom.</summary>
         public string defaultRepeatMode;
 
         public int targetCount = DefaultTargetCount;
         public int floorCount = DefaultFloorCount;
 
         /// <summary>
-        /// Mode des recettes que le jeu ne sait pas compter (decoupe, fonte, cremation, chirurgie...) :
-        /// RecipeWorkerCounter.CanCountProducts y renvoie false, donc "maintenir X" leur est interdit.
-        /// Seuls Always et Excluded sont valables.
+        /// Mode for recipes the game cannot count (butchering, smelting, cremation, surgery and the like):
+        /// RecipeWorkerCounter.CanCountProducts returns false for them, so "keep X" is impossible.
+        /// Only Always and Excluded are valid here.
         /// </summary>
         public AutoMode uncountableMode = AutoMode.Excluded;
 
@@ -109,23 +108,23 @@ namespace BillAutopilot
             if (recipe != null) rules.Remove(recipe.defName);
         }
 
-        /// <summary>Mode effectif d'une recette, surcharge et repli des recettes non comptables compris.</summary>
+        /// <summary>A recipe's effective mode, override and uncountable fallback included.</summary>
         public AutoMode ModeFor(RecipeDef recipe, bool countable)
         {
             var rule = RuleFor(recipe);
             var mode = rule != null && rule.mode != AutoMode.Inherit ? rule.mode : defaultMode;
 
-            // Un mode d'un autre mod dont le mod est parti : on retombe sur le notre plutot que de
-            // poser une bill sans mode.
+            // A mode from another mod that has since gone: fall back to one of ours rather than put up a
+            // bill with no mode at all.
             if (mode == AutoMode.Custom && RepeatModeFor(recipe) == null) mode = AutoMode.Maintain;
 
-            // Le repli des recettes non comptables ne vaut que pour "maintenir un stock" : c'est le
-            // seul de nos modes qui exige de savoir compter. Un mode etranger decide pour lui-meme.
+            // The uncountable fallback only applies to "keep a stock": it is the only one of our modes that
+            // needs to count. A foreign mode decides for itself.
             if (mode == AutoMode.Maintain && !countable) mode = uncountableMode;
             return mode;
         }
 
-        /// <summary>Le mode de repetition a poser quand le mode effectif est Custom, ou null.</summary>
+        /// <summary>The repeat mode to set when the effective mode is Custom, or null.</summary>
         public BillRepeatModeDef RepeatModeFor(RecipeDef recipe)
         {
             var rule = RuleFor(recipe);
@@ -168,17 +167,16 @@ namespace BillAutopilot
 
     public class BillAutopilotSettings : ModSettings
     {
-        /// <summary>Une notification de nouvelle recette par etabli, ou une seule pour tous.</summary>
+        /// <summary>Whether newly unlocked recipes are announced by letter.</summary>
         public bool notifyNewRecipes = true;
 
-        /// <summary>Nombre de ticks entre deux passages de synchronisation d'un meme etabli.</summary>
+        /// <summary>Ticks between two sync passes over the same workbench.</summary>
         public int syncIntervalTicks = 600;
 
         /// <summary>
-        /// Plafond de bills automatiques simultanees sur un meme etabli. Le jeu n'accepte que 15 bills
-        /// par etabli et masque le bouton "Ajouter" au-dela : on garde de la place pour celles posees a
-        /// la main. Ne s'applique qu'a la creation - une bill deja en place n'est retiree qu'une fois
-        /// son travail fait.
+        /// Cap on how many automatic bills may stand on one workbench at a time. The game accepts only 15
+        /// bills per bench and hides the "Add" button beyond that, so room is left for hand-placed ones.
+        /// Applies to creation only: a bill already up is taken down only once its work is done.
         /// </summary>
         public int maxAutoBillsPerTable = 8;
 
@@ -186,7 +184,7 @@ namespace BillAutopilot
 
         public IEnumerable<KeyValuePair<string, BenchProfile>> AllProfiles => profiles;
 
-        /// <summary>Profil existant, ou null. Ne cree rien : appele a chaque tick de synchro.</summary>
+        /// <summary>An existing profile, or null. Creates nothing: called on every sync tick.</summary>
         public BenchProfile ProfileFor(ThingDef benchDef)
         {
             if (benchDef == null) return null;

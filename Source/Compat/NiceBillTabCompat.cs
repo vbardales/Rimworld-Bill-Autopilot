@@ -5,17 +5,16 @@ using Verse;
 namespace BillAutopilot
 {
     /// <summary>
-    /// Pont vers Nice Bill Tab (assembly NiceBillTab, packageId Andromeda.NiceBillTab).
+    /// Bridge to Nice Bill Tab (assembly NiceBillTab, packageId Andromeda.NiceBillTab).
     ///
-    /// Il remplace entierement l'onglet des travaux par un prefixe bloquant sur ITab_Bills.FillTab,
-    /// et garde la liste affichee dans un champ statique, TabBillsDrawer.filteredBills, reconstruit
-    /// seulement quand shouldRefreshFilter passe a vrai. Tous ses propres chemins le font : ajout,
-    /// suppression, glisser-deposer.
+    /// It replaces the bills tab wholesale through a blocking prefix on ITab_Bills.FillTab, and keeps
+    /// the displayed list in a static field, TabBillsDrawer.filteredBills, rebuilt only when
+    /// shouldRefreshFilter is raised. All of its own paths raise it: add, delete, drag-and-drop.
     ///
-    /// Le pilote, lui, ajoute et retire des bills hors de son UI. Sans prevenir, sa liste garde des
-    /// bills qui n'existent plus : elles continuent de s'afficher, et son glisser-deposer reinsere
-    /// dans la pile une bill deja supprimee, puisqu'il reordonne d'apres cette liste. On se contente
-    /// donc d'actionner son propre mecanisme.
+    /// The autopilot, however, adds and removes bills outside its interface. Without a word, its list
+    /// keeps bills that no longer exist: they go on being drawn, and its drag-and-drop reinserts an
+    /// already deleted bill into the stack, since it reorders from that list. So we simply work its
+    /// own mechanism.
     /// </summary>
     internal static class NiceBillTabCompat
     {
@@ -75,7 +74,7 @@ namespace BillAutopilot
             }
             catch
             {
-                // Sans consequence : sa liste se reconstruira a la prochaine ouverture de l'onglet.
+                // Harmless: its list will rebuild the next time the tab is opened.
             }
         }
     }

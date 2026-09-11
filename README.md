@@ -112,6 +112,17 @@ both of which apply to *any* mod that adds a repeat mode:
   how many colonists there are, "with surplus" on the ingredient stock, and neither is something to
   reimplement. On the way in, the probe bill is dressed in that mode before being asked.
 
+Such a mode can also be **chosen as a profile default**, or as a per-recipe override: the mode menu
+lists every `BillRepeatModeDef` that is not one of the game's three. So a tailoring bench can be told
+once to keep one of everything per colonist.
+
+Under such a mode the two counters are labelled *Count* and *Second count* rather than *Keep in
+stock* and *Start again at*, with a tooltip saying why: the owning mod reads them its own way, as
+"+X per person", "X per person" or an ingredient surplus. They are passed on without being
+interpreted. The activation confirmation names the mode instead of announcing a target it cannot
+predict, and if the mod that owns the mode ever leaves, the profile falls back to *keep a stock*
+rather than putting up a bill with no mode at all.
+
 **Nice Bill Tab** (`Andromeda.NiceBillTab`) replaces the bills tab wholesale, via a blocking prefix
 on `ITab_Bills.FillTab`, and keeps the displayed list in a static field rebuilt only when
 `TabBillsDrawer.shouldRefreshFilter` is raised. All of its own paths raise it: add, delete,

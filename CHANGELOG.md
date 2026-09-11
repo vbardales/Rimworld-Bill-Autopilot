@@ -45,6 +45,9 @@ feature, never a broken game.
 - **Everybody Gets One**: its repeat modes (one per person, X per person, with surplus) survive the
   remove/replace cycle, and it is asked whether there is work rather than having its thresholds
   guessed at. The same holds for any other mod that adds a repeat mode.
+- A repeat mode from another mod can be chosen as a profile default or a per-recipe override, so a
+  whole bench can be set to "one per colonist" at once. Under such a mode the two counters are
+  labelled neutrally, since the owning mod reads them its own way.
 - **Nice Bill Tab**: its cached bill list is told to rebuild whenever the autopilot puts a bill up or
   takes one down, without which it would keep drawing bills that no longer exist and its
   drag-and-drop would reinsert deleted ones.
