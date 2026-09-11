@@ -28,6 +28,8 @@ The recipe list is grouped by product category, each group collapsible, with a f
 
 Switching a workbench type on asks first, naming how many recipes it is about to take and at what target: the one moment where a lot of production can start at once. Switching it back on later does not ask again.
 
+Bills the autopilot put up are marked in their label, so you can tell them from the ones you placed yourself. That matters, because deleting an automatic bill is what excludes its recipe.
+
 Change a bill's target in the bills tab and the autopilot keeps it: adjusting the bill IS adjusting the profile.
 
 WHY NOT "DO 1 TIME"

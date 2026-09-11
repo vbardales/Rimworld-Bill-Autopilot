@@ -39,7 +39,7 @@ namespace BillAutopilot
 
         public override void DoSettingsWindowContents(Rect inRect)
         {
-            var header = new Rect(inRect.x, inRect.y, inRect.width, 176f);
+            var header = new Rect(inRect.x, inRect.y, inRect.width, 204f);
             var listing = new Listing_Standard();
             listing.Begin(header);
 
@@ -59,6 +59,9 @@ namespace BillAutopilot
 
             listing.CheckboxLabeled("BillAutopilot.Settings.Notify".Translate(),
                 ref Settings.notifyNewRecipes, "BillAutopilot.Settings.NotifyDesc".Translate());
+
+            listing.CheckboxLabeled("BillAutopilot.Settings.MarkBills".Translate(),
+                ref Settings.markAutomaticBills, "BillAutopilot.Settings.MarkBillsDesc".Translate());
 
             // The game's cap: 15, or 125 when Better Workbench Management sees No Max Bills.
             int gameMax = BetterWorkbenchesCompat.MaxBills;

@@ -6,6 +6,8 @@
   <BillAutopilot.Settings.IntegrationsDesc>None of these is required. Each is detected on its own, and what the autopilot picks up from it is described on the mod page.</BillAutopilot.Settings.IntegrationsDesc>
   <BillAutopilot.Settings.Detected>found</BillAutopilot.Settings.Detected>
   <BillAutopilot.Settings.NotDetected>not found</BillAutopilot.Settings.NotDetected>
+  <BillAutopilot.Settings.MarkBills>Mark automatic bills</BillAutopilot.Settings.MarkBills>
+  <BillAutopilot.Settings.MarkBillsDesc>Adds a short mark to the label of every bill the autopilot put up, so you can tell it from one you placed yourself. It matters: deleting an automatic bill excludes its recipe, and an unmarked bill that comes down on its own leaves no trace of why.</BillAutopilot.Settings.MarkBillsDesc>
   <BillAutopilot.Settings.Notify>Announce newly unlocked recipes</BillAutopilot.Settings.Notify>
   <BillAutopilot.Settings.NotifyDesc>A recipe unlocked after a workbench was put on autopilot arrives as a suspended bill, so it never spends anything behind your back. This sends a letter listing them.</BillAutopilot.Settings.NotifyDesc>
   <BillAutopilot.Settings.MaxBills>At most {0} automatic bills per workbench (the game allows {1})</BillAutopilot.Settings.MaxBills>
@@ -55,6 +57,7 @@ Recipes unlocked later will arrive suspended, and will never spend anything with
   <BillAutopilot.Gizmo.Configure>Autopilot profile</BillAutopilot.Gizmo.Configure>
   <BillAutopilot.Gizmo.ConfigureDesc>Set what the autopilot does on every {0}, recipe by recipe.</BillAutopilot.Gizmo.ConfigureDesc>
 
+  <BillAutopilot.AutoMarker>(auto)</BillAutopilot.AutoMarker>
   <BillAutopilot.NewRecipeLine>{0} - {1}</BillAutopilot.NewRecipeLine>
   <BillAutopilot.NewRecipeLetterTitle>{0} new recipes available</BillAutopilot.NewRecipeLetterTitle>
   <BillAutopilot.NewRecipeLetterBody>The autopilot has put these up as suspended bills. Unsuspend the ones you want; delete the ones you do not, and it will leave them alone from now on.\n\n{0}</BillAutopilot.NewRecipeLetterBody>

@@ -107,6 +107,31 @@ namespace BillAutopilot
         }
     }
 
+    /// <summary>
+    /// Marks an automatic bill in its own label, so it can be told apart from one placed by hand.
+    /// Without the mark, "delete it to exclude the recipe" is a surprise, and a bill that came down on
+    /// its own leaves no trace of why.
+    ///
+    /// The label is the one place that reaches every interface at once. Bill_Production.LabelCap is
+    /// what the vanilla tab, Nice Bill Tab, Dubs Mint Menus and Better Workbench Management all read
+    /// to draw a row, so nothing of theirs has to be patched. Bill_Production is the override the call
+    /// actually lands on: Bill.LabelCap is virtual, and Bill_ProductionWithUft and Bill_Autonomous do
+    /// not override it again.
+    /// </summary>
+    [HarmonyPatch(typeof(Bill_Production), nameof(Bill_Production.LabelCap), MethodType.Getter)]
+    internal static class Patch_BillProduction_LabelCap
+    {
+        private static void Postfix(Bill_Production __instance, ref string __result)
+        {
+            if (!BillAutopilotMod.Settings.markAutomaticBills) return;
+
+            var state = BillAutopilotState.Current;
+            if (state == null || !state.IsAuto(__instance)) return;
+
+            __result = __result + " " + "BillAutopilot.AutoMarker".Translate();
+        }
+    }
+
     /// <summary>Switch and profile access directly on the selected workbench.</summary>
     [HarmonyPatch(typeof(Building), nameof(Building.GetGizmos))]
     internal static class Patch_Building_GetGizmos

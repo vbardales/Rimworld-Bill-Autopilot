@@ -28,6 +28,9 @@ This file serves the repository and the writing of Steam patch notes; RimWorld d
   game produces no load error.
 - A startup line in the log naming the companion mods found and the bill cap in force; the settings
   screen names them too.
+- Automatic bills are marked in their own label, so they can be told apart from the ones you place.
+  It is the label rather than the drawing, so every interface picks it up, including the mods that
+  redraw the tab. Can be turned off.
 
 ### Works with
 

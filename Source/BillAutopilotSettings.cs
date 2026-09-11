@@ -170,6 +170,13 @@ namespace BillAutopilot
         /// <summary>Whether newly unlocked recipes are announced by letter.</summary>
         public bool notifyNewRecipes = true;
 
+        /// <summary>
+        /// Whether an automatic bill carries a mark in its label. Without one it is indistinguishable
+        /// from a hand-placed bill, which makes "delete to exclude" a surprise and leaves no way to
+        /// tell why a bill vanished on its own.
+        /// </summary>
+        public bool markAutomaticBills = true;
+
         /// <summary>Ticks between two sync passes over the same workbench.</summary>
         public int syncIntervalTicks = 600;
 
@@ -211,6 +218,7 @@ namespace BillAutopilot
         {
             base.ExposeData();
             Scribe_Values.Look(ref notifyNewRecipes, "notifyNewRecipes", defaultValue: true);
+            Scribe_Values.Look(ref markAutomaticBills, "markAutomaticBills", defaultValue: true);
             Scribe_Values.Look(ref syncIntervalTicks, "syncIntervalTicks", 600);
             Scribe_Values.Look(ref maxAutoBillsPerTable, "maxAutoBillsPerTable", 8);
             Scribe_Collections.Look(ref profiles, "profiles", LookMode.Value, LookMode.Deep);

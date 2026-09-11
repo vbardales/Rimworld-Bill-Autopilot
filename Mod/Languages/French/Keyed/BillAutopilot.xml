@@ -6,6 +6,8 @@
   <BillAutopilot.Settings.IntegrationsDesc>Aucun n’est requis. Chacun est détecté tout seul, et ce que le pilote en reprend est décrit sur la page du mod.</BillAutopilot.Settings.IntegrationsDesc>
   <BillAutopilot.Settings.Detected>détecté</BillAutopilot.Settings.Detected>
   <BillAutopilot.Settings.NotDetected>absent</BillAutopilot.Settings.NotDetected>
+  <BillAutopilot.Settings.MarkBills>Marquer les travaux automatiques</BillAutopilot.Settings.MarkBills>
+  <BillAutopilot.Settings.MarkBillsDesc>Ajoute une courte marque au libellé de chaque travail posé par le pilote, pour le distinguer de ceux que vous posez vous-même. Ce n’est pas cosmétique : supprimer un travail automatique exclut sa recette, et un travail non marqué qui disparaît seul ne laisse aucune trace de la raison.</BillAutopilot.Settings.MarkBillsDesc>
   <BillAutopilot.Settings.Notify>Signaler les nouvelles recettes</BillAutopilot.Settings.Notify>
   <BillAutopilot.Settings.NotifyDesc>Une recette débloquée après la mise sous pilote arrive en travail suspendu : elle ne dépense donc jamais rien à votre insu. Ceci envoie une lettre qui les récapitule.</BillAutopilot.Settings.NotifyDesc>
   <BillAutopilot.Settings.MaxBills>Au plus {0} travaux automatiques par établi (le jeu en accepte {1})</BillAutopilot.Settings.MaxBills>
@@ -55,6 +57,7 @@ Les recettes débloquées plus tard arriveront suspendues, et ne dépenseront ja
   <BillAutopilot.Gizmo.Configure>Profil du pilote</BillAutopilot.Gizmo.Configure>
   <BillAutopilot.Gizmo.ConfigureDesc>Régler, recette par recette, ce que fait le pilote sur tous les établis « {0} ».</BillAutopilot.Gizmo.ConfigureDesc>
 
+  <BillAutopilot.AutoMarker>(auto)</BillAutopilot.AutoMarker>
   <BillAutopilot.NewRecipeLine>{0} - {1}</BillAutopilot.NewRecipeLine>
   <BillAutopilot.NewRecipeLetterTitle>{0} nouvelles recettes disponibles</BillAutopilot.NewRecipeLetterTitle>
   <BillAutopilot.NewRecipeLetterBody>Le pilote les a posées en travaux suspendus. Réactivez celles que vous voulez ; supprimez les autres, il ne les proposera plus.\n\n{0}</BillAutopilot.NewRecipeLetterBody>

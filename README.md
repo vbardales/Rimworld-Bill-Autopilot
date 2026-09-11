@@ -50,6 +50,12 @@ every control here is meant to be reachable with a pointer alone.
 The settings screen also names the companion mods it found, so you can tell an integration took
 without reading a log.
 
+The mod marks its own bills in their label. Not by drawing them differently, but by a postfix on
+`Bill_Production.LabelCap`, the one place the vanilla tab, Nice Bill Tab, Dubs Mint Menus and Better
+Workbench Management all read to draw a row: nothing of theirs has to be patched, and they all show
+the mark for free. The mark never reaches `playerCustomName`, so a renamed bill keeps its own name
+and the rename dialog stays clean. It can be turned off in the settings.
+
 **Adjusting a bill in the tab adjusts the profile.** Change the target of an automatic bill and the
 mod records it as an override for that recipe, instead of losing it the next time the bill comes
 down.
