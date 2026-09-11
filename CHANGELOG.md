@@ -31,6 +31,9 @@ This file serves the repository and the writing of Steam patch notes; RimWorld d
 - Automatic bills are marked in their own label, so they can be told apart from the ones you place.
   It is the label rather than the drawing, so every interface picks it up, including the mods that
   redraw the tab. Can be turned off.
+- What another mod attached to a bill is remembered per workbench, not per workbench type, so two
+  benches of the same kind can each carry a differently-set bill for the same recipe. An entry whose
+  bench no longer exists is dropped.
 
 ### Works with
 

@@ -83,7 +83,9 @@ Since the autopilot removes and re-places bills constantly, all of that would be
 stock filled up. Hence four measures:
 
 - **Read before removal, restored after placement.** The reading lives in `BillMemory`, keyed by
-  "BenchDef/RecipeDef", the granularity of the profile.
+  the bench itself and the recipe. Not by bench type: two benches of the same kind, each carrying a
+  differently-set bill for the same recipe, would otherwise share one entry and the last one taken
+  down would overwrite the other. An entry whose bench is gone is dropped on the next pass.
 - **Linked bills preserved.** The `loadID`s of the companion bills are remembered; on re-placement
   the first still-living one is picked up again, and `LinkBills` reattaches to the existing group.
 - **Workbench restriction applied.** BWM's hook on `BillUtility.MakeNewBill` reads

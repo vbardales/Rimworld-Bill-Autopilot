@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using RimWorld;
 using Verse;
 
@@ -81,8 +80,9 @@ namespace BillAutopilot
         private HashSet<string> seeded = new HashSet<string>();
 
         /// <summary>
-        /// "BenchDef/RecipeDef" -> what other mods had put on the bill that was taken down. This is what
-        /// lets the remove/replace cycle lose nothing.
+        /// "bench id/RecipeDef" -> what other mods had put on the bill that was taken down. This is
+        /// what lets the remove/replace cycle lose nothing. Keyed by the bench, not by its type: see
+        /// MemoryKey.
         /// </summary>
         private Dictionary<string, BillMemory> memories = new Dictionary<string, BillMemory>();
 
@@ -124,17 +124,26 @@ namespace BillAutopilot
 
         // --- Memory of bills taken down ----------------------------------------------------------
 
-        public BillMemory MemoryFor(ThingDef bench, RecipeDef recipe) =>
-            memories.TryGetValue(Key(bench, recipe), out var memory) ? memory : null;
+        /// <summary>
+        /// Keyed by the workbench itself, not by its type. What another mod attaches to a bill (a
+        /// name, a link group, a widened count) belongs to that one bill on that one bench: keyed by
+        /// type, two benches of the same kind each carrying a differently-set bill for the same recipe
+        /// would share one entry, and the last one taken down would overwrite the other.
+        /// </summary>
+        private static string MemoryKey(Thing table, RecipeDef recipe) =>
+            table.thingIDNumber + "/" + recipe.defName;
 
-        public void Remember(ThingDef bench, RecipeDef recipe, BillMemory memory)
+        public BillMemory MemoryFor(Thing table, RecipeDef recipe) =>
+            memories.TryGetValue(MemoryKey(table, recipe), out var memory) ? memory : null;
+
+        public void Remember(Thing table, RecipeDef recipe, BillMemory memory)
         {
-            var key = Key(bench, recipe);
+            var key = MemoryKey(table, recipe);
             if (memory == null) memories.Remove(key);
             else memories[key] = memory;
         }
 
-        public void Forget(ThingDef bench, RecipeDef recipe) => memories.Remove(Key(bench, recipe));
+        public void Forget(Thing table, RecipeDef recipe) => memories.Remove(MemoryKey(table, recipe));
 
         /// <summary>Has this workbench type already absorbed its opening stock in this game?</summary>
         public bool IsSeeded(ThingDef bench) => bench != null && seeded.Contains(bench.defName);
@@ -153,18 +162,6 @@ namespace BillAutopilot
             {
                 if (recipes[i].AvailableNow) known.Add(Key(bench, recipes[i]));
             }
-        }
-
-        /// <summary>Forgets everything about a workbench type: the next pass absorbs its stock afresh.</summary>
-        public void ForgetBench(ThingDef bench)
-        {
-            seeded.Remove(bench.defName);
-            var prefix = bench.defName + "/";
-            known.RemoveWhere(k => k.StartsWith(prefix));
-            pending.RemoveWhere(k => k.StartsWith(prefix));
-
-            var stale = memories.Keys.Where(k => k.StartsWith(prefix)).ToList();
-            foreach (var key in stale) memories.Remove(key);
         }
 
         // --- Notifications -----------------------------------------------------------------------
@@ -226,17 +223,54 @@ namespace BillAutopilot
             var maps = Find.Maps;
             if (maps == null) return;
 
+            // Every living workbench is counted, including those on maps not synced this pass: a bench
+            // must not lose its memory merely because nobody is home on its map.
+            var live = new HashSet<int>();
+
             for (int m = 0; m < maps.Count; m++)
             {
                 var map = maps[m];
-                if (!map.IsPlayerHome && map.mapPawns.FreeColonistsSpawnedCount == 0) continue;
+                bool sync = map.IsPlayerHome || map.mapPawns.FreeColonistsSpawnedCount > 0;
 
                 var buildings = map.listerBuildings.allBuildingsColonist;
                 for (int b = 0; b < buildings.Count; b++)
                 {
-                    if (buildings[b] is Building_WorkTable table) queue.Enqueue(table);
+                    if (!(buildings[b] is Building_WorkTable table)) continue;
+
+                    live.Add(table.thingIDNumber);
+                    if (sync) queue.Enqueue(table);
                 }
             }
+
+            PruneMemories(live);
+        }
+
+        /// <summary>
+        /// A bench that no longer exists keeps no memory. thingIDNumber is never reused, so an entry
+        /// whose bench is gone would sit there for the rest of the game. Entries written before the
+        /// memory was keyed per bench go the same way: their key names a def, never a live id.
+        /// </summary>
+        private void PruneMemories(HashSet<int> liveBenches)
+        {
+            // No bench in sight means we are not looking at a settled game, not that every bench died.
+            if (memories.Count == 0 || liveBenches.Count == 0) return;
+
+            List<string> stale = null;
+            foreach (var key in memories.Keys)
+            {
+                int slash = key.IndexOf('/');
+                if (slash > 0
+                    && int.TryParse(key.Substring(0, slash), out int id)
+                    && liveBenches.Contains(id))
+                {
+                    continue;
+                }
+
+                (stale ?? (stale = new List<string>())).Add(key);
+            }
+
+            if (stale == null) return;
+            foreach (var key in stale) memories.Remove(key);
         }
 
         // --- Saving --------------------------------------------------------------------------

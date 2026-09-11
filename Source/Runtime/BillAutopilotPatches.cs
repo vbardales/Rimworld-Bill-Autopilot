@@ -63,7 +63,7 @@ namespace BillAutopilot
             state.Accept(__instance.def, bill.recipe);
 
             // An explicit refusal: the memory of what the bill carried has no reason to survive.
-            state.Forget(__instance.def, bill.recipe);
+            state.Forget(__instance, bill.recipe);
 
             var profile = BillAutopilotMod.Settings.ProfileFor(__instance.def);
             if (profile == null) return;

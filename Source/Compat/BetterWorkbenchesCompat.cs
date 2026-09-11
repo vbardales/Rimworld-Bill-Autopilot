@@ -334,23 +334,33 @@ namespace BillAutopilot
             }
         }
 
-        /// <summary>15 in vanilla; 125 when BWM sees No Max Bills.</summary>
+        private static int cachedMaxBills = -1;
+
+        /// <summary>
+        /// 15 in vanilla; 125 when BWM sees No Max Bills. Read once and kept: BWM decides this from
+        /// which mods are loaded, so it cannot change while the game runs, and the sync asks for it on
+        /// every pass over every workbench. Two reflection calls each time would be paid for nothing.
+        /// </summary>
         public static int MaxBills
         {
             get
             {
-                if (!Active || getMaxBills == null || mainInstance == null) return BillStack.MaxCount;
+                if (cachedMaxBills > 0) return cachedMaxBills;
+
+                cachedMaxBills = BillStack.MaxCount;
+                if (!Active || getMaxBills == null || mainInstance == null) return cachedMaxBills;
 
                 try
                 {
                     var main = mainInstance.GetValue(null);
-                    if (main == null) return BillStack.MaxCount;
-                    return (int)getMaxBills.Invoke(main, null);
+                    if (main != null) cachedMaxBills = (int)getMaxBills.Invoke(main, null);
                 }
                 catch
                 {
-                    return BillStack.MaxCount;
+                    // Keeps the vanilla ceiling, which is never wrong, only sometimes too low.
                 }
+
+                return cachedMaxBills;
             }
         }
     }

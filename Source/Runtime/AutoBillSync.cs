@@ -76,7 +76,7 @@ namespace BillAutopilot
                                  && !HiddenRecipesCompat.IsHidden(table, recipe);
                 if (!available || manual.Contains(recipe))
                 {
-                    if (existing != null) Remove(state, stack, table.def, recipe, existing);
+                    if (existing != null) Remove(state, stack, table, recipe, existing);
                     continue;
                 }
 
@@ -85,7 +85,7 @@ namespace BillAutopilot
 
                 if (mode == AutoMode.Excluded)
                 {
-                    if (existing != null) Remove(state, stack, table.def, recipe, existing);
+                    if (existing != null) Remove(state, stack, table, recipe, existing);
                     continue;
                 }
 
@@ -125,7 +125,7 @@ namespace BillAutopilot
 
                     if (ShouldRetire(table, recipe, existing, profile, mode))
                     {
-                        Remove(state, stack, table.def, recipe, existing);
+                        Remove(state, stack, table, recipe, existing);
                         budget++;
                     }
                 }
@@ -139,7 +139,7 @@ namespace BillAutopilot
             // Our bills whose recipe has left the workbench (mod removed, def repatched).
             foreach (var pair in autos)
             {
-                if (!handled.Contains(pair.Key)) Remove(state, stack, table.def, pair.Key, pair.Value);
+                if (!handled.Contains(pair.Key)) Remove(state, stack, table, pair.Key, pair.Value);
             }
         }
 
@@ -153,7 +153,7 @@ namespace BillAutopilot
 
             // The probe bill counts the way the real one will: otherwise the threshold that fires and the
             // number the bill displays are talking about two different figures.
-            var memory = state.MemoryFor(table.def, recipe);
+            var memory = state.MemoryFor(table, recipe);
 
             // A mode from another mod, whether from the profile or from the bill we took down: it is the one
             // that says whether there is work again, since our comparisons mean nothing in its
@@ -267,7 +267,7 @@ namespace BillAutopilot
 
             // Then the bill is given back what its predecessor carried: name, widened counting, product
             // filter, membership of a linked bill group.
-            var memory = state.MemoryFor(table.def, recipe);
+            var memory = state.MemoryFor(table, recipe);
             if (memory != null)
             {
                 if (memory.name != null) bill.playerCustomName = memory.name;
@@ -322,10 +322,10 @@ namespace BillAutopilot
         /// link group. Without that reading, a name, a widened count or a link would vanish every time
         /// a stock filled up.
         /// </summary>
-        private static void Remove(BillAutopilotState state, BillStack stack, ThingDef bench,
+        private static void Remove(BillAutopilotState state, BillStack stack, Thing table,
             RecipeDef recipe, Bill bill)
         {
-            if (bench != null && recipe != null && bill is Bill_Production production)
+            if (table != null && recipe != null && bill is Bill_Production production)
             {
                 var memory = BetterWorkbenchesCompat.Capture(production);
 
@@ -345,7 +345,7 @@ namespace BillAutopilot
                     memory.repeatModeDefName = mode.defName;
                 }
 
-                state.Remember(bench, recipe, memory);
+                state.Remember(table, recipe, memory);
             }
 
             SuppressDeleteCapture = true;
@@ -363,11 +363,11 @@ namespace BillAutopilot
 
         public static void DropAll(BillAutopilotState state, BillStack stack)
         {
-            var bench = (stack.billGiver as Thing)?.def;
+            var table = stack.billGiver as Thing;
             var bills = stack.Bills;
             for (int i = bills.Count - 1; i >= 0; i--)
             {
-                if (state.IsAuto(bills[i])) Remove(state, stack, bench, bills[i].recipe, bills[i]);
+                if (state.IsAuto(bills[i])) Remove(state, stack, table, bills[i].recipe, bills[i]);
             }
         }
 
