@@ -2,14 +2,15 @@
 
   <PropertyGroup>
     <!--
-      Les intermediaires de compilation sortent du dossier du mod. L'uploader Workshop de RimWorld
-      envoie le dossier entier (SteamUGC.SetItemContent sur la racine, aucune exclusion possible) :
-      un .build/ pose dans le mod est invisible pour git mais part quand meme sur le Workshop, avec
-      l'Assembly-CSharp.dll publicisee de 5,8 Mo qu'il contient. Doit rester dans un
-      Directory.Build.props : la restauration NuGet lit cette propriete avant le csproj.
+      Build intermediates are sent outside the published folder. The Workshop uploader sends
+      Mod/ as it stands (SteamUGC.SetItemContent, no exclusion possible): an obj/ sitting there
+      would ship the publicised Assembly-CSharp.dll, ~6 MB, to every subscriber.
+      This must stay in a Directory.Build.props: NuGet restore reads the property before the
+      csproj. The path was ..\..\.build\ while this folder lived in the monorepo, which is one
+      level above this repository: it now stays inside it.
     -->
-    <BaseIntermediateOutputPath>$(MSBuildThisFileDirectory)..\..\.build\obj\BillAutopilot\</BaseIntermediateOutputPath>
-    <BaseOutputPath>$(MSBuildThisFileDirectory)..\..\.build\bin\BillAutopilot\</BaseOutputPath>
+    <BaseIntermediateOutputPath>$(MSBuildThisFileDirectory)..\.build\obj\</BaseIntermediateOutputPath>
+    <BaseOutputPath>$(MSBuildThisFileDirectory)..\.build\bin\</BaseOutputPath>
   </PropertyGroup>
 
 </Project>
