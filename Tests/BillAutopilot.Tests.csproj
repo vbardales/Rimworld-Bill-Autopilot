@@ -1,0 +1,62 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    Runs the SHIPPED BillAutopilot.dll against the real RimWorld assemblies, outside the game.
+
+    What it covers is the decision layer: given a bench profile and a recipe, which mode applies,
+    which target, which floor. That layer is pure C# with no workbench, no bill stack and no map in
+    it, so it can be exercised here - and it is where a wrong answer is invisible, because the mod
+    goes on working and merely produces the wrong quantity of the wrong things.
+
+    What it cannot cover stays in TESTING.md: anything touching a BillStack, a Building_WorkTable,
+    RecipeWorkerCounter, or the five reflection bridges into other mods, which walk the list of
+    loaded mods and find it empty here.
+
+    Needs a RimWorld installation, unlike the mod itself. If yours is elsewhere, override the
+    RimWorldManaged property on the command line, or pass the Managed folder as the first argument
+    to the built executable.
+
+    Build the mod before running this: the assembly under test is copied in from Mod/Assemblies.
+  -->
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net48</TargetFramework>
+    <AssemblyName>BillAutopilot.Tests</AssemblyName>
+    <RootNamespace>BillAutopilot.Tests</RootNamespace>
+    <LangVersion>latest</LangVersion>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
+    <RimWorldManaged Condition="'$(RimWorldManaged)' == ''">C:\Program Files (x86)\Steam\steamapps\common\RimWorld\RimWorldWin64_Data\Managed</RimWorldManaged>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Absolute path resolved at build time, so the test does not have to guess how deep its
+         output folder sits relative to the project. -->
+    <AssemblyMetadata Include="RimWorldManaged" Value="$(RimWorldManaged)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- The assembly under test is the one that ships, copied in beside the executable. -->
+    <Reference Include="BillAutopilot">
+      <HintPath>$(MSBuildThisFileDirectory)..\Mod\Assemblies\BillAutopilot.dll</HintPath>
+      <Private>true</Private>
+    </Reference>
+    <Reference Include="Assembly-CSharp">
+      <HintPath>$(RimWorldManaged)\Assembly-CSharp.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityEngine">
+      <HintPath>$(RimWorldManaged)\UnityEngine.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityEngine.CoreModule">
+      <HintPath>$(RimWorldManaged)\UnityEngine.CoreModule.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityEngine.IMGUIModule">
+      <HintPath>$(RimWorldManaged)\UnityEngine.IMGUIModule.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+  </ItemGroup>
+
+</Project>

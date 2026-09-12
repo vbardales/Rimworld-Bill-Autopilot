@@ -14,6 +14,28 @@ has never had a single line of it executed in a running game.
 
 Each scenario says what it proves. A test whose failure you cannot interpret is not worth running.
 
+## What no longer needs a human
+
+One layer is covered by a program instead, in `Tests/`. It runs the shipped assembly against the
+real RimWorld assemblies with no game running, and answers for itself:
+
+```bash
+dotnet build Source/BillAutopilot.csproj -c Release && dotnet build Tests/BillAutopilot.Tests.csproj -c Release && .build/bin/tests/Release/BillAutopilot.Tests.exe
+```
+
+Forty-four checks, and it exits non-zero when one fails. What it covers is the decision layer: given
+a profile and a recipe, which mode applies, how many to keep, when to start again. That includes the
+countability fallback, the clamp that keeps a floor under its target, and what happens to a repeat
+mode whose mod has been removed — answers that are invisible in game, because a wrong one still
+looks like a working mod quietly making the wrong amount of the wrong thing.
+
+So scenarios 9 and 14 below no longer have to be read as arithmetic. What they still prove is that
+the decision reaches the bench: that a butcher table really does stay idle, and that a foreign mode
+really is set on a real bill. **The program is the arithmetic, the scenario is the wiring.**
+
+It was itself checked by breaking the clamp on purpose and confirming that those two checks, and only
+those two, turned red. A suite never seen to fail proves nothing.
+
 ## Before anything
 
 1. **Harmony must be active, and this mod after it.** It is the only hard dependency, declared in
