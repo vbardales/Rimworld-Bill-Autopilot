@@ -27,6 +27,44 @@ updated:      2026-09-12, mod session
 
 # Bill Autopilot — status
 
+## Preview recomposition — 2026-09-12
+
+- Revised overlay brief checked and composition rendered again: `Bill` and `Autopilot`
+  are both identity-bearing words, so both remain at 100% (46 px, weight 600).
+  The exact name has no prefix, suffix or linking word requiring a 65% span.
+  Orange accent from the lit subject contrasts by hue and saturation with the dominant
+  cool blue-slate family and its light-blue secondary ink; it is not a brighter version
+  of that secondary ink. Full-size and 268-pixel previews were visually rechecked.
+  Existing illustration, title, summary and palette are retained for this revised brief;
+  no further source replacement was needed. The font and contrast checks below passed again.
+
+- Final asset: `Mod/About/Preview.png`, 896 x 504, 557,964 bytes (below 900 KB).
+- New text-free illustration: `Art/Preview.png`. The available `Art/Preview-source.png`
+  already contained engraved words and a bill interface, so it could not serve as a clean
+  background. It remains untouched and was archived before generation as
+  `Art/Preview-previous-engraved.png`. The replacement was visually inspected before composition.
+- Composition: `Art/preview.html`; parameters and preserved title/summary:
+  `Art/preview-layout.json`; sole colour reference: `Art/preview-palette.json`.
+  Reproduce using `Art/render-preview.cjs` with Node.js, Playwright, Sharp and Chrome
+  (`NODE_PATH` may point to the bundled Node modules). The script serves the files locally,
+  waits for `document.fonts.ready` and image decoding, then captures at native size.
+- Palette rationale: the broad blue-slate floor supplies the veil and the blue family of
+  the lightened secondary ink. The characteristic orange task-lamp light and worker's clothing
+  supply the saturated accent for the rule and badge. Title and summary share the same ivory ink.
+  Secondary ink is saved for consistency but unused: this original public mod has no status tag.
+- Fonts verified through Chrome's actual platform-font report: Segoe UI Semibold for the
+  title, Segoe UI regular for the summary, Segoe UI Bold for the version. No fallback font.
+- Version `1.6` checked against the highest stable `supportedVersions` entry in delivered
+  `Mod/About/About.xml`; triangle and rotated digits use the guide's coordinates.
+- QA: `Art/preview-qa.json` records actual fonts, geometry and contrast. The text-free rendered
+  background is `Art/preview-background.png`; thumbnail is `Art/preview-268.png`.
+  Minimum contrast over every pixel in each text rectangle (including all four corners):
+  title 11.70:1, summary 8.74:1; badge digits against the opaque accent 8.82:1.
+  Tag contrast is not applicable because no tag is displayed. Visual inspection at both
+  896 x 504 and 268 pixels wide found no overlap or clipping; title/version identifiable,
+  rule visible. The summary is intended for the full-size view, as specified by the guide.
+- No publication or push performed for this preview revision.
+
 Marked `done` at the owner's request on 2026-09-12 after the repository audit.
 The unverified in-game scenarios remain recorded above; this status change does not
 claim a new manual test pass or a Workshop release. `licence` remains `original`.
