@@ -38,6 +38,23 @@ those two, turned red. A suite never seen to fail proves nothing.
 
 ## Before anything
 
+### XML checks (no game required)
+
+Run from the repository root:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File Tests/ValidateXml.ps1
+```
+
+This checks every shipped XML file for parsing errors, the About metadata and Harmony dependency,
+the GitHub link inside the description, duplicate or empty translation entries, English/French
+key and placeholder parity, and literal translation keys referenced in C#. It exits non-zero
+on failure. On 12 September 2026, all 376 XML checks and all 44 C# checks passed; both Release
+builds completed without warnings. There are no Defs or XML patches in this mod. XML written into
+saves still needs scenario 12 in a running game.
+
+### Game setup
+
 1. **Harmony must be active, and this mod after it.** It is the only hard dependency, declared in
    `About.xml`; the mod list says so if it is missing.
 2. **The packageId is `nelim.billautopilot`.** It has never been published under another one.
@@ -314,8 +331,8 @@ With Dubs Mint Menus active, on a bench running several automatic bills, **make 
 
 **Proves** that the five bridges are soft, as the mod page claims.
 
-Turn off Better Workbench Management, Nice Bill Tab, Nice Bill Tab - Expansion, Dubs Mint Menus and
-Everybody Gets One, keeping Harmony. The mod must load, the settings and profile windows must open,
+Turn off Better Workbench Management, Nice Bill Tab, Nice Bill Tab - Expansion, Dubs Mint Menus,
+Everybody Gets One and Choose Your Recipe, keeping Harmony. The mod must load, the settings and profile windows must open,
 the base loop must work, and the log must stay silent apart from the startup line, which now reads
 `not found` throughout.
 
@@ -334,3 +351,22 @@ Open *Autopilot profile* on a workbench with many recipes.
   them.
 - **Every control is reachable with a pointer alone.** There is no search field, deliberately. If any
   step here needs the keyboard, that is the failure.
+
+## 19 — Hidden recipes from optional mods
+
+**Proves** the Nice Bill Tab - Expansion hidden-recipe bridge and the recipe list supplied by
+Choose Your Recipe. Never run during the repository audit.
+
+Use a disposable save with an enabled bench, a countable recipe below its restart threshold,
+and no manual bill for that recipe. Test each integration separately with its required dependencies.
+
+- With Nice Bill Tab - Expansion, hide the recipe and synchronise the bench by opening its bills
+  tab. No automatic bill for it should remain or reappear on subsequent passes.
+- Unhide it: its automatic bill should return while stock is still below the threshold.
+- With Choose Your Recipe, disable the recipe using that mod's configuration and reload if
+  required by that mod. It should be absent from the bench's available recipes and should not
+  acquire an automatic bill. Re-enable it and verify it becomes eligible again.
+- Repeat without either integration: the recipe should follow the normal profile rules.
+
+A hidden recipe being queued is an exclusion failure; one that stays excluded after being
+restored is a stale-state failure. Preserve Player.log and the active mod list with the result.

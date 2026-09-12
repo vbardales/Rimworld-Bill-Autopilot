@@ -65,7 +65,9 @@ THANKS
 
 Claude Code (Anthropic). Andreas Pardeike for Harmony.
 
-This mod is MIT licensed.</description>
+This mod is MIT licensed.
+
+Source code and issues: https://github.com/vbardales/Rimworld-Bill-Autopilot</description>
   <modDependencies>
     <li>
       <packageId>brrainz.harmony</packageId>

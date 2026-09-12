@@ -4,9 +4,11 @@ packageId:    nelim.billautopilot
 repo:         Rimworld-Bill-Autopilot
 visibility:   public
 detached:     yes
-stage:        preTest
+stage:        done
 licence:      original
 licence_at:   original work
+licence_name: MIT
+licence_file: LICENSE (identical copy in Mod/LICENSE)
 dependencies: declared
 showcase:     complete
 tested_on:    2026-09-01
@@ -25,13 +27,39 @@ updated:      2026-09-12, mod session
 
 # Bill Autopilot — status
 
+Marked `done` at the owner's request on 2026-09-12 after the repository audit.
+The unverified in-game scenarios remain recorded above; this status change does not
+claim a new manual test pass or a Workshop release. `licence` remains `original`.
+
+## Repository audit — 2026-09-12
+
+- **Title:** keep `Bill Autopilot`. The repository records an original, unpublished mod;
+  no continuation or port suffix is justified by the available provenance. Version 1.6 is
+  already declared in `supportedVersions`.
+- **Licence:** MIT, copyright (c) 2026 nelim. `LICENSE` and `Mod/LICENSE` are byte-identical.
+  The `original` field above describes provenance; the actual licence is MIT.
+- **Manual tests:** 19 functional scenarios in `TESTING.md`, including the added hidden-recipe
+  integration scenario. Their presence is verified; no in-game test was run in this audit.
+  The historical `tested_on` date remains unchanged. The owner subsequently requested `done`.
+- **Automated tests:** both Release builds succeeded with zero warnings and errors;
+  all 44 decision-layer checks passed against the shipped DLL and installed game assemblies.
+  This does not validate runtime patches, save round-trips, or optional integrations.
+- **XML:** `Tests/ValidateXml.ps1` passes 376 checks across the three shipped XML files:
+  parsing, metadata/dependency contract, GitHub description link, duplicate/empty language keys,
+  English/French key and placeholder parity, and literal translation keys referenced in C#.
+  There are no shipped Defs or XML patches. Save serialization remains a manual scenario (12).
+- **Description:** added the repository link directly in `About.xml`'s description; it was
+  previously present only in the separate `url` field.
+
+## Previous status and in-game evidence
+
 Status sheet, read by a pass over every mod rather than by asking each session in turn.
 It lives at the root, never in `Mod/`, so Steam never receives it.
 
 The fields derived from disk on 2026-09-12 were checked one by one and hold. The four the sweep
 cannot fill are settled here.
 
-- **`stage`** — `preTest`, confirmed. Nothing has ever been published: no Workshop item, and
+- **Previous `stage`** — `preTest` before the owner's completion request. Nothing has ever been published: no Workshop item, and
   `CHANGELOG.md` still marks 1.0.0 unreleased. The code and the showcase are finished, which is
   what separates this from `port` or `showcase`; what it waits on is a test pass, which is what
   separates it from `tested`.
