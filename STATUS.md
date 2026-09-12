@@ -1,19 +1,30 @@
 ---
+localization: complete
+translation_en: complete
+translation_fr: complete
 mod:          Bill Autopilot
 packageId:    nelim.billautopilot
 repo:         Rimworld-Bill-Autopilot
 visibility:   public
 detached:     yes
-stage:        done
+stage:        dansMonoRepo
 licence:      original
 licence_at:   original work
 licence_name: MIT
 licence_file: LICENSE (identical copy in Mod/LICENSE)
 dependencies: declared
 showcase:     complete
+settings_audit: partial
 tested_on:    2026-09-01
 workshop:
 remaining:
+  - defect: ATTRIBUTION.md is absent; document studied versus reused third-party material and provenance in English before horsMonoRepo
+  - defect: no discoverable hidden MainButtons shortcut exists for the useful settings page
+  - defect: changing a recipe count while inheriting a custom bench mode changes that recipe to Maintain (Dialog_BenchProfile.cs)
+  - defect: About.xml ends with a raw repository URL instead of the required linked Source code on GitHub text
+  - unverified: settings serialization round-trip, older stored values and complete applicable technical settings coverage
+  - unverified: final current-build in-game scenarios, FR/EN UI, logs, new game and existing save, options persistence and RIMMSQOL shortcut integration
+  - unverified: English and French runtime translation checks described in TESTING.md, including optional integrations and clipping
   - unverified: the mark in the bill label, in the tabs other mods redraw
   - unverified: a change made in the bills tab being kept as a profile override
   - unverified: the memory held per workbench, two benches of a kind set differently
@@ -22,10 +33,174 @@ remaining:
   - unverified: Nice Bill Tab's cached list, where a drag could bring a deleted bill back
   - unverified: loading a save after removing the mod, the reason its state avoids a GameComponent
 session:      local_3527e6d8-def4-4e54-97ff-a6430f1dc569
-updated:      2026-09-12, mod session
+updated:      2026-09-13, workflow audit
 ---
 
 # Bill Autopilot — status
+
+## Translation audit — 2026-09-13
+
+Applied the shared `PUBLISHING.md` / `TRANSLATIONS.md` gate to revision `275ff25`
+plus this working-tree update. The ordered workflow audit below supersedes the
+historical `done` stage; `tested_on` remains unchanged. These three complete fields
+certify static readiness only.
+
+- Inventory: all C# string literals and their UI/helper call paths, settings and
+  integration statuses, bench profiles, category headers, counters, repeat-mode menus,
+  activation confirmations, gizmos, automatic bill markers, recipe letters and messages,
+  including the Dubs Mint Menus template notification. `Mod/` has one assembly and
+  English/French Keyed resources; no LoadFolders, version directories, Defs, XML patches,
+  custom translatable XML fields or grammar resources require DefInjected validation.
+- Fixed integration statuses to translate complete parameterized messages. Moved the
+  settings title and count/group display formats into keys. Both languages now contain
+  54 nonempty keys. Reviewed their meaning, parameter arguments, paragraph breaks and
+  formatting; no dynamically constructed translation keys or rich-text tags are used.
+  The unchanged title, `(auto)` marker and structural formats are intentional in both languages.
+- Bench, recipe, category and foreign repeat-mode names come from the existing Def's
+  `LabelCap`, never from a hardcoded English replacement. Their translations belong to
+  the game or supplying mod; optional mod coverage still needs the runtime pass below.
+  No dependency Keyed keys are explicitly resolved by this mod. Standard confirmation
+  and close controls are drawn by the game's own dialogs.
+- Exclusions: integration product names, numeric step buttons and disclosure symbols,
+  user-entered bill names, serialization identifiers, reflection names, texture paths,
+  English technical logs and About metadata. The automatic marker is a translated
+  suffix on the existing bill label; recipe letter lines use a parameterized key.
+- Validation: `./Tests/ValidateXml.ps1` passed **397 checks** over all three XML files,
+  including source-key coverage, duplicate/empty entries and EN/FR placeholder parity.
+  `dotnet build Source/BillAutopilot.csproj -c Release --no-restore --nologo` succeeded
+  with zero warnings/errors and rebuilt `Mod/Assemblies/BillAutopilot.dll`.
+- No game session was run. English/French rendering, fallback detection, dependency
+  labels and clipping remain explicitly unverified in `remaining` and `TESTING.md`.
+  Reaudit affected fields after any UI, text, Def, patch or language-resource change.
+
+## Ordered workflow audit — 2026-09-13
+
+This audit supersedes earlier completion decisions without deleting their historical evidence.
+Audited base HEAD: `275ff25d866078d6d04bb058a6f9239b477a135c`, plus the local changes listed below; repository:
+`C:/Users/nelim/Documents/rimworld/BillAutopilot`; distribution: its `Mod/` directory.
+Before this audit only STATUS.md was modified: three unchecked localization fields and a
+correction recording the previous preview push. Both changes are preserved or explicitly
+updated by this audit. No code, distributed asset, licence or historical test result was changed.
+Build outputs were written under ignored `.build/`; nothing was published or pushed.
+
+
+Concurrent local changes appeared after the initial status snapshot and were reviewed at audit
+close: `Source/BillAutopilotMod.cs`, `Source/UI/Dialog_BenchProfile.cs`, both language XMLs,
+`Mod/Assemblies/BillAutopilot.dll` and `TESTING.md`. They add three translation keys, parameterize
+integration labels/counts, translate SettingsCategory and add the runtime language checklist.
+They were not made by this audit. The source/resource reads and successful builds/tests above
+already include these changes; the delivered DLL hash was rechecked and still equals the audit
+build. Thus these results apply to HEAD plus these local changes, not pristine HEAD. The increase
+from 376 to 397 XML checks follows the expanded localization coverage. `git diff --check` passed.
+The concurrent STATUS runtime-language reminder was preserved. The audit only edits STATUS.md.
+**Previous stage: done. Retained stage: dansMonoRepo (workflow baseline).** The stage uses
+literal names from the requested chain, not the older `port`/`showcase` codes. No completed
+transition can be certified cumulatively because the first gate lacks ATTRIBUTION.md.
+This baseline is a workflow rank only: the repository really IS detached, so `detached: yes`
+and its GitHub remote remain correct. It must not be physically returned to a monorepo.
+
+The user's interpretation takes precedence over the protocols: game interaction belongs to
+`done -> tested`, not to `preOptions -> options`. No missing historical image-generation report
+or side-by-side game-camera comparison is treated as a blocker.
+
+| Transition | Audit result |
+| --- | --- |
+| dansMonoRepo -> horsMonoRepo | **Defect:** required ATTRIBUTION.md is absent. README describes specific internals of BWM, Dubs Mint Menus, Nice Bill Tab/Expansion and other integrations; PUBLISHING requires attribution distinguishing studied and reused code. This is missing documentation, not proof of illicit copying. Git root, public GitHub repository, origin and pushed main commit were verified live. README, CHANGELOG and both identical MIT notices exist in English. Names Bill Autopilot / BillAutopilot / Rimworld-Bill-Autopilot / nelim.billautopilot are coherent; no Renew, unofficial or prohibited suffix is justified by the recorded original provenance. `original`/MIT/public is retained provisionally; attribution must make the provenance and rights basis explicit. |
+| horsMonoRepo -> ModIcon generated | Build and delivered DLL freshness **validated independently**. Icon PNG inspected directly: 128 x 128, 21,033 bytes, orange winking mascot, ponytail, clipboard and gear on a near-black background. No concrete visual defect identified. Development completion cannot be certified while the settings defects below remain. |
+| ModIcon generated -> Preview generated | **Validated independently:** delivered PNG directly inspected, 896 x 504, 557,964 bytes. High oblique workshop view, tiled floor, one warm light pool, a small rear-facing worker without a readable face, restrained slate/orange families. No concrete camera defect identified. Full-size and existing 268-pixel thumbnail inspected; readable title/version and no clipping. |
+| Preview generated -> preOptions | Palette and naming **validated independently**: orange accent clearly distinct from blue secondary; secondary unused because there is no tag/prefix/suffix. Both identity-bearing title words stay full size. Description is English. **Defect against PUBLISHING:** its final raw URL is not `[url=https://github.com/vbardales/Rimworld-Bill-Autopilot]Source code on GitHub[/url]`. |
+| preOptions -> options | **Partial:** useful primary settings exist; hidden discoverable MainButtons shortcut is absent from all sources and shipped XML. A selected-bench gizmo is not that shortcut. A custom-mode editing defect is detailed below; the existing suite does not cover the complete applicable settings contract. No in-game run is demanded to pass this gate. |
+| options -> l10n | Existing text inventory and EN/FR resources **validated independently**, as detailed below. This does not clear the preceding settings gate or certify future shortcut text. |
+| l10n -> preTest | Source/declaration contract **validated independently**: Harmony is the only hard mod dependency; game 1.6 is declared. Six optional mod loadAfter entries match the documented integrations; reflection avoids compile-time references to their assemblies. No shipped LoadFolders, Defs or conditional XML patches require further path checks. Actual integration-version compatibility remains unverified in game. |
+| preTest -> done | Existing test deliverables **validated independently**: 19 functional scenarios with setup/actions/expected outcomes in TESTING.md; both builds, 44 decision checks and 397 XML checks passed now. Full readiness is not established because earlier defects and settings coverage remain. |
+| done -> tested | **Unverified:** no game launched, no current-build Player.log or FR/EN UI checked, no new-game/existing-save run or integration pass performed. The historical 2026-09-01 result is preserved and does not certify this DLL. |
+
+### Commands and observed results
+
+- `git rev-parse --show-toplevel`, `git status --short`, `git diff -- STATUS.md`,
+  `git remote -v`, `git log -1`: autonomous root and starting local modifications verified.
+- `gh repo view vbardales/Rimworld-Bill-Autopilot --json nameWithOwner,visibility,defaultBranchRef,url`:
+  PUBLIC, main. `git ls-remote origin refs/heads/main`: exactly the audited HEAD above.
+- `dotnet build Source/BillAutopilot.csproj -c Release --no-restore -p:OutputPath=../.build/audit-build/`:
+  success, zero warnings/errors. Separate output preserves the shipped DLL.
+- SHA-256 of rebuilt and shipped DLLs both:
+  `7C05CDA616042B9CF1D90D94207402511D48CE5437292A9775DABB0B7A99D775`.
+- `dotnet build Tests/BillAutopilot.Tests.csproj -c Release --no-restore`: success,
+  zero warnings/errors. `.build/bin/tests/Release/BillAutopilot.Tests.exe`: **44 CHECKS PASSED**,
+  exercising the copied shipped assembly against the installed RimWorld Managed assemblies.
+- `Tests/ValidateXml.ps1`: **397 XML CHECKS PASSED (3 files)**. This is today's output;
+  the historical count of 376 is not rewritten. The test checks URL presence, not the required
+  Steam link markup, so its success does not contradict the description defect.
+- Initial sandbox attempts could not read SDK/GitHub CLI configuration or reach GitHub;
+  the approved rerun succeeded. These are resolved environment restrictions, not mod defects.
+- `LICENSE` and `Mod/LICENSE` SHA-256 both:
+  `1A24DB0B016BF77E6D15FDA1BF27B20C76F9B14F1A21458BA36F2BB3A7D2C908`.
+- Existing Art/preview.html, preview-layout.json, preview-palette.json and preview-qa.json
+  inspected. Historical font/contrast measurements are preserved, not represented as a fresh
+  browser measurement. Direct visual checks of the actual PNGs were performed in this audit.
+
+### Settings audit
+
+Useful global configuration is implemented through SettingsCategory/DoSettingsWindowContents:
+new-recipe notifications (true), automatic-bill marker (true), automatic-bill cap (8), and
+per-workbench-type profiles (disabled, Maintain, target 50, floor 25, uncountable Excluded).
+Profiles expose modes, quantities and per-recipe overrides, with clear-overrides and list filters.
+`syncIntervalTicks` is an internal scheduling parameter (600, runtime minimum 60); no extra
+option is required merely because that field is serialized.
+
+Sources connect marking to the bill label, notification to the letter queue, and profiles/cap
+to AutoBillSync. WriteSettings marks state dirty; profile edits write settings immediately.
+Configuration is global, while bill stamps/memory are per game. The cap limits new creation;
+it does not immediately remove already-running bills when lowered. The UI slider is 1..gameMax;
+normal target is at least 1 and floor clamped to 0..target; custom bench target permits 0.
+Text-entry empty/invalid-string tests are not applicable to pointer-only count buttons/slider.
+Arithmetic/default/fallback checks pass, but they are not UI or Scribe round-trip tests.
+
+**Defect:** `Source/UI/Dialog_BenchProfile.cs`, DrawRecipeRow, count button handler sets
+`written.mode = AutoMode.Maintain` whenever the rule inherits. For a profile whose default is
+Custom, changing an inherited recipe quantity therefore switches its mode to Maintain instead
+of retaining the foreign mode. This follows directly from the handler and ModeFor resolution;
+it was not reproduced interactively and is not covered by the 44 checks. Fix and add a focused
+regression when development is authorized. The comment claiming both counters are shown is also
+not borne out by DrawRecipeRow: only the target is editable there; per-recipe floor editing is absent.
+
+**Defect:** no MainButtonDef/MainTabWindow or programmatic equivalent exists. Required work at
+this later gate is a hidden-by-default, discoverable shortcut opening the same global settings,
+plus applicable technical checks of its default visibility/routing and the corrected settings.
+Settings serialization round-trip/older values are not covered by the suite and remain unverified.
+Actual effects, reopening, restart/save persistence, FR/EN layout, logs and RIMMSQOL reveal/hide
+interaction belong to the final game pass. No RIMMSQOL or other customization integration was
+actually tested here. Synthetic foreign-mode tests do not constitute an Everybody Gets One test.
+
+### Translation audit
+
+All shipped XML and Source UI/message/gizmo/compatibility paths were inspected, including
+ModeLabel switches, parameterized labels, confirmation branches and letter assembly.
+54 nonempty keys per language; parity, duplicate checks, literal references and numbered
+placeholder parity passed. English and French wording were read. No owned untranslated phrase,
+missing key or unresolved owned DefInjected path was found. Proper names of companion mods,
+numeric +/- controls, disclosure symbols, technical logs, metadata and serialized identifiers
+are not untranslated prose. Workbench/recipe/category/foreign-mode labels use their owning Def's
+LabelCap; the mod does not introduce those Defs. No redundant EN DefInjected file is required.
+The existing keyed newline escapes and actual XML line breaks use the native resource mechanism.
+
+`localization`, `translation_en`, `translation_fr: complete` certify the current static inventory
+and resources only, retained independently as explicitly permitted by the audit request. They do
+not finalize the blocked sequential options gate or claim runtime language validation. New or
+changed shortcut/settings text must trigger the relevant resource recheck. In-game formatting,
+clipping and language switching remain unverified.
+
+### Next transition and optional recommendations
+
+To pass the immediate `dansMonoRepo -> horsMonoRepo` gate, add the required English ATTRIBUTION.md
+with sources/credits, distinguish study from reuse, and document the rights basis without
+inventing third-party permissions. Include a distributed copy where third-party notices require
+it. Recheck consistency with the original/MIT/public decision. No repository recreation, remote
+repair, image generation or publication is needed. Later settings/description defects do not
+need to be fixed merely to pass this first transition.
+
+Optional: retain a durable per-run test log and clarify the creation-only cap behavior in the
+player documentation. Neither recommendation is an additional workflow blocker.
 
 ## Preview recomposition — 2026-09-12
 
@@ -63,7 +238,8 @@ updated:      2026-09-12, mod session
   Tag contrast is not applicable because no tag is displayed. Visual inspection at both
   896 x 504 and 268 pixels wide found no overlap or clipping; title/version identifiable,
   rule visible. The summary is intended for the full-size view, as specified by the guide.
-- No publication or push performed for this preview revision.
+- Preview revision committed as `275ff25` and pushed to `origin/main` at the owner's request.
+  No Workshop publication performed.
 
 Marked `done` at the owner's request on 2026-09-12 after the repository audit.
 The unverified in-game scenarios remain recorded above; this status change does not

@@ -28,7 +28,7 @@ namespace BillAutopilot
             HarmonyInstance.PatchAll();
         }
 
-        public override string SettingsCategory() => "Bill Autopilot";
+        public override string SettingsCategory() => "BillAutopilot.Settings.Title".Translate();
 
         /// <summary>Every bill-taking workbench in the game, those from mods included.</summary>
         private List<ThingDef> Benches =>
@@ -118,9 +118,9 @@ namespace BillAutopilot
 
         private static string Detected(string name, bool present)
         {
-            return name + " " + (present
-                ? "BillAutopilot.Settings.Detected".Translate()
-                : "BillAutopilot.Settings.NotDetected".Translate());
+            return present
+                ? "BillAutopilot.Settings.Detected".Translate(name)
+                : "BillAutopilot.Settings.NotDetected".Translate(name);
         }
 
         private static string Summary(ThingDef bench, BenchProfile profile)

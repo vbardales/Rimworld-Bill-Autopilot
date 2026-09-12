@@ -53,6 +53,32 @@ on failure. On 12 September 2026, all 376 XML checks and all 44 C# checks passed
 builds completed without warnings. There are no Defs or XML patches in this mod. XML written into
 saves still needs scenario 12 in a running game.
 
+### Translation gate and runtime pass (added 13 September 2026)
+
+Before `preTest`, follow the shared `PUBLISHING.md` and `TRANSLATIONS.md` protocol:
+inventory player-facing text and its helper paths, check both languages against that
+inventory, run the XML validator, and record evidence in `STATUS.md`. Reset affected
+translation fields to `unchecked` whenever UI code or language resources change.
+The 13 September static audit passed 397 XML checks with 54 keys per language;
+the rebuilt Release assembly compiled without warnings or errors.
+
+**Not yet run:** launch in English, then in French, and repeat this pass in each:
+
+1. Open settings: title, introduction, integration presence/absence, tooltips, bill cap
+   and bench summaries. Check at the intended resolution and UI scale.
+2. Open a bench profile: counters, category counts, collapse/expand, filters, overrides,
+   every repeat-mode menu and the uncountable-recipe tooltip.
+3. Trigger each activation confirmation (maintain, always and an optional custom mode),
+   inspect both gizmos and automatic bill labels, then trigger a new-recipe letter,
+   recipe exclusion and captured-override message. Verify paragraph breaks and arguments.
+4. With the optional integrations installed, repeat their displays and trigger the
+   Dubs Mint Menus template notification. Verify the supplying mods' Def labels too.
+
+Fail on raw keys, unintended English fallback in French, missing arguments, visible
+escape sequences, clipping or overlap. Product names and the `(auto)` marker may match.
+Record language, game/mod versions, UI scale, exercised cases and results in `STATUS.md`;
+keep each untested case in `remaining`. Static completion does not prove this pass.
+
 ### Game setup
 
 1. **Harmony must be active, and this mod after it.** It is the only hard dependency, declared in

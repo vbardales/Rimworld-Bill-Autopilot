@@ -190,7 +190,7 @@ namespace BillAutopilot
             string tooltip = null)
         {
             var row = listing.GetRect(RowHeight);
-            Widgets.Label(row.LeftPart(0.45f), label + " : " + value);
+            Widgets.Label(row.LeftPart(0.45f), "BillAutopilot.Profile.CountValue".Translate(label, value));
             if (tooltip != null) TooltipHandler.TipRegion(row, tooltip);
 
             float x = row.x + row.width * 0.45f;
@@ -281,7 +281,7 @@ namespace BillAutopilot
             Widgets.DrawHighlight(rect);
             if (Mouse.IsOver(rect)) Widgets.DrawHighlight(rect);
 
-            var label = (collapsed ? "> " : "v ") + group.label + "  (" + count + ")";
+            var label = "BillAutopilot.Profile.GroupCount".Translate(collapsed ? ">" : "v", group.label, count);
 
             Text.Font = GameFont.Small;
             GUI.color = new Color(0.85f, 0.85f, 0.7f);
