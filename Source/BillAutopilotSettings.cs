@@ -108,6 +108,21 @@ namespace BillAutopilot
             if (recipe != null) rules.Remove(recipe.defName);
         }
 
+        /// <summary>Edit a quantity without replacing the selected or inherited repeat mode.</summary>
+        public void AdjustTarget(RecipeDef recipe, int step)
+        {
+            bool custom = ModeFor(recipe, true) == AutoMode.Custom;
+            long changed = (long)TargetFor(recipe) + step;
+            var rule = RuleForWriting(recipe);
+            rule.targetCount = (int)System.Math.Max(custom ? 0L : 1L,
+                System.Math.Min(int.MaxValue, changed));
+            if (!custom)
+            {
+                if (rule.floorCount < 0) rule.floorCount = rule.targetCount / 2;
+                else if (rule.floorCount > rule.targetCount) rule.floorCount = rule.targetCount;
+            }
+        }
+
         /// <summary>A recipe's effective mode, override and uncountable fallback included.</summary>
         public AutoMode ModeFor(RecipeDef recipe, bool countable)
         {

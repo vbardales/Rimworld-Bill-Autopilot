@@ -396,3 +396,55 @@ and no manual bill for that recipe. Test each integration separately with its re
 
 A hidden recipe being queued is an exclusion failure; one that stays excluded after being
 restored is a stale-state failure. Preserve Player.log and the active mod list with the result.
+
+## 20 — Hidden settings shortcut and custom quantity regression
+
+Preconditions: RimWorld 1.6, Harmony and Bill Autopilot; a disposable save. Repeat in
+English and French. Record exact game and optional-mod versions with Player.log.
+
+1. With clean settings and no customization mod, verify no Bill Autopilot main-bar
+   button is visible or greyed out. Open Mod options -> Bill Autopilot, change the
+   marking option, close/reopen and verify the value and actual bill-label effect.
+2. Install RIMMSQOL (or a tool supporting MainButtonDef visibility). Reveal
+   `BillAutopilot_Settings`. Activate it: the native Bill Autopilot settings dialog
+   must open. Change the cap; close and reopen through Mod options. Both routes must
+   show the same value. Restart/reload and check persistence. Hide the shortcut again;
+   verify the customization tool retains that visibility choice. Check logs throughout.
+3. With Everybody Gets One, select a custom default mode on a bench profile. Leave
+   a recipe inheriting that mode, then change its quantity. It must remain in that
+   foreign mode with the new quantity. Test zero and an explicit custom override too.
+   Save/restart/reload and verify the profile and actual bill use the retained mode.
+4. Repeat normal Maintain quantity editing: minimum 1, valid restart threshold,
+   unchanged inheritance. Remove the optional mode provider: safe Maintain fallback;
+   restore it and verify the inherited mode identity was retained.
+
+Not executed in game during the implementation pass. The executable tests cover
+quantity decisions, overflow and the shortcut worker's native visibility contract;
+the XML tests cover the shipped hidden default and bilingual definition fields.
+
+## Native settings persistence tests — 13 September 2026
+
+`Tests/SettingsPersistence.cs` runs as part of the existing executable. It exercises
+BillAutopilotSettings.ExposeData through RimWorld's Scribe saver, loader, cross-reference
+resolution and post-load initialization. It does not substitute a custom XML serializer.
+The full suite now has 74 checks, including 18 native persistence checks. The earlier
+44/56-check results above remain historical snapshots.
+
+Coverage: global toggles/cap/interval; enabled profiles and their counts, modes and
+uncountable policy; per-recipe overrides; deletion and resaving; restored defaults;
+absent fields in a synthetic legacy-shaped file; null collections; safe fallback when
+an old custom mode has no identity; edited quantities retaining inheritance after reload.
+These legacy fixtures test absent-field compatibility, not an authenticated old user save.
+
+Harness setup is confined to the console test process. The .NET Framework CLR cannot
+inspect some game types containing default interface methods. The test supplies the
+real loadable types to GenTypes and registers the three real serialized model types,
+which the game normally discovers through its mod loader. It disables DeepProfiler,
+whose preferences are not initialized here, and uses a managed log sink that fails on
+serializer errors. No Scribe method or mod serialization method is patched or replaced.
+Generated XML fixtures are under `.build/bin/tests/Release/persistence-results/`.
+
+This proves native file/object persistence for the settings schema. It does not test
+actual Mod.WriteSettings file selection, process restart, save-game bill memory, Unity
+widgets or RIMMSQOL. Those remain in scenarios 12 and 20 and the final FR/EN game pass.
+The console setup is not shipped. The runtime DLL was unchanged by this test addition.

@@ -332,8 +332,7 @@ namespace BillAutopilot
             }
             x += ModeButtonWidth + 6f;
 
-            // Both counters show under a foreign mode too: they are what it will read, even if it gives
-            // them another meaning.
+            // The target remains editable under a foreign mode without changing that mode.
             bool maintains = (rule != null && (rule.mode == AutoMode.Maintain || rule.mode == AutoMode.Custom))
                              || ((rule == null || rule.mode == AutoMode.Inherit)
                                  && (effective == AutoMode.Maintain || effective == AutoMode.Custom));
@@ -350,11 +349,7 @@ namespace BillAutopilot
                     if (Widgets.ButtonText(new Rect(x, rect.y + 1f, CountButtonWidth, rect.height - 4f),
                             step > 0 ? "+" + step : step.ToString()))
                     {
-                        var written = profile.RuleForWriting(recipe);
-                        if (written.mode == AutoMode.Inherit) written.mode = AutoMode.Maintain;
-                        written.targetCount = Mathf.Max(1, target + step);
-                        if (written.floorCount < 0) written.floorCount = Mathf.Max(0, written.targetCount / 2);
-                        else if (written.floorCount > written.targetCount) written.floorCount = written.targetCount;
+                        profile.AdjustTarget(recipe, step);
                         Save();
                     }
                     x += CountButtonWidth + 3f;

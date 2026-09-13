@@ -1,0 +1,98 @@
+RimWorld:      C:\Program Files (x86)\Steam\steamapps\common\RimWorld\RimWorldWin64_Data\Managed
+under test:    C:\Users\nelim\Documents\rimworld\BillAutopilot\.build\bin\tests\Release\BillAutopilot.dll
+
+-- defaults
+   ok   off until switched on
+   ok   default mode is keep a stock
+   ok   target is 50
+   ok   floor is 25
+   ok   uncountable recipes are left alone
+   ok   no overrides
+
+-- countability
+   ok   a countable recipe keeps a stock
+   ok   an uncountable recipe falls back, and the default fallback is never
+   ok   the fallback is the one configured
+   ok   always is not diverted by countability
+
+-- overrides
+   ok   a rule beats the default
+   ok   a rule can refuse a recipe outright
+   ok   inherit really inherits, it is not a mode of its own
+
+-- modes from other mods
+   ok   a known foreign mode is kept
+   ok   and it is resolved to the def
+   ok   a foreign mode is not diverted by countability
+   ok   a mode whose mod has gone falls back to keep a stock
+   ok   and resolves to nothing
+   ok   the two fallbacks chain, in that order
+   ok   a rule can carry a foreign mode of its own
+   ok   read from the rule, not from the bench
+
+-- target and floor
+   ok   target comes from the bench
+   ok   floor comes from the bench
+   ok   a rule overrides the target
+   ok   zero is a target, not an absence
+   ok   minus one inherits again
+   ok   a floor above the target is clamped to it
+   ok   the bench's own floor is clamped too
+
+-- rule bookkeeping
+   ok   a freshly created rule is default
+   ok   and is not counted as an override
+   ok   a rule that says something is counted
+   ok   and is not default any more
+   ok   the same rule comes back
+   ok   clearing removes it
+   ok   and the count follows
+   ok   the recipe returns to the default
+
+-- settings
+   ok   an unknown bench has no profile
+   ok   and reading created nothing
+   ok   an unknown bench is not enabled
+   ok   writing creates one
+   ok   and it is the one read back
+   ok   still not enabled until it is
+   ok   enabled once the profile says so
+   ok   defaults carried over from the mod settings
+-- native settings persistence
+Type-discovery fixture: omitted unloadable types from Assembly-CSharp
+   ok   global toggles survive native round-trip
+   ok   cap and interval survive native round-trip
+   ok   profile restored independently
+   ok   profile mode identity survives
+   ok   profile counts and uncountable mode survive
+   ok   recipe mode and counts survive
+   ok   loaded mode actually resolves
+   ok   cleared override stays cleared after saving again
+   ok   toggle restored to default persists
+   ok   missing global fields use documented defaults
+   ok   missing profiles are safe and empty
+   ok   legacy fields retain stored values
+   ok   legacy missing marker and uncountable fields default
+   ok   legacy missing floor values default
+   ok   legacy custom mode without identity falls back safely
+   ok   null profile dictionary becomes writable
+   ok   null recipe dictionary becomes writable
+   ok   edited quantity still inherits after native reload
+
+-- quantity editing preserves modes
+   ok   editing inherited custom quantity keeps inheritance
+   ok   foreign mode still resolves
+   ok   quantity changes
+   ok   custom second count remains inherited
+   ok   custom quantity permits zero
+   ok   explicit custom mode and second count survive
+   ok   quantity cannot overflow
+   ok   missing foreign mode uses safe minimum
+   ok   missing mode identity retained for later restoration
+   ok   normal target minimum and floor remain safe
+
+-- shortcut visibility
+   ok   shortcut worker resolves
+   ok   shortcut uses native customizable visibility
+
+74 CHECKS PASSED

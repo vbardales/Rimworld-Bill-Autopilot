@@ -7,22 +7,17 @@ packageId:    nelim.billautopilot
 repo:         Rimworld-Bill-Autopilot
 visibility:   public
 detached:     yes
-stage:        dansMonoRepo
+stage:        done
 licence:      original
 licence_at:   original work
 licence_name: MIT
 licence_file: LICENSE (identical copy in Mod/LICENSE)
 dependencies: declared
 showcase:     complete
-settings_audit: partial
+settings_audit: complete
 tested_on:    2026-09-01
 workshop:
 remaining:
-  - defect: ATTRIBUTION.md is absent; document studied versus reused third-party material and provenance in English before horsMonoRepo
-  - defect: no discoverable hidden MainButtons shortcut exists for the useful settings page
-  - defect: changing a recipe count while inheriting a custom bench mode changes that recipe to Maintain (Dialog_BenchProfile.cs)
-  - defect: About.xml ends with a raw repository URL instead of the required linked Source code on GitHub text
-  - unverified: settings serialization round-trip, older stored values and complete applicable technical settings coverage
   - unverified: final current-build in-game scenarios, FR/EN UI, logs, new game and existing save, options persistence and RIMMSQOL shortcut integration
   - unverified: English and French runtime translation checks described in TESTING.md, including optional integrations and clipping
   - unverified: the mark in the bill label, in the tabs other mods redraw
@@ -37,6 +32,137 @@ updated:      2026-09-13, workflow audit
 ---
 
 # Bill Autopilot — status
+
+## Technical settings gate completed — 2026-09-13
+
+This result supersedes earlier pending settings-serialization entries. Base revision
+`c1df4a8ef1970473384489beee0580a9241697ec` plus the existing local implementation,
+attribution, description and documentation edits. This pass adds tests/documentation;
+no runtime source or distributed DLL change was needed. Existing history is preserved.
+
+`Tests/SettingsPersistence.cs` adds 18 checks using the actual shipped ExposeData and
+native Scribe save/load/finalize paths. Nondefault values survive, cleared overrides
+stay cleared, omitted fields restore defaults, null collections become writable,
+legacy-shaped custom modes without identity fall back safely, and a custom quantity
+edit retains inheritance after reload. Full executable output is retained in
+`Tests/Results/settings-persistence-2026-09-13.txt`: **74 checks passed**, exit 0.
+Test Release build: zero warnings/errors. The tested shipped DLL is still SHA-256
+`D13D4225B3667CA08F857FB0771F507A2CB472F04C82ACA232442F1B44DB599E`.
+
+The harness uses real loadable types in the native discovery cache and explicitly
+registers the three serialized model types because it has no mod loader. Some unrelated
+game interfaces cannot be enumerated on the desktop .NET Framework CLR. DeepProfiler
+is disabled and logging uses a managed fail-on-error sink. These are test-process-only
+fixtures; neither Scribe nor ExposeData is mocked or patched. Initial attempts exposed
+those harness dependencies and failed; the final successful run does not claim the
+unmodified console environment can initialize the entire game. Details in TESTING.md.
+
+Settings source paths were rechecked: notification gates the letter queue; marking
+gates the bill-label postfix; cap and profiles feed AutoBillSync; both settings access
+routes use the same native dialog/instance and WriteSettings persistence. The prior
+quantity, default, mode-fallback and shortcut-definition checks remain covered by the
+suite. Empty/invalid text input is not applicable to the pointer-only quantity controls.
+Absent/older stored fields and relevant model persistence are now tested. Actual
+production, UI rendering, process restart and customization interactions remain game
+scenarios rather than claims of console coverage.
+
+**settings_audit: complete under the user's technical-gate interpretation.** This does
+not claim the interactive verification required by the unamended MOD_SETTINGS protocol;
+the user's explicit override places those checks in `done -> tested`.
+
+**Stage: preOptions -> options -> l10n -> preTest -> done.** Current static EN/FR resource
+and dependency validations remain valid; no runtime text/Def/dependency changed in this
+pass. The written functional scenarios, passing executable suite and XML validation
+establish readiness for the final game pass. `done` is not `tested`. No game was launched,
+no real integration was exercised, and the historical tested_on date is not renewed.
+The remaining entries track current-build FR/EN UI, logs, new/existing game, persistence,
+shortcut/RIMMSQOL and optional integrations. Next required transition: execute those
+scenarios in game, retain logs/version details and fix any failures actually found.
+
+
+## Description link fix — 2026-09-13
+
+Replaced the final raw repository URL in `Mod/About/About.xml` with the required
+Steam markup: `[url=https://github.com/vbardales/Rimworld-Bill-Autopilot]Source code on GitHub[/url]`.
+The destination is unchanged from the repository verified during the audit.
+`Tests/ValidateXml.ps1` now checks the exact final link rather than URL presence alone.
+All **407 XML checks over five files passed**; `git diff --check` passed.
+No compiled source or image changed in this fix, so their independent validations remain valid.
+No Workshop publication or remote description update was performed.
+
+**Stage: Preview generated -> preOptions.** This supersedes the earlier description-link
+blocker, whose historical audit entries remain below. The next transition, `preOptions -> options`,
+requires completion of the applicable technical settings checks, including serialization
+round-trips and older stored values; `settings_audit` remains `partial`. Those missing results
+are unverified, not established defects. Interactive game and RIMMSQOL checks remain separately
+pending for the final game-validation gate under the user's workflow interpretation.
+
+
+## Settings fixes — 2026-09-13
+
+Implemented against base HEAD `c1df4a8ef1970473384489beee0580a9241697ec` plus local
+changes. Existing attribution, README and STATUS edits preserved. This section
+supersedes the earlier missing-shortcut and custom-mode-edit defects.
+
+- `BenchProfile.AdjustTarget` preserves explicit/inherited mode identity, permits
+  zero for a resolved custom mode, protects integer addition from overflow and
+  leaves the custom second-count override unchanged. The recipe UI calls this
+  method; normal Maintain target/floor constraints remain enforced.
+- New `BillAutopilot_Settings` MainButtonDef uses `buttonVisible=false` and the
+  native worker visibility mechanism; nothing forcibly hides it every frame.
+  `MainButtonWorker_Settings.Activate` opens RimWorld's `Dialog_ModSettings` with
+  the existing BillAutopilotMod instance. The native dialog renders the same settings
+  and calls WriteSettings on close. No customization dependency was added.
+- Native MainButtonDef/MainButtonWorker/Dialog_ModSettings implementations inspected
+  in the installed game assembly using ilspycmd with DOTNET_ROLL_FORWARD=Major.
+  No third-party source was copied. English label/description are native Def values;
+  both French DefInjected fields were added and validated.
+- Both Release builds succeeded with zero warnings/errors. Shipped DLL SHA-256:
+  `D13D4225B3667CA08F857FB0771F507A2CB472F04C82ACA232442F1B44DB599E`.
+  `Tests/ProfileTests.cs`: **56 checks passed**, including ten quantity regressions
+  and two worker contract checks. `Tests/ValidateXml.ps1`: **407 checks passed over
+  five XML files**. Shared `Check-DefInjected.ps1 -TransMod <repo>/Mod`: **2 keys,
+  0 errors**. `git diff --check` passed.
+- An initial executable attempt to call native Worker.Visible failed because
+  ModsConfig initialization reaches Unity ECalls unavailable outside the game.
+  That is not reported as a passing runtime test. The final automated check verifies
+  the worker retains the native visibility getter; actual reveal/hide behavior is
+  explicitly left to scenario 20 in TESTING.md. No RIMMSQOL run was performed.
+- Current EN/FR static localization remains complete after inspecting the new Def
+  and successful injection checks. Previous claims that no Defs exist are historical.
+  New native settings route and changed quantity behavior need their game regressions.
+
+**Stage: horsMonoRepo -> Preview générée**, using literal workflow state names.
+The two identified implementation defects are fixed; the DLL is rebuilt and existing
+independent icon/preview inspections remain applicable. The next preOptions gate is
+still blocked by the previously recorded raw GitHub URL in About.xml's description.
+`settings_audit: partial` remains honest: the broader settings serialization/upgrade
+coverage has not been established. No game pass or settings-complete status is claimed.
+
+
+## Attribution fix — 2026-09-13
+
+Added English `ATTRIBUTION.md` and an identical distributed copy in
+`Mod/ATTRIBUTION.md`. The document credits the six optional integrations and
+explains the specific interfaces studied, distinguishes original adapters from
+copied implementations, identifies external runtime/build tools and records
+AI-assisted code/art provenance. No third-party licence or permission was invented.
+No copied companion-mod source, assembly or artwork was identified in the reviewed
+files; this is a scoped repository finding, not a claim about unexamined history.
+The existing original/MIT/public decision is consistent with that recorded scope.
+
+**Stage: dansMonoRepo -> horsMonoRepo.** This resolves the first-gate attribution
+defect from the audit below. The autonomous repository, public remote and pushed
+commit were verified during that audit. Its findings remain below as historical
+evidence; this section supersedes its retained baseline and immediate next-step text.
+The next transition remains blocked by the recorded development/settings defects;
+the already-validated builds and images do not establish development completion.
+No game validation is claimed. Existing unrelated working-tree edits are preserved.
+
+Validation: root/distributed attribution and licence copies compared byte-for-byte;
+`git diff --check` passed. This documentation-only fix does not change the shipped
+DLL, settings, translations or images, so those independent checks were not rerun.
+
 
 ## Translation audit — 2026-09-13
 

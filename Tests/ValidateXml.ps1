@@ -33,7 +33,7 @@ Check ($about.ModMetaData.modDependencies.li.packageId -eq 'brrainz.harmony') 'H
 Check ($about.ModMetaData.loadAfter.li -contains 'brrainz.harmony') 'Load after Harmony'
 $repo = 'https://github.com/vbardales/Rimworld-Bill-Autopilot'
 Check ($about.ModMetaData.url -eq $repo) 'Repository URL'
-Check ($about.ModMetaData.description.Contains($repo)) 'GitHub link in description'
+Check ($about.ModMetaData.description.TrimEnd().EndsWith("[url=$repo]Source code on GitHub[/url]")) 'Description ends with the required Steam GitHub link'
 
 $english = Read-Language 'English'
 $french = Read-Language 'French'
@@ -50,5 +50,17 @@ foreach ($file in Get-ChildItem -LiteralPath (Join-Path $root 'Source') -Filter 
         $key = $match.Groups[1].Value
         Check ($english.ContainsKey($key)) "Source key missing from English: $key"
     }
+}
+[xml]$shortcut = Get-Content -LiteralPath (Join-Path $root 'Mod/Defs/MainButtonDefs/BillAutopilot.xml') -Raw
+$button = $shortcut.Defs.MainButtonDef
+Check ($button.defName -ceq 'BillAutopilot_Settings') 'Shortcut defName'
+Check ($button.buttonVisible -ceq 'false') 'Shortcut must be hidden, not disabled'
+Check ($button.workerClass -ceq 'BillAutopilot.MainButtonWorker_Settings') 'Shortcut worker'
+Check ($button.validWithoutMap -ceq 'true') 'Settings available without a map'
+[xml]$injected = Get-Content -LiteralPath (Join-Path $root 'Mod/Languages/French/DefInjected/MainButtonDef/BillAutopilot.xml') -Raw -Encoding UTF8
+foreach ($field in @('label', 'description')) {
+    Check (-not [string]::IsNullOrWhiteSpace($button.$field)) "Shortcut English $field"
+    $key = "$($button.defName).$field"
+    Check (-not [string]::IsNullOrWhiteSpace($injected.LanguageData.$key)) "Shortcut French $key"
 }
 Write-Host "$checks XML CHECKS PASSED ($($xmlFiles.Count) files)"

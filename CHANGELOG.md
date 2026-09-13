@@ -7,6 +7,9 @@ This file serves the repository and the writing of Steam patch notes; RimWorld d
 
 ### Added
 
+- Optional hidden main-bar shortcut to the native mod settings, with English/French labels.
+- Recipe quantity editing preserves inherited custom repeat modes and guards against overflow.
+
 - Autopilot per workbench type, so a bench built later is already configured. The mod puts a bill up
   when there is something to do and takes it down once the target is reached, keeping the tab short.
 - *Keep a stock* and *Always* modes, with a target and a restart threshold. The gap between the two

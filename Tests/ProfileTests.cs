@@ -102,6 +102,13 @@ internal static class Program
         Counts(steel);
         Bookkeeping(steel);
         Settings();
+        SettingsPersistence.Run(Check);
+        TargetEditing(steel, foreign);
+        Section("shortcut visibility");
+        var shortcut = new MainButtonDef { buttonVisible = false, workerClass = typeof(MainButtonWorker_Settings) };
+        Check("shortcut worker resolves", shortcut.Worker is MainButtonWorker_Settings);
+        Check("shortcut uses native customizable visibility", typeof(MainButtonWorker_Settings)
+            .GetProperty("Visible").GetMethod.DeclaringType == typeof(MainButtonWorker));
     }
 
     // --- The shipped defaults -------------------------------------------------------------
@@ -287,6 +294,36 @@ internal static class Program
         Check("defaults carried over from the mod settings",
             settings.maxAutoBillsPerTable == 8 && settings.syncIntervalTicks == 600
             && settings.markAutomaticBills && settings.notifyNewRecipes);
+    }
+
+    private static void TargetEditing(RecipeDef recipe, BillRepeatModeDef foreign)
+    {
+        Section("quantity editing preserves modes");
+        var profile = new BenchProfile { defaultMode = AutoMode.Custom, defaultRepeatMode = foreign.defName };
+        profile.AdjustTarget(recipe, 10);
+        Check("editing inherited custom quantity keeps inheritance", profile.RuleFor(recipe).mode == AutoMode.Inherit);
+        Check("foreign mode still resolves", profile.ModeFor(recipe, true) == AutoMode.Custom && profile.RepeatModeFor(recipe) == foreign);
+        Check("quantity changes", profile.TargetFor(recipe) == 60);
+        Check("custom second count remains inherited", profile.RuleFor(recipe).floorCount == -1);
+        profile.AdjustTarget(recipe, -100);
+        Check("custom quantity permits zero", profile.TargetFor(recipe) == 0);
+        var rule = profile.RuleFor(recipe);
+        rule.mode = AutoMode.Custom;
+        rule.repeatMode = foreign.defName;
+        rule.floorCount = 7;
+        profile.AdjustTarget(recipe, 1);
+        Check("explicit custom mode and second count survive", rule.mode == AutoMode.Custom && rule.repeatMode == foreign.defName && rule.floorCount == 7);
+        rule.targetCount = int.MaxValue;
+        profile.AdjustTarget(recipe, 10);
+        Check("quantity cannot overflow", profile.TargetFor(recipe) == int.MaxValue);
+        profile.ClearRule(recipe);
+        profile.defaultRepeatMode = "MissingMode";
+        profile.AdjustTarget(recipe, -100);
+        Check("missing foreign mode uses safe minimum", profile.TargetFor(recipe) == 1 && profile.ModeFor(recipe, true) == AutoMode.Maintain);
+        Check("missing mode identity retained for later restoration", profile.RuleFor(recipe).mode == AutoMode.Inherit && profile.defaultRepeatMode == "MissingMode");
+        profile = new BenchProfile();
+        profile.AdjustTarget(recipe, -100);
+        Check("normal target minimum and floor remain safe", profile.TargetFor(recipe) == 1 && profile.FloorFor(recipe) == 0);
     }
 
     // --- Plumbing ---------------------------------------------------------------------------------

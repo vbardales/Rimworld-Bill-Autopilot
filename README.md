@@ -30,6 +30,14 @@ through the same path, so the question appears wherever you flip it.
 Everything is set **per workbench type**: a bench built later is already configured. Reachable from
 the mod settings, or from the "Autopilot profile" gizmo on the selected bench.
 
+An optional main-bar shortcut opens the same native mod-settings dialog. It is hidden
+by default; tools that customize MainButtonDefs can reveal `BillAutopilot_Settings`
+by enabling its `buttonVisible` field. No customization mod is required for normal
+access through Mod options. Interactive RIMMSQOL compatibility still awaits validation.
+
+Changing a recipe quantity preserves its selected or inherited repeat mode, including
+modes supplied by other mods. Custom modes allow a quantity of zero.
+
 - **Default mode**: *Keep a stock of N*, or *Always*.
 - **Target** and **restart threshold**: the bill appears when stock falls to the threshold and
   disappears when the target is reached. The gap between the two keeps it from flickering on every
@@ -184,4 +192,12 @@ The assembly lands in `Mod/Assemblies/`. Reference assemblies come from NuGet
 
 ## Licence
 
-MIT. See `LICENSE`.
+The project's own code and documentation are MIT licensed. See [LICENSE](LICENSE).
+
+See [ATTRIBUTION.md](ATTRIBUTION.md) for companion-mod credits, the interfaces studied
+for compatibility, the distinction between study and reuse, and the recorded provenance
+of the code and artwork. It also identifies external runtime dependencies and build tools.
+No permission to redistribute third-party code or assets is implied by these credits.
+
+The distributed mod includes matching copies of the licence and attribution notices in
+`Mod/LICENSE` and `Mod/ATTRIBUTION.md`.
