@@ -376,7 +376,7 @@ claim a new manual test pass or a Workshop release. `licence` remains `original`
 - **Title:** keep `Bill Autopilot`. The repository records an original, unpublished mod;
   no continuation or port suffix is justified by the available provenance. Version 1.6 is
   already declared in `supportedVersions`.
-- **Licence:** MIT, copyright (c) 2026 nelim. `LICENSE` and `Mod/LICENSE` are byte-identical.
+- **Licence:** MIT, copyright (c) 2026 Nelim. `LICENSE` and `Mod/LICENSE` are byte-identical.
   The `original` field above describes provenance; the actual licence is MIT.
 - **Manual tests:** 19 functional scenarios in `TESTING.md`, including the added hidden-recipe
   integration scenario. Their presence is verified; no in-game test was run in this audit.
