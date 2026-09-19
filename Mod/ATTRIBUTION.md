@@ -2,7 +2,7 @@
 
 ## Bill Autopilot
 
-Bill Autopilot is an original mod maintained by nelim. The project's own code and
+Bill Autopilot is an original mod maintained by Nelim. The project's own code and
 documentation are distributed under the MIT notice in `LICENSE`, copyright
 (c) 2026 nelim. A copy of that notice accompanies the distributed mod.
 
