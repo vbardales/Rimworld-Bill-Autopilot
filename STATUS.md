@@ -7,7 +7,7 @@ packageId:    nelim.billautopilot
 repo:         Rimworld-Bill-Autopilot
 visibility:   public
 detached:     yes
-stage:        preTest
+stage:        done
 licence:      original
 licence_at:   original work
 licence_name: MIT
@@ -18,7 +18,10 @@ settings_audit: complete
 tested_on:    2026-09-01
 workshop:
 remaining:
-  - missing: Gherkin/Pickle tests are not written and TESTING.md does not justify their scope or non-applicability; preTest -> done requires them written (running them belongs to done -> tested)
+  - unverified: the Pickle suite has never been run; done -> tested needs the pass without the optional mods, the pass with them, and one per language, with exitReason and the scenarios-played against features-discovered counts read before the numbers
+  - unverified: every @review screenshot the suite attaches; a green there says the trip happened, not that the image shows anything
+  - unverified: loading a save with the mod removed, which no Pickle run can do since the mod list is fixed at startup
+  - unverified: RIMMSQOL revealing the shortcut in its own interface, and that visibility choice surviving a restart
   - unverified: final current-build in-game scenarios, FR/EN UI, logs, new game and existing save, options persistence and RIMMSQOL shortcut integration
   - unverified: English and French runtime translation checks described in TESTING.md, including optional integrations and clipping
   - unverified: the mark in the bill label, in the tabs other mods redraw
@@ -29,10 +32,78 @@ remaining:
   - unverified: Nice Bill Tab's cached list, where a drag could bring a deleted bill back
   - unverified: loading a save after removing the mod, the reason its state avoids a GameComponent
 session:      local_3527e6d8-def4-4e54-97ff-a6430f1dc569
-updated:      2026-09-21, workflow audit (AUDIT.md)
+updated:      2026-09-21, Pickle suite written
 ---
 
 # Bill Autopilot — status
+
+## Pickle suite written — 2026-09-21
+
+This closes the one gate the audit below left open. **Stage: preTest -> done.** Written on top of
+`878ac02`, the audited revision; no shipped source, asset or resource changed, so every validation
+recorded in that audit still holds and the delivered DLL is still SHA-256 `D13D4225...DB599E`.
+
+`Tests/Pickle/` now holds 19 feature files, a companion test mod (`Bill Autopilot - Pickle tests`,
+`nelim.billautopilot.pickletests`, never distributed) and a step assembly of 84 steps.
+
+**Written, not run.** The audit's own rule applies: running them is a criterion of `done -> tested`,
+not of this transition. Nothing here claims a game was launched; none was.
+
+### What the suite holds, and what it deliberately does not
+
+Only what a running game can show. The decision layer — which mode applies, which target, which
+floor, the clamps, the overflow guard, the fallback for a repeat mode whose owner has gone, and the
+settings round trip through Scribe — stays in `Tests/BillAutopilot.Tests.csproj` and is not
+restated: a Pickle run takes the machine for tens of minutes, and a scenario repeating a unit test
+would cost that on every run and add nothing.
+
+The 19 features cover TESTING.md scenarios 1-16 and 18-20. Each one's reason for needing a game is
+recorded per feature in `Tests/Pickle/README.md`: a real dialog whose announced count must equal a
+real intake, a count read through the game's own RecipeWorkerCounter, Notify_BillDeleted raised by a
+real BillStack.Delete, a postfix on a real bill's LabelCap, a drift capture proven by a bill that is
+a different object from the one edited, two benches of one kind, and RimWorld's own Scribe.
+
+Scenario 17 became the minimal pass itself rather than a feature. Scenario 19's Choose Your Recipe
+half has no scenario: that mod removes disabled recipes from the workbench before the autopilot sees
+them, so there is nothing of this mod's to assert.
+
+### Passes declared
+
+`TESTING.md` now states how many passes a verdict needs and what each covers: without the optional
+mods, with them (`Tests/Pickle/wsl-deps.map`), and one per language. **No incompatibility pass**, and
+the reason is recorded: `About.xml` declares no `incompatibleWith`.
+
+`wsl-deps.map` mounts Better Workbench Management (935982361) and Dubs Mint Menus (1446523594), the
+two of the six optional mods installed on this machine, both packageIds read from their own
+About.xml. Nice Bill Tab, Nice Bill Tab - Expansion, Everybody Gets One and Choose Your Recipe are
+not subscribed here, so no line was written for them rather than guessing a Workshop id: their
+scenarios carry `@requires:` and are skipped. **A pass is therefore green with scenarios never
+played, and its report has to be read for skips as well as failures.**
+
+### Checks performed on the suite itself
+
+- `dotnet build Tests/Pickle/Source/BillAutopilot.PickleSteps.csproj -c Release`: success, 0 warnings.
+- Every step text used in the 19 features resolves: 98 distinct texts against the 84 defined here
+  plus Pickle's 202 built-ins, **0 undefined**. An undefined step costs a whole run, so this was
+  checked mechanically rather than by reading.
+- **0 duplicate** step texts here, **0 collisions** with Pickle's own vocabulary, and **0 collisions**
+  with the SkillIcons, WorkStudio, ArchitectStudio and QuietNewFactions suites on this machine. Two
+  suites sharing a step text produce "Ambiguous step" and fail healthy scenarios.
+- **0 steps defined and unused**; two written and unreached were deleted rather than kept.
+- No scenario spells an English label: every marker, dialog, letter and message is rebuilt from the
+  mod's own translation key, so the same suite is the French pass.
+- `Tests/ValidateXml.ps1`: **407 XML CHECKS PASSED**, unchanged — the test mod lives outside `Mod/`.
+- `.build/bin/tests/Release/BillAutopilot.Tests.exe`: **74 CHECKS PASSED**, unchanged.
+- Nothing was added to the distributed `Mod/` folder, and no build output sits inside the test mod.
+
+### Next transition
+
+`done -> tested` needs the passes above actually run, their `exitReason` read before their numbers,
+the scenarios played compared with the features discovered, and every `@review` screenshot opened
+and looked at. `Tests/Pickle/README.md` keeps what no pass can reach: loading a save with the mod
+removed, RIMMSQOL's own interface, the Nice Bill Tab drag, and two Better Workbench Management
+details written against an interface this session could not read rather than guess at.
+
 
 ## Workflow audit — 2026-09-21
 

@@ -36,6 +36,61 @@ really is set on a real bill. **The program is the arithmetic, the scenario is t
 It was itself checked by breaking the clamp on purpose and confirming that those two checks, and only
 those two, turned red. A suite never seen to fail proves nothing.
 
+## The Pickle suite, and how many passes a verdict needs
+
+Nineteen feature files live in `Tests/Pickle/`, written on 21 September 2026 and **not yet run**.
+They hold only what a running game can show. The decision layer — which mode applies, which target,
+which floor, the clamps, the overflow guard, the fallback for a repeat mode whose owner has gone,
+and the settings round trip through Scribe — is proven by the executable suite above and is
+deliberately not restated there: a Pickle run takes the whole machine for tens of minutes, and a
+scenario repeating a unit test would cost that every time and add nothing.
+
+`Tests/Pickle/README.md` says, per feature, why a game is needed, and keeps the list of what stays
+manual. The numbered scenarios below are what the features were written from.
+
+**A verdict needs three passes, and they are not interchangeable.**
+
+1. **Without the optional mods** — the default staging: Core, the DLC, Harmony, RimLogging, Pickle,
+   Harmony as this mod's only hard dependency, and the suite. It covers scenarios 1 to 12 and 18,
+   and proves the mod stands alone, which is what the mod page claims of all five bridges. The
+   scenarios for absent mods carry `@requires:` and are **skipped**, so this pass is green with a
+   dozen scenarios never played: read the skips, not only the failures.
+
+   ```powershell
+   powershell.exe -ExecutionPolicy Bypass -File scripts/Run-PickleWsl.ps1 -Mod BillAutopilot
+   ```
+
+2. **With the optional mods** — `Tests/Pickle/wsl-deps.map`. It mounts Better Workbench Management
+   and Dubs Mint Menus, the two of the six that are on this machine, and covers scenarios 13 and 16
+   on top of the first pass. Nice Bill Tab, Nice Bill Tab - Expansion and Everybody Gets One are not
+   subscribed here, so scenarios 14, 15 and 19 stay skipped until they are and their Workshop ids
+   are added to that map. Green on the first pass says nothing about this one, and the reverse is
+   equally true: a scenario can pass *only* because an optional mod is present.
+
+   ```powershell
+   powershell.exe -ExecutionPolicy Bypass -File scripts/Run-PickleWsl.ps1 -Mod BillAutopilot -DepMap wsl-deps.map
+   ```
+
+   None of the six optional mods are exclusive with one another, so one set covers them all. That
+   has to be rechecked when the missing four are added: two mods that cannot cohabit would need a
+   named set each, so that every exclusive combination is played at least once.
+
+3. **Each language, in its own pass.** `-Language French`. The language is fixed at staging and
+   never switched inside a run. No scenario spells an English string — every label, marker, dialog
+   and letter is rebuilt from the mod's own translation key — so the same suite is the French check,
+   and the `@review` screenshots are where a missing key shows: in developer mode, which every
+   Pickle run is in, a key absent from the active language comes back as accented gibberish.
+
+**No incompatibility pass.** `About.xml` declares no `incompatibleWith` and the README claims no mod
+is broken by this one, so there is nothing to go and look at. If an incompatibility is ever
+declared, it needs a pass of its own that **asserts the documented symptom** rather than expecting a
+red: an expected red and an accidental red are the same colour, and nobody can tell afterwards which
+one they were looking at.
+
+**Two things no pass here can do**, both kept in `Tests/Pickle/README.md`: loading a save with the
+mod removed, which the mod list makes impossible from inside a run and which is the whole reason the
+state avoids a GameComponent; and anything inside RIMMSQOL's own interface.
+
 ## Before anything
 
 ### XML checks (no game required)

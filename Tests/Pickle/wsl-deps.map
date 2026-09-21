@@ -1,0 +1,39 @@
+# The optional set for Bill Autopilot, staged on top of the minimal one.
+#
+# One line per mod: packageId, then its Workshop id. `#` starts a comment. `first:` in front of a
+# packageId activates it ahead of everything else; nothing here needs that, because the order that
+# matters is the one About.xml already declares in <loadAfter> and the staging honours it.
+#
+# This mod declares six optional integrations and depends on none of them. Two of the six are on
+# this machine, so this set is what a "with the optional mods" pass can really mount today:
+#
+#   falconne.BWM           Better Workbench Management - the largest bridge by far, and the one
+#                          with no witness at all. It prefixes BillStack.Delete to erase what it
+#                          attached to a bill, and the autopilot removes and re-places bills
+#                          constantly, so this is the pass where 13 can run at all.
+#   Dubwise.DubsMintMenus  Dubs Mint Menus - its bench templates photograph every bill on a bench.
+#                          Without the postfix, a template taken from an autopiloted bench captures
+#                          the passing queue, and re-applying it retires those recipes for good.
+#                          16 needs it mounted to call its own MakeBenchTemplate.
+#
+# THE OTHER FOUR ARE NOT SUBSCRIBED ON THIS MACHINE, so no line is written for them: a map naming a
+# mod that is not in the Workshop folder makes the staging die before anything runs, and a Workshop
+# id guessed rather than read is worse than an absent line. Their scenarios carry `@requires:` and
+# are skipped rather than failed, which is why the suite is green without them and why the report
+# has to be read for skips, not only for failures.
+#
+#   Andromeda.NiceBillTab            15 - the cached row list, and the drag that can resurrect a bill
+#   HICON.NiceBillTabExpansion       17 - hidden recipes (needs Nice Bill Tab under it)
+#   Memegoddess.EverybodyGetsOne     14 - a repeat mode belonging to another mod
+#   zal.chooseyourrecipe             no scenario: it removes disabled recipes from the workbench
+#                                    itself, so the autopilot never sees them and there is nothing
+#                                    of this mod's to assert. Verifying that claim is still a
+#                                    manual look, see README.md
+#
+# To complete this pass: subscribe to the ones you want, read each packageId out of its own
+# About.xml rather than from its Workshop title - they disagree more often than not - and add a
+# line here. Then TESTING.md's count of passes needs updating with it.
+#
+# packageId              workshopId   what it is
+falconne.BWM             935982361    Better Workbench Management
+Dubwise.DubsMintMenus    1446523594   Dubs Mint Menus

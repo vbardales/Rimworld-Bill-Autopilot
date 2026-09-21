@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ModMetaData>
+  <name>Bill Autopilot - Pickle tests</name>
+  <author>Nelim</author>
+  <packageId>nelim.billautopilot.pickletests</packageId>
+  <supportedVersions>
+    <li>1.6</li>
+  </supportedVersions>
+  <description>In-game functional tests for Bill Autopilot, run by Pickle. Development only: never published, never part of the distributed Mod/ folder.
+
+Written, not yet run. The suite deliberately holds only what a running game can show: bills appearing and coming down on a real bench, the confirmation dialog, the mark in a real bill label, the drift capture through a real bill edit, the per-bench memory across a real down-and-up cycle, and the save round trip. The arithmetic underneath - which mode applies, which target, which floor, the clamps, the overflow guard and the settings round trip - is proven out of game by Tests/BillAutopilot.Tests.csproj and is not replayed here.
+
+The name Pickle's -pickle-run filter wants is the display name above, not the folder.
+
+See TESTING.md for the scenarios this suite comes from, and Tests/Pickle/README.md for what is covered here, what stays manual, and how many passes a verdict needs.</description>
+  <modDependencies>
+    <li>
+      <packageId>nelim.billautopilot</packageId>
+      <displayName>Bill Autopilot</displayName>
+    </li>
+    <li>
+      <packageId>rimworks.pickle</packageId>
+      <displayName>Pickle</displayName>
+      <steamWorkshopUrl>steam://url/CommunityFilePage/3791648678</steamWorkshopUrl>
+    </li>
+  </modDependencies>
+  <loadAfter>
+    <li>nelim.billautopilot</li>
+    <li>rimworks.pickle</li>
+  </loadAfter>
+</ModMetaData>
