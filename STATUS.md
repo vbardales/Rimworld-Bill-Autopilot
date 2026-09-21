@@ -7,7 +7,7 @@ packageId:    nelim.billautopilot
 repo:         Rimworld-Bill-Autopilot
 visibility:   public
 detached:     yes
-stage:        done
+stage:        preTest
 licence:      original
 licence_at:   original work
 licence_name: MIT
@@ -18,6 +18,7 @@ settings_audit: complete
 tested_on:    2026-09-01
 workshop:
 remaining:
+  - missing: Gherkin/Pickle tests are not written and TESTING.md does not justify their scope or non-applicability; preTest -> done requires them written (running them belongs to done -> tested)
   - unverified: final current-build in-game scenarios, FR/EN UI, logs, new game and existing save, options persistence and RIMMSQOL shortcut integration
   - unverified: English and French runtime translation checks described in TESTING.md, including optional integrations and clipping
   - unverified: the mark in the bill label, in the tabs other mods redraw
@@ -28,10 +29,52 @@ remaining:
   - unverified: Nice Bill Tab's cached list, where a drag could bring a deleted bill back
   - unverified: loading a save after removing the mod, the reason its state avoids a GameComponent
 session:      local_3527e6d8-def4-4e54-97ff-a6430f1dc569
-updated:      2026-09-13, workflow audit
+updated:      2026-09-21, workflow audit (AUDIT.md)
 ---
 
 # Bill Autopilot — status
+
+## Workflow audit — 2026-09-21
+
+Audited revision `772abc8cb784021cf44fc4740de65f0686b8803c` (main, equal to origin/main after
+`git fetch`), working tree clean at start; only STATUS.md is modified by this audit. Repository:
+`C:/Users/nelim/Documents/rimworld/BillAutopilot`, distributed folder `Mod/`.
+`stage` uses the literal names of the workflow chain, no codes.
+
+**Previous stage: done. Retained stage: preTest.** `l10n -> preTest` is established;
+`preTest -> done` is not, because one mandatory deliverable is missing (below). This is a
+missing deliverable, not a defect of the shipped mod.
+
+| Transition | Result |
+| --- | --- |
+| dansMonoRepo -> horsMonoRepo | Validated: standalone repo, GitHub origin, main pushed and in sync, STATUS.md, README/CHANGELOG/ATTRIBUTION/LICENSE in English; LICENSE and ATTRIBUTION.md identical in `Mod/` (SHA-256 compared); public + original + MIT coherent; names coherent. |
+| -> ModIcon generated | Validated: mod build succeeds (0 warnings/errors); rebuilt DLL SHA-256 equals the shipped one (`D13D4225...DB599E`); ModIcon is a 128x128 PNG. |
+| -> Preview generated | Validated: Preview 896x504 PNG, 557,964 bytes (< 1 MB). Not re-inspected visually in this pass; the 2026-09-13 inspection is kept, no new doubt. |
+| -> preOptions | Validated: English description ending with `[url=https://github.com/vbardales/Rimworld-Bill-Autopilot]Source code on GitHub[/url]`; no prefix/suffix required. |
+| -> options | Validated on code and automated tests (`settings_audit: complete`): 74 checks pass; hidden MainButton shortcut defined with `buttonVisible=false`. In-game and RIMMSQOL checks belong to done -> tested. |
+| -> l10n | Validated: 54 keys identical in EN and FR, all defined for every literal key used in the sources, no empty value; FR DefInjected for the shortcut resolves (`Check-DefInjected.ps1`: 2 keys, 0 errors). Runtime accent/clipping check stays unverified. |
+| -> preTest | Validated: Harmony is the only hard dependency and is used; six optional mods are `loadAfter` only, matching the reflection bridges in `Source/Compat/`; no LoadFolders or conditional patches ship. |
+| preTest -> done | **Not met.** Met: 20 written scenarios in TESTING.md, automated suite green (74 checks), XML checks green (407). **Missing: Pickle (Gherkin) tests are not written** (no `Tests/Pickle`, no `.feature`), and neither TESTING.md nor this file justifies their scope or non-applicability. Scenarios such as the bills tab redrawn by other mods, the Nice Bill Tab drag, save/reload and the Steam Deck layout are what only a running game shows, so a justified scope is unlikely to be empty. |
+| done -> tested | Unverified: no game run. The 2026-09-01 result is historical and does not cover this DLL. |
+
+### Commands and results
+
+- `git fetch origin`, `git status -sb`: in sync, clean.
+- `dotnet build Source/BillAutopilot.csproj -c Release -p:OutputPath=../.build/audit-build/`: success, 0 warnings/errors, DLL hash identical to the shipped one.
+- `dotnet build Tests/BillAutopilot.Tests.csproj -c Release`, then `.build/bin/tests/Release/BillAutopilot.Tests.exe`: **74 CHECKS PASSED**.
+- `Tests/ValidateXml.ps1`: **407 XML CHECKS PASSED (5 files)**.
+- `scripts/Check-DefInjected.ps1 -TransMod Mod`: 2 keys checked, 0 errors.
+- Key cross-check: 54 EN = 54 FR; every literal `BillAutopilot.*` key used in the sources is defined.
+- No RimWorld instance was launched (Windows or WSL), no Pickle run, no lock taken, nothing published.
+
+### Next transition
+
+Write the Pickle tests, or state in TESTING.md, with reasons, which part of scenarios 1-20 only a running game can show and write that part as Gherkin. Declare the passes in TESTING.md (without optional mods, with optional mods, one per exclusive combination). Running them is not required for `done`.
+
+### Optional
+
+Keep `@review` scenarios for captures only; prefer the existing unit suite for anything provable outside the game.
+
 
 ## Technical settings gate completed — 2026-09-13
 
