@@ -39,13 +39,13 @@ namespace BillAutopilot.PickleSteps
         /// check that read the mod's own memory back would agree with itself whether or not anything
         /// ever reached BWM.
         /// </summary>
-        [Given("Better Workbench Management counts Bill Autopilot's bill for {string} on the {string} at ({int}, {int}) away from the home map")]
+        [Given("Better Workbench Management counts Bill Autopilot's bill for {string} on the {string} at \\({int}, {int}\\) away from the home map")]
         public void SetCountAway(PickleContext ctx, string recipeDefName, string benchDefName, int x, int z)
         {
             SetExtendedField(ctx, recipeDefName, benchDefName, x, z, "CountAway", true);
         }
 
-        [Then("Better Workbench Management still counts Bill Autopilot's bill for {string} on the {string} at ({int}, {int}) away from the home map")]
+        [Then("Better Workbench Management still counts Bill Autopilot's bill for {string} on the {string} at \\({int}, {int}\\) away from the home map")]
         public void AssertCountAway(PickleContext ctx, string recipeDefName, string benchDefName, int x, int z)
         {
             var value = GetExtendedField(ctx, recipeDefName, benchDefName, x, z, "CountAway");
@@ -55,13 +55,13 @@ namespace BillAutopilot.PickleSteps
                 + "silence: nothing crashes, the feature is simply gone");
         }
 
-        [Given("Better Workbench Management names Bill Autopilot's bill for {string} on the {string} at ({int}, {int}) {string}")]
+        [Given("Better Workbench Management names Bill Autopilot's bill for {string} on the {string} at \\({int}, {int}\\) {string}")]
         public void SetBwmName(PickleContext ctx, string recipeDefName, string benchDefName, int x, int z, string name)
         {
             SetExtendedField(ctx, recipeDefName, benchDefName, x, z, "Name", name);
         }
 
-        [Then("Better Workbench Management still names Bill Autopilot's bill for {string} on the {string} at ({int}, {int}) {string}")]
+        [Then("Better Workbench Management still names Bill Autopilot's bill for {string} on the {string} at \\({int}, {int}\\) {string}")]
         public void AssertBwmName(PickleContext ctx, string recipeDefName, string benchDefName, int x, int z, string name)
         {
             var value = GetExtendedField(ctx, recipeDefName, benchDefName, x, z, "Name");
@@ -75,7 +75,7 @@ namespace BillAutopilot.PickleSteps
         /// its predecessor belonged to rather than start a new one of its own, which looks identical
         /// on a single bill and is a different thing entirely on two.
         /// </summary>
-        [Given("Better Workbench Management links Bill Autopilot's bills for {string} and {string} on the {string} at ({int}, {int})")]
+        [Given("Better Workbench Management links Bill Autopilot's bills for {string} and {string} on the {string} at \\({int}, {int}\\)")]
         public void LinkBills(PickleContext ctx, string firstRecipe, string secondRecipe,
             string benchDefName, int x, int z)
         {
@@ -91,7 +91,7 @@ namespace BillAutopilot.PickleSteps
             link.Invoke(storage, new object[] { a, b });
         }
 
-        [Then("Better Workbench Management still links Bill Autopilot's bills for {string} and {string} on the {string} at ({int}, {int})")]
+        [Then("Better Workbench Management still links Bill Autopilot's bills for {string} and {string} on the {string} at \\({int}, {int}\\)")]
         public void AssertLinked(PickleContext ctx, string firstRecipe, string secondRecipe,
             string benchDefName, int x, int z)
         {
@@ -172,11 +172,11 @@ namespace BillAutopilot.PickleSteps
         /// the store really has. The first run of this pass therefore either works or says exactly
         /// what to write instead.
         /// </summary>
-        [When("{string} is hidden on the Bill Autopilot bench {string} at ({int}, {int})")]
+        [When("{string} is hidden on the Bill Autopilot bench {string} at \\({int}, {int}\\)")]
         public void Hide(PickleContext ctx, string recipeDefName, string benchDefName, int x, int z) =>
             SetHidden(ctx, recipeDefName, benchDefName, x, z, true);
 
-        [When("{string} is unhidden on the Bill Autopilot bench {string} at ({int}, {int})")]
+        [When("{string} is unhidden on the Bill Autopilot bench {string} at \\({int}, {int}\\)")]
         public void Unhide(PickleContext ctx, string recipeDefName, string benchDefName, int x, int z) =>
             SetHidden(ctx, recipeDefName, benchDefName, x, z, false);
 
@@ -245,7 +245,7 @@ namespace BillAutopilot.PickleSteps
         /// The real method is called, so the mod's own postfix on it runs. Building the template by
         /// hand here would test nothing at all.
         /// </summary>
-        [When("a Dubs Mint Menus bench template is made from the {string} at ({int}, {int})")]
+        [When("a Dubs Mint Menus bench template is made from the {string} at \\({int}, {int}\\)")]
         public void MakeTemplate(PickleContext ctx, string benchDefName, int x, int z)
         {
             var table = Driver.Bench(ctx, benchDefName, x, z);

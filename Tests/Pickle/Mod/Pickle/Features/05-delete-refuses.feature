@@ -14,7 +14,7 @@ Feature: deleting an automatic bill refuses its recipe, and only an automatic on
     Given the save "test-colony" is loaded
     And Bill Autopilot settings are at their defaults
     And a "HandTailoringBench" is built at (140, 155)
-    And Bill Autopilot is on for "HandTailoringBench"
+    And Bill Autopilot is switched on for "HandTailoringBench"
     And Bill Autopilot keeps 50 of everything on "HandTailoringBench", restarting at 25
     And the Bill Autopilot test stockpile at (134, 150) holds 10 "Leather_Patch"
     And Bill Autopilot syncs the "HandTailoringBench" at (140, 155)
@@ -29,7 +29,7 @@ Feature: deleting an automatic bill refuses its recipe, and only an automatic on
   # An explicit refusal leaves nothing to restore. What the bill carried - a name, a widened count,
   # a link - is held only for the down-and-up cycle the autopilot itself performs.
   Scenario: an explicit refusal drops what the bill carried
-    When Bill Autopilot's bill for "Make_Patchleather" on the "HandTailoringBench" at (140, 155) is named "hand cut"
+    When Bill Autopilot's bill for "Make_Patchleather" on the "HandTailoringBench" at (140, 155) is renamed "hand cut"
     And Bill Autopilot's bill for "Make_Patchleather" on the "HandTailoringBench" at (140, 155) is deleted
     Then Bill Autopilot remembers nothing for "Make_Patchleather" on the "HandTailoringBench" at (140, 155)
 

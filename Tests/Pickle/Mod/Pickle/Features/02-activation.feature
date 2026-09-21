@@ -49,13 +49,13 @@ Feature: switching a workbench type on asks first, and takes everything already 
     Then Bill Autopilot is off for "HandTailoringBench"
     When Bill Autopilot's toggle is used to switch "HandTailoringBench" on
     Then Bill Autopilot asks nothing
-    And Bill Autopilot is on for "HandTailoringBench"
+    And Bill Autopilot is switched on for "HandTailoringBench"
 
   # Switching off takes down what the autopilot put up and leaves everything else exactly where it
   # is. The hand-placed bill is the control: a DropAll that took the whole stack would look like a
   # working teardown on a bench carrying nothing else.
   Scenario: switching off takes down the automatic bills and leaves hand-placed ones alone
-    Given Bill Autopilot is on for "HandTailoringBench"
+    Given Bill Autopilot is switched on for "HandTailoringBench"
     When I add bill "Make_Patchleather" to the "HandTailoringBench" at (140, 155)
     And Bill Autopilot syncs the "HandTailoringBench" at (140, 155)
     Then Bill Autopilot left the hand-placed bill for "Make_Patchleather" on the "HandTailoringBench" at (140, 155)

@@ -17,7 +17,7 @@ Feature: a repeat mode belonging to another mod is set, kept and asked
     Given the save "test-colony" is loaded
     And Bill Autopilot settings are at their defaults
     And a "HandTailoringBench" is built at (140, 155)
-    And Bill Autopilot is on for "HandTailoringBench"
+    And Bill Autopilot is switched on for "HandTailoringBench"
 
   @requires:Memegoddess.EverybodyGetsOne
   Scenario: the bench default reaches the bill

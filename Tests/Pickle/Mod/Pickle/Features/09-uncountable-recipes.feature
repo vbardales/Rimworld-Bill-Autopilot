@@ -15,7 +15,7 @@ Feature: recipes the game cannot count have a setting of their own
     Given the save "test-colony" is loaded
     And Bill Autopilot settings are at their defaults
     And a "ButcherSpot" is built at (146, 155)
-    And Bill Autopilot is on for "ButcherSpot"
+    And Bill Autopilot is switched on for "ButcherSpot"
 
   # The guard. If the game ever starts counting butchery products, everything below stops meaning
   # what it says, and this is where that should be noticed.

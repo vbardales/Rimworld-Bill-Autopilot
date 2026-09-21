@@ -15,7 +15,7 @@ Feature: the base loop, and the gap that stops it flickering
     Given the save "test-colony" is loaded
     And Bill Autopilot settings are at their defaults
     And a "HandTailoringBench" is built at (140, 155)
-    And Bill Autopilot is on for "HandTailoringBench"
+    And Bill Autopilot is switched on for "HandTailoringBench"
     And Bill Autopilot keeps 50 of everything on "HandTailoringBench", restarting at 25
 
   Scenario: the stock this scenario sets is the stock the autopilot reads

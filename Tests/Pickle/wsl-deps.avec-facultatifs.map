@@ -1,5 +1,18 @@
 # The optional set for Bill Autopilot, staged on top of the minimal one.
 #
+# NAMED, and not called wsl-deps.map, for a reason found the hard way on 2026-09-21.
+# stage-pickle-wsl.sh falls back to `<mod>/Tests/Pickle/wsl-deps.map` whenever PICKLE_DEPMAP
+# arrives empty, and it arrives empty even for a minimal pass: Run-PickleWsl.ps1 exports the value
+# `none`, but it exports it through `WSLENV=...:PICKLE_DEPMAP/p`, and the `/p` path translation
+# turns a value that is not a path into an empty string. Measured:
+#     PICKLE_DEPMAP=none WSLENV=PICKLE_DEPMAP/p wsl.exe -- bash -lc 'echo "[$PICKLE_DEPMAP]"'  ->  []
+# So while this file was called wsl-deps.map, the pass meant to prove the mod stands alone mounted
+# all seven of these instead, and said nothing. The staging script's own comment warns about that
+# fallback; what it does not say is that the official entry point walks into it.
+#
+# A named set is also what the workflow asks for. Run it with:
+#     -DepMap wsl-deps.avec-facultatifs.map
+#
 # One line per mod: packageId, then its Workshop id. `#` starts a comment. `first:` in front of a
 # packageId activates it ahead of everything else; nothing here needs that, because the order that
 # matters is the one About.xml already declares in <loadAfter> and the staging honours it.

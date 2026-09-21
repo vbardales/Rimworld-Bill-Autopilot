@@ -13,7 +13,7 @@ Feature: the cap on automatic bills, and the room it leaves
     Given the save "test-colony" is loaded
     And Bill Autopilot settings are at their defaults
     And a "HandTailoringBench" is built at (140, 155)
-    And Bill Autopilot is on for "HandTailoringBench"
+    And Bill Autopilot is switched on for "HandTailoringBench"
     And Bill Autopilot default mode for "HandTailoringBench" is "always"
 
   # "Always" means every available recipe wants a bill, so the only thing that can stop the stack

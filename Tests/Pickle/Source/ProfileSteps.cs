@@ -56,20 +56,11 @@ namespace BillAutopilot.PickleSteps
             BillAutopilotState.Current?.MarkDirty();
         }
 
-        [Given("Bill Autopilot is on for {string}")]
+        [Given("Bill Autopilot is switched on for {string}")]
         public void EnableBench(PickleContext ctx, string benchDefName)
         {
             var bench = Driver.BenchDef(ctx, benchDefName);
             Driver.Settings(ctx).ProfileForWriting(bench).enabled = true;
-            Driver.Mod(ctx).WriteSettings();
-            BillAutopilotState.Current?.MarkDirty();
-        }
-
-        [Given("Bill Autopilot is off for {string}")]
-        public void DisableBench(PickleContext ctx, string benchDefName)
-        {
-            var bench = Driver.BenchDef(ctx, benchDefName);
-            Driver.Settings(ctx).ProfileForWriting(bench).enabled = false;
             Driver.Mod(ctx).WriteSettings();
             BillAutopilotState.Current?.MarkDirty();
         }

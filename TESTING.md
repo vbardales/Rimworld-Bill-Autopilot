@@ -60,14 +60,14 @@ manual. The numbered scenarios below are what the features were written from.
    powershell.exe -ExecutionPolicy Bypass -File scripts/Run-PickleWsl.ps1 -Mod BillAutopilot
    ```
 
-2. **With the optional mods** — `Tests/Pickle/wsl-deps.map`. It mounts all six integrations this mod
+2. **With the optional mods** — `Tests/Pickle/wsl-deps.avec-facultatifs.map`. It mounts all six integrations this mod
    declares in `loadAfter`, plus No Max Bills: Redux for the raised bill ceiling that scenario 10
    reads live rather than hard-coding. It covers scenarios 13 to 16 and 19 on top of the first pass.
    Green on the first pass says nothing about this one, and the reverse is equally true: a scenario
    can pass *only* because an optional mod is present.
 
    ```powershell
-   powershell.exe -ExecutionPolicy Bypass -File scripts/Run-PickleWsl.ps1 -Mod BillAutopilot -DepMap wsl-deps.map
+   powershell.exe -ExecutionPolicy Bypass -File scripts/Run-PickleWsl.ps1 -Mod BillAutopilot -DepMap wsl-deps.avec-facultatifs.map
    ```
 
    **One set covers them, not several.** A named set is owed per exclusive combination, and the

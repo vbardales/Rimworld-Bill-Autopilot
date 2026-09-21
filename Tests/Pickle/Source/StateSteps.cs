@@ -67,7 +67,7 @@ namespace BillAutopilot.PickleSteps
                 + "read as an acceptance");
         }
 
-        [Then("Bill Autopilot remembers the name {string} for {string} on the {string} at ({int}, {int})")]
+        [Then("Bill Autopilot remembers the name {string} for {string} on the {string} at \\({int}, {int}\\)")]
         public void AssertMemoryName(PickleContext ctx, string name, string recipeDefName,
             string benchDefName, int x, int z)
         {
@@ -84,7 +84,7 @@ namespace BillAutopilot.PickleSteps
                 + "per-workbench-type key coming back");
         }
 
-        [Then("Bill Autopilot remembers nothing for {string} on the {string} at ({int}, {int})")]
+        [Then("Bill Autopilot remembers nothing for {string} on the {string} at \\({int}, {int}\\)")]
         public void AssertNoMemory(PickleContext ctx, string recipeDefName, string benchDefName, int x, int z)
         {
             var table = Driver.Bench(ctx, benchDefName, x, z);

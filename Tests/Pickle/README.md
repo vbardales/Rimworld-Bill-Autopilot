@@ -53,11 +53,11 @@ It proves the mod stands alone, which is what the mod page claims of all five br
 worst case is a lost feature. The scenarios for absent mods carry `@requires:` and are skipped, so
 **this pass is green with a dozen scenarios never played** — read the skips, not only the failures.
 
-**2. With the optional mods** — `wsl-deps.map`, which mounts all six integrations the mod declares,
+**2. With the optional mods** — `wsl-deps.avec-facultatifs.map`, which mounts all six integrations the mod declares,
 plus No Max Bills: Redux for the raised bill ceiling that `10-bill-cap.feature` reads live.
 
 ```powershell
-powershell.exe -ExecutionPolicy Bypass -File scripts/Run-PickleWsl.ps1 -Mod BillAutopilot -DepMap wsl-deps.map
+powershell.exe -ExecutionPolicy Bypass -File scripts/Run-PickleWsl.ps1 -Mod BillAutopilot -DepMap wsl-deps.avec-facultatifs.map
 ```
 
 It proves the mod holds in the decor it will really be loaded in. Green on the first pass says

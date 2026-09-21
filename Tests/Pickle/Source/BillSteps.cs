@@ -30,7 +30,7 @@ namespace BillAutopilot.PickleSteps
         /// second in REAL time, so under a runner driving a thousand ticks a second a scenario that
         /// opened the tab would get one sync and not know which pass it was looking at.
         /// </summary>
-        [When("Bill Autopilot syncs the {string} at ({int}, {int})")]
+        [When("Bill Autopilot syncs the {string} at \\({int}, {int}\\)")]
         public void Sync(PickleContext ctx, string benchDefName, int x, int z)
         {
             Driver.State(ctx);
@@ -47,7 +47,7 @@ namespace BillAutopilot.PickleSteps
         /// its displayed name, and a scenario spelling "hand tailoring bench" would find nothing at
         /// all in the French pass.
         /// </summary>
-        [When("the bills tab of the Bill Autopilot bench {string} at ({int}, {int}) is opened")]
+        [When("the bills tab of the Bill Autopilot bench {string} at \\({int}, {int}\\) is opened")]
         public async System.Threading.Tasks.Task OpenBillsTab(PickleContext ctx, string benchDefName, int x, int z)
         {
             var table = Driver.Bench(ctx, benchDefName, x, z);
@@ -63,7 +63,7 @@ namespace BillAutopilot.PickleSteps
 
         // --- What the player does in the tab -------------------------------------------------------
 
-        [When("Bill Autopilot's bill for {string} on the {string} at ({int}, {int}) is deleted")]
+        [When("Bill Autopilot's bill for {string} on the {string} at \\({int}, {int}\\) is deleted")]
         public void DeleteAuto(PickleContext ctx, string recipeDefName, string benchDefName, int x, int z)
         {
             var table = Driver.Bench(ctx, benchDefName, x, z);
@@ -81,7 +81,7 @@ namespace BillAutopilot.PickleSteps
         /// pass whichever one the lookup happened to find first, and the whole point here is which of
         /// the two was deleted.
         /// </summary>
-        [When("the hand-placed bill for {string} on the Bill Autopilot bench {string} at ({int}, {int}) is deleted")]
+        [When("the hand-placed bill for {string} on the Bill Autopilot bench {string} at \\({int}, {int}\\) is deleted")]
         public void DeleteManual(PickleContext ctx, string recipeDefName, string benchDefName, int x, int z)
         {
             var table = Driver.Bench(ctx, benchDefName, x, z);
@@ -93,13 +93,13 @@ namespace BillAutopilot.PickleSteps
             table.billStack.Delete(bill);
         }
 
-        [When("Bill Autopilot's bill for {string} on the {string} at ({int}, {int}) is unsuspended")]
+        [When("Bill Autopilot's bill for {string} on the {string} at \\({int}, {int}\\) is unsuspended")]
         public void Unsuspend(PickleContext ctx, string recipeDefName, string benchDefName, int x, int z)
         {
             Auto(ctx, recipeDefName, benchDefName, x, z).suspended = false;
         }
 
-        [When("Bill Autopilot's bill for {string} on the {string} at ({int}, {int}) is set to keep {int}, restarting at {int}")]
+        [When("Bill Autopilot's bill for {string} on the {string} at \\({int}, {int}\\) is set to keep {int}, restarting at {int}")]
         public void Retarget(PickleContext ctx, string recipeDefName, string benchDefName, int x, int z,
             int target, int floor)
         {
@@ -110,7 +110,7 @@ namespace BillAutopilot.PickleSteps
             bill.unpauseWhenYouHave = floor;
         }
 
-        [When("Bill Autopilot's bill for {string} on the {string} at ({int}, {int}) is set to repeat forever")]
+        [When("Bill Autopilot's bill for {string} on the {string} at \\({int}, {int}\\) is set to repeat forever")]
         public void Forever(PickleContext ctx, string recipeDefName, string benchDefName, int x, int z)
         {
             Auto(ctx, recipeDefName, benchDefName, x, z).repeatMode = BillRepeatModeDefOf.Forever;
@@ -121,7 +121,7 @@ namespace BillAutopilot.PickleSteps
         /// "make one" would be remade the moment it finished, forever, so the capture leaves it
         /// alone; this step exists to let a scenario prove that nothing was written.
         /// </summary>
-        [When("Bill Autopilot's bill for {string} on the {string} at ({int}, {int}) is set to do it {int} times")]
+        [When("Bill Autopilot's bill for {string} on the {string} at \\({int}, {int}\\) is set to do it {int} times")]
         public void RepeatCount(PickleContext ctx, string recipeDefName, string benchDefName, int x, int z, int times)
         {
             var bill = Auto(ctx, recipeDefName, benchDefName, x, z);
@@ -129,7 +129,7 @@ namespace BillAutopilot.PickleSteps
             bill.repeatCount = times;
         }
 
-        [When("Bill Autopilot's bill for {string} on the {string} at ({int}, {int}) is set to the repeat mode {string}")]
+        [When("Bill Autopilot's bill for {string} on the {string} at \\({int}, {int}\\) is set to the repeat mode {string}")]
         public void ForeignMode(PickleContext ctx, string recipeDefName, string benchDefName, int x, int z,
             string repeatModeDefName)
         {
@@ -147,7 +147,7 @@ namespace BillAutopilot.PickleSteps
         /// Named per bench: the entire point of scenario 11 is that two benches of the same kind
         /// carrying different names must each get their own back.
         /// </summary>
-        [When("Bill Autopilot's bill for {string} on the {string} at ({int}, {int}) is named {string}")]
+        [When("Bill Autopilot's bill for {string} on the {string} at \\({int}, {int}\\) is renamed {string}")]
         public void Rename(PickleContext ctx, string recipeDefName, string benchDefName, int x, int z, string name)
         {
             Auto(ctx, recipeDefName, benchDefName, x, z).playerCustomName = name;
@@ -155,7 +155,7 @@ namespace BillAutopilot.PickleSteps
 
         // --- What the stack looks like afterwards -------------------------------------------------
 
-        [Then("Bill Autopilot has {int} bills up on the {string} at ({int}, {int})")]
+        [Then("Bill Autopilot has {int} bills up on the {string} at \\({int}, {int}\\)")]
         public void AssertAutoCount(PickleContext ctx, int expected, string benchDefName, int x, int z)
         {
             var table = Driver.Bench(ctx, benchDefName, x, z);
@@ -172,7 +172,7 @@ namespace BillAutopilot.PickleSteps
                 $"the autopilot has {actual} bills up, not {expected}: {Driver.Describe(ctx, table)}");
         }
 
-        [Then("Bill Autopilot has a bill up for {string} on the {string} at ({int}, {int})")]
+        [Then("Bill Autopilot has a bill up for {string} on the {string} at \\({int}, {int}\\)")]
         public void AssertAutoPresent(PickleContext ctx, string recipeDefName, string benchDefName, int x, int z)
         {
             var table = Driver.Bench(ctx, benchDefName, x, z);
@@ -181,7 +181,7 @@ namespace BillAutopilot.PickleSteps
                 $"the autopilot has no bill up for {recipeDefName}: {Driver.Describe(ctx, table)}");
         }
 
-        [Then("Bill Autopilot has no bill up for {string} on the {string} at ({int}, {int})")]
+        [Then("Bill Autopilot has no bill up for {string} on the {string} at \\({int}, {int}\\)")]
         public void AssertAutoAbsent(PickleContext ctx, string recipeDefName, string benchDefName, int x, int z)
         {
             var table = Driver.Bench(ctx, benchDefName, x, z);
@@ -190,7 +190,7 @@ namespace BillAutopilot.PickleSteps
                 $"the autopilot still has a bill up for {recipeDefName}: {Driver.Describe(ctx, table)}");
         }
 
-        [Then("Bill Autopilot left the hand-placed bill for {string} on the {string} at ({int}, {int})")]
+        [Then("Bill Autopilot left the hand-placed bill for {string} on the {string} at \\({int}, {int}\\)")]
         public void AssertManualPresent(PickleContext ctx, string recipeDefName, string benchDefName, int x, int z)
         {
             var table = Driver.Bench(ctx, benchDefName, x, z);
@@ -199,7 +199,7 @@ namespace BillAutopilot.PickleSteps
                 $"the hand-placed bill for {recipeDefName} is gone: {Driver.Describe(ctx, table)}");
         }
 
-        [Then("Bill Autopilot's bill for {string} on the {string} at ({int}, {int}) is suspended")]
+        [Then("Bill Autopilot's bill for {string} on the {string} at \\({int}, {int}\\) is suspended")]
         public void AssertSuspended(PickleContext ctx, string recipeDefName, string benchDefName, int x, int z)
         {
             var bill = Auto(ctx, recipeDefName, benchDefName, x, z);
@@ -208,14 +208,14 @@ namespace BillAutopilot.PickleSteps
                 + "type must arrive suspended, so that nothing is spent before the player answers");
         }
 
-        [Then("Bill Autopilot's bill for {string} on the {string} at ({int}, {int}) is running")]
+        [Then("Bill Autopilot's bill for {string} on the {string} at \\({int}, {int}\\) is running")]
         public void AssertRunning(PickleContext ctx, string recipeDefName, string benchDefName, int x, int z)
         {
             var bill = Auto(ctx, recipeDefName, benchDefName, x, z);
             ctx.Assert(!bill.suspended, $"the automatic bill for {recipeDefName} is suspended");
         }
 
-        [Then("Bill Autopilot's bill for {string} on the {string} at ({int}, {int}) keeps {int}, restarting at {int}")]
+        [Then("Bill Autopilot's bill for {string} on the {string} at \\({int}, {int}\\) keeps {int}, restarting at {int}")]
         public void AssertBillCounts(PickleContext ctx, string recipeDefName, string benchDefName, int x, int z,
             int target, int floor)
         {
@@ -229,7 +229,7 @@ namespace BillAutopilot.PickleSteps
                 $"the bill for {recipeDefName} restarts at {bill.unpauseWhenYouHave}, not {floor}");
         }
 
-        [Then("Bill Autopilot's bill for {string} on the {string} at ({int}, {int}) has the repeat mode {string}")]
+        [Then("Bill Autopilot's bill for {string} on the {string} at \\({int}, {int}\\) has the repeat mode {string}")]
         public void AssertRepeatMode(PickleContext ctx, string recipeDefName, string benchDefName, int x, int z,
             string repeatModeDefName)
         {
@@ -239,7 +239,7 @@ namespace BillAutopilot.PickleSteps
                 + $"'{bill.repeatMode?.defName ?? "none"}', not '{repeatModeDefName}'");
         }
 
-        [Then("Bill Autopilot's bill for {string} on the {string} at ({int}, {int}) is named {string}")]
+        [Then("Bill Autopilot's bill for {string} on the {string} at \\({int}, {int}\\) is named {string}")]
         public void AssertName(PickleContext ctx, string recipeDefName, string benchDefName, int x, int z, string name)
         {
             var bill = Auto(ctx, recipeDefName, benchDefName, x, z);
@@ -257,7 +257,7 @@ namespace BillAutopilot.PickleSteps
         /// own translation key, never spelled out: a scenario carrying "(auto)" would pass in English
         /// and fail the French pass on a correctly translated marker.
         /// </summary>
-        [Then("Bill Autopilot marks its bill for {string} on the {string} at ({int}, {int})")]
+        [Then("Bill Autopilot marks its bill for {string} on the {string} at \\({int}, {int}\\)")]
         public void AssertMarked(PickleContext ctx, string recipeDefName, string benchDefName, int x, int z)
         {
             var bill = Auto(ctx, recipeDefName, benchDefName, x, z);
@@ -267,7 +267,7 @@ namespace BillAutopilot.PickleSteps
                 + $"'{marker}', so nothing on screen tells it apart from a bill placed by hand");
         }
 
-        [Then("Bill Autopilot does not mark the hand-placed bill for {string} on the {string} at ({int}, {int})")]
+        [Then("Bill Autopilot does not mark the hand-placed bill for {string} on the {string} at \\({int}, {int}\\)")]
         public void AssertManualUnmarked(PickleContext ctx, string recipeDefName, string benchDefName, int x, int z)
         {
             var table = Driver.Bench(ctx, benchDefName, x, z);
@@ -282,7 +282,7 @@ namespace BillAutopilot.PickleSteps
                 + $"marker '{marker}'");
         }
 
-        [Then("Bill Autopilot does not mark its bill for {string} on the {string} at ({int}, {int})")]
+        [Then("Bill Autopilot does not mark its bill for {string} on the {string} at \\({int}, {int}\\)")]
         public void AssertAutoUnmarked(PickleContext ctx, string recipeDefName, string benchDefName, int x, int z)
         {
             var bill = Auto(ctx, recipeDefName, benchDefName, x, z);
@@ -299,7 +299,7 @@ namespace BillAutopilot.PickleSteps
         /// reports when No Max Bills is present, so the question is asked against the live ceiling
         /// rather than against the number 15.
         /// </summary>
-        [Then("Bill Autopilot leaves room for another bill on the {string} at ({int}, {int})")]
+        [Then("Bill Autopilot leaves room for another bill on the {string} at \\({int}, {int}\\)")]
         public void AssertRoomLeft(PickleContext ctx, string benchDefName, int x, int z)
         {
             var table = Driver.Bench(ctx, benchDefName, x, z);
@@ -309,7 +309,7 @@ namespace BillAutopilot.PickleSteps
                 + $"the Add button is gone. {Driver.Describe(ctx, table)}");
         }
 
-        [Then("Bill Autopilot counts {int} of {string} on the {string} at ({int}, {int})")]
+        [Then("Bill Autopilot counts {int} of {string} on the {string} at \\({int}, {int}\\)")]
         public void AssertCounted(PickleContext ctx, int expected, string recipeDefName, string benchDefName,
             int x, int z)
         {

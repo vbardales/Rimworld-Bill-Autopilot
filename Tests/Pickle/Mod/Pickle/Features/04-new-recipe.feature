@@ -18,7 +18,7 @@ Feature: a recipe unlocked by research arrives suspended, and is answered once f
     Given the save "test-colony" is loaded
     And Bill Autopilot settings are at their defaults
     And a "HandTailoringBench" is built at (140, 155)
-    And Bill Autopilot is on for "HandTailoringBench"
+    And Bill Autopilot is switched on for "HandTailoringBench"
     And Bill Autopilot syncs the "HandTailoringBench" at (140, 155)
 
   Scenario: it arrives suspended, and a letter names it

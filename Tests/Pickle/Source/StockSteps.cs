@@ -25,7 +25,7 @@ namespace BillAutopilot.PickleSteps
         /// first. A fixture arrives with a colony's worth of odds and ends, and a scenario that only
         /// added to it would be asserting against a number it did not choose.
         /// </summary>
-        [Given("the Bill Autopilot test stockpile at ({int}, {int}) holds {int} {string}")]
+        [Given("the Bill Autopilot test stockpile at \\({int}, {int}\\) holds {int} {string}")]
         public void SetStock(PickleContext ctx, int x, int z, int count, string thingDefName)
         {
             var map = Driver.Map(ctx);

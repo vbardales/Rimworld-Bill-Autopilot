@@ -18,7 +18,7 @@ settings_audit: complete
 tested_on:    2026-09-01
 workshop:
 remaining:
-  - unverified: the Pickle suite has never been run; done -> tested needs the pass without the optional mods, the pass with them, and one per language, with exitReason and the scenarios-played against features-discovered counts read before the numbers
+  - unverified: the Pickle suite has never produced a verdict (first run 2026-09-21: exitReason infrastructure-error, 0 scenarios, two suite defects since fixed); done -> tested needs the pass without the optional mods, the pass with them, and one per language, with exitReason and the scenarios-played against features-discovered counts read before the numbers
   - unverified: every @review screenshot the suite attaches; a green there says the trip happened, not that the image shows anything
   - unverified: loading a save with the mod removed, which no Pickle run can do since the mod list is fixed at startup
   - unverified: RIMMSQOL revealing the shortcut in its own interface, and that visibility choice surviving a restart
@@ -32,10 +32,81 @@ remaining:
   - unverified: Nice Bill Tab's cached list, where a drag could bring a deleted bill back
   - unverified: loading a save after removing the mod, the reason its state avoids a GameComponent
 session:      local_3527e6d8-def4-4e54-97ff-a6430f1dc569
-updated:      2026-09-21, Pickle suite written
+updated:      2026-09-21, Pickle suite written; first run gave no verdict
 ---
 
 # Bill Autopilot — status
+
+## First Pickle run: no verdict, two defects in the suite — 2026-09-21
+
+The first WSL pass, minimal set, English. **`exitReason: infrastructure-error`, 0 scenarios played
+out of 19 features discovered.** Not a result, and not read as one. Report kept at
+`pickle-reports-archive/0921-1508`; the live `pickle-reports/` was overwritten by the next session's
+run within the minute, which is why the archived copy is the one cited.
+
+**Stage is unchanged at `done`.** Both defects are in the test suite, none in the shipped mod, whose
+DLL is untouched at `D13D4225...DB599E`. Running these passes is a criterion of `done -> tested`, and
+it has still not been met.
+
+### What broke, and what it cost
+
+**1. Parentheses in a step pattern are not parentheses.** In a Cucumber Expression they mean
+OPTIONAL TEXT, so `at ({int}, {int})` is an optional group containing parameters, which is illegal.
+Pickle builds its whole step table before it runs anything, so one bad pattern out of 87 meant not
+one scenario of the nineteen ran:
+
+```
+Invalid step pattern: Bill Autopilot syncs the {string} at ({int}, {int})
+An optional may not contain a parameter type.
+```
+
+36 patterns carried it. Fixed by escaping — `at \({int}, {int}\)`, written `\\(` and `\\)` in a C#
+literal. Verified against Pickle's own expression compiler, not by reading.
+
+**2. Three step texts were declared twice.** A `Given` setter and a `Then` assertion spelled
+identically: `Bill Autopilot is on for {string}`, `is off for {string}`, and `... is named {string}`.
+Pickle matches on the expression text alone and the keyword is decoration, so these are Ambiguous
+steps — they would have failed healthy scenarios on the next run. The setters are now `is switched
+on for`, `is switched off for` and `is renamed`. One step nothing called was deleted rather than kept.
+
+The earlier text-level cross-check passed on both of these: it normalised patterns and sorted them
+unique, which hid the duplicates, and it never compiled anything, which hid the parentheses.
+
+### The guard that replaces that check
+
+`Tests/Pickle/Check-Steps.ps1`, about two seconds, no game. It loads Pickle's own
+`CucumberExpressions` and `PickleParameterTypeRegistry`, compiles every declared pattern, reports any
+declared twice, matches every step line of every feature against the compiled regexes, and names any
+pattern no feature uses. Current state: **86 patterns declared, 86 compile, none declared twice, none
+unused, 465 step lines**.
+
+A lost run is not only this mod's forty minutes: the machine is shared and there were eleven tickets
+in the queue behind this one.
+
+### And the minimal pass was not minimal
+
+The archived Player.log shows Better Workbench Management, Nice Bill Tab, Nice Bill Tab - Expansion
+and Dubs Mint Menus all detected, with the bill ceiling at 2147483647 — in the pass meant to prove
+the mod stands alone.
+
+`Run-PickleWsl.ps1` exports `PICKLE_DEPMAP=none` for a pass with no `-DepMap`, but it exports it
+through `WSLENV=...:PICKLE_DEPMAP/p`, and `/p` path translation turns a value that is not a path into
+an empty string. Measured directly:
+
+```
+PICKLE_DEPMAP=none WSLENV=PICKLE_DEPMAP/p wsl.exe -- bash -lc 'echo "[$PICKLE_DEPMAP]"'   ->   []
+```
+
+`stage-pickle-wsl.sh` then falls back to `<mod>/Tests/Pickle/wsl-deps.map` — the very fallback its
+own comment warns about. Adding that file earlier today is what turned this mod's minimal pass into
+an optional one, silently.
+
+Fixed here by naming the set: `wsl-deps.avec-facultatifs.map`, passed explicitly with `-DepMap`, so
+nothing is picked up by default. That is also the naming the workflow asks for. **The underlying
+defect is in the shared tooling and is left untouched**: `scripts/` is the monorepo's, eleven
+sessions were queued on it at the time, and a change there lands under runs already in flight. It
+affects every mod that owns a `wsl-deps.map`.
+
 
 ## Pickle suite written — 2026-09-21
 
@@ -44,7 +115,7 @@ This closes the one gate the audit below left open. **Stage: preTest -> done.** 
 recorded in that audit still holds and the delivered DLL is still SHA-256 `D13D4225...DB599E`.
 
 `Tests/Pickle/` now holds 19 feature files, a companion test mod (`Bill Autopilot - Pickle tests`,
-`nelim.billautopilot.pickletests`, never distributed) and a step assembly of 84 steps.
+`nelim.billautopilot.pickletests`, never distributed) and a step assembly of 86 steps.
 
 **Written, not run.** The audit's own rule applies: running them is a criterion of `done -> tested`,
 not of this transition. Nothing here claims a game was launched; none was.
@@ -70,10 +141,10 @@ them, so there is nothing of this mod's to assert.
 ### Passes declared
 
 `TESTING.md` now states how many passes a verdict needs and what each covers: without the optional
-mods, with them (`Tests/Pickle/wsl-deps.map`), and one per language. **No incompatibility pass**, and
+mods, with them (`Tests/Pickle/wsl-deps.avec-facultatifs.map`), and one per language. **No incompatibility pass**, and
 the reason is recorded: `About.xml` declares no `incompatibleWith`.
 
-`wsl-deps.map` mounts all six optional integrations, every packageId read from that mod's own
+`wsl-deps.avec-facultatifs.map` mounts all six optional integrations, every packageId read from that mod's own
 About.xml on 2026-09-21 rather than from its Workshop title — three of them are continuations whose
 title and packageId disagree. No Max Bills: Redux (3526216885) is staged too although the mod
 neither declares nor reaches it: it raises the per-bench bill ceiling from 15 to 125, a number the
@@ -93,13 +164,12 @@ for failures.
 ### Checks performed on the suite itself
 
 - `dotnet build Tests/Pickle/Source/BillAutopilot.PickleSteps.csproj -c Release`: success, 0 warnings.
-- Every step text used in the 19 features resolves: 98 distinct texts against the 84 defined here
-  plus Pickle's 202 built-ins, **0 undefined**. An undefined step costs a whole run, so this was
-  checked mechanically rather than by reading.
-- **0 duplicate** step texts here, **0 collisions** with Pickle's own vocabulary, and **0 collisions**
-  with the SkillIcons, WorkStudio, ArchitectStudio and QuietNewFactions suites on this machine. Two
-  suites sharing a step text produce "Ambiguous step" and fail healthy scenarios.
-- **0 steps defined and unused**; two written and unreached were deleted rather than kept.
+- Every step text used in the 19 features resolves against the ones defined here plus Pickle's 202
+  built-ins, **0 undefined**. An undefined step costs a whole run, so this was checked mechanically
+  rather than by reading. *(This text-level check missed two real defects; see the run below.)*
+- **0 collisions** with Pickle's own vocabulary, and **0 collisions** with the SkillIcons,
+  WorkStudio, ArchitectStudio and QuietNewFactions suites on this machine. Two suites sharing a step
+  text produce "Ambiguous step" and fail healthy scenarios.
 - No scenario spells an English label: every marker, dialog, letter and message is rebuilt from the
   mod's own translation key, so the same suite is the French pass.
 - `Tests/ValidateXml.ps1`: **407 XML CHECKS PASSED**, unchanged — the test mod lives outside `Mod/`.

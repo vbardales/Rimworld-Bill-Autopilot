@@ -20,7 +20,7 @@ Feature: the profile window, as a person has to read it
     Given the save "test-colony" is loaded
     And Bill Autopilot settings are at their defaults
     And a "HandTailoringBench" is built at (140, 155)
-    And Bill Autopilot is on for "HandTailoringBench"
+    And Bill Autopilot is switched on for "HandTailoringBench"
     And I close all dialogs
 
   @review
@@ -49,7 +49,7 @@ Feature: the profile window, as a person has to read it
   @review
   Scenario: the window on a bench whose recipes the game cannot count
     Given a "ButcherSpot" is built at (146, 155)
-    And Bill Autopilot is on for "ButcherSpot"
+    And Bill Autopilot is switched on for "ButcherSpot"
     When Bill Autopilot's profile window for "ButcherSpot" is opened
     And I take a screenshot "profile window: a bench with an uncountable recipe, and its own setting"
     And I close all dialogs

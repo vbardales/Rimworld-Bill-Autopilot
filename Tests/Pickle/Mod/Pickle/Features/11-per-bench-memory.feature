@@ -16,7 +16,7 @@ Feature: the memory is held per workbench, not per workbench type
     And Bill Autopilot settings are at their defaults
     And a "HandTailoringBench" is built at (140, 155)
     And a "HandTailoringBench" is built at (144, 155)
-    And Bill Autopilot is on for "HandTailoringBench"
+    And Bill Autopilot is switched on for "HandTailoringBench"
     And Bill Autopilot keeps 50 of everything on "HandTailoringBench", restarting at 25
     And the Bill Autopilot test stockpile at (134, 150) holds 10 "Leather_Patch"
     And Bill Autopilot syncs the "HandTailoringBench" at (140, 155)
@@ -26,8 +26,8 @@ Feature: the memory is held per workbench, not per workbench type
   # two names differ by more than a digit on purpose: a failure message quoting the wrong one should
   # be unmistakable.
   Scenario: each bench gets its own name back after a down-and-up cycle
-    When Bill Autopilot's bill for "Make_Patchleather" on the "HandTailoringBench" at (140, 155) is named "north bench"
-    And Bill Autopilot's bill for "Make_Patchleather" on the "HandTailoringBench" at (144, 155) is named "south bench"
+    When Bill Autopilot's bill for "Make_Patchleather" on the "HandTailoringBench" at (140, 155) is renamed "north bench"
+    And Bill Autopilot's bill for "Make_Patchleather" on the "HandTailoringBench" at (144, 155) is renamed "south bench"
 
     Given the Bill Autopilot test stockpile at (134, 150) holds 60 "Leather_Patch"
     When Bill Autopilot syncs the "HandTailoringBench" at (140, 155)
@@ -51,8 +51,8 @@ Feature: the memory is held per workbench, not per workbench type
   # refill is on the mod's own interval of 600 ticks. The runner drives ticks far faster than real
   # time, so this costs under a second.
   Scenario: deconstructing a bench drops its entry and leaves the other alone
-    When Bill Autopilot's bill for "Make_Patchleather" on the "HandTailoringBench" at (140, 155) is named "north bench"
-    And Bill Autopilot's bill for "Make_Patchleather" on the "HandTailoringBench" at (144, 155) is named "south bench"
+    When Bill Autopilot's bill for "Make_Patchleather" on the "HandTailoringBench" at (140, 155) is renamed "north bench"
+    And Bill Autopilot's bill for "Make_Patchleather" on the "HandTailoringBench" at (144, 155) is renamed "south bench"
     Given the Bill Autopilot test stockpile at (134, 150) holds 60 "Leather_Patch"
     When Bill Autopilot syncs the "HandTailoringBench" at (140, 155)
     And Bill Autopilot syncs the "HandTailoringBench" at (144, 155)
