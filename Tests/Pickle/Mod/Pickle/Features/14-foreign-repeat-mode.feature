@@ -34,16 +34,16 @@ Feature: a repeat mode belonging to another mod is set, kept and asked
   @requires:Memegoddess.EverybodyGetsOne
   Scenario: a mode set by hand in the tab is recorded and comes back
     Given Bill Autopilot keeps 50 of everything on "HandTailoringBench", restarting at 25
-    And the Bill Autopilot test stockpile at (134, 150) holds 10 "Leather_Patch"
+    And the Bill Autopilot test stockpile holds 10 "Leather_Patch"
     And Bill Autopilot syncs the "HandTailoringBench" at (140, 155)
 
     When Bill Autopilot's bill for "Make_Patchleather" on the "HandTailoringBench" at (140, 155) is set to the repeat mode "TD_XPerPerson"
     And Bill Autopilot syncs the "HandTailoringBench" at (140, 155)
     Then Bill Autopilot has "Make_Patchleather" set to "another mod" on "HandTailoringBench"
 
-    Given the Bill Autopilot test stockpile at (134, 150) holds 500 "Leather_Patch"
+    Given the Bill Autopilot test stockpile holds 500 "Leather_Patch"
     When Bill Autopilot syncs the "HandTailoringBench" at (140, 155)
-    Given the Bill Autopilot test stockpile at (134, 150) holds 0 "Leather_Patch"
+    Given the Bill Autopilot test stockpile holds 0 "Leather_Patch"
     When Bill Autopilot syncs the "HandTailoringBench" at (140, 155)
     Then Bill Autopilot's bill for "Make_Patchleather" on the "HandTailoringBench" at (140, 155) has the repeat mode "TD_XPerPerson"
 
@@ -53,7 +53,7 @@ Feature: a repeat mode belonging to another mod is set, kept and asked
   Scenario: a mode whose owner is gone falls back to keeping a stock
     Given Bill Autopilot keeps 50 of everything on "HandTailoringBench", restarting at 25
     And Bill Autopilot default mode for "HandTailoringBench" is a repeat mode no longer in this game
-    And the Bill Autopilot test stockpile at (134, 150) holds 10 "Leather_Patch"
+    And the Bill Autopilot test stockpile holds 10 "Leather_Patch"
     When Bill Autopilot syncs the "HandTailoringBench" at (140, 155)
     Then Bill Autopilot has a bill up for "Make_Patchleather" on the "HandTailoringBench" at (140, 155)
     And Bill Autopilot's bill for "Make_Patchleather" on the "HandTailoringBench" at (140, 155) keeps 50, restarting at 25

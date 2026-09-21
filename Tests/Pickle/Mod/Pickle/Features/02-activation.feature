@@ -35,7 +35,7 @@ Feature: switching a workbench type on asks first, and takes everything already 
     When Bill Autopilot syncs the "HandTailoringBench" at (140, 155)
     Then Bill Autopilot has a bill up for "Make_Patchleather" on the "HandTailoringBench" at (140, 155)
     And Bill Autopilot's bill for "Make_Patchleather" on the "HandTailoringBench" at (140, 155) is running
-    And Bill Autopilot has announced nothing
+    And Bill Autopilot has not announced "Make_Patchleather" on "HandTailoringBench"
     And no errors were logged
 
   # The question is about the opening intake, and that has already happened in this game. Asking it

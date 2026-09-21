@@ -26,8 +26,9 @@ Feature: what Better Workbench Management adds to a bill survives the autopilot'
     And Bill Autopilot settings are at their defaults
     And a "HandTailoringBench" is built at (140, 155)
     And Bill Autopilot is switched on for "HandTailoringBench"
+    And Bill Autopilot only takes "Make_Patchleather" on "HandTailoringBench"
     And Bill Autopilot keeps 50 of everything on "HandTailoringBench", restarting at 25
-    And the Bill Autopilot test stockpile at (134, 150) holds 10 "Leather_Patch"
+    And the Bill Autopilot test stockpile holds 10 "Leather_Patch"
     And Bill Autopilot syncs the "HandTailoringBench" at (140, 155)
 
   Scenario: the mod found it
@@ -37,11 +38,11 @@ Feature: what Better Workbench Management adds to a bill survives the autopilot'
     Given Better Workbench Management names Bill Autopilot's bill for "Make_Patchleather" on the "HandTailoringBench" at (140, 155) "caravan stock"
     And Better Workbench Management counts Bill Autopilot's bill for "Make_Patchleather" on the "HandTailoringBench" at (140, 155) away from the home map
 
-    Given the Bill Autopilot test stockpile at (134, 150) holds 60 "Leather_Patch"
+    Given the Bill Autopilot test stockpile holds 60 "Leather_Patch"
     When Bill Autopilot syncs the "HandTailoringBench" at (140, 155)
     Then Bill Autopilot has no bill up for "Make_Patchleather" on the "HandTailoringBench" at (140, 155)
 
-    Given the Bill Autopilot test stockpile at (134, 150) holds 10 "Leather_Patch"
+    Given the Bill Autopilot test stockpile holds 10 "Leather_Patch"
     When Bill Autopilot syncs the "HandTailoringBench" at (140, 155)
     Then Bill Autopilot has a bill up for "Make_Patchleather" on the "HandTailoringBench" at (140, 155)
     And Better Workbench Management still names Bill Autopilot's bill for "Make_Patchleather" on the "HandTailoringBench" at (140, 155) "caravan stock"
@@ -51,17 +52,19 @@ Feature: what Better Workbench Management adds to a bill survives the autopilot'
   # Membership in a link group, which is the one that cannot be faked by re-setting a field: the
   # returning bill has to rejoin the group its predecessor was in rather than start a new one, and
   # on a single bill those two look exactly alike.
+  # A second recipe is let back in for this one: the Background narrows the bench to one, and a link
+  # group of one bill is not a link group. Make_Apparel_Pants is available from the start in this
+  # fixture, so it needs no research and arrives running rather than suspended.
   Scenario: a linked bill rejoins its group rather than starting a new one
-    Given research "ComplexClothing" is finished
-    And Bill Autopilot syncs the "HandTailoringBench" at (140, 155)
-    When Bill Autopilot's bill for "Make_Apparel_Pants" on the "HandTailoringBench" at (140, 155) is unsuspended
-    And Bill Autopilot syncs the "HandTailoringBench" at (140, 155)
+    Given Bill Autopilot's rule for "Make_Apparel_Pants" on "HandTailoringBench" is set back to the default
+    When Bill Autopilot syncs the "HandTailoringBench" at (140, 155)
+    Then Bill Autopilot has a bill up for "Make_Apparel_Pants" on the "HandTailoringBench" at (140, 155)
     Given Better Workbench Management links Bill Autopilot's bills for "Make_Patchleather" and "Make_Apparel_Pants" on the "HandTailoringBench" at (140, 155)
 
-    Given the Bill Autopilot test stockpile at (134, 150) holds 60 "Leather_Patch"
+    Given the Bill Autopilot test stockpile holds 60 "Leather_Patch"
     When Bill Autopilot syncs the "HandTailoringBench" at (140, 155)
     Then Bill Autopilot has no bill up for "Make_Patchleather" on the "HandTailoringBench" at (140, 155)
 
-    Given the Bill Autopilot test stockpile at (134, 150) holds 10 "Leather_Patch"
+    Given the Bill Autopilot test stockpile holds 10 "Leather_Patch"
     When Bill Autopilot syncs the "HandTailoringBench" at (140, 155)
     Then Better Workbench Management still links Bill Autopilot's bills for "Make_Patchleather" and "Make_Apparel_Pants" on the "HandTailoringBench" at (140, 155)

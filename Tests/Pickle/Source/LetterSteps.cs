@@ -37,14 +37,25 @@ namespace BillAutopilot.PickleSteps
                 + Describe());
         }
 
-        [Then("Bill Autopilot has announced nothing")]
-        public void AssertSilent(PickleContext ctx)
+        /// <summary>
+        /// Named per recipe, not "the stack is empty".
+        ///
+        /// The first real run failed two scenarios on "the letter stack is not empty: Fallen
+        /// monolith". That was the assertion's fault, not the mod's: the fixture is a played colony
+        /// under Anomaly and the game raises letters of its own whenever it likes. What a scenario
+        /// here means is that THIS recipe was absorbed in silence, and that is what is asked.
+        /// </summary>
+        [Then("Bill Autopilot has not announced {string} on {string}")]
+        public void AssertNotAnnounced(PickleContext ctx, string recipeDefName, string benchDefName)
         {
-            var titles = Letters().Select(l => l.Label).ToArray();
-            ctx.Assert(titles.Length == 0,
-                "the letter stack is not empty: " + Describe()
-                + ". A recipe already unlocked when the bench was switched on is absorbed in silence; "
-                + "only what is unlocked afterwards announces itself");
+            var bench = Driver.BenchDef(ctx, benchDefName);
+            var recipe = Driver.Recipe(ctx, recipeDefName);
+            string line = "BillAutopilot.NewRecipeLine".Translate(recipe.LabelCap, bench.LabelCap).Resolve();
+
+            ctx.Assert(!Letters().Any(l => Text(l).Contains(line)),
+                $"a letter announces {recipeDefName} on {benchDefName}. A recipe already unlocked "
+                + "when the bench was switched on is absorbed in silence; only what is unlocked "
+                + "afterwards announces itself. The stack holds: " + Describe());
         }
 
         private static System.Collections.Generic.List<Letter> Letters() =>

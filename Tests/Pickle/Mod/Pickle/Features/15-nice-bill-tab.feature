@@ -20,13 +20,14 @@ Feature: Nice Bill Tab's cached row list is told whenever the autopilot changes 
     And Bill Autopilot settings are at their defaults
     And a "HandTailoringBench" is built at (140, 155)
     And Bill Autopilot is switched on for "HandTailoringBench"
+    And Bill Autopilot only takes "Make_Patchleather" on "HandTailoringBench"
     And Bill Autopilot keeps 50 of everything on "HandTailoringBench", restarting at 25
 
   Scenario: the mod found it
     Then Bill Autopilot found Nice Bill Tab
 
   Scenario: putting a bill up tells the list to rebuild
-    Given the Bill Autopilot test stockpile at (134, 150) holds 10 "Leather_Patch"
+    Given the Bill Autopilot test stockpile holds 10 "Leather_Patch"
     And Nice Bill Tab's row cache is marked as up to date
     When Bill Autopilot syncs the "HandTailoringBench" at (140, 155)
     Then Bill Autopilot has a bill up for "Make_Patchleather" on the "HandTailoringBench" at (140, 155)
@@ -35,11 +36,11 @@ Feature: Nice Bill Tab's cached row list is told whenever the autopilot changes 
   # The dangerous direction. A row for a bill that no longer exists is what a drag can resurrect, so
   # the flag matters more on the way down than on the way up.
   Scenario: taking a bill down tells the list to rebuild
-    Given the Bill Autopilot test stockpile at (134, 150) holds 10 "Leather_Patch"
+    Given the Bill Autopilot test stockpile holds 10 "Leather_Patch"
     When Bill Autopilot syncs the "HandTailoringBench" at (140, 155)
     Then Bill Autopilot has a bill up for "Make_Patchleather" on the "HandTailoringBench" at (140, 155)
 
-    Given the Bill Autopilot test stockpile at (134, 150) holds 60 "Leather_Patch"
+    Given the Bill Autopilot test stockpile holds 60 "Leather_Patch"
     And Nice Bill Tab's row cache is marked as up to date
     When Bill Autopilot syncs the "HandTailoringBench" at (140, 155)
     Then Bill Autopilot has no bill up for "Make_Patchleather" on the "HandTailoringBench" at (140, 155)
@@ -51,7 +52,7 @@ Feature: Nice Bill Tab's cached row list is told whenever the autopilot changes 
   # survives a tab that builds its rows its own way. That question is what the picture is for.
   @review
   Scenario: the replaced tab, for a person to look at
-    Given the Bill Autopilot test stockpile at (134, 150) holds 10 "Leather_Patch"
+    Given the Bill Autopilot test stockpile holds 10 "Leather_Patch"
     When Bill Autopilot syncs the "HandTailoringBench" at (140, 155)
     And I add bill "Make_Apparel_Pants" to the "HandTailoringBench" at (140, 155)
     And the bills tab of the Bill Autopilot bench "HandTailoringBench" at (140, 155) is opened

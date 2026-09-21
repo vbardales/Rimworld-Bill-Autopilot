@@ -15,8 +15,9 @@ Feature: deleting an automatic bill refuses its recipe, and only an automatic on
     And Bill Autopilot settings are at their defaults
     And a "HandTailoringBench" is built at (140, 155)
     And Bill Autopilot is switched on for "HandTailoringBench"
+    And Bill Autopilot only takes "Make_Patchleather" on "HandTailoringBench"
     And Bill Autopilot keeps 50 of everything on "HandTailoringBench", restarting at 25
-    And the Bill Autopilot test stockpile at (134, 150) holds 10 "Leather_Patch"
+    And the Bill Autopilot test stockpile holds 10 "Leather_Patch"
     And Bill Autopilot syncs the "HandTailoringBench" at (140, 155)
 
   Scenario: deleting a running automatic bill sets its recipe to never
@@ -56,10 +57,10 @@ Feature: deleting an automatic bill refuses its recipe, and only an automatic on
   # retire itself. This is that flag, seen from outside: a bill removed because the stock reached
   # the target leaves the profile untouched, and comes back when the stock falls.
   Scenario: the autopilot taking its own bill down is not a refusal
-    Given the Bill Autopilot test stockpile at (134, 150) holds 50 "Leather_Patch"
+    Given the Bill Autopilot test stockpile holds 50 "Leather_Patch"
     When Bill Autopilot syncs the "HandTailoringBench" at (140, 155)
     Then Bill Autopilot has no bill up for "Make_Patchleather" on the "HandTailoringBench" at (140, 155)
     And Bill Autopilot has no override for "Make_Patchleather" on "HandTailoringBench"
-    Given the Bill Autopilot test stockpile at (134, 150) holds 10 "Leather_Patch"
+    Given the Bill Autopilot test stockpile holds 10 "Leather_Patch"
     When Bill Autopilot syncs the "HandTailoringBench" at (140, 155)
     Then Bill Autopilot has a bill up for "Make_Patchleather" on the "HandTailoringBench" at (140, 155)

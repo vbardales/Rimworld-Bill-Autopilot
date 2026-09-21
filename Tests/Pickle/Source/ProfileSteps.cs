@@ -145,6 +145,46 @@ namespace BillAutopilot.PickleSteps
             BillAutopilotState.Current?.MarkDirty();
         }
 
+        /// <summary>
+        /// Narrows the bench to one recipe, by setting every other one it can do to Never.
+        ///
+        /// Written after the first real run. A tailoring bench in a played colony offers a couple of
+        /// dozen available recipes, so an autopilot on its defaults fills its whole allowance with
+        /// whatever comes first in the bench's list, and a scenario about ONE recipe was really
+        /// asserting against a queue it had not chosen: bills appeared and vanished for hats and
+        /// masks, and the cap decided which. Nothing about the base loop, the marker, the capture or
+        /// the per-bench memory is about how many recipes a bench has.
+        ///
+        /// The feature that IS about the allowance - 10-bill-cap - deliberately does not use this.
+        /// </summary>
+        [Given("Bill Autopilot only takes {string} on {string}")]
+        public void OnlyTake(PickleContext ctx, string recipeDefName, string benchDefName)
+        {
+            var bench = Driver.BenchDef(ctx, benchDefName);
+            var kept = Driver.Recipe(ctx, recipeDefName);
+            var profile = Driver.Settings(ctx).ProfileForWriting(bench);
+
+            bool found = false;
+            var recipes = bench.AllRecipes;
+            for (int i = 0; i < recipes.Count; i++)
+            {
+                var recipe = recipes[i];
+                if (recipe == null) continue;
+
+                if (recipe == kept) { profile.ClearRule(recipe); found = true; }
+                else profile.RuleForWriting(recipe).mode = AutoMode.Excluded;
+            }
+
+            ctx.Require(found,
+                $"{benchDefName} cannot do {recipeDefName} at all. It can do: "
+                + string.Join(", ", System.Linq.Enumerable.ToArray(
+                    System.Linq.Enumerable.Take(
+                        System.Linq.Enumerable.Select(recipes, r => r?.defName ?? "?"), 20))));
+
+            Driver.Mod(ctx).WriteSettings();
+            BillAutopilotState.Current?.MarkDirty();
+        }
+
         [Given("Bill Autopilot keeps {int} of everything on {string}, restarting at {int}")]
         public void SetCounts(PickleContext ctx, int target, string benchDefName, int floor)
         {

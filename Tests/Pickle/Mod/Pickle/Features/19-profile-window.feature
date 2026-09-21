@@ -35,7 +35,7 @@ Feature: the profile window, as a person has to read it
   @review
   Scenario: the window with one recipe overridden
     Given Bill Autopilot keeps 50 of everything on "HandTailoringBench", restarting at 25
-    And the Bill Autopilot test stockpile at (134, 150) holds 10 "Leather_Patch"
+    And the Bill Autopilot test stockpile holds 10 "Leather_Patch"
     And Bill Autopilot syncs the "HandTailoringBench" at (140, 155)
     When Bill Autopilot's bill for "Make_Patchleather" on the "HandTailoringBench" at (140, 155) is set to keep 200, restarting at 100
     And Bill Autopilot syncs the "HandTailoringBench" at (140, 155)

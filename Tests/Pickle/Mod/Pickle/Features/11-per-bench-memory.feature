@@ -17,8 +17,9 @@ Feature: the memory is held per workbench, not per workbench type
     And a "HandTailoringBench" is built at (140, 155)
     And a "HandTailoringBench" is built at (144, 155)
     And Bill Autopilot is switched on for "HandTailoringBench"
+    And Bill Autopilot only takes "Make_Patchleather" on "HandTailoringBench"
     And Bill Autopilot keeps 50 of everything on "HandTailoringBench", restarting at 25
-    And the Bill Autopilot test stockpile at (134, 150) holds 10 "Leather_Patch"
+    And the Bill Autopilot test stockpile holds 10 "Leather_Patch"
     And Bill Autopilot syncs the "HandTailoringBench" at (140, 155)
     And Bill Autopilot syncs the "HandTailoringBench" at (144, 155)
 
@@ -29,7 +30,7 @@ Feature: the memory is held per workbench, not per workbench type
     When Bill Autopilot's bill for "Make_Patchleather" on the "HandTailoringBench" at (140, 155) is renamed "north bench"
     And Bill Autopilot's bill for "Make_Patchleather" on the "HandTailoringBench" at (144, 155) is renamed "south bench"
 
-    Given the Bill Autopilot test stockpile at (134, 150) holds 60 "Leather_Patch"
+    Given the Bill Autopilot test stockpile holds 60 "Leather_Patch"
     When Bill Autopilot syncs the "HandTailoringBench" at (140, 155)
     And Bill Autopilot syncs the "HandTailoringBench" at (144, 155)
     Then Bill Autopilot has no bill up for "Make_Patchleather" on the "HandTailoringBench" at (140, 155)
@@ -37,7 +38,7 @@ Feature: the memory is held per workbench, not per workbench type
     And Bill Autopilot remembers the name "north bench" for "Make_Patchleather" on the "HandTailoringBench" at (140, 155)
     And Bill Autopilot remembers the name "south bench" for "Make_Patchleather" on the "HandTailoringBench" at (144, 155)
 
-    Given the Bill Autopilot test stockpile at (134, 150) holds 10 "Leather_Patch"
+    Given the Bill Autopilot test stockpile holds 10 "Leather_Patch"
     When Bill Autopilot syncs the "HandTailoringBench" at (140, 155)
     And Bill Autopilot syncs the "HandTailoringBench" at (144, 155)
     Then Bill Autopilot's bill for "Make_Patchleather" on the "HandTailoringBench" at (140, 155) is named "north bench"
@@ -53,7 +54,7 @@ Feature: the memory is held per workbench, not per workbench type
   Scenario: deconstructing a bench drops its entry and leaves the other alone
     When Bill Autopilot's bill for "Make_Patchleather" on the "HandTailoringBench" at (140, 155) is renamed "north bench"
     And Bill Autopilot's bill for "Make_Patchleather" on the "HandTailoringBench" at (144, 155) is renamed "south bench"
-    Given the Bill Autopilot test stockpile at (134, 150) holds 60 "Leather_Patch"
+    Given the Bill Autopilot test stockpile holds 60 "Leather_Patch"
     When Bill Autopilot syncs the "HandTailoringBench" at (140, 155)
     And Bill Autopilot syncs the "HandTailoringBench" at (144, 155)
     And Bill Autopilot's memory is counted

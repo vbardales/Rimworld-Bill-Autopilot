@@ -19,8 +19,9 @@ Feature: a bench template holds the player's bills and not the autopilot's
     And Bill Autopilot settings are at their defaults
     And a "HandTailoringBench" is built at (140, 155)
     And Bill Autopilot is switched on for "HandTailoringBench"
+    And Bill Autopilot only takes "Make_Patchleather" on "HandTailoringBench"
     And Bill Autopilot keeps 50 of everything on "HandTailoringBench", restarting at 25
-    And the Bill Autopilot test stockpile at (134, 150) holds 10 "Leather_Patch"
+    And the Bill Autopilot test stockpile holds 10 "Leather_Patch"
     And Bill Autopilot syncs the "HandTailoringBench" at (140, 155)
 
   Scenario: the mod found it

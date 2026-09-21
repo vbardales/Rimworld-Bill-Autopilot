@@ -24,9 +24,15 @@ namespace BillAutopilot.PickleSteps
         /// Exactly N, not "at least N": every existing stack of that def on the map is destroyed
         /// first. A fixture arrives with a colony's worth of odds and ends, and a scenario that only
         /// added to it would be asserting against a number it did not choose.
+        ///
+        /// No cell is named, and that is the fix for the first real run of this suite: seven
+        /// scenarios died on "no free cell for a stockpile at (134, 150)" because the fixture's
+        /// colony already occupies that square. Where the stock sits is not something any scenario
+        /// here has an opinion about, so the step finds its own room instead of making the feature
+        /// files carry a map layout they would have to be corrected against every fixture.
         /// </summary>
-        [Given("the Bill Autopilot test stockpile at \\({int}, {int}\\) holds {int} {string}")]
-        public void SetStock(PickleContext ctx, int x, int z, int count, string thingDefName)
+        [Given("the Bill Autopilot test stockpile holds {int} {string}")]
+        public void SetStock(PickleContext ctx, int count, string thingDefName)
         {
             var map = Driver.Map(ctx);
             var def = DefDatabase<ThingDef>.GetNamedSilentFail(thingDefName);
@@ -35,7 +41,7 @@ namespace BillAutopilot.PickleSteps
                 $"{thingDefName} is made from stuff, so 'how many' is not a whole answer: pick a "
                 + "product with no stuff, or extend this step to name one");
 
-            var zone = StockpileAt(ctx, map, x, z);
+            var zone = TestStockpile(ctx, map, count, def);
 
             foreach (var existing in map.listerThings.ThingsOfDef(def).ToList())
             {
@@ -55,49 +61,55 @@ namespace BillAutopilot.PickleSteps
             }
 
             ctx.Require(left <= 0,
-                $"the stockpile at ({x}, {z}) holds {zone.Cells.Count} cells, room for "
-                + $"{zone.Cells.Count * def.stackLimit} {thingDefName} and not {count}: make it bigger");
+                $"the test stockpile holds {zone.Cells.Count} cells, room for "
+                + $"{zone.Cells.Count * def.stackLimit} {thingDefName} and not {count}");
 
             // ResourceCounter recounts on its own every few hundred ticks. A check fired straight
             // after a spawn would otherwise read the old number and blame the mod for it.
             map.resourceCounter.UpdateResourceCounts();
         }
 
-        /// <summary>
-        /// A stockpile the scenario owns. Reused when the same cell is asked for twice, so a scenario
-        /// can move its stock up and down across several steps without stacking zone on zone.
-        /// </summary>
-        private static Zone_Stockpile StockpileAt(PickleContext ctx, Map map, int x, int z)
-        {
-            var origin = new IntVec3(x, 0, z);
-            ctx.Require(origin.InBounds(map),
-                $"({x}, {z}) is outside this {map.Size.x} x {map.Size.z} map");
+        /// <summary>The label the test stockpile carries, so a scenario can find the one it made.</summary>
+        private const string ZoneLabel = "BillAutopilot test stock";
 
-            if (map.zoneManager.ZoneAt(origin) is Zone_Stockpile existing) return existing;
+        /// <summary>
+        /// The scenario's own stockpile, made once and reused. It is found again by its label rather
+        /// than by a remembered reference: a save reload replaces every object in the game, and a
+        /// scenario that moves its stock across a round trip would otherwise be filling a zone that
+        /// no longer belongs to the live map.
+        ///
+        /// Room is taken wherever the map has it. The whole map is swept in reading order for enough
+        /// free, unzoned, walkable cells; a colony's buildings, existing zones and walls are simply
+        /// skipped. Only a map with no room at all fails, and it says how many cells it wanted.
+        /// </summary>
+        private static Zone_Stockpile TestStockpile(PickleContext ctx, Map map, int count, ThingDef def)
+        {
+            foreach (var existing in map.zoneManager.AllZones)
+            {
+                if (existing is Zone_Stockpile mine && mine.label == ZoneLabel) return mine;
+            }
+
+            // One cell per stack, plus a margin, so a scenario asking for a large stock is not
+            // refused by a zone sized for a small one.
+            int wanted = count / System.Math.Max(1, def.stackLimit) + 2;
+
+            var cells = new List<IntVec3>();
+            foreach (var cell in map.AllCells)
+            {
+                if (cells.Count >= wanted) break;
+                if (map.zoneManager.ZoneAt(cell) != null) continue;
+                if (cell.GetEdifice(map) != null) continue;
+                if (!cell.Standable(map)) continue;
+                cells.Add(cell);
+            }
+
+            ctx.Require(cells.Count >= wanted,
+                $"this map has {cells.Count} free unzoned cells and {wanted} are needed to hold "
+                + $"{count} {def.defName}: everything else is built on, zoned or impassable");
 
             var zone = new Zone_Stockpile(StorageSettingsPreset.DefaultStockpile, map.zoneManager);
             map.zoneManager.RegisterZone(zone);
-
-            var cells = new List<IntVec3>();
-            for (int dx = 0; dx < 5; dx++)
-            {
-                for (int dz = 0; dz < 5; dz++)
-                {
-                    var cell = new IntVec3(x + dx, 0, z + dz);
-
-                    // A cell already zoned, or one a zone cannot cover, is skipped rather than fought
-                    // over: RimWorld's own designator does the same, and a stockpile of 23 cells
-                    // serves this suite exactly as well as one of 25.
-                    if (!cell.InBounds(map) || map.zoneManager.ZoneAt(cell) != null) continue;
-                    if (cell.GetEdifice(map) != null) continue;
-                    cells.Add(cell);
-                }
-            }
-
-            ctx.Require(cells.Count > 0,
-                $"no free cell for a stockpile at ({x}, {z}): every cell in the 5 x 5 square is "
-                + "already zoned or built on");
-
+            zone.label = ZoneLabel;
             foreach (var cell in cells) zone.AddCell(cell);
             return zone;
         }

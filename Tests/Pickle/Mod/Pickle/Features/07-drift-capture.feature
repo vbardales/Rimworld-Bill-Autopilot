@@ -18,8 +18,9 @@ Feature: a change made in the bills tab is kept as a profile override
     And Bill Autopilot settings are at their defaults
     And a "HandTailoringBench" is built at (140, 155)
     And Bill Autopilot is switched on for "HandTailoringBench"
+    And Bill Autopilot only takes "Make_Patchleather" on "HandTailoringBench"
     And Bill Autopilot keeps 50 of everything on "HandTailoringBench", restarting at 25
-    And the Bill Autopilot test stockpile at (134, 150) holds 10 "Leather_Patch"
+    And the Bill Autopilot test stockpile holds 10 "Leather_Patch"
     And Bill Autopilot syncs the "HandTailoringBench" at (140, 155)
 
   Scenario: a new target set in the tab is written to the profile
@@ -33,10 +34,10 @@ Feature: a change made in the bills tab is kept as a profile override
   Scenario: the bill returns with the new target, not the old one
     When Bill Autopilot's bill for "Make_Patchleather" on the "HandTailoringBench" at (140, 155) is set to keep 200, restarting at 100
     And Bill Autopilot syncs the "HandTailoringBench" at (140, 155)
-    Given the Bill Autopilot test stockpile at (134, 150) holds 200 "Leather_Patch"
+    Given the Bill Autopilot test stockpile holds 200 "Leather_Patch"
     When Bill Autopilot syncs the "HandTailoringBench" at (140, 155)
     Then Bill Autopilot has no bill up for "Make_Patchleather" on the "HandTailoringBench" at (140, 155)
-    Given the Bill Autopilot test stockpile at (134, 150) holds 50 "Leather_Patch"
+    Given the Bill Autopilot test stockpile holds 50 "Leather_Patch"
     When Bill Autopilot syncs the "HandTailoringBench" at (140, 155)
     Then Bill Autopilot has a bill up for "Make_Patchleather" on the "HandTailoringBench" at (140, 155)
     And Bill Autopilot's bill for "Make_Patchleather" on the "HandTailoringBench" at (140, 155) keeps 200, restarting at 100
@@ -45,7 +46,7 @@ Feature: a change made in the bills tab is kept as a profile override
     When Bill Autopilot's bill for "Make_Patchleather" on the "HandTailoringBench" at (140, 155) is set to repeat forever
     And Bill Autopilot syncs the "HandTailoringBench" at (140, 155)
     Then Bill Autopilot has "Make_Patchleather" set to "always" on "HandTailoringBench"
-    Given the Bill Autopilot test stockpile at (134, 150) holds 500 "Leather_Patch"
+    Given the Bill Autopilot test stockpile holds 500 "Leather_Patch"
     When Bill Autopilot syncs the "HandTailoringBench" at (140, 155)
     Then Bill Autopilot has a bill up for "Make_Patchleather" on the "HandTailoringBench" at (140, 155)
 

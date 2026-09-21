@@ -16,28 +16,29 @@ Feature: the base loop, and the gap that stops it flickering
     And Bill Autopilot settings are at their defaults
     And a "HandTailoringBench" is built at (140, 155)
     And Bill Autopilot is switched on for "HandTailoringBench"
+    And Bill Autopilot only takes "Make_Patchleather" on "HandTailoringBench"
     And Bill Autopilot keeps 50 of everything on "HandTailoringBench", restarting at 25
 
   Scenario: the stock this scenario sets is the stock the autopilot reads
-    Given the Bill Autopilot test stockpile at (134, 150) holds 30 "Leather_Patch"
+    Given the Bill Autopilot test stockpile holds 30 "Leather_Patch"
     Then Bill Autopilot counts 30 of "Make_Patchleather" on the "HandTailoringBench" at (140, 155)
 
   Scenario: a bill goes up at or below the restart number
-    Given the Bill Autopilot test stockpile at (134, 150) holds 20 "Leather_Patch"
+    Given the Bill Autopilot test stockpile holds 20 "Leather_Patch"
     When Bill Autopilot syncs the "HandTailoringBench" at (140, 155)
     Then Bill Autopilot has a bill up for "Make_Patchleather" on the "HandTailoringBench" at (140, 155)
     And Bill Autopilot's bill for "Make_Patchleather" on the "HandTailoringBench" at (140, 155) keeps 50, restarting at 25
 
   Scenario: no bill between the restart number and the target
-    Given the Bill Autopilot test stockpile at (134, 150) holds 30 "Leather_Patch"
+    Given the Bill Autopilot test stockpile holds 30 "Leather_Patch"
     When Bill Autopilot syncs the "HandTailoringBench" at (140, 155)
     Then Bill Autopilot has no bill up for "Make_Patchleather" on the "HandTailoringBench" at (140, 155)
 
   Scenario: the bill comes down once the stock reaches the target
-    Given the Bill Autopilot test stockpile at (134, 150) holds 20 "Leather_Patch"
+    Given the Bill Autopilot test stockpile holds 20 "Leather_Patch"
     When Bill Autopilot syncs the "HandTailoringBench" at (140, 155)
     Then Bill Autopilot has a bill up for "Make_Patchleather" on the "HandTailoringBench" at (140, 155)
-    Given the Bill Autopilot test stockpile at (134, 150) holds 50 "Leather_Patch"
+    Given the Bill Autopilot test stockpile holds 50 "Leather_Patch"
     When Bill Autopilot syncs the "HandTailoringBench" at (140, 155)
     Then Bill Autopilot has no bill up for "Make_Patchleather" on the "HandTailoringBench" at (140, 155)
 
@@ -46,16 +47,16 @@ Feature: the base loop, and the gap that stops it flickering
   # target looks like from the bench's point of view. A mod with one threshold puts the bill back at
   # 49 and the tab flickers a row on every unit made.
   Scenario: the bill does not come back while the stock is still inside the band
-    Given the Bill Autopilot test stockpile at (134, 150) holds 50 "Leather_Patch"
+    Given the Bill Autopilot test stockpile holds 50 "Leather_Patch"
     When Bill Autopilot syncs the "HandTailoringBench" at (140, 155)
     Then Bill Autopilot has no bill up for "Make_Patchleather" on the "HandTailoringBench" at (140, 155)
-    Given the Bill Autopilot test stockpile at (134, 150) holds 49 "Leather_Patch"
+    Given the Bill Autopilot test stockpile holds 49 "Leather_Patch"
     When Bill Autopilot syncs the "HandTailoringBench" at (140, 155)
     Then Bill Autopilot has no bill up for "Make_Patchleather" on the "HandTailoringBench" at (140, 155)
-    Given the Bill Autopilot test stockpile at (134, 150) holds 26 "Leather_Patch"
+    Given the Bill Autopilot test stockpile holds 26 "Leather_Patch"
     When Bill Autopilot syncs the "HandTailoringBench" at (140, 155)
     Then Bill Autopilot has no bill up for "Make_Patchleather" on the "HandTailoringBench" at (140, 155)
-    Given the Bill Autopilot test stockpile at (134, 150) holds 25 "Leather_Patch"
+    Given the Bill Autopilot test stockpile holds 25 "Leather_Patch"
     When Bill Autopilot syncs the "HandTailoringBench" at (140, 155)
     Then Bill Autopilot has a bill up for "Make_Patchleather" on the "HandTailoringBench" at (140, 155)
     And no errors were logged

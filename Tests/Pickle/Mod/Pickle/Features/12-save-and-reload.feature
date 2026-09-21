@@ -21,8 +21,9 @@ Feature: everything the autopilot knows survives a save and a reload
     And Bill Autopilot settings are at their defaults
     And a "HandTailoringBench" is built at (140, 155)
     And Bill Autopilot is switched on for "HandTailoringBench"
+    And Bill Autopilot only takes "Make_Patchleather" on "HandTailoringBench"
     And Bill Autopilot keeps 50 of everything on "HandTailoringBench", restarting at 25
-    And the Bill Autopilot test stockpile at (134, 150) holds 10 "Leather_Patch"
+    And the Bill Autopilot test stockpile holds 10 "Leather_Patch"
     And Bill Autopilot syncs the "HandTailoringBench" at (140, 155)
 
   # Ownership is the load-bearing part. A bill whose stamp did not survive stops being the
@@ -51,7 +52,7 @@ Feature: everything the autopilot knows survives a save and a reload
     Then Bill Autopilot has already met "Make_Patchleather" on "HandTailoringBench"
     When Bill Autopilot syncs the "HandTailoringBench" at (140, 155)
     And I wait 120 ticks
-    Then Bill Autopilot has announced nothing
+    Then Bill Autopilot has not announced "Make_Patchleather" on "HandTailoringBench"
 
   # The whole graft in one step: Pickle's own round trip fails if anything hits the error log during
   # the save and the load. A Class attribute written where none belongs, or a node the loader cannot
