@@ -64,10 +64,12 @@ It proves the mod holds in the decor it will really be loaded in. Green on the f
 nothing about this one, and the reverse is just as true: a scenario can pass *only* because an
 optional mod is there.
 
-Whether any two of them cannot cohabit is **not known yet**, and the first run of this set is what
-will say. Nice Bill Tab redraws the whole bills tab, Better Workbench Management adds to it, and
-Dubs Mint Menus keeps its own menu beside it. If two turn out to be exclusive, this set splits into
-one named set per combination, so that every exclusion is played at least once.
+**One set, not several.** The doctrine asks for a named set per exclusive combination, and Nice Bill
+Tab redraws the whole bills tab while Better Workbench Management adds to it and Dubs Mint Menus
+keeps its own menu beside it — so the question was worth asking. Virginie, who plays with these, has
+seen no incompatibility between them (2026-09-21). That is a player's experience rather than a
+measurement, which is why this pass exists: a scenario going red because two neighbours fight is a
+real result, and the answer is to split this set per combination, not to loosen the scenario.
 
 **3. Each language, in its own pass.** The language is fixed at staging and never switched inside a
 run: `SelectLanguage` reloads every piece of game data underneath the runner.

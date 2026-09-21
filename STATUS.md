@@ -79,8 +79,12 @@ title and packageId disagree. No Max Bills: Redux (3526216885) is staged too alt
 neither declares nor reaches it: it raises the per-bench bill ceiling from 15 to 125, a number the
 mod is documented to honour, and scenario 10 reads that ceiling live instead of hard-coding it.
 
-Whether any two of the six cannot cohabit is not established: the first run of that set is what will
-say, and two that turn out to be exclusive need a named set each.
+One set covers the six rather than several. A named set is owed per exclusive combination, and the
+question is a fair one — Nice Bill Tab redraws the whole bills tab, Better Workbench Management adds
+to it, Dubs Mint Menus keeps its own menu beside it. Virginie, who plays with these mods, reports
+seeing no incompatibility between them (2026-09-21). Recorded as what it is: a player's experience,
+not a measurement. A scenario going red in that pass because two neighbours fight would be a real
+result, and the answer would be to split the set per combination.
 
 In the minimal pass the integration scenarios carry `@requires:` and are **skipped**, so that pass
 is green with about a dozen scenarios never played. Its report has to be read for skips as well as

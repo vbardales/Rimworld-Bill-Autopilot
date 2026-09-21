@@ -70,10 +70,12 @@ manual. The numbered scenarios below are what the features were written from.
    powershell.exe -ExecutionPolicy Bypass -File scripts/Run-PickleWsl.ps1 -Mod BillAutopilot -DepMap wsl-deps.map
    ```
 
-   Whether any two of them cannot cohabit is not known yet, and the first run of this set is what
-   will say: Nice Bill Tab redraws the whole bills tab, Better Workbench Management adds to it, and
-   Dubs Mint Menus keeps its own menu beside it. Two mods that turn out to be exclusive need a named
-   set each, so that every exclusive combination is played at least once.
+   **One set covers them, not several.** A named set is owed per exclusive combination, and the
+   question is a fair one here — Nice Bill Tab redraws the whole bills tab, Better Workbench
+   Management adds to it, Dubs Mint Menus keeps its own menu beside it. Virginie, who plays with
+   these mods, has seen no incompatibility between them (2026-09-21). That is a player's experience,
+   not a measurement, which is what this pass is for: a scenario going red because two neighbours
+   fight is a real result, and the answer to it is to split the set per combination.
 
 3. **Each language, in its own pass.** `-Language French`. The language is fixed at staging and
    never switched inside a run. No scenario spells an English string — every label, marker, dialog

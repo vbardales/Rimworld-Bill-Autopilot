@@ -33,10 +33,15 @@
 #                                changes nothing here" is a claim, and this pass is where the rest
 #                                of the suite stays green beside it or does not
 #
-# NOT KNOWN YET, and the first run of this set is what will say: whether any two of these cannot
-# cohabit. Nice Bill Tab redraws the whole bills tab, Better Workbench Management adds to it, and
-# Dubs Mint Menus keeps its own menu beside it. If two turn out to be exclusive, this set splits
-# into one named set per combination, so that every exclusion is played at least once.
+# ONE SET, not several. The doctrine wants a named set per exclusive combination, so the question
+# had to be answered before writing this file: Nice Bill Tab redraws the whole bills tab, Better
+# Workbench Management adds to it, and Dubs Mint Menus keeps its own menu beside it.
+#
+# Virginie, who plays with these, has seen no incompatibility between them (2026-09-21). That is
+# the best evidence available and it is what this single set rests on - it is a player's experience,
+# not a measurement, which is exactly why the pass exists. A scenario going red here because two
+# neighbours fight is a real result, and the answer to it is to split this file into one named set
+# per combination rather than to widen a tolerance.
 #
 # packageId                     workshopId   what it is
 justharry.nomaxbillsredux       3526216885   No Max Bills: Redux
