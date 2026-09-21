@@ -48,7 +48,13 @@ namespace BillAutopilot.PickleSteps
                 existing.Destroy(DestroyMode.Vanish);
             }
 
+            // GenSpawn rather than GenPlace: GenPlace REFUSES a cell it dislikes and returns false,
+            // and the first version of this step ignored that answer. Nothing was spawned, the stock
+            // stayed at zero, and the failure surfaced three steps later as "the autopilot counts 0,
+            // not 30" - which reads as a broken threshold in the mod. GenSpawn puts the stack where
+            // it is told.
             int left = count;
+            int placed = 0;
             foreach (var cell in zone.Cells)
             {
                 if (left <= 0) break;
@@ -56,7 +62,8 @@ namespace BillAutopilot.PickleSteps
                 int stack = left < def.stackLimit ? left : def.stackLimit;
                 var thing = ThingMaker.MakeThing(def);
                 thing.stackCount = stack;
-                GenPlace.TryPlaceThing(thing, cell, map, ThingPlaceMode.Direct);
+                GenSpawn.Spawn(thing, cell, map);
+                placed += stack;
                 left -= stack;
             }
 
@@ -67,6 +74,17 @@ namespace BillAutopilot.PickleSteps
             // ResourceCounter recounts on its own every few hundred ticks. A check fired straight
             // after a spawn would otherwise read the old number and blame the mod for it.
             map.resourceCounter.UpdateResourceCounts();
+
+            // And the step proves its own work before handing back. What the scenarios care about is
+            // not that stacks exist somewhere but that the game COUNTS them, which is a different
+            // claim: a stack outside storage, or on a cell the zone does not really cover, exists
+            // and counts for nothing. Checked through the game's own counter, so a stock this step
+            // cannot make is reported here, by the step that failed to make it.
+            int seen = map.resourceCounter.GetCount(def);
+            ctx.Require(seen == count,
+                $"{placed} {thingDefName} were spawned into the test stockpile of {zone.Cells.Count} "
+                + $"cells, and the game counts {seen}. A stack that is not in storage counts for "
+                + "nothing, so no threshold in this scenario would mean what it says");
         }
 
         /// <summary>The label the test stockpile carries, so a scenario can find the one it made.</summary>
@@ -93,14 +111,22 @@ namespace BillAutopilot.PickleSteps
             // refused by a zone sized for a small one.
             int wanted = count / System.Math.Max(1, def.stackLimit) + 2;
 
+            // Swept outwards from the middle of the map rather than from its corner. A corner is as
+            // free as anywhere and works for storage, but the colony is in the middle, and a
+            // stockpile the scenarios can also be photographed beside is worth the two extra lines.
             var cells = new List<IntVec3>();
-            foreach (var cell in map.AllCells)
+            var centre = map.Center;
+            for (int radius = 0; radius < map.Size.x && cells.Count < wanted; radius += 2)
             {
-                if (cells.Count >= wanted) break;
-                if (map.zoneManager.ZoneAt(cell) != null) continue;
-                if (cell.GetEdifice(map) != null) continue;
-                if (!cell.Standable(map)) continue;
-                cells.Add(cell);
+                foreach (var cell in GenRadial.RadialCellsAround(centre, radius, true))
+                {
+                    if (cells.Count >= wanted) break;
+                    if (!cell.InBounds(map) || cells.Contains(cell)) continue;
+                    if (map.zoneManager.ZoneAt(cell) != null) continue;
+                    if (cell.GetEdifice(map) != null) continue;
+                    if (!cell.Standable(map)) continue;
+                    cells.Add(cell);
+                }
             }
 
             ctx.Require(cells.Count >= wanted,

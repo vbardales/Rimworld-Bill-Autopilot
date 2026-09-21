@@ -24,6 +24,7 @@ Feature: a recipe unlocked by research arrives suspended, and is answered once f
     Given the save "test-colony" is loaded
     And Bill Autopilot settings are at their defaults
     And a "FueledStove" is built at (140, 155)
+    And Bill Autopilot only takes "Make_Pemmican" on "FueledStove"
     And Bill Autopilot is switched on for "FueledStove"
     And Bill Autopilot syncs the "FueledStove" at (140, 155)
 

@@ -32,10 +32,52 @@ remaining:
   - unverified: Nice Bill Tab's cached list, where a drag could bring a deleted bill back
   - unverified: loading a save after removing the mod, the reason its state avoids a GameComponent
 session:      local_3527e6d8-def4-4e54-97ff-a6430f1dc569
-updated:      2026-09-21, Pickle suite written; first run gave no verdict
+updated:      2026-09-21, three Pickle features green, run still cut short
 ---
 
 # Bill Autopilot — status
+
+## Third Pickle run: three features green, still no verdict — 2026-09-21
+
+`exitReason: watchdog-timeout`, **26 scenarios of 65**, 15 passed, 11 failed. Not a verdict: the
+game stopped writing after feature 06 and the watchdog killed it. Report kept outside the repository
+(the shared script's own stall-archive step is broken, see below); the machine was left clean —
+lock released, no RimWorld and no Xvfb surviving, checked by `pgrep`.
+
+**Three features fully green, and two of them had never been seen working at all:**
+
+| Feature | |
+| --- | --- |
+| 01 loading | 4/4 — patches applied, integration report matches the mods loaded |
+| 02 activation | 4/4 — the confirmation, its count, the silent intake, the second toggle, the teardown |
+| 06 the marker | 4/4 — the postfix on `LabelCap`, absent on a hand-placed bill, removed by its setting |
+
+The marker is the one TESTING.md said had never been on screen. It is now, `@review` screenshot
+included — which says the trip happened, not that the image is legible.
+
+The 11 failures are two causes, both in the suite and both already corrected after this run:
+the stock step used `GenPlace.TryPlaceThing`, which **refuses** a cell and returns false, and that
+answer was ignored — nothing was spawned, the stock stayed at zero, and it surfaced three steps
+later as "the autopilot counts 0, not 30", which reads as a broken threshold in the mod. It now
+spawns with `GenSpawn` and re-reads the count through the game's own counter before handing back.
+And the stove filled its eight-bill allowance with meals before reaching the recipe under test, so
+feature 04 narrows it the way the tailoring benches already were.
+
+One `Object reference` failure is still unexplained. Pickle attaches no stack, and it sat behind a
+Background that failed first; the next run sees it alone.
+
+### Two defects in the shared tooling, reported and not touched
+
+Both are in `scripts/`, which belongs to the monorepo and had eighteen tickets queued on it.
+
+1. **A minimal pass is not minimal for any mod owning `wsl-deps.map`** — `PICKLE_DEPMAP=none`
+   arrives empty through `WSLENV`'s `/p` translation. Worked around here by naming the set.
+2. **The stall archive never runs.** `Run-PickleWsl.ps1:367` builds its path from
+   `"pickle-reports-archive\bloque-{0}-{1}"` where `\b` is a literal **backspace byte (0x08)**, not
+   two characters. Windows rejects it, `New-Item` fails with "Caractères non conformes dans le
+   chemin", and the Player.log the comment above it exists to preserve is lost every time a run
+   stalls. Seen on two runs in a row.
+
 
 ## First Pickle run: no verdict, two defects in the suite — 2026-09-21
 
