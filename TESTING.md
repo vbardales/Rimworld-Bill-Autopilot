@@ -60,20 +60,20 @@ manual. The numbered scenarios below are what the features were written from.
    powershell.exe -ExecutionPolicy Bypass -File scripts/Run-PickleWsl.ps1 -Mod BillAutopilot
    ```
 
-2. **With the optional mods** — `Tests/Pickle/wsl-deps.map`. It mounts Better Workbench Management
-   and Dubs Mint Menus, the two of the six that are on this machine, and covers scenarios 13 and 16
-   on top of the first pass. Nice Bill Tab, Nice Bill Tab - Expansion and Everybody Gets One are not
-   subscribed here, so scenarios 14, 15 and 19 stay skipped until they are and their Workshop ids
-   are added to that map. Green on the first pass says nothing about this one, and the reverse is
-   equally true: a scenario can pass *only* because an optional mod is present.
+2. **With the optional mods** — `Tests/Pickle/wsl-deps.map`. It mounts all six integrations this mod
+   declares in `loadAfter`, plus No Max Bills: Redux for the raised bill ceiling that scenario 10
+   reads live rather than hard-coding. It covers scenarios 13 to 16 and 19 on top of the first pass.
+   Green on the first pass says nothing about this one, and the reverse is equally true: a scenario
+   can pass *only* because an optional mod is present.
 
    ```powershell
    powershell.exe -ExecutionPolicy Bypass -File scripts/Run-PickleWsl.ps1 -Mod BillAutopilot -DepMap wsl-deps.map
    ```
 
-   None of the six optional mods are exclusive with one another, so one set covers them all. That
-   has to be rechecked when the missing four are added: two mods that cannot cohabit would need a
-   named set each, so that every exclusive combination is played at least once.
+   Whether any two of them cannot cohabit is not known yet, and the first run of this set is what
+   will say: Nice Bill Tab redraws the whole bills tab, Better Workbench Management adds to it, and
+   Dubs Mint Menus keeps its own menu beside it. Two mods that turn out to be exclusive need a named
+   set each, so that every exclusive combination is played at least once.
 
 3. **Each language, in its own pass.** `-Language French`. The language is fixed at staging and
    never switched inside a run. No scenario spells an English string — every label, marker, dialog

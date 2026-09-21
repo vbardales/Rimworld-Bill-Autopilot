@@ -53,8 +53,8 @@ It proves the mod stands alone, which is what the mod page claims of all five br
 worst case is a lost feature. The scenarios for absent mods carry `@requires:` and are skipped, so
 **this pass is green with a dozen scenarios never played** — read the skips, not only the failures.
 
-**2. With the optional mods** — `wsl-deps.map`, which today mounts Better Workbench Management and
-Dubs Mint Menus, the two of the six that are on this machine.
+**2. With the optional mods** — `wsl-deps.map`, which mounts all six integrations the mod declares,
+plus No Max Bills: Redux for the raised bill ceiling that `10-bill-cap.feature` reads live.
 
 ```powershell
 powershell.exe -ExecutionPolicy Bypass -File scripts/Run-PickleWsl.ps1 -Mod BillAutopilot -DepMap wsl-deps.map
@@ -64,9 +64,10 @@ It proves the mod holds in the decor it will really be loaded in. Green on the f
 nothing about this one, and the reverse is just as true: a scenario can pass *only* because an
 optional mod is there.
 
-None of the six are exclusive with each other, so one set covers them; that has to be rechecked
-when the four missing ones are added, and if two of them turn out not to cohabit, each combination
-gets a named set of its own.
+Whether any two of them cannot cohabit is **not known yet**, and the first run of this set is what
+will say. Nice Bill Tab redraws the whole bills tab, Better Workbench Management adds to it, and
+Dubs Mint Menus keeps its own menu beside it. If two turn out to be exclusive, this set splits into
+one named set per combination, so that every exclusion is played at least once.
 
 **3. Each language, in its own pass.** The language is fixed at staging and never switched inside a
 run: `SelectLanguage` reloads every piece of game data underneath the runner.

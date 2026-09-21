@@ -73,12 +73,18 @@ them, so there is nothing of this mod's to assert.
 mods, with them (`Tests/Pickle/wsl-deps.map`), and one per language. **No incompatibility pass**, and
 the reason is recorded: `About.xml` declares no `incompatibleWith`.
 
-`wsl-deps.map` mounts Better Workbench Management (935982361) and Dubs Mint Menus (1446523594), the
-two of the six optional mods installed on this machine, both packageIds read from their own
-About.xml. Nice Bill Tab, Nice Bill Tab - Expansion, Everybody Gets One and Choose Your Recipe are
-not subscribed here, so no line was written for them rather than guessing a Workshop id: their
-scenarios carry `@requires:` and are skipped. **A pass is therefore green with scenarios never
-played, and its report has to be read for skips as well as failures.**
+`wsl-deps.map` mounts all six optional integrations, every packageId read from that mod's own
+About.xml on 2026-09-21 rather than from its Workshop title — three of them are continuations whose
+title and packageId disagree. No Max Bills: Redux (3526216885) is staged too although the mod
+neither declares nor reaches it: it raises the per-bench bill ceiling from 15 to 125, a number the
+mod is documented to honour, and scenario 10 reads that ceiling live instead of hard-coding it.
+
+Whether any two of the six cannot cohabit is not established: the first run of that set is what will
+say, and two that turn out to be exclusive need a named set each.
+
+In the minimal pass the integration scenarios carry `@requires:` and are **skipped**, so that pass
+is green with about a dozen scenarios never played. Its report has to be read for skips as well as
+for failures.
 
 ### Checks performed on the suite itself
 
