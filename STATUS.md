@@ -116,11 +116,20 @@ unique, which hid the duplicates, and it never compiled anything, which hid the 
 
 ### The guard that replaces that check
 
-`Tests/Pickle/Check-Steps.ps1`, about two seconds, no game. It loads Pickle's own
+`Tests/Pickle/Check-Steps.ps1`, a few seconds, no game. It loads Pickle's own
 `CucumberExpressions` and `PickleParameterTypeRegistry`, compiles every declared pattern, reports any
-declared twice, matches every step line of every feature against the compiled regexes, and names any
-pattern no feature uses. Current state: **86 patterns declared, 86 compile, none declared twice, none
-unused, 465 step lines**.
+declared twice, matches every step line against the compiled regexes, and names any pattern no
+feature uses.
+
+**Since 2026-09-21 it also checks ambiguity**, which came back from `PickleTools`, whose own
+`Check-Steps` grew out of an earlier copy of this file. That is the check a text comparison cannot
+do: two DIFFERENT expressions can both match one line, and Pickle matches on the text alone across
+every suite installed in a run. This suite's expressions are now compared against Pickle's own
+vocabulary, read out of its assemblies with Mono.Cecil rather than from its documentation, and
+against every other step source in the collection.
+
+Current state: **87 patterns declared, 87 compile, none declared twice, none ambiguous against 568
+others (205 from Pickle, 363 from 20 step sources), every one of the 480 step lines resolves**.
 
 A lost run is not only this mod's forty minutes: the machine is shared and there were eleven tickets
 in the queue behind this one.
