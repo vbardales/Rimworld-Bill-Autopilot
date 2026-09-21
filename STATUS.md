@@ -32,10 +32,50 @@ remaining:
   - unverified: Nice Bill Tab's cached list, where a drag could bring a deleted bill back
   - unverified: loading a save after removing the mod, the reason its state avoids a GameComponent
 session:      local_3527e6d8-def4-4e54-97ff-a6430f1dc569
-updated:      2026-09-21, three Pickle features green, run still cut short
+updated:      2026-09-21, prepublication work done off-game
 ---
 
 # Bill Autopilot — status
+
+## Prepublication work done off-game — 2026-09-21
+
+The in-game gate is handed to the Pickle side, so this pass advances everything `tested ->
+prepublished` asks for that needs no game. **The stage does not move: it stays `done`.** Nothing was
+uploaded, no tag was posted, no release was created.
+
+`PUBLICATION.md` is new, and it holds what the Workshop page asks for and the repository had nowhere
+else: the one-way parts, the screenshot order, the dependencies and DLC, the adult-content answers,
+six thank-you messages and the release notes.
+
+**One defect found and fixed in the description.** It ended on "This mod is MIT licensed." with no
+pointer to `ATTRIBUTION.md`, where the workflow requires a line sending the reader to both the
+attribution and the licence before the GitHub link. It now reads "Credits, and the rights they rest
+on, are in ATTRIBUTION.md in the repository. This mod is MIT licensed and the notice ships with it."
+Worth catching now rather than later: `SetItemDescription` is called only at creation, so after the
+first upload this text is corrected by hand on the Steam page and never from `About.xml`.
+
+**Dependencies and DLC settled from the sources, not from intent.** Harmony is the only hard
+dependency. **No DLC at all** — `supportedVersions` is 1.6, there is no `LoadFolders.xml`, no
+`Patches/`, no `MayRequire` and no Def or C# path conditional on any expansion; the five DLC in
+`loadAfter` are load order only and must not be declared as requirements, since a hard dependency
+forces a download on someone who does not want it. The six optional integrations stay `loadAfter`.
+
+**Adult-content boxes answered no, with both images opened rather than judged by their file names:**
+`Preview.png` is a title over an overhead workshop scene with a small rear-facing colonist;
+`ModIcon.png` is a stylised winking face with a clipboard and a gear.
+
+**Six thank-you messages written**, one per mod this one reaches into, each naming what it actually
+does with that mod. Measured: 882, 770, 691, 539, 732 and 454 characters against Steam's limit of
+1000. To be posted only after the item is made public, a link to a private item opening for nobody.
+
+### What `tested -> prepublished` still lacks
+
+- The **five page captures do not exist**. Their order and what each must show are settled in
+  `PUBLICATION.md`; producing them needs a game, and each one has to be opened and looked at.
+- **No version tag and no GitHub release.** Deliberately left: tagging 1.0.0 would put a version
+  number on a build that has not passed the in-game gate.
+- `done -> tested` itself.
+
 
 ## Third Pickle run: three features green, still no verdict — 2026-09-21
 
