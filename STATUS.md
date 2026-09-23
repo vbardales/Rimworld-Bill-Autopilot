@@ -40,6 +40,13 @@ updated:      2026-09-23, Workshop item created (0.1.0), tested gate restated
 
 # Bill Autopilot — status
 
+## Where the run evidence lives
+
+Raw evidence (reports, launcher logs, captures) is **on disk only**, in `docs/runs/evidence/`, ignored by
+git. What is tracked is a text summary: `docs/runs/2026-09-21-pickle-runs.md`. Runs 2 and 3 of 2026-09-21
+are kept; run 1's report was lost to the shared script's five-report rotation before it was copied, and
+only its cause (recorded in the summary) survives.
+
 ## Workshop item created, and the gate to tested restated — 2026-09-23
 
 Stage stays **done**. Nothing in the shipped mod changed; the DLL is still D13D4225...DB599E.
