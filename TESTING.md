@@ -110,6 +110,41 @@ played against features discovered):
 mod removed, which the mod list makes impossible from inside a run and which is the whole reason the
 state avoids a GameComponent; and anything inside RIMMSQOL's own interface.
 
+## Evidence to keep when a test runs
+
+The root `AGENTS.md` rule ("Test evidence") is: keep only the reports that still prove something, and the disk
+is full. For this mod that means the following. Everything raw lives in `docs/runs/evidence/<date>-run<N>/`,
+which git ignores; what git tracks is `docs/runs/<date>-pickle-runs.md`, one table line per run.
+
+**Keep, per run**
+
+| What | Why it is kept |
+| --- | --- |
+| `summary.json` | Its `exitReason`, read before any number, and the scenarios played against the features discovered. Without them a killed run reads as a result |
+| `junit.xml` | Per scenario outcome and failure message, which is where a suite defect is told from a mod defect |
+| `Player.log` and the launcher's own log | The `Command line arguments` line proves which pass it was (`-pickle-set-name`), and the integration lines prove which optional mods were really mounted. A "minimal" pass that shows Better Workbench Management detected is not minimal |
+| The `@review` captures | Their only value is that a person opens them. Feature 06's marker capture, 18's settings page, 19's profile windows, 15's Nice Bill Tab tab. Keep at full size |
+| The captures of a scenario **no later run repeated** | The sole proof of that check |
+
+**Delete, as soon as a newer report replaces it**
+
+- `report.html` and `messages.ndjson`: about 100 MB each, and nothing in them that `junit.xml` and `summary.json` do not say.
+- Any capture whose scenario a later run played again.
+- Every report about a build that is no longer the one in the repository. When `Mod/Assemblies/BillAutopilot.dll` or a
+  step assembly changes, the reports of the old one prove nothing about the new one.
+
+**How**
+
+- Copy a run out of `pickle-reports/` the moment it ends: the next session's run overwrites it, and the archive keeps
+  only five. Run 1 of 2026-09-21 was lost that way.
+- Shrink captures to JPEG (1280 wide, quality 70; the `@review` ones full size, quality 88). 78 MB became under 3.
+- Keep a file path under 260 characters, or the conversion fails: shorten the scenario's capture name.
+- Before deleting a report, check that no `STATUS.md` field points to it; repoint it first.
+
+**Manual tests need their own evidence**, and it is small: the date, the game and mod versions, the list of active
+mods, the language and UI scale, the `Player.log` for that session, and one line per case saying what was seen. A
+manual entry recorded green without those is not recorded. They go under `docs/runs/`, in the same text summary.
+
 ## Before anything
 
 ### XML checks (no game required)

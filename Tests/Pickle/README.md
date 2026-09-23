@@ -128,8 +128,10 @@ Every step text begins with "Bill Autopilot" or names the neighbour it drives. P
 steps of every installed suite into one namespace, and two suites sharing a step text produce
 "Ambiguous step" and fail scenarios that are perfectly healthy.
 
-## Reading a report
+## Reading a report, and what to keep of it
 
 `exitReason` first, before any number. A run killed in flight leaves a report that looks like a
 result. Then the count of scenarios played against the count of features discovered, in the
 `SuiteScanner` line: `exitReason: passed` says nothing about what was never selected.
+
+What to keep of a run, and what to delete, is in TESTING.md, "Evidence to keep when a test runs".
