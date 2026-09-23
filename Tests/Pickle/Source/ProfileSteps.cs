@@ -290,7 +290,14 @@ namespace BillAutopilot.PickleSteps
             if (profile == null) return;
 
             var rule = profile.RuleFor(recipe);
-            ctx.Assert(rule == null || rule.IsDefault,
+
+            // The message is built BEFORE Assert runs, so it must not read the rule when there is
+            // none. It used to, and threw "Object reference not set" in exactly the case that should
+            // pass - the absence of an override - which failed five scenarios of the 2026-09-23 run
+            // and had been the unexplained null-reference failure since the first one.
+            if (rule == null || rule.IsDefault) return;
+
+            ctx.Assert(false,
                 $"{recipeDefName} on {benchDefName} carries an override: mode "
                 + $"'{Driver.ModeName(rule.mode)}', target {rule.targetCount}, floor {rule.floorCount}");
         }

@@ -21,7 +21,10 @@ remaining:
   - unverified: gate to tested, condition 1 - no scenario tagged @wip (none tagged today)
   - unverified: gate to tested, condition 2 - every scenario with a @requires tag has RUN, not been skipped: features 13, 15, 16, 17 and two scenarios of 14 have never been played
   - unverified: gate to tested, condition 3 - every manual test validated green: save loaded with the mod removed, RIMMSQOL interface, Nice Bill Tab drag, two Better Workbench Management details, Choose Your Recipe, every @review screenshot
-  - unverified: the Pickle suite has never produced a verdict (first run 2026-09-21: exitReason infrastructure-error, 0 scenarios, two suite defects since fixed); done -> tested needs the pass without the optional mods, the pass with them, and one per language, with exitReason and the scenarios-played against features-discovered counts read before the numbers
+  - unverified: the Pickle suite has produced one verdict (run 4, 2026-09-23: exitReason failed, 40 passed, 11 failed, 14 skipped of 65), and the fixes made after it have not been replayed; done -> tested still needs a clean pass without the optional mods, the pass with them, and one per language
+  - defect: profile window and switch-on confirmation decide countability by hand (BenchActivation.cs:85, Dialog_BenchProfile.cs:302) while the engine asks the game; for butchering they disagree, so the confirmation announces fewer recipes than are taken and the window shows Never for a recipe that runs in stock
+  - defect: shipped text says butchering cannot be counted (Steam description, BillAutopilot.Profile.UncountableDesc EN and FR, About.xml); the game counts raw meat for it
+  - defect: settings page, the red cross of each workbench row overlaps the first digit of its recipe count (@review capture, run 4)
   - unverified: every @review screenshot the suite attaches; a green there says the trip happened, not that the image shows anything
   - unverified: loading a save with the mod removed, which no Pickle run can do since the mod list is fixed at startup
   - unverified: RIMMSQOL revealing the shortcut in its own interface, and that visibility choice surviving a restart
@@ -35,22 +38,39 @@ remaining:
   - unverified: Nice Bill Tab's cached list, where a drag could bring a deleted bill back
   - unverified: loading a save after removing the mod, the reason its state avoids a GameComponent
 session:      local_3527e6d8-def4-4e54-97ff-a6430f1dc569
-updated:      2026-09-23, Workshop item created (0.1.0), tested gate restated
+updated:      2026-09-23, first Pickle verdict (run 4), three defects found
 ---
 
 # Bill Autopilot — status
 
+## First verdict: Pickle run 4, and what it found — 2026-09-23
+
+`exitReason: failed`, **65 scenarios run of 65 selected**: 40 passed, 11 failed, 14 skipped. Stage stays
+**done**. The 14 skipped are the `@requires` scenarios (features 13 to 17), expected in a pass without the
+optional mods and **not yet played**. The full breakdown is in `docs/runs/pickle-runs.md`.
+
+- **The 11 failures are in the suite, except one question that turned out to be about the documentation.**
+  The unexplained `Object reference` failure of runs 2 to 4 is explained: an assertion message read
+  `rule.mode` before the assertion ran, when the rule was null. Also a stockpile too small for a later,
+  larger request, a hysteresis scenario written against the wrong starting state, and butchering, which
+  the game **does** count (`RecipeWorkerCounter_ButcherAnimals.CanCountProducts` returns true). All fixed in
+  the suite, feature 09 now uses the electric smelter; **none replayed yet**.
+- **Three defects in the shipped mod were exposed** and are in `remaining`: countability decided by hand in
+  two places against the engine's own answer; shipped text (frozen Steam description, in-game tooltip in
+  English and French) still calling butchering uncountable; a layout overlap on the settings page. They
+  change shipped content, so none was touched without a decision. Repository documents that only described
+  the claim (README, CHANGELOG, TESTING.md) were corrected.
+- **Two `@review` captures were opened**: the profile window reads cleanly, and the settings page shows the
+  overlap above. The marker capture of feature 06 also reads ("Make patchleather (auto)" beside an unmarked
+  hand-placed bill). The other `@review` captures are still to be opened.
+
 ## Where the run evidence lives
 
 Raw evidence (reports, launcher logs, captures) is **on disk only**, in `docs/runs/evidence/`, ignored by
-git. What is tracked is a text summary: `docs/runs/2026-09-21-pickle-runs.md`, one table line per run. Run 3 of
-2026-09-21 is kept whole, as the latest report for features 01 to 06. Run 2 keeps its summary, junit and
-log, plus the captures of the scenarios run 3 did not repeat (features 07 to 12); the rest was deleted
-under the "Test evidence" rule of the root AGENTS.md. Run 1's report was lost to the shared script's
-five-report rotation before it was copied, and only its cause (recorded in the summary) survives.
-Captures are kept as reduced JPEG; the whole folder is under 3 MB. The `@review` capture of feature 06 was
-opened on 2026-09-23 and the marker reads in it ("Make patchleather (auto)" beside an unmarked hand-placed
-bill); the other `@review` captures are still to be opened.
+git; what is tracked is the text summary `docs/runs/pickle-runs.md`, one table line per run. Under the "Test
+evidence" rule of the root AGENTS.md only run 4 is kept, as the latest report for every scenario; runs 2 and 3
+were deleted the day it replayed all of them, and run 1's report was lost to the shared script's five-report
+rotation before it was copied. Captures are kept as reduced JPEG; the folder is under 4 MB.
 
 ## Workshop item created, and the gate to tested restated — 2026-09-23
 

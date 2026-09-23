@@ -102,25 +102,30 @@ namespace BillAutopilot.PickleSteps
         /// </summary>
         private static Zone_Stockpile TestStockpile(PickleContext ctx, Map map, int count, ThingDef def)
         {
-            foreach (var existing in map.zoneManager.AllZones)
-            {
-                if (existing is Zone_Stockpile mine && mine.label == ZoneLabel) return mine;
-            }
-
-            // One cell per stack, plus a margin, so a scenario asking for a large stock is not
-            // refused by a zone sized for a small one.
+            // One cell per stack, plus a margin.
             int wanted = count / System.Math.Max(1, def.stackLimit) + 2;
 
-            // Swept outwards from the middle of the map rather than from its corner. A corner is as
-            // free as anywhere and works for storage, but the colony is in the middle, and a
-            // stockpile the scenarios can also be photographed beside is worth the two extra lines.
+            // A zone made for a small stock and then asked for a large one is GROWN, not reused as it
+            // is. The first version returned the existing zone whatever its size, so a scenario that
+            // set 10 and later 200 found two cells for 150 items, and the 2026-09-23 run failed two
+            // scenarios on "room for 150 and not 200".
+            Zone_Stockpile zone = null;
+            foreach (var existing in map.zoneManager.AllZones)
+            {
+                if (existing is Zone_Stockpile mine && mine.label == ZoneLabel) { zone = mine; break; }
+            }
+            int have = zone == null ? 0 : zone.Cells.Count;
+            if (have >= wanted) return zone;
+
+            // Swept outwards from the middle of the map rather than from its corner. A cell already
+            // zoned (this zone's own included), built on, or not standable is skipped.
             var cells = new List<IntVec3>();
             var centre = map.Center;
-            for (int radius = 0; radius < map.Size.x && cells.Count < wanted; radius += 2)
+            for (int radius = 0; radius < map.Size.x && have + cells.Count < wanted; radius += 2)
             {
                 foreach (var cell in GenRadial.RadialCellsAround(centre, radius, true))
                 {
-                    if (cells.Count >= wanted) break;
+                    if (have + cells.Count >= wanted) break;
                     if (!cell.InBounds(map) || cells.Contains(cell)) continue;
                     if (map.zoneManager.ZoneAt(cell) != null) continue;
                     if (cell.GetEdifice(map) != null) continue;
@@ -129,13 +134,16 @@ namespace BillAutopilot.PickleSteps
                 }
             }
 
-            ctx.Require(cells.Count >= wanted,
-                $"this map has {cells.Count} free unzoned cells and {wanted} are needed to hold "
-                + $"{count} {def.defName}: everything else is built on, zoned or impassable");
+            ctx.Require(have + cells.Count >= wanted,
+                $"this map has room for {have + cells.Count} cells of stock and {wanted} are needed to "
+                + $"hold {count} {def.defName}: everything else is built on, zoned or impassable");
 
-            var zone = new Zone_Stockpile(StorageSettingsPreset.DefaultStockpile, map.zoneManager);
-            map.zoneManager.RegisterZone(zone);
-            zone.label = ZoneLabel;
+            if (zone == null)
+            {
+                zone = new Zone_Stockpile(StorageSettingsPreset.DefaultStockpile, map.zoneManager);
+                map.zoneManager.RegisterZone(zone);
+                zone.label = ZoneLabel;
+            }
             foreach (var cell in cells) zone.AddCell(cell);
             return zone;
         }

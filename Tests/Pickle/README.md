@@ -88,7 +88,7 @@ active language comes back as accented gibberish rather than as clean English.
 `HandTailoringBench` with `Make_Patchleather`, whose product is `Leather_Patch`: one product, no
 stuff, no research, and countable, so a stock can be set to an exact number and the thresholds
 placed on either side of it. `Make_Apparel_Pants` behind `ComplexClothing` is the recipe unlocked
-later. `ButcherSpot` carries one recipe of each kind — butchering cannot be counted, kibble can —
+later. `ElectricSmelter` carries one recipe of each kind — a smelted weapon cannot be counted, slag steel can —
 which is what lets 09 show that the uncountable setting reaches one and not the other.
 
 If the fixture ever ships with `ComplexClothing` already researched, 04 fails on its first step

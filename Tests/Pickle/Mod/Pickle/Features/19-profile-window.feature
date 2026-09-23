@@ -47,10 +47,10 @@ Feature: the profile window, as a person has to read it
   # The uncountable case has a row of its own kind, with its own setting and its own tooltip, and it
   # is gathered under its own group at the end of the list.
   @review
-  Scenario: the window on a bench whose recipes the game cannot count
-    Given a "ButcherSpot" is built at (146, 155)
-    And Bill Autopilot is switched on for "ButcherSpot"
-    When Bill Autopilot's profile window for "ButcherSpot" is opened
-    And I take a screenshot "profile window: a bench with an uncountable recipe, and its own setting"
+  Scenario: the window on a bench with recipes the game cannot count
+    Given a "ElectricSmelter" is built at (146, 155)
+    And Bill Autopilot is switched on for "ElectricSmelter"
+    When Bill Autopilot's profile window for "ElectricSmelter" is opened
+    And I take a screenshot "profile window: a smelter with uncountable recipes, and its own setting"
     And I close all dialogs
     And no errors were logged

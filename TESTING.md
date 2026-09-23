@@ -30,7 +30,7 @@ mode whose mod has been removed — answers that are invisible in game, because 
 looks like a working mod quietly making the wrong amount of the wrong thing.
 
 So scenarios 9 and 14 below no longer have to be read as arithmetic. What they still prove is that
-the decision reaches the bench: that a butcher table really does stay idle, and that a foreign mode
+the decision reaches the bench: that a smelter really does put up nothing for a smelted weapon, and that a foreign mode
 really is set on a real bill. **The program is the arithmetic, the scenario is the wiring.**
 
 It was itself checked by breaking the clamp on purpose and confirming that those two checks, and only
@@ -338,11 +338,14 @@ On an autopiloted bench, place a bill yourself for a recipe the autopilot also h
 **Proves** the countability test, and the separate setting that exists because *keep a stock* is
 impossible for them.
 
-Put a **butcher table** on autopilot, or a smelter, a crematorium, an electric smithy doing surgery.
+Put an **electric smelter** on autopilot, or a crematorium, or an electric smithy doing surgery. A **butcher
+table is not a case for this scenario**: `RecipeWorkerCounter_ButcherAnimals.CanCountProducts` returns true and
+the game counts raw meat for it. This scenario said otherwise until the first full Pickle run of 2026-09-23.
 
-- In *Autopilot profile*, those recipes are marked as uncountable and their tooltip says so.
-- With the default, *Recipes with no countable product* set to *Never*, **the butcher table produces
-  nothing at all**. That is correct, not a bug.
+- In *Autopilot profile*, the recipes with no countable product (a smelted weapon) are marked as
+  uncountable and their tooltip says so.
+- With the default, *Recipes with no countable product* set to *Never*, **the smelter puts up no bill
+  for a smelted weapon**. That is correct, not a bug.
 - Set it to *Always* instead: standing bills appear and never stop.
 
 ## 10 — The cap, and room left for your own bills

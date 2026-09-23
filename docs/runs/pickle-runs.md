@@ -1,18 +1,19 @@
-# Pickle runs of 2026-09-21
+# Pickle runs
 
-Text summary of the first three WSL passes of `Tests/Pickle/`. The raw evidence (reports, launcher
+Text summary of the WSL passes of `Tests/Pickle/`. The raw evidence (reports, launcher
 logs, captures) is **on disk only**, in `docs/runs/evidence/`, and ignored by git. It weighs under 3 MB after
 pruning and converting the captures to reduced JPEG (full size, quality 88, for the `@review` one).
 This file is what survives a clone. STATUS.md holds the reasoning; this holds the numbers.
 
-All three: pass `sans-facultatifs`, English, `-pickle-run="Bill Autopilot - Pickle tests"`.
-**None produced a verdict** (`exitReason` was never `passed` nor `failed`).
+All four: pass `sans-facultatifs`, English, `-pickle-run="Bill Autopilot - Pickle tests"`.
+Runs 1 to 3 produced no verdict; **run 4 is the first: `exitReason: failed`, all 65 scenarios selected and run.**
 
 | Run | exitReason | Scenarios | Passed | Failed | Evidence |
 | --- | --- | --- | --- | --- | --- |
 | 1 | `infrastructure-error` | 0 of 65 selected (19 features discovered) | 0 | 0 | **lost**: the shared script archives five reports and this one rotated out. Cause was read from its `Player.log` before that; see below |
-| 2 | `in-progress`, killed by the 5-minute stall watchdog | 43 of 65 | 20 | 23 | `evidence/2026-09-21-run2/`: summary, junit, log and only the captures of features 07 to 12, the rest superseded by run 3 |
-| 3 | `watchdog-timeout` (10-minute stall setting) | 26 of 65 | 15 | 11 | `evidence/2026-09-21-run3/` |
+| 2 | `in-progress`, killed by the 5-minute stall watchdog | 43 of 65 | 20 | 23 | deleted 2026-09-23: superseded by run 4, which replayed every scenario |
+| 3 | `watchdog-timeout` (10-minute stall setting) | 26 of 65 | 15 | 11 | deleted 2026-09-23: superseded by run 4 |
+| 4 | `failed` (2026-09-23, `-pickle-no-http`) | 65 of 65: 40 passed, 11 failed, 14 skipped | 40 | 11 | `evidence/2026-09-23-run4/` |
 
 ## Run 1 — no scenario played
 
@@ -81,7 +82,7 @@ with it. Untested hypothesis: `-Extra '-pickle-no-http'` avoids it.
 
 ## Capture of note
 
-`evidence/2026-09-21-run3/screenshots/manual--bills-tab--one-automatic-bill-and-one-placed-by-hand--step0.jpg`
+`evidence/2026-09-23-run4/screenshots/manual--bills-tab--one-automatic-bill-and-one-placed-by-hand--step0.jpg`
 is the `@review` capture of feature 06. Opened on 2026-09-23: the automatic bill reads
 "Make patchleather (auto)" and the hand-placed one, "Make pants", carries no mark. So the marker does read
 in the vanilla tab. A green scenario alone would only say that the path ran.

@@ -29,7 +29,15 @@ Feature: the base loop, and the gap that stops it flickering
     Then Bill Autopilot has a bill up for "Make_Patchleather" on the "HandTailoringBench" at (140, 155)
     And Bill Autopilot's bill for "Make_Patchleather" on the "HandTailoringBench" at (140, 155) keeps 50, restarting at 25
 
+  # The bill has to be brought DOWN first. The game ticks between two steps, so the autopilot has
+  # already put a bill up while the stock was still at zero in the Background - and once a bill stands it
+  # is meant to stay until the target is reached: that is the gap. The first version set the stock to 30
+  # and expected no bill, and the 2026-09-23 run read the hysteresis working as a defect. "No bill in
+  # the band" is only true of a bill that has already come down and has not yet fallen to the floor.
   Scenario: no bill between the restart number and the target
+    Given the Bill Autopilot test stockpile holds 60 "Leather_Patch"
+    When Bill Autopilot syncs the "HandTailoringBench" at (140, 155)
+    Then Bill Autopilot has no bill up for "Make_Patchleather" on the "HandTailoringBench" at (140, 155)
     Given the Bill Autopilot test stockpile holds 30 "Leather_Patch"
     When Bill Autopilot syncs the "HandTailoringBench" at (140, 155)
     Then Bill Autopilot has no bill up for "Make_Patchleather" on the "HandTailoringBench" at (140, 155)

@@ -42,9 +42,9 @@ modes supplied by other mods. Custom modes allow a quantity of zero.
 - **Target** and **restart threshold**: the bill appears when stock falls to the threshold and
   disappears when the target is reached. The gap between the two keeps it from flickering on every
   unit produced.
-- **Recipes with an uncountable product** (butchering, smelting, cremation, surgery): the game
+- **Recipes with an uncountable product** (smelting a weapon, cremation, surgery): the game
   cannot count these, so "keep a stock" is impossible for them. They get their own setting,
-  *Never* by default.
+  *Never* by default. Butchering is not one of them: the game counts raw meat for it.
 - **Per-recipe override**: inherit, keep a different stock, always, or never.
 - **Cap on automatic bills per bench** (8 by default). The game accepts 15 bills per bench and hides
   the "Add" button beyond that, or 125 when Better Workbench Management sees No Max Bills, in which
