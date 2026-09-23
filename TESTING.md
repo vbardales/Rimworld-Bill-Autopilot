@@ -89,6 +89,23 @@ declared, it needs a pass of its own that **asserts the documented symptom** rat
 red: an expected red and an accidental red are the same colour, and nobody can tell afterwards which
 one they were looking at.
 
+### The gate to `tested`, as stated on 2026-09-23
+
+Three conditions, on top of the passes above being run and read (`exitReason` first, then scenarios
+played against features discovered):
+
+1. **No scenario tagged `@wip` is left.** None is tagged today; the condition is that none is added to
+   get a pass green.
+2. **Every conditional scenario has actually run.** A scenario carrying `@requires:` is skipped, not
+   failed, in a pass that lacks its mod, so a pass can be green with it never played. Here that is
+   features 13, 15, 16 and 17 and two scenarios of 14: none has run yet. The pass with the optional
+   mods (`wsl-deps.avec-facultatifs.map`) has to play every one of them, and the report has to show
+   them played, not skipped.
+3. **No manual test is left to validate: all are green.** The manual list of `Tests/Pickle/README.md`
+   (a save loaded with the mod removed, RIMMSQOL's own interface, the Nice Bill Tab drag, the two
+   Better Workbench Management details, Choose Your Recipe, every `@review` screenshot) is closed by
+   a person, each entry recorded green in STATUS.md. An entry not yet done is pending, not passed.
+
 **Two things no pass here can do**, both kept in `Tests/Pickle/README.md`: loading a save with the
 mod removed, which the mod list makes impossible from inside a run and which is the whole reason the
 state avoids a GameComponent; and anything inside RIMMSQOL's own interface.

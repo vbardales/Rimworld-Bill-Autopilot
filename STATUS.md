@@ -16,8 +16,11 @@ dependencies: declared
 showcase:     complete
 settings_audit: complete
 tested_on:    2026-09-01
-workshop:
+workshop:      3806709456 (item created private by the 0.1.0 prepublication, 2026-09-23; not public)
 remaining:
+  - unverified: gate to tested, condition 1 - no scenario tagged @wip (none tagged today)
+  - unverified: gate to tested, condition 2 - every scenario with a @requires tag has RUN, not been skipped: features 13, 15, 16, 17 and two scenarios of 14 have never been played
+  - unverified: gate to tested, condition 3 - every manual test validated green: save loaded with the mod removed, RIMMSQOL interface, Nice Bill Tab drag, two Better Workbench Management details, Choose Your Recipe, every @review screenshot
   - unverified: the Pickle suite has never produced a verdict (first run 2026-09-21: exitReason infrastructure-error, 0 scenarios, two suite defects since fixed); done -> tested needs the pass without the optional mods, the pass with them, and one per language, with exitReason and the scenarios-played against features-discovered counts read before the numbers
   - unverified: every @review screenshot the suite attaches; a green there says the trip happened, not that the image shows anything
   - unverified: loading a save with the mod removed, which no Pickle run can do since the mod list is fixed at startup
@@ -32,10 +35,26 @@ remaining:
   - unverified: Nice Bill Tab's cached list, where a drag could bring a deleted bill back
   - unverified: loading a save after removing the mod, the reason its state avoids a GameComponent
 session:      local_3527e6d8-def4-4e54-97ff-a6430f1dc569
-updated:      2026-09-21, prepublication work done off-game
+updated:      2026-09-23, Workshop item created (0.1.0), tested gate restated
 ---
 
 # Bill Autopilot — status
+
+## Workshop item created, and the gate to tested restated — 2026-09-23
+
+Stage stays **done**. Nothing in the shipped mod changed; the DLL is still D13D4225...DB599E.
+
+- **0.1.0 prepublished by the maintainer.** The Workshop item exists, private, id **3806709456**;
+  `About/PublishedFileId.txt` was committed at once (13ac5ed), as PUBLICATION.md requires.
+  `CHANGELOG.md` now opens with `## [0.1.0]`: the creation of that item. The feature list stays
+  under `[1.0.0] - unreleased`, since no functional release exists yet. The 0.1.0 upload also left
+  `Mod/Textures/BillAutopilot/Autopilot.dds` beside the PNG; RimWorld generates it, so it is
+  ignored in `.gitignore` rather than committed.
+- **Three new conditions to reach tested** (maintainer, 2026-09-23), written into TESTING.md and
+  `remaining`: no `@wip` scenario, every `@requires` scenario actually run, and every manual
+  test validated green. State today: condition 1 holds (none tagged); condition 2 does not (four
+  features and two scenarios have never been played, only skipped or not reached); condition 3 does
+  not (no manual test has been done).
 
 ## Prepublication work done off-game — 2026-09-21
 
