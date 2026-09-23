@@ -43,9 +43,11 @@ updated:      2026-09-23, Workshop item created (0.1.0), tested gate restated
 ## Where the run evidence lives
 
 Raw evidence (reports, launcher logs, captures) is **on disk only**, in `docs/runs/evidence/`, ignored by
-git. What is tracked is a text summary: `docs/runs/2026-09-21-pickle-runs.md`. Runs 2 and 3 of 2026-09-21
-are kept; run 1's report was lost to the shared script's five-report rotation before it was copied, and
-only its cause (recorded in the summary) survives.
+git. What is tracked is a text summary: `docs/runs/2026-09-21-pickle-runs.md`, one table line per run. Run 3 of
+2026-09-21 is kept whole, as the latest report for features 01 to 06. Run 2 keeps its summary, junit and
+log, plus the captures of the scenarios run 3 did not repeat (features 07 to 12); the rest was deleted
+under the "Test evidence" rule of the root AGENTS.md. Run 1's report was lost to the shared script's
+five-report rotation before it was copied, and only its cause (recorded in the summary) survives.
 
 ## Workshop item created, and the gate to tested restated — 2026-09-23
 
