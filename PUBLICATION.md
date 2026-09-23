@@ -3,9 +3,12 @@
 What the Workshop page asks for and the repository holds nowhere else. Written before the first upload,
 and kept for whoever picks this mod up later.
 
-**Nothing here has been sent.** The mod is at `done` in the workflow: the in-game gate of `done -> tested`
-has not been passed, so the first upload is not due yet. This file exists so that when it is, none of it is
-discovered at the form.
+**The item exists, private, and only the item.** The maintainer created it on 2026-09-23 as 0.1.0, id
+**3806709456**, and `About/PublishedFileId.txt` is committed. That upload was the creation, so
+`SetItemDescription` ran once and **the description is now frozen**: it was the one committed in
+`1842dec`, with the credit line, and any change to it is made by hand on the Steam page, never from
+`About.xml`. The mod is at `done` in the workflow: the in-game gate of `done -> tested` has not been
+passed, so no functional release is due yet, and the item stays private until it is.
 
 ## The one-way parts
 
@@ -105,7 +108,7 @@ goes on its own line. Steam's comment limit is 1000 characters; each of these is
 > counting rules to decide whether a stock is full, so the threshold and the bill's own display agree. Thank
 > you for a mod that has been the reference for bill management for years.
 >
-> https://steamcommunity.com/sharedfiles/filedetails/?id=PUBLISHED_FILE_ID
+> https://steamcommunity.com/sharedfiles/filedetails/?id=3806709456
 
 ### Dubs Mint Menus (`dubwise.dubsmintmenus`)
 
@@ -117,7 +120,7 @@ goes on its own line. Steam's comment limit is 1000 characters; each of these is
 > out. Applying a template needs nothing: the bills it places read as placed by hand, which is exactly right.
 > Thank you for the menus, and for keeping them out of the tab's way.
 >
-> https://steamcommunity.com/sharedfiles/filedetails/?id=PUBLISHED_FILE_ID
+> https://steamcommunity.com/sharedfiles/filedetails/?id=3806709456
 
 ### Nice Bill Tab (`Andromeda.NiceBillTab`)
 
@@ -128,7 +131,7 @@ goes on its own line. Steam's comment limit is 1000 characters; each of these is
 > found while writing this. Thank you for a tab that is genuinely nicer than the vanilla one; the mod marks
 > its own bills in their label rather than patching any tab, so yours picks the mark up for free.
 >
-> https://steamcommunity.com/sharedfiles/filedetails/?id=PUBLISHED_FILE_ID
+> https://steamcommunity.com/sharedfiles/filedetails/?id=3806709456
 
 ### Nice Bill Tab - Expansion (`HICON.NiceBillTabExpansion`)
 
@@ -138,7 +141,7 @@ goes on its own line. Steam's comment limit is 1000 characters; each of these is
 > store through IsHidden and nothing else, so the worst case if it ever moves is a lost feature rather than a
 > broken game. Thank you for the expansion.
 >
-> https://steamcommunity.com/sharedfiles/filedetails/?id=PUBLISHED_FILE_ID
+> https://steamcommunity.com/sharedfiles/filedetails/?id=3806709456
 
 ### Everybody Gets One (`Memegoddess.EverybodyGetsOne`)
 
@@ -150,7 +153,7 @@ goes on its own line. Steam's comment limit is 1000 characters; each of these is
 > your own way. Any mod that adds a repeat mode gets the same treatment; yours is what showed me it had to
 > work that way. Thank you.
 >
-> https://steamcommunity.com/sharedfiles/filedetails/?id=PUBLISHED_FILE_ID
+> https://steamcommunity.com/sharedfiles/filedetails/?id=3806709456
 
 ### Choose Your Recipe (`zal.chooseyourrecipe`)
 
@@ -159,7 +162,7 @@ goes on its own line. Steam's comment limit is 1000 characters; each of these is
 > the workbench itself, so the autopilot simply never sees them and follows your choice without knowing it is
 > doing so. That is the best kind of compatibility. Thank you for it.
 >
-> https://steamcommunity.com/sharedfiles/filedetails/?id=PUBLISHED_FILE_ID
+> https://steamcommunity.com/sharedfiles/filedetails/?id=3806709456
 
 Andreas Pardeike is thanked for Harmony in the description rather than by comment, and Claude Code (Anthropic)
 is named there under `AI-GENERATED`.
@@ -191,8 +194,8 @@ For 1.0.0, from `CHANGELOG.md`:
 
 ## Right after the upload, in this order
 
-1. Commit and push `Mod/About/PublishedFileId.txt`. Before anything else.
+1. ~~Commit and push `Mod/About/PublishedFileId.txt`.~~ Committed (`13ac5ed`); pushing is what remains.
 2. Subscribe to your own item and load it, as a subscriber sees it.
 3. Switch the item to public by hand.
-4. Post the six messages above, with the real item id in the links.
-5. Write the Workshop id into `STATUS.md` under `workshop:`.
+4. Post the six messages above. Their links already carry the item id.
+5. ~~Write the Workshop id into `STATUS.md` under `workshop:`.~~ Done.

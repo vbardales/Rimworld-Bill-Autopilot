@@ -16,7 +16,7 @@ dependencies: declared
 showcase:     complete
 settings_audit: complete
 tested_on:    2026-09-01
-workshop:      3806709456 (item created private by the 0.1.0 prepublication, 2026-09-23; not public)
+workshop:      3806709456
 remaining:
   - unverified: gate to tested, condition 1 - no scenario tagged @wip (none tagged today)
   - unverified: gate to tested, condition 2 - every scenario with a @requires tag has RUN, not been skipped: features 13, 15, 16, 17 and two scenarios of 14 have never been played

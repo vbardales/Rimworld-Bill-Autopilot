@@ -3,12 +3,6 @@
 Format inspired by [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 This file serves the repository and the writing of Steam patch notes; RimWorld does not display it in game.
 
-## [0.1.0] - 2026-09-23
-
-### Added
-
-- Creation of the Workshop item: `About/PublishedFileId.txt` (3806709456). The item is private and carries no functional release yet.
-
 ## [1.0.0] - unreleased
 
 ### Added
@@ -69,3 +63,9 @@ feature, never a broken game.
 - **Nice Bill Tab - Expansion**: a recipe hidden on a bench is treated as excluded.
 - **Choose Your Recipe**: respected with no work needed, since it removes disabled recipes from the
   bench itself.
+
+## [0.1.0] - 2026-09-23
+
+### Added
+
+- Creation of the Workshop item: `About/PublishedFileId.txt` (3806709456). The item is private and carries no functional release yet.
