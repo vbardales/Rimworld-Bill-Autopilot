@@ -1,8 +1,9 @@
 # Pickle runs of 2026-09-21
 
 Text summary of the first three WSL passes of `Tests/Pickle/`. The raw evidence (reports, launcher
-logs, captures) is **on disk only**, in `docs/runs/evidence/`, and ignored by git: it weighs about
-78 MB after pruning. This file is what survives a clone. STATUS.md holds the reasoning; this holds the numbers.
+logs, captures) is **on disk only**, in `docs/runs/evidence/`, and ignored by git. It weighs under 3 MB after
+pruning and converting the captures to reduced JPEG (full size, quality 88, for the `@review` one).
+This file is what survives a clone. STATUS.md holds the reasoning; this holds the numbers.
 
 All three: pass `sans-facultatifs`, English, `-pickle-run="Bill Autopilot - Pickle tests"`.
 **None produced a verdict** (`exitReason` was never `passed` nor `failed`).
@@ -80,9 +81,10 @@ with it. Untested hypothesis: `-Extra '-pickle-no-http'` avoids it.
 
 ## Capture of note
 
-`evidence/2026-09-21-run3/screenshots/manual--bills-tab--one-automatic-bill-and-one-placed-by-hand--step0.png`
-is the `@review` capture of feature 06. Whether the marker reads in it is a judgement for a person; the
-green scenario only says the path ran.
+`evidence/2026-09-21-run3/screenshots/manual--bills-tab--one-automatic-bill-and-one-placed-by-hand--step0.jpg`
+is the `@review` capture of feature 06. Opened on 2026-09-23: the automatic bill reads
+"Make patchleather (auto)" and the hand-placed one, "Make pants", carries no mark. So the marker does read
+in the vanilla tab. A green scenario alone would only say that the path ran.
 
 ## Two defects in shared tooling seen here
 

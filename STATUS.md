@@ -48,6 +48,9 @@ git. What is tracked is a text summary: `docs/runs/2026-09-21-pickle-runs.md`, o
 log, plus the captures of the scenarios run 3 did not repeat (features 07 to 12); the rest was deleted
 under the "Test evidence" rule of the root AGENTS.md. Run 1's report was lost to the shared script's
 five-report rotation before it was copied, and only its cause (recorded in the summary) survives.
+Captures are kept as reduced JPEG; the whole folder is under 3 MB. The `@review` capture of feature 06 was
+opened on 2026-09-23 and the marker reads in it ("Make patchleather (auto)" beside an unmarked hand-placed
+bill); the other `@review` captures are still to be opened.
 
 ## Workshop item created, and the gate to tested restated — 2026-09-23
 
