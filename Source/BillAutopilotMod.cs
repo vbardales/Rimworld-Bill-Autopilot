@@ -99,7 +99,9 @@ namespace BillAutopilot
             var profile = Settings.ProfileFor(bench);
             bool enabled = profile != null && profile.enabled;
 
-            var checkRect = new Rect(rect.x + 4f, rect.y, rect.width * 0.5f, rect.height);
+            // The checkbox is drawn at the RIGHT edge of this rect, and the summary starts at half the row: the
+            // rect used to end past that point and the cross was drawn over the first digit of the count.
+            var checkRect = new Rect(rect.x + 4f, rect.y, rect.width * 0.5f - 16f, rect.height);
             bool afterClick = enabled;
             Widgets.CheckboxLabeled(checkRect, bench.LabelCap, ref afterClick);
             if (afterClick != enabled) BenchActivation.Toggle(bench, afterClick);

@@ -33,9 +33,23 @@ namespace BillAutopilot
             return probe;
         }
 
-        /// <summary>Can the game count this recipe's product? False for butchering, smelting and the like.</summary>
+        /// <summary>
+        /// Can the game count this recipe's product? False for smelting a weapon, cremation, surgery and
+        /// the like - and TRUE for butchering, whose counter counts raw meat.
+        ///
+        /// This is the one answer every part of the mod uses: the sync pass, the profile window and the
+        /// confirmation that announces how many recipes will be taken. The window and the confirmation used
+        /// to work it out by hand from the recipe's products, which is only what the BASE counter does;
+        /// RecipeWorkerCounter has subclasses that decide otherwise, and for butchering the two answers
+        /// differed, so the window showed Never for a recipe the engine ran in stock and the confirmation
+        /// announced fewer recipes than were taken.
+        /// </summary>
         public static bool CanCount(RecipeDef recipe)
         {
+            // No game yet - the settings page opened from the main menu - and so no bill to build a probe
+            // from: Bill's constructor takes its id from the game.
+            if (Verse.Current.Game == null) return CanCountWithoutGame(recipe);
+
             var probe = GetProbe(recipe);
             if (probe == null) return false;
 
@@ -50,6 +64,29 @@ namespace BillAutopilot
                     recipe.shortHash ^ 0x5A11);
                 return false;
             }
+        }
+
+        /// <summary>
+        /// The same question with no bill. A counter of its own class is asked directly with none: the ones
+        /// that ignore the bill (butchering) answer, and one that reads it throws and falls through to what
+        /// the base counter decides from the recipe alone, which is exactly the base class's own rule.
+        /// </summary>
+        private static bool CanCountWithoutGame(RecipeDef recipe)
+        {
+            try
+            {
+                var counter = recipe.WorkerCounter;
+                if (counter != null && counter.GetType() != typeof(RecipeWorkerCounter))
+                {
+                    return counter.CanCountProducts(null);
+                }
+            }
+            catch (Exception)
+            {
+                // A counter that needs its bill: the base rule below is the best answer without one.
+            }
+
+            return recipe.specialProducts == null && recipe.products != null && recipe.products.Count == 1;
         }
 
         /// <summary>

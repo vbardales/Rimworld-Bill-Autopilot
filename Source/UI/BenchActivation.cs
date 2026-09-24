@@ -69,9 +69,10 @@ namespace BillAutopilot
         }
 
         /// <summary>
-        /// How many recipes the autopilot would take charge of. The countability test is done by hand
-        /// rather than through RecipeProbe: this window also opens from the main menu, where there is
-        /// no game in which to build a probe bill.
+        /// How many recipes the autopilot would take charge of. Countability comes from RecipeProbe, the
+        /// same answer the sync pass acts on, so the number announced is the number taken. Opened from the
+        /// main menu there is no game to build a probe bill in, and RecipeProbe then asks the recipe's
+        /// own counter with no bill.
         /// </summary>
         private static int RecipesTaken(ThingDef bench, BenchProfile profile)
         {
@@ -82,7 +83,7 @@ namespace BillAutopilot
                 {
                     if (!r.AvailableNow) return false;
 
-                    bool countable = r.products != null && r.products.Count == 1 && r.specialProducts == null;
+                    bool countable = RecipeProbe.CanCount(r);
                     return profile.ModeFor(r, countable) != AutoMode.Excluded;
                 });
         }

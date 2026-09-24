@@ -38,7 +38,7 @@ Recipes unlocked later will arrive suspended, and will never spend anything with
   <BillAutopilot.Profile.Target>Keep in stock</BillAutopilot.Profile.Target>
   <BillAutopilot.Profile.Floor>Start again at</BillAutopilot.Profile.Floor>
   <BillAutopilot.Profile.Uncountable>Recipes with no countable product</BillAutopilot.Profile.Uncountable>
-  <BillAutopilot.Profile.UncountableDesc>Butchering, smelting, cremation, surgery and anything else the game cannot count: "keep in stock" is impossible for them, so they follow this setting instead.</BillAutopilot.Profile.UncountableDesc>
+  <BillAutopilot.Profile.UncountableDesc>Smelting a weapon, cremation, surgery and anything else the game cannot count: "keep in stock" is impossible for them, so they follow this setting instead.</BillAutopilot.Profile.UncountableDesc>
   <BillAutopilot.Profile.UncountableRecipe>The game cannot count what this recipe produces, so it follows the setting for uncountable recipes.</BillAutopilot.Profile.UncountableRecipe>
   <BillAutopilot.Profile.CustomCount>Count</BillAutopilot.Profile.CustomCount>
   <BillAutopilot.Profile.CustomFloor>Second count</BillAutopilot.Profile.CustomFloor>

@@ -14,7 +14,7 @@ licence_name: MIT
 licence_file: LICENSE (identical copy in Mod/LICENSE)
 dependencies: declared
 showcase:     complete
-settings_audit: complete
+settings_audit: partial
 tested_on:    2026-09-01
 workshop:      3806709456
 remaining:
@@ -22,9 +22,8 @@ remaining:
   - unverified: gate to tested, condition 2 - every scenario with a @requires tag has RUN, not been skipped: features 13, 15, 16, 17 and two scenarios of 14 have never been played
   - unverified: gate to tested, condition 3 - every manual test validated green: save loaded with the mod removed, RIMMSQOL interface, Nice Bill Tab drag, two Better Workbench Management details, Choose Your Recipe, every @review screenshot
   - unverified: the Pickle suite has produced one verdict (run 4, 2026-09-23: exitReason failed, 40 passed, 11 failed, 14 skipped of 65), and the fixes made after it have not been replayed; done -> tested still needs a clean pass without the optional mods, the pass with them, and one per language
-  - defect: profile window and switch-on confirmation decide countability by hand (BenchActivation.cs:85, Dialog_BenchProfile.cs:302) while the engine asks the game; for butchering they disagree, so the confirmation announces fewer recipes than are taken and the window shows Never for a recipe that runs in stock
-  - defect: shipped text says butchering cannot be counted (Steam description, BillAutopilot.Profile.UncountableDesc EN and FR, About.xml); the game counts raw meat for it
-  - defect: settings page, the red cross of each workbench row overlaps the first digit of its recipe count (@review capture, run 4)
+  - unverified: the three defects found by run 4 are fixed in the source and covered by new scenarios, none yet replayed in game (details in the section "Three defects fixed")
+  - unverified: settings_audit reset to partial on 2026-09-24 because settings-page and profile-window UI code changed; the technical tests pass again (74 checks), the in-game re-check is the next Pickle pass and its @review captures
   - unverified: every @review screenshot the suite attaches; a green there says the trip happened, not that the image shows anything
   - unverified: loading a save with the mod removed, which no Pickle run can do since the mod list is fixed at startup
   - unverified: RIMMSQOL revealing the shortcut in its own interface, and that visibility choice surviving a restart
@@ -38,10 +37,43 @@ remaining:
   - unverified: Nice Bill Tab's cached list, where a drag could bring a deleted bill back
   - unverified: loading a save after removing the mod, the reason its state avoids a GameComponent
 session:      local_3527e6d8-def4-4e54-97ff-a6430f1dc569
-updated:      2026-09-23, first Pickle verdict (run 4), three defects found
+updated:      2026-09-24, three defects fixed, DLL changed, settings_audit back to partial
 ---
 
 # Bill Autopilot — status
+
+## Three defects fixed, DLL changed — 2026-09-24
+
+Stage stays **done**. The shipped assembly changed: SHA-256 is now
+`436E71797FFF8241BF6C20C9B4881AB467E2B866F74B56F984443D2F1B8E0F8A` (was `D13D4225...DB599E`). Every
+in-game result before this date describes the old build.
+
+1. **Countability, one answer.** `RecipeProbe.CanCount` is now the only place that decides it. The profile
+   window (`Dialog_BenchProfile.cs`) and the switch-on confirmation (`BenchActivation.cs`) used to derive it
+   from the recipe's products, which is only what the *base* `RecipeWorkerCounter` does; subclasses decide
+   otherwise, and butchering does (`CanCountProducts` returns true). With no game loaded (the settings page
+   from the main menu) there is no bill to probe with, so it asks the recipe's own counter with none, falling
+   back to the base rule if that counter needs its bill.
+2. **Shipped text.** Butchering is no longer named among the uncountable recipes: `About.xml` and
+   `BillAutopilot.Profile.UncountableDesc` in English and French now say "smelting a weapon, cremation,
+   surgery". **The Steam page is frozen at the description sent at creation and still says butchering: that
+   has to be edited by hand on the page** (noted in `PUBLICATION.md`).
+3. **Settings page overlap.** The checkbox is drawn at the right edge of its rect, which ended exactly where
+   the summary text starts; the rect is 16 px narrower so the cross no longer covers the first digit.
+
+**New coverage:** two scenarios in feature 09 — butchering resolves to *keep in stock*, and the confirmation
+announces exactly the bills the engine then puts up (before the fix: one announced, two taken on a butcher
+spot).
+
+**Found on the way, and mine:** `Tests/BillAutopilot.Tests.csproj` had stopped building the day
+`Tests/Pickle/Source` was created, because the SDK's default globbing compiled the Pickle sources into it.
+It now excludes `Pickle\**`. The last unit-test result before today had been obtained from an executable built
+before that; the suite is green again on the new build (**74 checks passed**), XML **407 checks passed**.
+
+**Rules applied.** `settings_audit` goes back to `partial`: the protocol resets it after a change to settings
+UI, and the in-game re-check has not been done. `localization` and both language fields stay `complete`: the
+one changed text was revalidated statically (407 checks, key and placeholder parity); the runtime check in
+each language is still listed in `remaining`.
 
 ## First verdict: Pickle run 4, and what it found — 2026-09-23
 
@@ -74,7 +106,7 @@ rotation before it was copied. Captures are kept as reduced JPEG; the folder is 
 
 ## Workshop item created, and the gate to tested restated — 2026-09-23
 
-Stage stays **done**. Nothing in the shipped mod changed; the DLL is still D13D4225...DB599E.
+Stage stays **done**. Nothing in the shipped mod changed on 2026-09-23; the DLL was still D13D4225...DB599E (it changed on 2026-09-24, see above).
 
 - **0.1.0 prepublished by the maintainer.** The Workshop item exists, private, id **3806709456**;
   `About/PublishedFileId.txt` was committed at once (13ac5ed), as PUBLICATION.md requires.

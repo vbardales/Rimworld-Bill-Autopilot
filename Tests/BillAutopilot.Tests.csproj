@@ -59,4 +59,12 @@
     </Reference>
   </ItemGroup>
 
+
+  <ItemGroup>
+    <!-- The Pickle suite lives under Tests/Pickle and is built by its own project. Without this the SDK's
+         default globbing compiles its sources into THIS executable, which has no Pickle reference:
+         the unit tests stopped building the day Tests/Pickle/Source was created. -->
+    <Compile Remove="Pickle\**" />
+  </ItemGroup>
+
 </Project>

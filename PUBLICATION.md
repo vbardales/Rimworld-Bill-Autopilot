@@ -199,3 +199,17 @@ For 1.0.0, from `CHANGELOG.md`:
 3. Switch the item to public by hand.
 4. Post the six messages above. Their links already carry the item id.
 5. ~~Write the Workshop id into `STATUS.md` under `workshop:`.~~ Done.
+
+## The Steam description needs one edit by hand
+
+`SetItemDescription` ran once, at creation, so the page still carries the wording of 2026-09-23. On
+2026-09-24 `About.xml` was corrected: **butchering is not an uncountable recipe** (the game counts raw meat for
+it). On the Steam page, edit the "WHAT YOU SET" list item that says:
+
+> Butchering, smelting, cremation and anything else the game cannot count get their own setting, since "keep N in stock" is impossible for them.
+
+so that it reads:
+
+> Smelting a weapon, cremation, surgery and anything else the game cannot count get their own setting, since "keep N in stock" is impossible for them.
+
+Nothing else on the page changes. This is the only known divergence between the page and `About.xml`.

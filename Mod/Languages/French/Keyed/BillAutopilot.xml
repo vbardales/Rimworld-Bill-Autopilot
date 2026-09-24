@@ -38,7 +38,7 @@ Les recettes débloquées plus tard arriveront suspendues, et ne dépenseront ja
   <BillAutopilot.Profile.Target>Maintenir un stock de</BillAutopilot.Profile.Target>
   <BillAutopilot.Profile.Floor>Relancer à</BillAutopilot.Profile.Floor>
   <BillAutopilot.Profile.Uncountable>Recettes au produit non comptable</BillAutopilot.Profile.Uncountable>
-  <BillAutopilot.Profile.UncountableDesc>Découpe, fonte, crémation, chirurgie et tout ce que le jeu ne sait pas compter : « maintenir un stock » leur est impossible, elles suivent donc ce réglage.</BillAutopilot.Profile.UncountableDesc>
+  <BillAutopilot.Profile.UncountableDesc>Fonte d'une arme, crémation, chirurgie et tout ce que le jeu ne sait pas compter : « maintenir un stock » leur est impossible, elles suivent donc ce réglage.</BillAutopilot.Profile.UncountableDesc>
   <BillAutopilot.Profile.UncountableRecipe>Le jeu ne sait pas compter ce que produit cette recette : elle suit le réglage des recettes non comptables.</BillAutopilot.Profile.UncountableRecipe>
   <BillAutopilot.Profile.CustomCount>Nombre</BillAutopilot.Profile.CustomCount>
   <BillAutopilot.Profile.CustomFloor>Second nombre</BillAutopilot.Profile.CustomFloor>

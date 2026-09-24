@@ -101,6 +101,40 @@ namespace BillAutopilot.PickleSteps
                 + "more recipes available in this fixture, or lower the cap");
         }
 
+        /// <summary>
+        /// What the confirmation announced against what the engine then did, which is the only way to check
+        /// that they agree. Comparing the announced number with the mod's own calculation would agree with
+        /// itself: the confirmation and the sync pass once used different countability rules, and for
+        /// butchering the dialog announced one recipe while the engine put up two. Counted from the bills
+        /// actually standing on a real bench.
+        ///
+        /// It only means something when every recipe the mod takes gets a bill straight away, so the scenario
+        /// sets a target far above any stock.
+        /// </summary>
+        [Then("Bill Autopilot has put up a bill for every recipe its confirmation announced on the {string} at \\({int}, {int}\\)")]
+        public void AssertAnnouncedIsTaken(PickleContext ctx, string benchDefName, int x, int z)
+        {
+            var bench = Driver.BenchDef(ctx, benchDefName);
+            var table = Driver.Bench(ctx, benchDefName, x, z);
+            var profile = Driver.Settings(ctx).ProfileFor(bench);
+            ctx.Require(profile != null, $"{benchDefName} has no profile at all");
+
+            int announced = Driver.RecipesTaken(ctx, bench, profile);
+
+            var state = Driver.State(ctx);
+            int actual = 0;
+            var bills = table.billStack.Bills;
+            for (int i = 0; i < bills.Count; i++)
+            {
+                if (state.IsAuto(bills[i])) actual++;
+            }
+
+            ctx.Assert(actual == announced,
+                $"the confirmation announced {announced} recipes on the {benchDefName} and the autopilot put "
+                + $"up {actual} bills: {Driver.Describe(ctx, table)}. When these differ, the window and the "
+                + "sync pass are deciding countability by different rules");
+        }
+
         [Then("Bill Autopilot asks nothing")]
         public void AssertNoConfirmation(PickleContext ctx)
         {

@@ -299,7 +299,7 @@ namespace BillAutopilot
         {
             if (Mouse.IsOver(rect)) Widgets.DrawHighlight(rect);
 
-            bool countable = recipe.products != null && recipe.products.Count == 1 && recipe.specialProducts == null;
+            bool countable = RecipeProbe.CanCount(recipe);
             var effective = profile.ModeFor(recipe, countable);
 
             var labelRect = new Rect(rect.x + 4f, rect.y, rect.width * 0.5f, rect.height);

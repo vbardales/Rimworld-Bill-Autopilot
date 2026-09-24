@@ -52,3 +52,24 @@ Feature: recipes the game cannot count have a setting of their own
     Given Bill Autopilot uncountable recipes on "ElectricSmelter" are "never"
     Then Bill Autopilot would run "ExtractMetalFromSlag" on "ElectricSmelter" as "keep in stock"
     And no errors were logged
+
+  # Butchering is counted by the game, so the mod keeps a stock of it like any other recipe. Until the
+  # 2026-09-23 fix the profile window and the confirmation decided countability by hand, sent it to the
+  # uncountable setting and showed Never for a recipe the engine ran in stock.
+  Scenario: butchering is kept in stock, not sent to the uncountable setting
+    Given a "ButcherSpot" is built at (150, 155)
+    And Bill Autopilot is switched on for "ButcherSpot"
+    Then Bill Autopilot would run "ButcherCorpseFlesh" on "ButcherSpot" as "keep in stock"
+
+  # The confirmation and the engine agree on how many recipes are taken. The target is set far above any
+  # stock, so every recipe the mod takes gets a bill at once and the bills standing ARE the intake. Before
+  # the fix the dialog announced one recipe on a butcher spot where the engine put up two.
+  Scenario: the confirmation announces what the engine really takes
+    Given a "ButcherSpot" is built at (150, 155)
+    And Bill Autopilot keeps 100000 of everything on "ButcherSpot", restarting at 99999
+    When Bill Autopilot's toggle is used to switch "ButcherSpot" on
+    Then Bill Autopilot asks before taking the recipes it would take on "ButcherSpot"
+    When the Bill Autopilot confirmation is accepted
+    And Bill Autopilot syncs the "ButcherSpot" at (150, 155)
+    Then Bill Autopilot has put up a bill for every recipe its confirmation announced on the "ButcherSpot" at (150, 155)
+    And no errors were logged
