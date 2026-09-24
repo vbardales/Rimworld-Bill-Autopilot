@@ -5,15 +5,19 @@ logs, captures) is **on disk only**, in `docs/runs/evidence/`, and ignored by gi
 pruning and converting the captures to reduced JPEG (full size, quality 88, for the `@review` one).
 This file is what survives a clone. STATUS.md holds the reasoning; this holds the numbers.
 
-All four: pass `sans-facultatifs`, English, `-pickle-run="Bill Autopilot - Pickle tests"`.
+All runs: pass `sans-facultatifs`, English, `-pickle-run="Bill Autopilot - Pickle tests"`.
 Runs 1 to 3 produced no verdict; **run 4 is the first: `exitReason: failed`, all 65 scenarios selected and run.**
+Runs 5a and 5b are on the build that fixes its three shipped defects; from 5b on, runs are small requests
+through the TicketDispatcher.
 
 | Run | exitReason | Scenarios | Passed | Failed | Evidence |
 | --- | --- | --- | --- | --- | --- |
 | 1 | `infrastructure-error` | 0 of 65 selected (19 features discovered) | 0 | 0 | **lost**: the shared script archives five reports and this one rotated out. Cause was read from its `Player.log` before that; see below |
 | 2 | `in-progress`, killed by the 5-minute stall watchdog | 43 of 65 | 20 | 23 | deleted 2026-09-23: superseded by run 4, which replayed every scenario |
 | 3 | `watchdog-timeout` (10-minute stall setting) | 26 of 65 | 15 | 11 | deleted 2026-09-23: superseded by run 4 |
-| 4 | `failed` (2026-09-23, `-pickle-no-http`) | 65 of 65: 40 passed, 11 failed, 14 skipped | 40 | 11 | `evidence/2026-09-23-run4/` |
+| 4 | `failed` (2026-09-23, `-pickle-no-http`) | 65 of 65: 40 passed, 11 failed, 14 skipped | 40 | 11 | `evidence/2026-09-23-run4/`, previous build; deleted when the final pass replaces it |
+| 5a | `watchdog-timeout` (2026-09-24, new build) | 4 of 65: the load of the save took 78 s on a loaded machine, past the 120 s scenario limit | 4 | 0 | deleted 2026-09-24: no verdict, superseded by 5b |
+| 5b | `passed` (2026-09-24, new build 436E7179, request `41c5`, features 09, 18, 19) | 12 of 12 | 12 | 0 | `evidence/2026-09-24-run5-fixcheck/` |
 
 ## Run 1 — no scenario played
 

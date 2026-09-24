@@ -22,8 +22,9 @@ remaining:
   - unverified: gate to tested, condition 2 - every scenario with a @requires tag has RUN, not been skipped: features 13, 15, 16, 17 and two scenarios of 14 have never been played
   - unverified: gate to tested, condition 3 - every manual test validated green: save loaded with the mod removed, RIMMSQOL interface, Nice Bill Tab drag, two Better Workbench Management details, Choose Your Recipe, every @review screenshot
   - unverified: the Pickle suite has produced one verdict (run 4, 2026-09-23: exitReason failed, 40 passed, 11 failed, 14 skipped of 65), and the fixes made after it have not been replayed; done -> tested still needs a clean pass without the optional mods, the pass with them, and one per language
-  - unverified: the three defects found by run 4 are fixed in the source and covered by new scenarios, none yet replayed in game (details in the section "Three defects fixed")
-  - unverified: settings_audit reset to partial on 2026-09-24 because settings-page and profile-window UI code changed; the technical tests pass again (74 checks), the in-game re-check is the next Pickle pass and its @review captures
+  - unverified: the fixes are proven in game only on the features they touch (run 5 fix-check, features 09, 18, 19: 12 of 12 passed on the new build); the other 57 scenarios have not been replayed on it, four small requests for the final pass are queued (see "Where the run evidence lives")
+  - unverified: settings_audit reset to partial on 2026-09-24 because settings-page and profile-window UI code changed; the technical tests pass (74 checks) and the run 5 captures of the settings page and the profile window were opened and read correctly, the full final pass and the French pass are still owed
+  - defect, not fixed: the settings page and the profile window write "1 recipes" (Brewery), a plural the keys do not handle; French has the same form
   - unverified: every @review screenshot the suite attaches; a green there says the trip happened, not that the image shows anything
   - unverified: loading a save with the mod removed, which no Pickle run can do since the mod list is fixed at startup
   - unverified: RIMMSQOL revealing the shortcut in its own interface, and that visibility choice surviving a restart
@@ -37,10 +38,28 @@ remaining:
   - unverified: Nice Bill Tab's cached list, where a drag could bring a deleted bill back
   - unverified: loading a save after removing the mod, the reason its state avoids a GameComponent
 session:      local_3527e6d8-def4-4e54-97ff-a6430f1dc569
-updated:      2026-09-24, three defects fixed, DLL changed, settings_audit back to partial
+updated:      2026-09-24, fix check passed in game (12 of 12), final pass queued as small requests
 ---
 
 # Bill Autopilot — status
+
+## Fix check replayed in game — 2026-09-24
+
+Stage stays **done**. Run 5 (fix-check request `20260924-163910-321-41c5`, features 09, 18 and 19, English, no
+optional mod, build `436E7179...`): **`exitReason: passed`, 12 of 12 scenarios played and passed**, one attempt.
+That covers the two new scenarios of feature 09 (butchering kept in stock; the confirmation announces exactly
+the bills the engine puts up) and the ones that failed in run 4 for the same reasons.
+
+The four `@review` captures were opened: on the settings page the cross now sits left of the count with a
+clear gap (defect 3 gone); on the electric smelter's profile window "Smelt metal from slag" reads *Keep in
+stock* and the five uncountable recipes read *Never*. **Not covered by this run:** the Steam description still
+says butchering and has to be edited by hand (PUBLICATION.md), and the other 57 scenarios are not yet replayed
+on this build. An earlier attempt at the full suite, killed by the Pickle watchdog after 4 scenarios while the
+machine was loaded (the save took 78 s to load), counts for nothing and is one line in `docs/runs/pickle-runs.md`.
+
+Process, per the maintainer: **small requests, submitted through the TicketDispatcher** (`Submit-PickleRun.ps1`,
+no watcher, no heartbeat: it messages the session at START, END and RUN_DONE). A fix check plays the fewest
+scenarios; only the initial and final passes play everything.
 
 ## Three defects fixed, DLL changed — 2026-09-24
 
@@ -100,9 +119,25 @@ optional mods and **not yet played**. The full breakdown is in `docs/runs/pickle
 
 Raw evidence (reports, launcher logs, captures) is **on disk only**, in `docs/runs/evidence/`, ignored by
 git; what is tracked is the text summary `docs/runs/pickle-runs.md`, one table line per run. Under the "Test
-evidence" rule of the root AGENTS.md only run 4 is kept, as the latest report for every scenario; runs 2 and 3
-were deleted the day it replayed all of them, and run 1's report was lost to the shared script's five-report
-rotation before it was copied. Captures are kept as reduced JPEG; the folder is under 4 MB.
+evidence" rule of the root AGENTS.md two reports are kept: `2026-09-24-run5-fixcheck` (features 09, 18, 19 on the
+current build) and run 4, which stays **only until the final pass replaces it** (it is a report of the previous
+build, so it proves nothing about this one; it is kept meanwhile for the 14 skipped scenarios' baseline and the
+marker captures). Runs 2 and 3 were deleted the day run 4 replayed all of them, and run 1's report was lost to
+the shared script's five-report rotation before it was copied. Captures are kept as reduced JPEG; the folder is
+under 3 MB.
+
+Queued through the TicketDispatcher on 2026-09-24, all English, all `-pickle-no-http`, evidence in
+`docs/runs/evidence/2026-09-24-<name>`:
+
+| Request | Filter | Mods | Purpose |
+| --- | --- | --- | --- |
+| `6e5f` | features 01 to 06 | 7 optional | final pass 1 of 3 |
+| `1f5e` | features 07 to 12 | 7 optional | final pass 2 of 3 |
+| `479c` | features 13 to 19 | 7 optional | final pass 3 of 3, the `@requires` scenarios finally played |
+| `c6a4` | features 13 to 17 | none | they must be **skipped by requirement**, not failed |
+
+The French pass will be a separate request afterwards. Delete run 4 and repoint this section when the three
+final requests have replaced it.
 
 ## Workshop item created, and the gate to tested restated — 2026-09-23
 
