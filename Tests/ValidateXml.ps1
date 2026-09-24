@@ -48,7 +48,10 @@ foreach ($file in Get-ChildItem -LiteralPath (Join-Path $root 'Source') -Filter 
     $source = Get-Content -LiteralPath $file.FullName -Raw -Encoding UTF8
     foreach ($match in [regex]::Matches($source, '"(BillAutopilot\.[A-Za-z][A-Za-z0-9_.]*)"')) {
         $key = $match.Groups[1].Value
-        Check ($english.ContainsKey($key)) "Source key missing from English: $key"
+        # A counted thing is a family of keys chosen by CountForm at run time (key.One, key.Many and an optional
+        # key.Zero), so the source names the base and the base itself does not exist.
+        $isFamily = $english.ContainsKey("$key.One") -and $english.ContainsKey("$key.Many")
+        Check ($english.ContainsKey($key) -or $isFamily) "Source key missing from English: $key"
     }
 }
 [xml]$shortcut = Get-Content -LiteralPath (Join-Path $root 'Mod/Defs/MainButtonDefs/BillAutopilot.xml') -Raw

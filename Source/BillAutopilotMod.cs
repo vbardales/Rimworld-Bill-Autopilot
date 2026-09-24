@@ -68,7 +68,7 @@ namespace BillAutopilot
 
             var capRow = listing.GetRect(28f);
             Widgets.Label(capRow.LeftPart(0.6f),
-                "BillAutopilot.Settings.MaxBills".Translate(Settings.maxAutoBillsPerTable, gameMax));
+                CountForm.Text("BillAutopilot.Settings.MaxBills", Settings.maxAutoBillsPerTable, gameMax));
             Settings.maxAutoBillsPerTable = Mathf.RoundToInt(Widgets.HorizontalSlider(
                 capRow.RightPart(0.4f), Settings.maxAutoBillsPerTable, 1f, gameMax, middleAlignment: true));
 
@@ -135,9 +135,9 @@ namespace BillAutopilot
             }
 
             return profile.defaultMode == AutoMode.Always
-                ? "BillAutopilot.Settings.SummaryAlways".Translate(recipes, profile.OverrideCount)
+                ? "BillAutopilot.Settings.SummaryAlways".Translate(recipes, RecipeCount.Overridden(profile.OverrideCount))
                 : "BillAutopilot.Settings.SummaryMaintain".Translate(
-                    recipes, profile.targetCount, profile.OverrideCount);
+                    recipes, profile.targetCount, RecipeCount.Overridden(profile.OverrideCount));
         }
 
         public override void WriteSettings()

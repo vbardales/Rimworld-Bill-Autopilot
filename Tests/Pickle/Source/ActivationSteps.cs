@@ -163,6 +163,31 @@ namespace BillAutopilot.PickleSteps
                 + $"\"{pluralForOne}\"");
         }
 
+        /// <summary>
+        /// The same check for the overridden count on the line of a workbench type that is on: French writes
+        /// "1 surchargée", and used to write "1 surchargées". Needs exactly one override on the bench, which
+        /// the scenario sets up, and says so if it does not hold.
+        /// </summary>
+        [Then("Bill Autopilot's settings line for {string} counts its one override in the singular")]
+        public void AssertSingularOverride(PickleContext ctx, string benchDefName)
+        {
+            var bench = Driver.BenchDef(ctx, benchDefName);
+            var profile = Driver.Settings(ctx).ProfileFor(bench);
+            ctx.Require(profile != null && profile.enabled && profile.OverrideCount == 1,
+                $"{benchDefName} must be on with exactly one override for this step, it has "
+                + $"{(profile == null ? "no profile" : profile.enabled ? profile.OverrideCount + " overrides" : "the autopilot off")}");
+
+            string line = BillAutopilotMod.Summary(bench, profile);
+            string singular = "BillAutopilot.Overridden.One".Translate().Resolve();
+            string pluralForOne = "BillAutopilot.Overridden.Many".Translate(1).Resolve();
+
+            ctx.Assert(line.Contains(singular),
+                $"the settings line reads \"{line}\" and does not contain \"{singular}\"");
+            ctx.Assert(!line.Contains(pluralForOne) || pluralForOne == singular,
+                $"the settings line reads \"{line}\": one override is written with the plural form "
+                + $"\"{pluralForOne}\"");
+        }
+
         [Then("Bill Autopilot asks nothing")]
         public void AssertNoConfirmation(PickleContext ctx)
         {

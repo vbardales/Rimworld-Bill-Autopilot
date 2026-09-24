@@ -24,7 +24,7 @@ remaining:
   - unverified: the Pickle suite has produced one verdict (run 4, 2026-09-23: exitReason failed, 40 passed, 11 failed, 14 skipped of 65), and the fixes made after it have not been replayed; done -> tested still needs a clean pass without the optional mods, the pass with them, and one per language
   - unverified: the fixes are proven in game only on the features they touch (run 5 fix-check, features 09, 18, 19: 12 of 12 passed on the new build); the other 57 scenarios have not been replayed on it, four small requests for the final pass are queued (see "Where the run evidence lives")
   - unverified: settings_audit reset to partial on 2026-09-24 because settings-page and profile-window UI code changed; the technical tests pass (74 checks) and the run 5 captures of the settings page and the profile window were opened and read correctly, the full final pass and the French pass are still owed
-  - unverified: the "1 recipes" plural fix (settings page, switch-on confirmation, new-recipe letter): built and covered by a new scenario in feature 02, not yet played; it will be by the queued final requests, which run on this build. Left as is: the French override count reads "1 surchargées" on the settings line
+  - unverified: the "1 recipes" plural fix (settings page, switch-on confirmation, new-recipe letter): built and covered by a new scenario in feature 02, not yet played; it will be by the queued final requests, which run on this build. The same fix covers the overridden count ("1 surchargée"), the clear button, the cap label and the Dubs Mint Menus message
   - unverified: every @review screenshot the suite attaches; a green there says the trip happened, not that the image shows anything
   - unverified: loading a save with the mod removed, which no Pickle run can do since the mod list is fixed at startup
   - unverified: RIMMSQOL revealing the shortcut in its own interface, and that visibility choice surviving a restart
@@ -49,14 +49,21 @@ Stage stays **done**. Found on a capture of the fix check: the settings page wro
 count was inside the sentences as "{0} recipes", and a plural cannot be built by adding an "s" (French says
 "0 recette" and "1 recette"). It is now a noun phrase the translator owns, three keys
 `BillAutopilot.Recipes.Zero / One / Many` behind `RecipeCount.Phrase`, passed to the sentences as one argument;
-`SummaryOff` is gone (the phrase is the line), the letter title has a `.One` form. Both languages, 428 XML checks
-and 74 unit checks pass. New scenario in feature 02: the brewery, which has exactly one recipe, must read the
-singular on the settings line.
+`SummaryOff` is gone (the phrase is the line), the letter title has a `.One` form. The same fault was then fixed
+wherever a count meets a noun, through one helper, `CountForm.Text(keyBase, count, ...)`, which picks
+`keyBase.One`, `.Many` or (when defined) `.Zero`: the overridden count on the settings line (French read "1
+surchargées", now "1 surchargée"), the clear button of the profile window ("Clear the override", "Effacer la
+surcharge"), the cap slider label ("At most 1 automatic bill"), and the Dubs Mint Menus message ("1 autopilot bill
+was left out of the template"). Both languages have 63 keys; 463 XML checks and 74 unit checks pass;
+`Tests/ValidateXml.ps1` now accepts a source key whose `.One` and `.Many` exist. New scenarios: feature 02, the
+brewery, which has exactly one recipe, must read the singular on the settings line; feature 19, the scenario with
+one overridden recipe asserts the same for the override count.
 
-**The shipped assembly changed again:** SHA-256 `173A53BEC1FF46B49A8CCAC608461F6B216FE756CACC5974E1E179A56B72EAF1`
+**The shipped assembly changed again:** SHA-256 `8E3C5CC749BC698D267A1CCD91A373B3B177D0472178AA9682D1DEEBA3A7D5EE`
 (it was `436E7179...` when run 5b passed). Run 5b therefore describes the build before this change: it stays as the
 proof for the countability fix and the two captures, and the four queued requests, which have not started, will
-replay features 01 to 19 on this build. Nothing here has been played in game yet.
+replay features 01 to 19 on this build. Nothing here has been played in game yet. Not covered by any scenario: the
+button, the cap label and the Dubs message read from a screen; the `@review` capture of feature 19 shows the button.
 
 ## Fix check replayed in game — 2026-09-24
 

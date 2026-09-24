@@ -14,15 +14,19 @@
   <BillAutopilot.Settings.MarkBillsDesc>Ajoute une courte marque au libellé de chaque travail posé par le pilote, pour le distinguer de ceux que vous posez vous-même. Ce n’est pas cosmétique : supprimer un travail automatique exclut sa recette, et un travail non marqué qui disparaît seul ne laisse aucune trace de la raison.</BillAutopilot.Settings.MarkBillsDesc>
   <BillAutopilot.Settings.Notify>Signaler les nouvelles recettes</BillAutopilot.Settings.Notify>
   <BillAutopilot.Settings.NotifyDesc>Une recette débloquée après la mise sous pilote arrive en travail suspendu : elle ne dépense donc jamais rien à votre insu. Ceci envoie une lettre qui les récapitule.</BillAutopilot.Settings.NotifyDesc>
-  <BillAutopilot.Settings.MaxBills>Au plus {0} travaux automatiques par établi (le jeu en accepte {1})</BillAutopilot.Settings.MaxBills>
+  <BillAutopilot.Settings.MaxBills.One>Au plus 1 travail automatique par établi (le jeu en accepte {1})</BillAutopilot.Settings.MaxBills.One>
+  <BillAutopilot.Settings.MaxBills.Many>Au plus {0} travaux automatiques par établi (le jeu en accepte {1})</BillAutopilot.Settings.MaxBills.Many>
   <BillAutopilot.Settings.Configure>Configurer...</BillAutopilot.Settings.Configure>
   <!-- Un nombre de recettes sous forme de groupe nominal. Il entre dans les phrases ci-dessous comme un seul
        argument : le pluriel vit ici et nulle part ailleurs. En français, 0 et 1 sont au singulier. -->
   <BillAutopilot.Recipes.Zero>0 recette</BillAutopilot.Recipes.Zero>
   <BillAutopilot.Recipes.One>1 recette</BillAutopilot.Recipes.One>
   <BillAutopilot.Recipes.Many>{0} recettes</BillAutopilot.Recipes.Many>
-  <BillAutopilot.Settings.SummaryMaintain>{0}, maintenir {1}, {2} surchargées</BillAutopilot.Settings.SummaryMaintain>
-  <BillAutopilot.Settings.SummaryAlways>{0}, toujours actives, {1} surchargées</BillAutopilot.Settings.SummaryAlways>
+  <BillAutopilot.Overridden.Zero>0 surchargée</BillAutopilot.Overridden.Zero>
+  <BillAutopilot.Overridden.One>1 surchargée</BillAutopilot.Overridden.One>
+  <BillAutopilot.Overridden.Many>{0} surchargées</BillAutopilot.Overridden.Many>
+  <BillAutopilot.Settings.SummaryMaintain>{0}, maintenir {1}, {2}</BillAutopilot.Settings.SummaryMaintain>
+  <BillAutopilot.Settings.SummaryAlways>{0}, toujours actives, {1}</BillAutopilot.Settings.SummaryAlways>
 
   <BillAutopilot.Confirm.Title>Pilote automatique : {0}</BillAutopilot.Confirm.Title>
   <BillAutopilot.Confirm.BodyMaintain>Le pilote va prendre en charge {0} sur chaque établi « {1} », en maintenant un stock de {2} de chacune.
@@ -51,7 +55,8 @@ Les recettes débloquées plus tard arriveront suspendues, et ne dépenseront ja
   <BillAutopilot.Profile.Uncategorised>Divers</BillAutopilot.Profile.Uncategorised>
   <BillAutopilot.Profile.CollapseAll>Tout replier</BillAutopilot.Profile.CollapseAll>
   <BillAutopilot.Profile.ExpandAll>Tout déplier</BillAutopilot.Profile.ExpandAll>
-  <BillAutopilot.Profile.ClearOverrides>Effacer les {0} surcharges</BillAutopilot.Profile.ClearOverrides>
+  <BillAutopilot.Profile.ClearOverrides.One>Effacer la surcharge</BillAutopilot.Profile.ClearOverrides.One>
+  <BillAutopilot.Profile.ClearOverrides.Many>Effacer les {0} surcharges</BillAutopilot.Profile.ClearOverrides.Many>
 
   <BillAutopilot.Mode.Maintain>Maintenir un stock</BillAutopilot.Mode.Maintain>
   <BillAutopilot.Mode.Always>Toujours</BillAutopilot.Mode.Always>
@@ -71,7 +76,8 @@ Les recettes débloquées plus tard arriveront suspendues, et ne dépenseront ja
   <BillAutopilot.NewRecipeLetterTitle.One>1 nouvelle recette disponible</BillAutopilot.NewRecipeLetterTitle.One>
   <BillAutopilot.NewRecipeLetterBody>Le pilote les a posées en travaux suspendus. Réactivez celles que vous voulez ; supprimez les autres, il ne les proposera plus.\n\n{0}</BillAutopilot.NewRecipeLetterBody>
   <BillAutopilot.DriftCaptured>{0} retenue comme surcharge du profil « {1} ».</BillAutopilot.DriftCaptured>
-  <BillAutopilot.TemplateStripped>{0} travaux du pilote ont été laissés hors du modèle : il retient ce que vous avez posé, pas ce que le pilote avait en cours.</BillAutopilot.TemplateStripped>
+  <BillAutopilot.TemplateStripped.One>1 travail du pilote a été laissé hors du modèle : il retient ce que vous avez posé, pas ce que le pilote avait en cours.</BillAutopilot.TemplateStripped.One>
+  <BillAutopilot.TemplateStripped.Many>{0} travaux du pilote ont été laissés hors du modèle : il retient ce que vous avez posé, pas ce que le pilote avait en cours.</BillAutopilot.TemplateStripped.Many>
   <BillAutopilot.RecipeExcluded>{0} ne sera plus posée sur un établi « {1} ».</BillAutopilot.RecipeExcluded>
 
 </LanguageData>

@@ -123,7 +123,7 @@ namespace BillAutopilot
                 if (removed > 0)
                 {
                     Messages.Message(
-                        "BillAutopilot.TemplateStripped".Translate(removed),
+                        CountForm.Text("BillAutopilot.TemplateStripped", removed),
                         MessageTypeDefOf.SilentInput, historical: false);
                 }
             }

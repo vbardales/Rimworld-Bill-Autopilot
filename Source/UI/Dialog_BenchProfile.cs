@@ -229,7 +229,7 @@ namespace BillAutopilot
 
             if (Widgets.ButtonText(
                     new Rect(toolbar.xMax - 220f, toolbar.y, 220f, RowHeight - 4f),
-                    "BillAutopilot.Profile.ClearOverrides".Translate(profile.OverrideCount)))
+                    CountForm.Text("BillAutopilot.Profile.ClearOverrides", profile.OverrideCount)))
             {
                 profile.Rules.Clear();
                 Save();

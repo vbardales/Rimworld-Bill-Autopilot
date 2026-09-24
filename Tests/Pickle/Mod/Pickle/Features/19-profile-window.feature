@@ -40,6 +40,7 @@ Feature: the profile window, as a person has to read it
     When Bill Autopilot's bill for "Make_Patchleather" on the "HandTailoringBench" at (140, 155) is set to keep 200, restarting at 100
     And Bill Autopilot syncs the "HandTailoringBench" at (140, 155)
     Then Bill Autopilot keeps 200 of "Make_Patchleather" on "HandTailoringBench", restarting at 100
+    And Bill Autopilot's settings line for "HandTailoringBench" counts its one override in the singular
     When Bill Autopilot's profile window for "HandTailoringBench" is opened
     And I take a screenshot "profile window: one overridden recipe, the filter and the clear control"
     And I close all dialogs
