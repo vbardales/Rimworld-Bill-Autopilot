@@ -25,6 +25,11 @@ Feature: switching a workbench type on asks first, and takes everything already 
     When Bill Autopilot syncs the "HandTailoringBench" at (140, 155)
     Then Bill Autopilot has 0 bills up on the "HandTailoringBench" at (140, 155)
 
+  # Found on a capture of the settings page (2026-09-24): the brewery read "1 recipes". The count now goes
+  # through a noun phrase the translator owns, so the singular is a key, not a trailing "s".
+  Scenario: a workbench type with a single recipe is counted in the singular
+    Then Bill Autopilot's settings line for "Brewery" counts its recipes in the singular
+
   # Accepting absorbs everything already unlocked in silence. "I want all the recipes" means today's
   # ones, not forty suspended lines and a letter naming them; only what is unlocked LATER announces
   # itself, and that is scenario 04.

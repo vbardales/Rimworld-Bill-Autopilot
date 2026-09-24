@@ -24,7 +24,7 @@ remaining:
   - unverified: the Pickle suite has produced one verdict (run 4, 2026-09-23: exitReason failed, 40 passed, 11 failed, 14 skipped of 65), and the fixes made after it have not been replayed; done -> tested still needs a clean pass without the optional mods, the pass with them, and one per language
   - unverified: the fixes are proven in game only on the features they touch (run 5 fix-check, features 09, 18, 19: 12 of 12 passed on the new build); the other 57 scenarios have not been replayed on it, four small requests for the final pass are queued (see "Where the run evidence lives")
   - unverified: settings_audit reset to partial on 2026-09-24 because settings-page and profile-window UI code changed; the technical tests pass (74 checks) and the run 5 captures of the settings page and the profile window were opened and read correctly, the full final pass and the French pass are still owed
-  - defect, not fixed: the settings page and the profile window write "1 recipes" (Brewery), a plural the keys do not handle; French has the same form
+  - unverified: the "1 recipes" plural fix (settings page, switch-on confirmation, new-recipe letter): built and covered by a new scenario in feature 02, not yet played; it will be by the queued final requests, which run on this build. Left as is: the French override count reads "1 surchargées" on the settings line
   - unverified: every @review screenshot the suite attaches; a green there says the trip happened, not that the image shows anything
   - unverified: loading a save with the mod removed, which no Pickle run can do since the mod list is fixed at startup
   - unverified: RIMMSQOL revealing the shortcut in its own interface, and that visibility choice surviving a restart
@@ -38,10 +38,25 @@ remaining:
   - unverified: Nice Bill Tab's cached list, where a drag could bring a deleted bill back
   - unverified: loading a save after removing the mod, the reason its state avoids a GameComponent
 session:      local_3527e6d8-def4-4e54-97ff-a6430f1dc569
-updated:      2026-09-24, fix check passed in game (12 of 12), final pass queued as small requests
+updated:      2026-09-24, plural fix ("1 recipes"), DLL changed again, final pass queued as small requests
 ---
 
 # Bill Autopilot — status
+
+## Plural "1 recipes" fixed, DLL changed again — 2026-09-24
+
+Stage stays **done**. Found on a capture of the fix check: the settings page wrote "Brewery — 1 recipes". The
+count was inside the sentences as "{0} recipes", and a plural cannot be built by adding an "s" (French says
+"0 recette" and "1 recette"). It is now a noun phrase the translator owns, three keys
+`BillAutopilot.Recipes.Zero / One / Many` behind `RecipeCount.Phrase`, passed to the sentences as one argument;
+`SummaryOff` is gone (the phrase is the line), the letter title has a `.One` form. Both languages, 428 XML checks
+and 74 unit checks pass. New scenario in feature 02: the brewery, which has exactly one recipe, must read the
+singular on the settings line.
+
+**The shipped assembly changed again:** SHA-256 `173A53BEC1FF46B49A8CCAC608461F6B216FE756CACC5974E1E179A56B72EAF1`
+(it was `436E7179...` when run 5b passed). Run 5b therefore describes the build before this change: it stays as the
+proof for the countability fix and the two captures, and the four queued requests, which have not started, will
+replay features 01 to 19 on this build. Nothing here has been played in game yet.
 
 ## Fix check replayed in game — 2026-09-24
 

@@ -34,7 +34,7 @@ namespace BillAutopilot
                 return;
             }
 
-            int count = RecipesTaken(bench, profile);
+            TaggedString count = RecipeCount.Phrase(RecipesTaken(bench, profile));
 
             TaggedString text;
             if (profile.defaultMode == AutoMode.Always)

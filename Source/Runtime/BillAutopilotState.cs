@@ -178,7 +178,9 @@ namespace BillAutopilot
             if (BillAutopilotMod.Settings.notifyNewRecipes)
             {
                 Find.LetterStack.ReceiveLetter(
-                    "BillAutopilot.NewRecipeLetterTitle".Translate(pendingNews.Count),
+                    pendingNews.Count == 1
+                        ? "BillAutopilot.NewRecipeLetterTitle.One".Translate()
+                        : "BillAutopilot.NewRecipeLetterTitle".Translate(pendingNews.Count),
                     "BillAutopilot.NewRecipeLetterBody".Translate(string.Join("\n", pendingNews.ToArray())),
                     LetterDefOf.NeutralEvent);
             }

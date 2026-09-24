@@ -17,7 +17,7 @@ through the TicketDispatcher.
 | 3 | `watchdog-timeout` (10-minute stall setting) | 26 of 65 | 15 | 11 | deleted 2026-09-23: superseded by run 4 |
 | 4 | `failed` (2026-09-23, `-pickle-no-http`) | 65 of 65: 40 passed, 11 failed, 14 skipped | 40 | 11 | `evidence/2026-09-23-run4/`, previous build; deleted when the final pass replaces it |
 | 5a | `watchdog-timeout` (2026-09-24, new build) | 4 of 65: the load of the save took 78 s on a loaded machine, past the 120 s scenario limit | 4 | 0 | deleted 2026-09-24: no verdict, superseded by 5b |
-| 5b | `passed` (2026-09-24, new build 436E7179, request `41c5`, features 09, 18, 19) | 12 of 12 | 12 | 0 | `evidence/2026-09-24-run5-fixcheck/` |
+| 5b | `passed` (2026-09-24, build 436E7179, before the plural fix; request `41c5`, features 09, 18, 19) | 12 of 12 | 12 | 0 | `evidence/2026-09-24-run5-fixcheck/`, replaced by the final pass on build 173A53BE |
 
 ## Run 1 — no scenario played
 

@@ -54,10 +54,11 @@ namespace BillAutopilot.PickleSteps
             var profile = Driver.Settings(ctx).ProfileFor(bench);
             ctx.Require(profile != null, $"{benchDefName} has no profile at all");
 
-            int count = Driver.RecipesTaken(ctx, bench, profile);
-            ctx.Assert(count > 0,
+            int taken = Driver.RecipesTaken(ctx, bench, profile);
+            ctx.Assert(taken > 0,
                 $"the autopilot would take no recipe at all on {benchDefName}, so this scenario proves "
                 + "nothing about a dialog that exists to warn about a large intake");
+            TaggedString count = RecipeCount.Phrase(taken);
 
             TaggedString expected;
             if (profile.defaultMode == AutoMode.Always)
@@ -133,6 +134,33 @@ namespace BillAutopilot.PickleSteps
                 $"the confirmation announced {announced} recipes on the {benchDefName} and the autopilot put "
                 + $"up {actual} bills: {Driver.Describe(ctx, table)}. When these differ, the window and the "
                 + "sync pass are deciding countability by different rules");
+        }
+
+        /// <summary>
+        /// The line the settings page draws beside a workbench type, read from the mod itself. A workbench
+        /// with one recipe used to read "1 recipes" (and "1 recettes" in French). The forms are compared
+        /// through the mod's own keys, so the check holds in whichever language the pass runs in: the line
+        /// must carry the singular phrase and must not carry the plural phrase built for a count of one.
+        /// The bench needs exactly one recipe for that to mean anything, and says so if it does not.
+        /// </summary>
+        [Then("Bill Autopilot's settings line for {string} counts its recipes in the singular")]
+        public void AssertSingularLine(PickleContext ctx, string benchDefName)
+        {
+            var bench = Driver.BenchDef(ctx, benchDefName);
+            ctx.Require(bench.AllRecipes.Count == 1,
+                $"{benchDefName} has {bench.AllRecipes.Count} recipes here, not one: this scenario needs a "
+                + "workbench type with a single recipe to prove anything about the singular form");
+
+            var profile = Driver.Settings(ctx).ProfileFor(bench);
+            string line = BillAutopilotMod.Summary(bench, profile);
+            string singular = "BillAutopilot.Recipes.One".Translate().Resolve();
+            string pluralForOne = "BillAutopilot.Recipes.Many".Translate(1).Resolve();
+
+            ctx.Assert(line.Contains(singular),
+                $"the settings line reads \"{line}\" and does not contain \"{singular}\"");
+            ctx.Assert(!line.Contains(pluralForOne),
+                $"the settings line reads \"{line}\": a count of one is written with the plural form "
+                + $"\"{pluralForOne}\"");
         }
 
         [Then("Bill Autopilot asks nothing")]

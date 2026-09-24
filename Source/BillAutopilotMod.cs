@@ -125,18 +125,19 @@ namespace BillAutopilot
                 : "BillAutopilot.Settings.NotDetected".Translate(name);
         }
 
-        private static string Summary(ThingDef bench, BenchProfile profile)
+        // Public so the Pickle suite can read the exact line the settings page draws.
+        public static string Summary(ThingDef bench, BenchProfile profile)
         {
-            int recipeCount = bench.AllRecipes.Count;
+            TaggedString recipes = RecipeCount.Phrase(bench.AllRecipes.Count);
             if (profile == null || !profile.enabled)
             {
-                return "BillAutopilot.Settings.SummaryOff".Translate(recipeCount);
+                return recipes.Resolve();
             }
 
             return profile.defaultMode == AutoMode.Always
-                ? "BillAutopilot.Settings.SummaryAlways".Translate(recipeCount, profile.OverrideCount)
+                ? "BillAutopilot.Settings.SummaryAlways".Translate(recipes, profile.OverrideCount)
                 : "BillAutopilot.Settings.SummaryMaintain".Translate(
-                    recipeCount, profile.targetCount, profile.OverrideCount);
+                    recipes, profile.targetCount, profile.OverrideCount);
         }
 
         public override void WriteSettings()
