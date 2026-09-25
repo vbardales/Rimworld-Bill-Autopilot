@@ -40,6 +40,19 @@ code or assets is asserted, and their licences are not replaced by this project'
 MIT notice. Any future copied material must be separately identified with its
 actual licence or permission and required notices before distribution.
 
+## Mods and tools used only by the tests
+
+None of these is shipped in `Mod/`, none is a dependency of the mod, and none of their code or assets is used.
+They are mounted by the Pickle test passes of `Tests/Pickle/` so that the integrations above can be exercised.
+
+| Project / package ID | Why the tests mount it |
+| --- | --- |
+| No Max Bills: Redux (`justharry.nomaxbillsredux`) | Raises the per-bench bill ceiling that Better Workbench Management reports; the bill-cap scenarios read that ceiling live. |
+| TD Find Lib - Continued (`Memegoddess.TDFindLib`) and TDS Bug Fixes - Continued (`Memegoddess.TDSBugFixes`) | Everybody Gets One declares the first, which declares the second; without them its assembly loads half a class and its repeat modes throw. |
+| RIMMSQOL (`MalteSchulze.RIMMSqol`) | The pass that reveals the hidden main-bar shortcut through RIMMSQOL's own interface. |
+| Pickle (`rimworks.pickle`) and RimLogging (`rimworks.rimlogging`) | The Gherkin runner and the logging library the test passes run on. Development only. |
+| Nelim's Pickle Tools | The shared steps that drive RIMMSQOL, from the same author. Development only. |
+
 ## Runtime and build tools
 
 - RimWorld and its game interfaces are provided by Ludeon Studios. Game assemblies

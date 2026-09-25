@@ -1,6 +1,6 @@
 # The Pickle suite for Bill Autopilot
 
-Nineteen feature files, written and **not yet run**. They hold what only a running game can show;
+Twenty feature files, played since 2026-09-23 (`docs/runs/pickle-runs.md`). They hold what only a running game can show;
 everything provable outside one is proven outside one, in `Tests/BillAutopilot.Tests.csproj`.
 
 A run takes the whole machine — real rendering, real clicks, real screenshots — for tens of
@@ -96,7 +96,9 @@ saying the recipe is already known. That is the guard working, not a defect in t
 
 ## What is still manual, and why
 
-Nothing below is a defect. It is work no scenario here performs.
+Nothing below is a defect. It is work no scenario here performs. **`TESTING.md` (gate to `tested`, condition 3) is where
+each entry is classified**: automated, to automate, or not applicable with its reason. RIMMSQOL's own interface is now
+automated by `20-rimmsqol-shortcut.feature` (pass `wsl-deps.avec-rimmsqol.map`); the entry below stays as history.
 
 - **Loading the save with the mod removed.** The whole reason the state is grafted into the save's
   `<game>` node instead of a GameComponent. A Pickle run cannot do it: the mod list is fixed at

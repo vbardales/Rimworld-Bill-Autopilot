@@ -38,8 +38,8 @@ those two, turned red. A suite never seen to fail proves nothing.
 
 ## The Pickle suite, and how many passes a verdict needs
 
-Nineteen feature files live in `Tests/Pickle/`, written on 21 September 2026 and **not yet run**.
-They hold only what a running game can show. The decision layer — which mode applies, which target,
+Twenty feature files live in `Tests/Pickle/`, written from 21 September 2026 and played since 23 September
+(`docs/runs/pickle-runs.md` has one line per run). They hold only what a running game can show. The decision layer — which mode applies, which target,
 which floor, the clamps, the overflow guard, the fallback for a repeat mode whose owner has gone,
 and the settings round trip through Scribe — is proven by the executable suite above and is
 deliberately not restated there: a Pickle run takes the whole machine for tens of minutes, and a
@@ -62,7 +62,9 @@ manual. The numbered scenarios below are what the features were written from.
 
 2. **With the optional mods** — `Tests/Pickle/wsl-deps.avec-facultatifs.map`. It mounts all six integrations this mod
    declares in `loadAfter`, plus No Max Bills: Redux for the raised bill ceiling that scenario 10
-   reads live rather than hard-coding. It covers scenarios 13 to 16 and 19 on top of the first pass.
+   reads live rather than hard-coding, and the two libraries Everybody Gets One needs (TD Find Lib and
+   TDS Bug Fixes: the staging mounts only what a map lists, and without them its assembly loads half a
+   class). It covers scenarios 13 to 16 and 19 on top of the first pass.
    Green on the first pass says nothing about this one, and the reverse is equally true: a scenario
    can pass *only* because an optional mod is present.
 
@@ -76,6 +78,12 @@ manual. The numbered scenarios below are what the features were written from.
    these mods, has seen no incompatibility between them (2026-09-21). That is a player's experience,
    not a measurement, which is what this pass is for: a scenario going red because two neighbours
    fight is a real result, and the answer to it is to split the set per combination.
+
+   **A fourth set, for RIMMSQOL alone:** `wsl-deps.avec-rimmsqol.map` mounts RIMMSQOL and
+   PickleTools' `RimmsqolSteps`, and only `20-rimmsqol-shortcut.feature` runs in it. It stays out of the pass
+   with the neighbours because it changes the main bar, which no bill feature looks at, and a red then names
+   its own cause. What it does not test: that RIMMSQOL keeps its choice across a restart, which is RIMMSQOL's
+   behaviour and was shown by PickleTools' own demonstration on 2026-09-21.
 
 3. **Each language, in its own pass.** `-Language French`. The language is fixed at staging and
    never switched inside a run. No scenario spells an English string — every label, marker, dialog
@@ -98,13 +106,25 @@ played against features discovered):
    get a pass green.
 2. **Every conditional scenario has actually run.** A scenario carrying `@requires:` is skipped, not
    failed, in a pass that lacks its mod, so a pass can be green with it never played. Here that is
-   features 13, 15, 16 and 17 and two scenarios of 14: none has run yet. The pass with the optional
-   mods (`wsl-deps.avec-facultatifs.map`) has to play every one of them, and the report has to show
-   them played, not skipped.
-3. **No manual test is left to validate: all are green.** The manual list of `Tests/Pickle/README.md`
-   (a save loaded with the mod removed, RIMMSQOL's own interface, the Nice Bill Tab drag, the two
-   Better Workbench Management details, Choose Your Recipe, every `@review` screenshot) is closed by
-   a person, each entry recorded green in STATUS.md. An entry not yet done is pending, not passed.
+   features 13 to 17 (feature 20 in its own pass). The pass with the optional mods
+   (`wsl-deps.avec-facultatifs.map`) has to play every one of them, and the report has to show
+   them played, not skipped. They ran for the first time on 2026-09-25: features 13, 14 and 15 had to
+   be repaired (two defects of the mod, and errors of the scenarios) and replayed green.
+3. **No manual test is left to validate.** `AUDIT.md`: what used to be ticked by hand is either
+   automated and green, or listed as not applicable with its reason. The former manual list of
+   `Tests/Pickle/README.md` stands as follows (2026-09-25):
+
+   | Former manual test | Now |
+   | --- | --- |
+   | RIMMSQOL revealing the shortcut in its own interface | Automated: `20-rimmsqol-shortcut.feature`, pass `avec-rimmsqol`. Not yet played |
+   | That RIMMSQOL keeps its visibility choice across a restart | **Not applicable**: RIMMSQOL's own behaviour, shown by PickleTools' demonstration (2026-09-21) |
+   | The Nice Bill Tab drag | **Not applicable**: a gesture inside another mod's window, where a click lands on whatever window owns the point. The cause (the cache told to rebuild) is asserted by feature 15 |
+   | Choose Your Recipe | **Not applicable**: it removes disabled recipes before this mod sees them, so nothing of this mod's is left to assert. It is mounted in the pass with the neighbours |
+   | A save loaded with the mod removed | To automate with `-Then` and `-ThenWithout` (a launch that saves, a launch without the mod that loads). Not written |
+   | BWM: the workbench restriction applied to a bill created from a tick, and the agreement between the widened count and what the bill displays | To automate: both are this mod's behaviour. Not written |
+   | Every `@review` screenshot | Opened and read, one by one, recorded in STATUS.md; the French pass captures are still to be opened |
+
+   An entry not yet done is pending, not passed.
 
 **Two things no pass here can do**, both kept in `Tests/Pickle/README.md`: loading a save with the
 mod removed, which the mod list makes impossible from inside a run and which is the whole reason the

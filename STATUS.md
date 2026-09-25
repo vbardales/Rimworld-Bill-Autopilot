@@ -43,6 +43,26 @@ updated:      2026-09-25, first play of the optional-mod scenarios: two mod defe
 
 # Bill Autopilot — status
 
+## Red scenarios all replayed green; RIMMSQOL automated; description template — 2026-09-25
+
+Stage stays **done**. Feature 14 replay `115b`: `exitReason: passed`, 3 of 3. With `c5dd` (feature 13) and `5a32`
+(feature 15) every scenario that went red has been replayed green on build `4B89FBA7...`, which is what fail fast
+requires of the tests before a `publish`; the full 69-scenario replay on this build is the regression pass that may
+follow. **Still required before a `publish`:** the gallery (five captures), the owner's manual validations, and the
+CI setup.
+
+**Manual tests, classified as `AUDIT.md` asks** (table in `TESTING.md`, condition 3): RIMMSQOL is now automated by
+`20-rimmsqol-shortcut.feature` (pass `wsl-deps.avec-rimmsqol.map`, request `dafa`, not yet played); RIMMSQOL's
+persistence across a restart, the Nice Bill Tab drag and Choose Your Recipe are **not applicable**, each with its
+reason; the save loaded without the mod (`-Then` with `-ThenWithout`) and the two Better Workbench Management details
+are **to automate**; the `@review` captures are to be opened one by one.
+
+**Description by template.** `OPERATIONS.md` documents `--description-markdown FILE` for the manual publish workflow.
+`Mod/README.template.md` (6956 bytes, limit 8000) carries the description of `About.xml` as Markdown, with the
+butchering correction, and `Mod/.steamignore` keeps it and `README.md` out of the upload. `About.xml` stays as it is
+and the two texts must be kept the same. `ATTRIBUTION.md` (both copies, identical) now lists the mods and tools only
+the tests use.
+
 ## Thanks brought to the current rules, CI path asked — 2026-09-25
 
 Stage stays **done**. Reading PUBLISHING.md showed that every integration named, claimed or exercised must be
@@ -235,7 +255,8 @@ Queued through the TicketDispatcher on 2026-09-24, all English, all `-pickle-no-
 | `c6a4` | features 13 to 17 | none | done: **`exitReason: passed`, 14 skipped by requirement, 1 passed** (the one scenario that needs no mod), as expected; evidence `2026-09-24-skipcheck-13-17` |
 | `c5dd` | features 13 to 15 | 7 optional + TD Find Lib + TDS Bug Fixes | fix check on build `4B89FBA7...`: **`exitReason: failed`, 10 played, 7 passed, 3 failed**; feature 13 fully green (the BWM fix works), the 3 failures were scenario errors; evidence `2026-09-25-fixcheck2-13-15` |
 | `5a32` | features 14 and 15 | same | replay of the corrected scenarios: **`exitReason: failed`, 7 played, 5 passed, 2 failed**. Feature 15 **green** (all four scenarios, including the row-cache ones; the `@review` capture of the redrawn tab was opened earlier). Feature 14: the two Everybody Gets One scenarios failed on the mode names I had wrongly renamed, the third (owner gone) passed; evidence `2026-09-25-fixcheck3-14-15` |
-| `115b` | feature 14 | same | replay after reverting the names and rewriting the first scenario; queued 2026-09-25 (tree = HEAD `0320020` plus uncommitted features 14/15 and documents, DLL `4B89FBA7...` unchanged) |
+| `115b` | feature 14 | same | replay after reverting the names and rewriting the first scenario: **`exitReason: passed`, 3 of 3**, evidence `2026-09-25-fixcheck4-14`. **Every scenario that has been red is now replayed green** (13 in `c5dd`, 15 in `5a32`, 14 here), on build `4B89FBA7...` |
+| `dafa` | feature 20 (new) | RIMMSQOL + PickleTools `RimmsqolSteps`, pass `avec-rimmsqol` | first play of the automated RIMMSQOL test, queued 2026-09-25 (tree = HEAD `a12568a` plus uncommitted feature 20, its map, `Mod/README.template.md`, `Mod/.steamignore`, `ATTRIBUTION.md` and `TESTING.md`; DLL unchanged) |
 
 Requests `6e5f` and `1f5e` ran on the build before the fixes below (`8E3C5CC7...`), so the whole suite still has
 to be replayed on the last build (`4B89FBA7...`) as three small requests plus the skip check. **What blocks the

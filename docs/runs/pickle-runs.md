@@ -18,6 +18,7 @@ through the TicketDispatcher.
 | 4 | `failed` (2026-09-23, `-pickle-no-http`) | 65 of 65: 40 passed, 11 failed, 14 skipped | 40 | 11 | `evidence/2026-09-23-run4/`, previous build; deleted when the final pass replaces it |
 | 5a | `watchdog-timeout` (2026-09-24, new build) | 4 of 65: the load of the save took 78 s on a loaded machine, past the 120 s scenario limit | 4 | 0 | deleted 2026-09-24: no verdict, superseded by 5b |
 | 6a | `passed` (2026-09-24, build 8E3C5CC7, request `6e5f`, features 01 to 06, pass `avec-facultatifs`) | 27 of 27, none skipped | 27 | 0 | `evidence/2026-09-24-final1-01-06/` |
+| 7c | `passed` (2026-09-25, build 4B89FBA7, request `115b`, feature 14, pass `avec-facultatifs` + 2 libraries) | 3 of 3 | 3 | 0 | `evidence/2026-09-25-fixcheck4-14/` |
 | 7b | `failed` (2026-09-25, build 4B89FBA7, request `5a32`, features 14 and 15, pass `avec-facultatifs` + 2 libraries) | 7 of 7 played | 5 | 2 | `evidence/2026-09-25-fixcheck3-14-15/`: feature 15 green; feature 14 red on mode names I had wrongly renamed and on a bill already standing; replay `115b` queued |
 | 7a | `failed` (2026-09-25, build 4B89FBA7, request `c5dd`, features 13 to 15, pass `avec-facultatifs` + 2 libraries) | 10 of 10 played | 7 | 3 | `evidence/2026-09-25-fixcheck2-13-15/`: feature 13 all green; the 3 failures were scenario errors (mode names, bill cap, starting state) |
 | 6d | `passed` (2026-09-25, build 8E3C5CC7, request `c6a4`, features 13 to 17, pass `sans-facultatifs`) | 15 of 15: 14 skipped by requirement, 1 passed | 1 | 0 | `evidence/2026-09-24-skipcheck-13-17/` |

@@ -1,0 +1,14 @@
+# RIMMSQOL and the shared steps that drive its real MainButtons list. The dedicated avec-rimmsqol pass selects
+# 20-rimmsqol-shortcut.feature; the requirement tags keep it from being counted in a pass where RIMMSQOL or the steps
+# are absent.
+#
+# Not something this mod wrote. The steps are PickleTools/RimmsqolSteps, and the demonstration this feature is adapted
+# from is SkillIcons' 17-rimmsqol-shortcut.feature. What this mod owes RIMMSQOL is that its shortcut is one RIMMSQOL can
+# list and reveal (MOD_SETTINGS.md), and that is all this pass asserts. RIMMSQOL is kept out of the pass with the
+# neighbours on purpose: it changes the main bar, which none of the bill features looks at, and one pass per concern
+# says which mod a red belongs to.
+#
+# The folder PickleTools has to be cloned beside the mods under exactly that name: the path below is relative to the
+# collection's root, and the folder's own About.xml packageId must equal the one written here.
+MalteSchulze.RIMMSqol            1084452457
+nelim.pickletools.rimmsqol       path:PickleTools/RimmsqolSteps/Mod
