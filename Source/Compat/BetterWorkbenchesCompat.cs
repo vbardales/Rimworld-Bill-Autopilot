@@ -118,6 +118,17 @@ namespace BillAutopilot
             return null;
         }
 
+        /// <summary>
+        /// What went wrong INSIDE a reflection call. A method invoked by reflection reports every failure
+        /// as "Exception has been thrown by the target of an invocation", which says nothing: the cause is
+        /// the inner exception.
+        /// </summary>
+        private static string Describe(Exception e)
+        {
+            var inner = e is TargetInvocationException && e.InnerException != null ? e.InnerException : e;
+            return inner.GetType().Name + ": " + inner.Message;
+        }
+
         /// <summary>Both stores are WorldComponents, so they are taken at the source, without going through Main.</summary>
         private static object ExtendedStorage =>
             extendedStorageType == null ? null : Find.World?.GetComponent(extendedStorageType);
@@ -160,7 +171,7 @@ namespace BillAutopilot
             }
             catch (Exception e)
             {
-                Log.WarningOnce("[Bill Autopilot] Could not read Better Workbench Management data: " + e.Message, 0x5A21);
+                Log.WarningOnce("[Bill Autopilot] Could not read Better Workbench Management data: " + Describe(e), 0x5A21);
                 return null;
             }
         }
@@ -169,7 +180,11 @@ namespace BillAutopilot
         {
             if (getBillSetContaining == null || linkedSetBills == null) return;
 
+            // Null for every bill that is not linked, which is nearly all of them. Asking a null set for its
+            // Bills threw inside the reflection call, and the catch in Capture then discarded the name and
+            // the count that had already been read: the bridge lost everything for the common bill.
             var set = getBillSetContaining.Invoke(storage, new object[] { bill });
+            if (set == null) return;
             if (!(linkedSetBills.GetValue(set) is IEnumerable bills)) return;
 
             foreach (var other in bills)
@@ -208,7 +223,7 @@ namespace BillAutopilot
             }
             catch (Exception e)
             {
-                Log.WarningOnce("[Bill Autopilot] Could not restore Better Workbench Management data: " + e.Message, 0x5A22);
+                Log.WarningOnce("[Bill Autopilot] Could not restore Better Workbench Management data: " + Describe(e), 0x5A22);
             }
         }
 

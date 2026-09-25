@@ -17,6 +17,10 @@ through the TicketDispatcher.
 | 3 | `watchdog-timeout` (10-minute stall setting) | 26 of 65 | 15 | 11 | deleted 2026-09-23: superseded by run 4 |
 | 4 | `failed` (2026-09-23, `-pickle-no-http`) | 65 of 65: 40 passed, 11 failed, 14 skipped | 40 | 11 | `evidence/2026-09-23-run4/`, previous build; deleted when the final pass replaces it |
 | 5a | `watchdog-timeout` (2026-09-24, new build) | 4 of 65: the load of the save took 78 s on a loaded machine, past the 120 s scenario limit | 4 | 0 | deleted 2026-09-24: no verdict, superseded by 5b |
+| 6a | `passed` (2026-09-24, build 8E3C5CC7, request `6e5f`, features 01 to 06, pass `avec-facultatifs`) | 27 of 27, none skipped | 27 | 0 | `evidence/2026-09-24-final1-01-06/` |
+| 6d | `passed` (2026-09-25, build 8E3C5CC7, request `c6a4`, features 13 to 17, pass `sans-facultatifs`) | 15 of 15: 14 skipped by requirement, 1 passed | 1 | 0 | `evidence/2026-09-24-skipcheck-13-17/` |
+| 6c | `failed` (2026-09-25, build 8E3C5CC7, request `479c`, features 13 to 19, pass `avec-facultatifs`) | 21 of 21 played | 17 | 4 | `evidence/2026-09-24-final3-13-19/`: first play of the optional scenarios; 2 mod defects and 1 environment gap, see STATUS.md |
+| 6b | `passed` (2026-09-25, build 8E3C5CC7, request `1f5e`, features 07 to 12, pass `avec-facultatifs`) | 20 of 20, none skipped | 20 | 0 | `evidence/2026-09-24-final2-07-12/` |
 | 5b | `passed` (2026-09-24, build 436E7179, before the plural fix; request `41c5`, features 09, 18, 19) | 12 of 12 | 12 | 0 | `evidence/2026-09-24-run5-fixcheck/`, replaced by the final pass on build 8E3C5CC7 |
 
 ## Run 1 — no scenario played

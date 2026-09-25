@@ -26,9 +26,15 @@ Feature: Nice Bill Tab's cached row list is told whenever the autopilot changes 
   Scenario: the mod found it
     Then Bill Autopilot found Nice Bill Tab
 
+  # The cache is marked up to date BEFORE the stock changes, not after. The game keeps ticking between steps,
+  # and the autopilot's own tick sync can put the bill up in the frames between two of them. SUSPECTED, not
+  # measured, cause of the first red of this scenario (2026-09-25; the take-down scenario passed on the same
+  # bridge): the tick raised the flag, the reset lowered it again, and the explicit sync found the bill already
+  # there and raised nothing. With this order the flag can be raised by the tick or by the explicit sync, and
+  # either is the behaviour under test. If it is still red, the cause was something else and this is not it.
   Scenario: putting a bill up tells the list to rebuild
-    Given the Bill Autopilot test stockpile holds 10 "Leather_Patch"
-    And Nice Bill Tab's row cache is marked as up to date
+    Given Nice Bill Tab's row cache is marked as up to date
+    And the Bill Autopilot test stockpile holds 10 "Leather_Patch"
     When Bill Autopilot syncs the "HandTailoringBench" at (140, 155)
     Then Bill Autopilot has a bill up for "Make_Patchleather" on the "HandTailoringBench" at (140, 155)
     And Nice Bill Tab's row cache has been told to rebuild
@@ -40,8 +46,8 @@ Feature: Nice Bill Tab's cached row list is told whenever the autopilot changes 
     When Bill Autopilot syncs the "HandTailoringBench" at (140, 155)
     Then Bill Autopilot has a bill up for "Make_Patchleather" on the "HandTailoringBench" at (140, 155)
 
-    Given the Bill Autopilot test stockpile holds 60 "Leather_Patch"
-    And Nice Bill Tab's row cache is marked as up to date
+    Given Nice Bill Tab's row cache is marked as up to date
+    And the Bill Autopilot test stockpile holds 60 "Leather_Patch"
     When Bill Autopilot syncs the "HandTailoringBench" at (140, 155)
     Then Bill Autopilot has no bill up for "Make_Patchleather" on the "HandTailoringBench" at (140, 155)
     And Nice Bill Tab's row cache has been told to rebuild

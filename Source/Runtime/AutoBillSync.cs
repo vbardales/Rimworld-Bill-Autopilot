@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using RimWorld;
 using UnityEngine;
@@ -186,7 +187,24 @@ namespace BillAutopilot
             // A mode from another mod: its thresholds are not ours. "One per person" depends on how many
             // colonists there are, "with surplus" on the ingredient stock. It alone knows when things
             // are full, so it is asked instead of comparing numbers of our own.
-            if (IsForeignMode(bill.repeatMode)) return !bill.ShouldDoNow();
+            if (IsForeignMode(bill.repeatMode))
+            {
+                try
+                {
+                    return !bill.ShouldDoNow();
+                }
+                catch (Exception e)
+                {
+                    // Not ours, and it threw: Bill_Production.ShouldDoNow runs the other mod's code. Left
+                    // unguarded, the exception went up through the tick and out of Update() every frame.
+                    // The bill stays where it is, and the failure is named once, as RecipeProbe already does.
+                    Log.WarningOnce(
+                        "[Bill Autopilot] ShouldDoNow failed for " + recipe.defName + " under repeat mode "
+                        + bill.repeatMode.defName + ", the bill is left as it is: " + e.Message,
+                        recipe.shortHash ^ 0x5A14);
+                    return false;
+                }
+            }
 
             // Here the real bill exists: measure with what it carries, not with a memory.
             if (!RecipeProbe.TryCount(table, recipe, BetterWorkbenchesCompat.Capture(bill), out int count))

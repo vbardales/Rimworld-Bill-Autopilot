@@ -46,6 +46,14 @@
 #                                changes nothing here" is a claim, and this pass is where the rest
 #                                of the suite stays green beside it or does not
 #
+# TWO LIBRARIES WERE MISSING until 2026-09-25, and the first run of feature 14 showed it. Everybody Gets One
+# declares TD Find Library as a dependency of its 1.6 version (About.xml, modDependenciesByVersion), and TD Find
+# Library declares TDS Bug Fixes. The staging mounts what this file lists and does not follow declared
+# dependencies, so the assembly loaded half a class: "Could not resolve type ... TD_Find_Lib.
+# SearchEditorRevertableWindow", then the repeat mode threw from ShouldDoNow and two scenarios of feature 14
+# went red for a reason that was the test environment's, not the mod's. Read a mod's <modDependencies> and
+# <modDependenciesByVersion> before adding it here, and add what they name.
+#
 # ONE SET, not several. The doctrine wants a named set per exclusive combination, so the question
 # had to be answered before writing this file: Nice Bill Tab redraws the whole bills tab, Better
 # Workbench Management adds to it, and Dubs Mint Menus keeps its own menu beside it.
@@ -62,5 +70,7 @@ falconne.BWM                    935982361    Better Workbench Management
 Andromeda.NiceBillTab           3520130671   Nice Bill Tab
 HICON.NiceBillTabExpansion      3721023311   Nice Bill Tab - Expansion
 Dubwise.DubsMintMenus           1446523594   Dubs Mint Menus
+Memegoddess.TDSBugFixes         3529433984   TDS Bug Fixes: required by TD Find Lib, and it by Everybody Gets One
+Memegoddess.TDFindLib           3529443295   TD Find Library: Everybody Gets One's 1.6 assembly references its SearchEditorRevertableWindow
 Memegoddess.EverybodyGetsOne    3530806680   Everybody Gets One - Continued
 zal.chooseyourrecipe            3263007587   Choose Your Recipe (Continued)

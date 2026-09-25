@@ -19,7 +19,7 @@ tested_on:    2026-09-01
 workshop:      3806709456
 remaining:
   - unverified: gate to tested, condition 1 - no scenario tagged @wip (none tagged today)
-  - unverified: gate to tested, condition 2 - every scenario with a @requires tag has RUN, not been skipped: features 13, 15, 16, 17 and two scenarios of 14 have never been played
+  - unverified: gate to tested, condition 2 - every scenario with a @requires tag has RUN: they ran for the first time on 2026-09-25 (17 of 21 passed, 4 failed for three causes, two of them real defects of the mod, fixed in the source); the replay of features 13 to 15 on the fixed build is queued (request c5dd), and none is green yet
   - unverified: gate to tested, condition 3 - every manual test validated green: save loaded with the mod removed, RIMMSQOL interface, Nice Bill Tab drag, two Better Workbench Management details, Choose Your Recipe, every @review screenshot
   - unverified: the Pickle suite has produced one verdict (run 4, 2026-09-23: exitReason failed, 40 passed, 11 failed, 14 skipped of 65), and the fixes made after it have not been replayed; done -> tested still needs a clean pass without the optional mods, the pass with them, and one per language
   - unverified: the fixes are proven in game only on the features they touch (run 5 fix-check, features 09, 18, 19: 12 of 12 passed on the new build); the other 57 scenarios have not been replayed on it, four small requests for the final pass are queued (see "Where the run evidence lives")
@@ -38,10 +38,47 @@ remaining:
   - unverified: Nice Bill Tab's cached list, where a drag could bring a deleted bill back
   - unverified: loading a save after removing the mod, the reason its state avoids a GameComponent
 session:      local_3527e6d8-def4-4e54-97ff-a6430f1dc569
-updated:      2026-09-24, plural fix ("1 recipes"), DLL changed again, final pass queued as small requests
+updated:      2026-09-25, first play of the optional-mod scenarios: two mod defects fixed (DLL changed), test environment corrected
 ---
 
 # Bill Autopilot — status
+
+## First play of the optional-mod scenarios — 2026-09-25
+
+Stage stays **done**. The features that needed Better Workbench Management, Nice Bill Tab, Dubs Mint Menus,
+Nice Bill Tab - Expansion and Everybody Gets One had never run. Request `479c` (features 13 to 19, pass
+`avec-facultatifs`): **21 played, 17 passed, 4 failed**. Features 16, 17, 18 and 19 are green. The skip check
+`c6a4` is green: without the mods the 14 `@requires` scenarios are skipped, not failed. The four failures have
+three causes, and two of them are defects of the mod:
+
+1. **Better Workbench Management: the bridge lost everything on an ordinary bill (mod defect).** In
+   `BetterWorkbenchesCompat.CaptureLinks`, `GetBillSetContaining` returns null for any bill that is not linked,
+   and the next line asked that null set for its `Bills` through reflection. The exception was swallowed by the
+   `catch` in `Capture`, which returned null and discarded the custom name and the count-away flag already read:
+   `named 'nothing' in Better Workbench Management's own store, not 'caravan stock'`. Only a bill in a link
+   group survived. Fixed with a null check; the warning now names the inner exception (it read "Exception has
+   been thrown by the target of an invocation", which says nothing). The log line "Could not read Better
+   Workbench Management data" is what gave it away.
+2. **A repeat mode that throws took the tick down (mod defect).** `AutoBillSync.ShouldRetire` called a foreign
+   mode's `ShouldDoNow` unguarded, so the exception went up through the tick as "Root level exception in
+   Update()". `RecipeProbe` already guarded the same call. `ShouldRetire` now guards it, leaves the bill as it
+   is and names the failure once.
+3. **Everybody Gets One: the test environment was incomplete (not the mod).** Its 1.6 version declares TD Find
+   Library, which declares TDS Bug Fixes, and the staging mounts only what the map lists. The assembly loaded
+   half a class ("Could not resolve type ... TD_Find_Lib.SearchEditorRevertableWindow"), the repeat mode threw
+   from `ShouldDoNow`, and two scenarios of feature 14 went red: `TargetCount` instead of `TD_PersonCount`, and
+   an `InvalidOperationException`. Both libraries are now in `wsl-deps.avec-facultatifs.map`.
+   **The two feature-14 failures are treated as environment until the replay says otherwise** (the guard of
+   point 2 is what the exception exposed, so it stays).
+4. **Nice Bill Tab, "putting a bill up tells the list to rebuild" (cause not established).** The take-down
+   scenario passes on the same bridge, so the bridge works. **Suspected**, not measured: the game ticks between
+   steps, the autopilot's own tick sync put the bill up between the stock step and the step that marks the cache
+   up to date, and the flag was lowered after being raised. The scenario now marks the cache up to date first
+   (both scenarios). If it is still red on the replay, the cause is something else.
+
+Also seen: the shipped assembly changed again, SHA-256
+`4B89FBA7D61C828A13663A74D002CA9508DC0AAD1FFD11FB64CE2F25F2670B83`. The requests already run (`6e5f`, `1f5e`)
+describe `8E3C5CC7...` and are to be replayed on this one, after `c5dd`.
 
 ## Plural "1 recipes" fixed, DLL changed again — 2026-09-24
 
@@ -153,10 +190,14 @@ Queued through the TicketDispatcher on 2026-09-24, all English, all `-pickle-no-
 
 | Request | Filter | Mods | Purpose |
 | --- | --- | --- | --- |
-| `6e5f` | features 01 to 06 | 7 optional | final pass 1 of 3 |
-| `1f5e` | features 07 to 12 | 7 optional | final pass 2 of 3 |
-| `479c` | features 13 to 19 | 7 optional | final pass 3 of 3, the `@requires` scenarios finally played |
-| `c6a4` | features 13 to 17 | none | they must be **skipped by requirement**, not failed |
+| `6e5f` | features 01 to 06 | 7 optional | final pass 1 of 3: **done, `exitReason: passed`, 27 of 27**, evidence `2026-09-24-final1-01-06` (the marker capture of feature 06 was opened and reads: "(auto)" on the autopilot's bill, nothing on the hand-placed one, inside Better Workbench Management's tab) |
+| `1f5e` | features 07 to 12 | 7 optional | final pass 2 of 3: **done, `exitReason: passed`, 20 of 20**, evidence `2026-09-24-final2-07-12`; feature 09, with its two new scenarios, passes on the build that fixes the countability defect |
+| `479c` | features 13 to 19 | 7 optional | final pass 3 of 3, the `@requires` scenarios finally played: **`exitReason: failed`, 21 played, 17 passed, 4 failed**, evidence `2026-09-24-final3-13-19`; the failures and their causes are in "First play of the optional-mod scenarios" |
+| `c6a4` | features 13 to 17 | none | done: **`exitReason: passed`, 14 skipped by requirement, 1 passed** (the one scenario that needs no mod), as expected; evidence `2026-09-24-skipcheck-13-17` |
+| `c5dd` | features 13 to 15 | 7 optional + TD Find Lib + TDS Bug Fixes | fix check for the three causes below, queued 2026-09-25, on build `4B89FBA7...` |
+
+Requests `6e5f` and `1f5e` ran on the build before the fixes below (`8E3C5CC7...`). Once `c5dd` is green the whole
+final pass has to be replayed on the last build, as three small requests again, plus the skip check.
 
 The French pass will be a separate request afterwards. Delete run 4 and repoint this section when the three
 final requests have replaced it.
