@@ -19,7 +19,7 @@ documents are read from the repository that holds each (`PickleTools` `587488f`,
 | `AGENTS.md` | whole | 3a1d2cb, 2026-09-24, 36631e730433, 46 lines | Yes: the evidence rule (latest report per scenario, history as one line per run, never a folder), publishing by CI |
 | `AUDIT.md` | whole | 7546e86, 2026-09-25, 1c4ace2867de, 232 lines | Yes: the stage chain, the Pickle rules, requests without a SHA, two passes named, fail fast (the wording rewritten today is committed as 359a460) |
 | `PUBLISHING.md` | whole | 04aa365, 2026-09-25, 3d83491eb5bf, 683 lines | Yes: thanks and links, the gallery folder rule, the CI section, the fail-fast line, the pitfalls of a shared index |
-| `TRANSLATIONS.md` | whole | b83933b, 2026-09-23, 3368579d01dc, 100 lines | Yes, for one open question (see below), and the rule that a change to texts resets the language fields until revalidated |
+| `TRANSLATIONS.md` | whole | b83933b, 2026-09-23, 3368579d01dc, 100 lines; **changed by this session afterwards**: f5c2d9d, 2026-09-25, 298f74d226da, 112 lines (the "Counts and plurals" bullet) | Yes, and the rule that a change to texts resets the language fields until revalidated |
 | `STYLE_RIMWORLD.md` | whole | 7311308, 2026-09-25, de13cbe5e1f9, 484 lines | **No**: the graphic style of Preview and ModIcon. Only the file constraints matter (Preview 896x504 under 1 MB, ModIcon 128 px checked at 32 px, checked by the owner, never generated here) |
 | `scripts/SEARCHING.md` | whole | 372c447, 2026-09-23, 9dbd52b2bcd4, 168 lines | **No**: searching the mod corpus. One line worth keeping: the session's own Grep and Glob tools time out after 20 seconds on the collection folder and return nothing, so search a named directory |
 | `PickleTools/README.md` | whole | d20db95, 2026-09-25, 86a5939ae1f3, 83 lines | Yes, for one lead (see below): `RimmsqolSteps` |
@@ -64,7 +64,10 @@ documents are read from the repository that holds each (`PickleTools` `587488f`,
 1. **`TRANSLATIONS.md` asks to translate complete sentences and not to assemble them from translated fragments.** The
    plural fix of 2026-09-24/25 passes a translated noun phrase (`Recipes.One/Many`, `Overridden.*`) as an argument into
    sentences. It fixes "1 recipes" and "1 surchargées", but it is a fragment argument in the strict reading. The
-   compliant alternative is a `.One` and a `.Many` variant of each whole sentence. **The owner decides.**
+   compliant alternative is a `.One` and a `.Many` variant of each whole sentence. **Decided by the owner on
+   2026-09-25: keep the mechanism** and write it into `TRANSLATIONS.md` as a bounded exception ("Counts and
+   plurals", commit f5c2d9d of the protocols repository). Checked beforehand: the engine's `LanguageWorker_French.
+   Pluralize` ignores its `count` argument, so it cannot serve a count in French.
 2. **Out of date in this repository**, not corrected: `TESTING.md` and `Tests/Pickle/README.md` still say the suite is
    "not yet run" and that the pass with the optional mods mounts six neighbours plus No Max Bills (it now mounts TD
    Find Lib and TDS Bug Fixes too); the gate to `tested`, condition 2, says features 13 to 17 "have never run" (they
