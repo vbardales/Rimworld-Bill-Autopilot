@@ -19,7 +19,7 @@ tested_on:    2026-09-01
 workshop:      3806709456
 remaining:
   - unverified: gate to tested, condition 1 - no scenario tagged @wip (none tagged today)
-  - unverified: gate to tested, condition 2 - every scenario with a @requires tag has RUN: they ran for the first time on 2026-09-25 (17 of 21 passed, 4 failed for three causes, two of them real defects of the mod, fixed in the source); the replay of features 13 to 15 on the fixed build is queued (request c5dd), and none is green yet
+  - unverified: gate to tested, condition 2 - every scenario with a @requires tag has RUN: they ran for the first time on 2026-09-25 (17 of 21 passed, 4 failed for three causes, two of them real defects of the mod, fixed in the source); on the fixed build feature 13 is green (request c5dd), features 14 and 15 had scenario errors and their replay is queued (request 5a32)
   - unverified: gate to tested, condition 3 - every manual test validated green: save loaded with the mod removed, RIMMSQOL interface, Nice Bill Tab drag, two Better Workbench Management details, Choose Your Recipe, every @review screenshot
   - unverified: the Pickle suite has produced one verdict (run 4, 2026-09-23: exitReason failed, 40 passed, 11 failed, 14 skipped of 65), and the fixes made after it have not been replayed; done -> tested still needs a clean pass without the optional mods, the pass with them, and one per language
   - unverified: the fixes are proven in game only on the features they touch (run 5 fix-check, features 09, 18, 19: 12 of 12 passed on the new build); the other 57 scenarios have not been replayed on it, four small requests for the final pass are queued (see "Where the run evidence lives")
@@ -43,6 +43,22 @@ updated:      2026-09-25, first play of the optional-mod scenarios: two mod defe
 
 # Bill Autopilot — status
 
+## Thanks brought to the current rules, CI path asked — 2026-09-25
+
+Stage stays **done**. Reading PUBLISHING.md showed that every integration named, claimed or exercised must be
+thanked, the test-only ones included. Done in the repository, not on the Steam page (which stays frozen until
+hand-edited, see PUBLICATION.md): `Mod/About/About.xml` now links every neighbour's Workshop page at each
+mention, thanks its author (Falconne, Andromeda, HICON, Dubwise, Uuugggg, Zaljerem, Just Harry), thanks TD Find
+Lib and TDS Bug Fixes (mounted by the test pass for Everybody Gets One, never dependencies), names Pickle and
+RimLogging as development-only, and no longer repeats Claude Code, already named under `AI-GENERATED`.
+`PUBLICATION.md` carries nine drafted comments in copyable blocks (six neighbours plus No Max Bills, TD Find Lib,
+TDS Bug Fixes), all under 1000 characters; the collection register `WORKSHOP_COMMENTS.md` has nine `drafted`
+rows and Bill Autopilot added to the `Covers` of Harmony, Pickle, RimLogging and RIMMSQOL. Nothing is posted:
+the item is private. The description grew by these lines; the text was validated (463 XML checks).
+
+The CI path (manual workflow or semantic-release, tag and rollback target, gallery folder) was put to the CI/CD
+session; the repository has only `build.yml`, no tag, no `README.template.md`. No answer yet.
+
 ## First play of the optional-mod scenarios — 2026-09-25
 
 Stage stays **done**. The features that needed Better Workbench Management, Nice Bill Tab, Dubs Mint Menus,
@@ -63,18 +79,41 @@ three causes, and two of them are defects of the mod:
    mode's `ShouldDoNow` unguarded, so the exception went up through the tick as "Root level exception in
    Update()". `RecipeProbe` already guarded the same call. `ShouldRetire` now guards it, leaves the bill as it
    is and names the failure once.
-3. **Everybody Gets One: the test environment was incomplete (not the mod).** Its 1.6 version declares TD Find
-   Library, which declares TDS Bug Fixes, and the staging mounts only what the map lists. The assembly loaded
-   half a class ("Could not resolve type ... TD_Find_Lib.SearchEditorRevertableWindow"), the repeat mode threw
-   from `ShouldDoNow`, and two scenarios of feature 14 went red: `TargetCount` instead of `TD_PersonCount`, and
-   an `InvalidOperationException`. Both libraries are now in `wsl-deps.avec-facultatifs.map`.
-   **The two feature-14 failures are treated as environment until the replay says otherwise** (the guard of
-   point 2 is what the exception exposed, so it stays).
-4. **Nice Bill Tab, "putting a bill up tells the list to rebuild" (cause not established).** The take-down
-   scenario passes on the same bridge, so the bridge works. **Suspected**, not measured: the game ticks between
-   steps, the autopilot's own tick sync put the bill up between the stock step and the step that marks the cache
-   up to date, and the flag was lowered after being raised. The scenario now marks the cache up to date first
-   (both scenarios). If it is still red on the replay, the cause is something else.
+3. **Everybody Gets One: the test environment was incomplete (not the mod), and that was not the whole story.**
+   Its 1.6 version declares TD Find Library, which declares TDS Bug Fixes, and the staging mounts only what the map
+   lists. The assembly loaded half a class ("Could not resolve type ... TD_Find_Lib.SearchEditorRevertableWindow"),
+   the repeat mode threw from `ShouldDoNow`, and two scenarios of feature 14 went red: `TargetCount` instead of
+   `TD_PersonCount`, and an `InvalidOperationException`. Both libraries are now in
+   `wsl-deps.avec-facultatifs.map`, and the replay `c5dd` shows no loading error any more. The guard of point 2 is
+   what the exception exposed, so it stays. The two scenarios were nevertheless still red: see the replay below.
+4. **Nice Bill Tab, "putting a bill up tells the list to rebuild".** The take-down scenario passes on the same
+   bridge, so the bridge works, and Nice Bill Tab lowers the flag only inside its own tab drawing (decompiled).
+   The first guess (a race between two steps) was wrong: reordering them changed nothing. The cause is in the
+   scenario: the Background sets no stock, so the bill is wanted at once and the autopilot's tick put it up before
+   the cache was marked up to date. The scenario now starts from a bench with no bill.
+
+**Replay `c5dd` (features 13 to 15, same build `4B89FBA7...`): `exitReason: failed`, 10 played, 7 passed, 3 failed.**
+Feature 13, all three scenarios: **passed**, so the Better Workbench Management fix (point 1) is proven in game:
+the custom name, the count-away flag and the link group all come back. The `@review` capture of feature 15 was
+opened: "Make patchleather (auto)" carries the mark inside Nice Bill Tab's redrawn tab, the hand-placed bill does
+not. The three failures were errors of the scenarios, not of the mod:
+
+- **Feature 14, first scenario: a bill already standing (my first diagnosis of "wrong mode names" was wrong).** I
+  read `Defs/BillRepeatModeDef.xml` at the root of Everybody Gets One - Continued, saw `TD_ColonistCount`, and
+  renamed the modes in the feature, the README and a comment. The replay `5a32` then failed with `no
+  BillRepeatModeDef named 'TD_ColonistCount'. This pass loaded: ... TD_PersonCount, TD_XPerPerson,
+  TD_WithSurplusIng`: the mod's `LoadFolders` decides which of its `Defs` folders is read, and under 1.6 the game
+  loads the original names. **Reverted** (README, feature, comment). The real cause of `TargetCount` instead of
+  `TD_PersonCount` is the Background: it switches the bench on with nothing in stock, so the autopilot's tick put
+  the bill up in `TargetCount` before the scenario set the bench default, and a sync never rewrites the mode of a
+  bill that stands. Same family as feature 15. The scenario now starts from a bench with no bill (stock raised,
+  synced, mode set, stock lowered); replay queued as request `115b`.
+- **Feature 14, second scenario:** the bench took every recipe, and the 8 automatic bills of the default cap were
+  used up by the first hats, so `Make_Patchleather` never got a slot. The Background now restricts the bench to
+  that one recipe, as feature 13 does.
+- **Feature 15, "putting a bill up":** as in point 4, now rewritten.
+
+The replay of the corrected features 14 and 15 is request `5a32` (queued, same build; the DLL did not change).
 
 Also seen: the shipped assembly changed again, SHA-256
 `4B89FBA7D61C828A13663A74D002CA9508DC0AAD1FFD11FB64CE2F25F2670B83`. The requests already run (`6e5f`, `1f5e`)
@@ -194,10 +233,16 @@ Queued through the TicketDispatcher on 2026-09-24, all English, all `-pickle-no-
 | `1f5e` | features 07 to 12 | 7 optional | final pass 2 of 3: **done, `exitReason: passed`, 20 of 20**, evidence `2026-09-24-final2-07-12`; feature 09, with its two new scenarios, passes on the build that fixes the countability defect |
 | `479c` | features 13 to 19 | 7 optional | final pass 3 of 3, the `@requires` scenarios finally played: **`exitReason: failed`, 21 played, 17 passed, 4 failed**, evidence `2026-09-24-final3-13-19`; the failures and their causes are in "First play of the optional-mod scenarios" |
 | `c6a4` | features 13 to 17 | none | done: **`exitReason: passed`, 14 skipped by requirement, 1 passed** (the one scenario that needs no mod), as expected; evidence `2026-09-24-skipcheck-13-17` |
-| `c5dd` | features 13 to 15 | 7 optional + TD Find Lib + TDS Bug Fixes | fix check for the three causes below, queued 2026-09-25, on build `4B89FBA7...` |
+| `c5dd` | features 13 to 15 | 7 optional + TD Find Lib + TDS Bug Fixes | fix check on build `4B89FBA7...`: **`exitReason: failed`, 10 played, 7 passed, 3 failed**; feature 13 fully green (the BWM fix works), the 3 failures were scenario errors; evidence `2026-09-25-fixcheck2-13-15` |
+| `5a32` | features 14 and 15 | same | replay of the corrected scenarios: **`exitReason: failed`, 7 played, 5 passed, 2 failed**. Feature 15 **green** (all four scenarios, including the row-cache ones; the `@review` capture of the redrawn tab was opened earlier). Feature 14: the two Everybody Gets One scenarios failed on the mode names I had wrongly renamed, the third (owner gone) passed; evidence `2026-09-25-fixcheck3-14-15` |
+| `115b` | feature 14 | same | replay after reverting the names and rewriting the first scenario; queued 2026-09-25 (tree = HEAD `0320020` plus uncommitted features 14/15 and documents, DLL `4B89FBA7...` unchanged) |
 
-Requests `6e5f` and `1f5e` ran on the build before the fixes below (`8E3C5CC7...`). Once `c5dd` is green the whole
-final pass has to be replayed on the last build, as three small requests again, plus the skip check.
+Requests `6e5f` and `1f5e` ran on the build before the fixes below (`8E3C5CC7...`), so the whole suite still has
+to be replayed on the last build (`4B89FBA7...`) as three small requests plus the skip check. **What blocks the
+publication and what does not** (owner, 2026-09-25): every scenario that has been red must have been replayed
+green after its fix before the `publish`, which is `5a32` (features 14 and 15) and nothing else; the full
+regression replay of the 69 scenarios may follow the publication, in small tickets, and a red there is a defect of
+the published version. The gallery and the owner's manual validations are still required before the `publish`.
 
 The French pass will be a separate request afterwards. Delete run 4 and repoint this section when the three
 final requests have replaced it.

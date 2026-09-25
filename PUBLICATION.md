@@ -76,8 +76,9 @@ never in the required items.
 | Everybody Gets One | `Memegoddess.EverybodyGetsOne` | Keeps a repeat mode it owns, and asks it whether there is work rather than guessing |
 | Choose Your Recipe | `zal.chooseyourrecipe` | Nothing to do: it removes disabled recipes from the workbench itself, so the autopilot never sees them |
 
-No Max Bills is not an integration. It raises the per-bench bill ceiling that Better Workbench Management
-reports, and the cap honours whatever that number is; it is worth a line in the text, not a declaration.
+No Max Bills is not an integration, and is not declared: it raises the per-bench bill ceiling that Better Workbench Management
+reports, and the cap honours whatever that number is. It is named in the text, and thanked, because the test pass mounts it.
+So are the two libraries that pass mounts for Everybody Gets One (TD Find Lib, TDS Bug Fixes): none is a dependency of this mod.
 
 ## Adult content boxes
 
@@ -90,82 +91,91 @@ reports, and the cap honours whatever that number is; it is worth a line in the 
 Nothing sexual, nothing graphic, no nudity, no gore. The mod adds no art beyond one gizmo icon, no text
 beyond its own interface strings, and touches no body, health or social system.
 
-## Messages to post, one per mod
+## Messages to post, one per recipient
 
-Written for the six mods this one reaches into. **Posted after the item is public** — a link to a private item
-opens for nobody. One per recipient and personalised: the same text pasted three times is visible from orbit.
-BBCode works in Steam comments, and pasting a bare Workshop URL makes a thumbnail, so the link to this mod
-goes on its own line. Steam's comment limit is 1000 characters; each of these is well under it.
+Written for the nine recipients this mod reaches: the six it works beside, and three that only the test pass
+mounts (No Max Bills, and the two libraries Everybody Gets One needs). **Posted after the item is public**: a
+link to a private item opens for nobody. Before posting any of them, look the recipient's Workshop ID up in
+`WORKSHOP_COMMENTS.md` at the root of the collection: the register decides, and every row here is `drafted`
+there. One per recipient and personalised, since the same text pasted nine times is visible from orbit. Each
+block is BBCode ready to copy, one line per paragraph so that no hard wrap reaches Steam, under the limit of
+1000 characters. Pasting a bare Workshop URL makes a thumbnail, so the link to this mod goes on its own line.
 
-### Better Workbench Management (`falconne.BWM`)
+### Better Workbench Management (`falconne.BWM`, 935982361)
 
-> I have published a mod that puts a workbench type on autopilot: it raises a bill when there is work and takes
-> it down when the stock is full. That cycle is brutal for your extended bill data, since you clear it on
-> BillStack.Delete, so the mod reads it before every removal and puts it back on the bill it creates — the
-> custom name, counting away from the home map, the extra product filter, and membership of a linked set,
-> which it rejoins rather than starting a new group. It also applies your workbench restriction to bills it
-> creates from a tick, which your own hook cannot do since it reads the selected bench, and it uses your wider
-> counting rules to decide whether a stock is full, so the threshold and the bill's own display agree. Thank
-> you for a mod that has been the reference for bill management for years.
->
-> https://steamcommunity.com/sharedfiles/filedetails/?id=3806709456
+```text
+I have published a mod that puts a workbench type on autopilot: it raises a bill when there is work and takes it down when the stock is full. That cycle is brutal for your extended bill data, since you clear it on BillStack.Delete, so the mod reads it before every removal and puts it back on the bill it creates: the custom name, counting away from the home map, the extra product filter, and membership of a linked set, which it rejoins rather than starting a new group. It also applies your workbench restriction to bills it creates from a tick, which your own hook cannot do since it reads the selected bench, and it uses your wider counting rules to decide whether a stock is full. Thank you for a mod that has been the reference for bill management for years 💛
 
-### Dubs Mint Menus (`dubwise.dubsmintmenus`)
+https://steamcommunity.com/sharedfiles/filedetails/?id=3806709456
+```
 
-> I have published a mod that keeps a workbench's bills up to date on its own, and it needed care around your
-> bench templates. Making one photographs every bill on the bench, so a template taken from an autopiloted
-> bench would have captured whatever the autopilot happened to have up at that moment, and re-applying it
-> later would have turned those recipes into hand-placed bills for good — retiring the autopilot from them
-> without a word. The mod now removes its own bills from a template as it is made, and says how many it left
-> out. Applying a template needs nothing: the bills it places read as placed by hand, which is exactly right.
-> Thank you for the menus, and for keeping them out of the tab's way.
->
-> https://steamcommunity.com/sharedfiles/filedetails/?id=3806709456
+### Dubs Mint Menus (`dubwise.dubsmintmenus`, 1446523594)
 
-### Nice Bill Tab (`Andromeda.NiceBillTab`)
+```text
+I have published a mod that keeps a workbench's bills up to date on its own, and it needed care around your bench templates. Making one photographs every bill on the bench, so a template taken from an autopiloted bench would have captured whatever the autopilot had up at that moment, and re-applying it later would have turned those recipes into hand-placed bills for good, retiring the autopilot from them without a word. The mod now removes its own bills from a template as it is made, and says how many it left out. Applying a template needs nothing: the bills it places read as placed by hand, which is exactly right. Thank you for the menus, and for keeping them out of the tab's way ✨
 
-> I have published a mod that puts bills up and takes them down on its own, which is exactly the case your
-> cached row list does not expect: a bill can disappear while your tab is open. So the mod sets your refresh
-> flag every time it changes a stack. Without it your list would go on drawing a bill that no longer exists,
-> and dragging the rows could put the deleted one back — which is the single most dangerous interaction I
-> found while writing this. Thank you for a tab that is genuinely nicer than the vanilla one; the mod marks
-> its own bills in their label rather than patching any tab, so yours picks the mark up for free.
->
-> https://steamcommunity.com/sharedfiles/filedetails/?id=3806709456
+https://steamcommunity.com/sharedfiles/filedetails/?id=3806709456
+```
 
-### Nice Bill Tab - Expansion (`HICON.NiceBillTabExpansion`)
+### Nice Bill Tab (`Andromeda.NiceBillTab`, 3520130671)
 
-> I have published a mod that takes charge of a workbench's bills, and your hidden recipes turned out to be
-> exactly the right signal for it: hiding a recipe on a bench says you do not want it there, so the mod treats
-> it as excluded and never raises a bill for it. Unhide it and it comes back on the next pass. It reads your
-> store through IsHidden and nothing else, so the worst case if it ever moves is a lost feature rather than a
-> broken game. Thank you for the expansion.
->
-> https://steamcommunity.com/sharedfiles/filedetails/?id=3806709456
+```text
+I have published a mod that puts bills up and takes them down on its own, which is exactly the case your cached row list does not expect: a bill can disappear while your tab is open. So the mod sets your refresh flag every time it changes a stack. Without it your list would go on drawing a bill that no longer exists, and dragging the rows could put the deleted one back, which is the single most dangerous interaction I found while writing this. Thank you for a tab that is genuinely nicer than the vanilla one 😊 The mod marks its own bills in their label rather than patching any tab, so yours picks the mark up for free.
 
-### Everybody Gets One (`Memegoddess.EverybodyGetsOne`)
+https://steamcommunity.com/sharedfiles/filedetails/?id=3806709456
+```
 
-> I have published a mod that maintains bills on a workbench by itself, and yours is the reason it never tries
-> to understand a repeat mode it does not own. A bill set to one of your modes keeps it across the mod's own
-> remove-and-replace cycle, it can be chosen as the default for a whole bench, and when the mod needs to know
-> whether there is work to do under one of them it asks your mode rather than comparing thresholds that mean
-> nothing in your terms. The two counters are labelled neutrally under a foreign mode, since you read them
-> your own way. Any mod that adds a repeat mode gets the same treatment; yours is what showed me it had to
-> work that way. Thank you.
->
-> https://steamcommunity.com/sharedfiles/filedetails/?id=3806709456
+### Nice Bill Tab - Expansion (`HICON.NiceBillTabExpansion`, 3721023311)
 
-### Choose Your Recipe (`zal.chooseyourrecipe`)
+```text
+I have published a mod that takes charge of a workbench's bills, and your hidden recipes turned out to be exactly the right signal for it: hiding a recipe on a bench says you do not want it there, so the mod treats it as excluded and never raises a bill for it. Unhide it and it comes back on the next pass. It reads your store through IsHidden and nothing else, so the worst case if it ever moves is a lost feature rather than a broken game. Thank you for the expansion ✨
 
-> I have published a mod that puts a workbench type on autopilot and takes every recipe it can do — which
-> makes yours a natural fit, and pleasantly so: nothing had to be written. You remove disabled recipes from
-> the workbench itself, so the autopilot simply never sees them and follows your choice without knowing it is
-> doing so. That is the best kind of compatibility. Thank you for it.
->
-> https://steamcommunity.com/sharedfiles/filedetails/?id=3806709456
+https://steamcommunity.com/sharedfiles/filedetails/?id=3806709456
+```
 
-Andreas Pardeike is thanked for Harmony in the description rather than by comment, and Claude Code (Anthropic)
-is named there under `AI-GENERATED`.
+### Everybody Gets One (`Memegoddess.EverybodyGetsOne`, 3530806680)
+
+```text
+I have published a mod that maintains bills on a workbench by itself, and yours is the reason it never tries to understand a repeat mode it does not own. A bill set to one of your modes keeps it across the mod's own remove-and-replace cycle, it can be chosen as the default for a whole bench, and when the mod needs to know whether there is work to do under one of them it asks your mode rather than comparing thresholds that mean nothing in your terms. Any mod that adds a repeat mode gets the same treatment; yours is what showed me it had to work that way. Thank you 💛
+
+https://steamcommunity.com/sharedfiles/filedetails/?id=3806709456
+```
+
+### Choose Your Recipe (`zal.chooseyourrecipe`, 3263007587)
+
+```text
+I have published a mod that puts a workbench type on autopilot and takes every recipe it can do, which makes yours a natural fit, and pleasantly so: nothing had to be written. You remove disabled recipes from the workbench itself, so the autopilot simply never sees them and follows your choice without knowing it is doing so. That is the best kind of compatibility. Thank you for it 😊
+
+https://steamcommunity.com/sharedfiles/filedetails/?id=3806709456
+```
+
+### No Max Bills: Redux (`justharry.nomaxbillsredux`, 3526216885) — test pass only
+
+```text
+I have published a mod that keeps a workbench's bills up on its own, and yours has a part in its tests 😊 You raise the per-bench bill ceiling that Better Workbench Management reports, and the mod's cap reads that number live instead of assuming 15, so a game with No Max Bills gets a cap that can actually reach it. One whole test pass runs with yours mounted, just to watch the ceiling go from 15 to 125 and everything keep behaving. It is not a dependency of mine. Thank you for lifting a limit the game never needed ✨
+
+https://steamcommunity.com/sharedfiles/filedetails/?id=3806709456
+```
+
+### TD Find Lib (`Memegoddess.TDFindLib`, 3529443295) — test pass only
+
+```text
+I have published a mod that puts workbenches on autopilot, and it is tested beside Everybody Gets One, which is how I ended up leaning on your library without writing a line for it 😊 My first run mounted that mod without you, its assembly loaded half a class, and a repeat mode threw from the middle of a tick: a very concrete lesson in how much quietly rests on TD Find Lib. It is only mounted for testing and is never a dependency of mine. Thank you for the plumbing so many mods stand on 💛
+
+https://steamcommunity.com/sharedfiles/filedetails/?id=3806709456
+```
+
+### TDS Bug Fixes (`Memegoddess.TDSBugFixes`, 3529433984) — test pass only
+
+```text
+I have published a mod that puts workbenches on autopilot, and its test pass mounts Everybody Gets One, which needs TD Find Lib, which needs you 😊 So TDS Bug Fixes is loaded, quietly, in every one of those runs. It is for testing only and never a dependency of mine, but I wanted the chain thanked all the way to the bottom. Thank you for fixing what the game would not ✨
+
+https://steamcommunity.com/sharedfiles/filedetails/?id=3806709456
+```
+
+Andreas Pardeike (Harmony), Pickle and RimLogging are thanked in the description, and their registry rows are
+already `posted` by other mods of the collection, so this mod is added to their `Covers` and nothing is posted.
+Claude Code (Anthropic) is named under `AI-GENERATED` in the description and is not repeated in the thanks.
 
 ## Steam release notes
 

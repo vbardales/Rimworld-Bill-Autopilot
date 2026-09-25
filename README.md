@@ -116,7 +116,8 @@ the moment it is created. Applying a template needs nothing: `ApplyTemplateToBen
 the autopilot correctly reads them as placed by hand.
 
 **Everybody Gets One** (`Memegoddess.EverybodyGetsOne`) adds three `BillRepeatModeDef`s:
-`TD_PersonCount` (one per person, plus X), `TD_XPerPerson` and `TD_WithSurplusIng`. Two consequences,
+`TD_PersonCount` (one per person, plus X), `TD_XPerPerson` and `TD_WithSurplusIng` (the names the game loads
+under 1.6; the mod's root `Defs` folder also declares `TD_ColonistCount` and `TD_XPerColonist`). Two consequences,
 both of which apply to *any* mod that adds a repeat mode:
 
 - **A foreign mode is never flattened.** The drift capture used to read anything that was not

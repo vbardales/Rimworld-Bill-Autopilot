@@ -42,12 +42,12 @@ Nothing is replaced in the bills tab, so mods that redraw it keep working. Bills
 
 Detected automatically, none required; the settings screen names the ones it found. Every call into a neighbour is wrapped, so the worst case is a lost feature, never a broken game.
 
-- Better Workbench Management: what it adds to a bill survives the autopilot taking that bill down and putting it back up (custom name, counting away from the home map, extra products counted toward the target, and membership of a linked bill set, which is rejoined rather than lost). Its workbench restriction is applied to bills the autopilot creates, which its own hook cannot do since that hook reads the selected workbench. Its wider counting rules are used when deciding whether a stock is full, so the threshold and the bill's own display agree. Its raised bill ceiling is honoured too, when No Max Bills is present.
-- Everybody Gets One: a bill set to one of its repeat modes keeps it. The autopilot never flattens a repeat mode it does not own, and asks the mod that owns it whether there is work to do, instead of guessing at thresholds that are not its own. Any other mod adding a repeat mode gets the same treatment.
-- Nice Bill Tab: it redraws the whole tab and keeps its own cached list of the bills it shows. That list is told to rebuild whenever the autopilot puts a bill up or takes one down, without which it would go on drawing bills that no longer exist, and dragging one could bring a deleted bill back.
-- Nice Bill Tab - Expansion: a recipe you hide on a workbench is treated as one you do not want, and the autopilot leaves it alone.
-- Dubs Mint Menus: its bill menu leaves the tab alone, so nothing collides. Its bench templates do need care: making one photographs every bill on the bench, so a template taken from an autopiloted bench would capture whatever the autopilot had up at that moment, and re-applying it later would turn those recipes into hand-placed bills for good. Autopilot bills are kept out of the template. Applying one needs nothing: the bills it places read as placed by hand, which is exactly right.
-- Choose Your Recipe: nothing needed. It removes disabled recipes from the workbench itself, so the autopilot never sees them.
+- [url=https://steamcommunity.com/sharedfiles/filedetails/?id=935982361]Better Workbench Management[/url]: what it adds to a bill survives the autopilot taking that bill down and putting it back up (custom name, counting away from the home map, extra products counted toward the target, and membership of a linked bill set, which is rejoined rather than lost). Its workbench restriction is applied to bills the autopilot creates, which its own hook cannot do since that hook reads the selected workbench. Its wider counting rules are used when deciding whether a stock is full, so the threshold and the bill's own display agree. Its raised bill ceiling is honoured too, when [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3526216885]No Max Bills[/url] is present.
+- [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3530806680]Everybody Gets One[/url]: a bill set to one of its repeat modes keeps it. The autopilot never flattens a repeat mode it does not own, and asks the mod that owns it whether there is work to do, instead of guessing at thresholds that are not its own. Any other mod adding a repeat mode gets the same treatment.
+- [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3520130671]Nice Bill Tab[/url]: it redraws the whole tab and keeps its own cached list of the bills it shows. That list is told to rebuild whenever the autopilot puts a bill up or takes one down, without which it would go on drawing bills that no longer exist, and dragging one could bring a deleted bill back.
+- [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3721023311]Nice Bill Tab - Expansion[/url]: a recipe you hide on a workbench is treated as one you do not want, and the autopilot leaves it alone.
+- [url=https://steamcommunity.com/sharedfiles/filedetails/?id=1446523594]Dubs Mint Menus[/url]: its bill menu leaves the tab alone, so nothing collides. Its bench templates do need care: making one photographs every bill on the bench, so a template taken from an autopiloted bench would capture whatever the autopilot had up at that moment, and re-applying it later would turn those recipes into hand-placed bills for good. Autopilot bills are kept out of the template. Applying one needs nothing: the bills it places read as placed by hand, which is exactly right.
+- [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3263007587]Choose Your Recipe[/url]: nothing needed. It removes disabled recipes from the workbench itself, so the autopilot never sees them.
 
 Can be added to a game in progress, and taken back out of one. Nothing it stores is written to your save as a class of its own, so removing it raises no load error the way a mod with its own game component does; the bills it had put up simply stay behind as ordinary bills, yours to keep or delete.
 
@@ -63,7 +63,11 @@ This mod's code was written with Claude Code (Anthropic), under human direction,
 
 THANKS
 
-Claude Code (Anthropic). Andreas Pardeike for Harmony.
+Andreas Pardeike for [url=https://steamcommunity.com/sharedfiles/filedetails/?id=2009463077]Harmony[/url].
+
+The authors of the mods this one works beside, against whose interfaces it was written and with which it was tested: Falconne for Better Workbench Management, Andromeda for Nice Bill Tab, HICON for its Expansion, Dubwise for Dubs Mint Menus, Uuugggg for Everybody Gets One, Zaljerem for Choose Your Recipe and Just Harry for No Max Bills. Uuugggg again for [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3529443295]TD Find Lib[/url] and [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3529433984]TDS Bug Fixes[/url], which Everybody Gets One needs and which the test pass mounts for that reason only.
+
+Used for development and testing only, never a dependency of this mod: [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3791648678]Pickle[/url] and [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3733484696]RimLogging[/url].
 
 Credits, and the rights they rest on, are in ATTRIBUTION.md in the repository. This mod is MIT licensed and the notice ships with it.
 
