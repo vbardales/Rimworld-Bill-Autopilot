@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ModMetaData>
+  <name>Bill Autopilot - Pickle removal check</name>
+  <author>Nelim</author>
+  <packageId>nelim.billautopilot.pickleremoval</packageId>
+  <supportedVersions><li>1.6</li></supportedVersions>
+  <modVersion>0.1.0</modVersion>
+  <description>Development only, never published. It has no dependency on Bill Autopilot on purpose: the launch that plays it runs with Bill Autopilot taken out of the mod list, and loads a game saved with it.</description>
+  <modDependencies>
+    <li><packageId>rimworks.pickle</packageId><displayName>Pickle</displayName><steamWorkshopUrl>steam://url/CommunityFilePage/3791648678</steamWorkshopUrl></li>
+  </modDependencies>
+  <loadAfter><li>rimworks.pickle</li></loadAfter>
+</ModMetaData>

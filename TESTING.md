@@ -116,12 +116,12 @@ played against features discovered):
 
    | Former manual test | Now |
    | --- | --- |
-   | RIMMSQOL revealing the shortcut in its own interface | Automated: `20-rimmsqol-shortcut.feature`, pass `avec-rimmsqol`. Not yet played |
+   | RIMMSQOL revealing the shortcut in its own interface | Automated and green: `20-rimmsqol-shortcut.feature`, pass `avec-rimmsqol`, 3 of 3 on 2026-09-25, captures opened |
    | That RIMMSQOL keeps its visibility choice across a restart | **Not applicable**: RIMMSQOL's own behaviour, shown by PickleTools' demonstration (2026-09-21) |
    | The Nice Bill Tab drag | **Not applicable**: a gesture inside another mod's window, where a click lands on whatever window owns the point. The cause (the cache told to rebuild) is asserted by feature 15 |
    | Choose Your Recipe | **Not applicable**: it removes disabled recipes before this mod sees them, so nothing of this mod's is left to assert. It is mounted in the pass with the neighbours |
-   | A save loaded with the mod removed | To automate with `-Then` and `-ThenWithout` (a launch that saves, a launch without the mod that loads). Not written |
-   | BWM: the workbench restriction applied to a bill created from a tick, and the agreement between the widened count and what the bill displays | To automate: both are this mod's behaviour. Not written |
+   | A save loaded with the mod removed | Automated and green: `21-removal-write.feature` and the companion `nelim.billautopilot.pickleremoval`, chain `-Then` / `-ThenWithout` (pass `wsl-deps.removal.map`), both launches passed on 2026-09-25 |
+   | BWM: the workbench restriction applied to a bill created from a tick, and the agreement between the widened count and what the bill displays | Automated and green: `22-bwm-restriction-and-count.feature`, pass with the neighbours, 2 of 2 on 2026-09-25 (not yet seen red: no mutation of the bridge was tried) |
    | Every `@review` screenshot | Opened and read, one by one, recorded in STATUS.md; the French pass captures are still to be opened |
 
    An entry not yet done is pending, not passed.

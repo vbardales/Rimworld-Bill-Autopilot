@@ -43,6 +43,36 @@ updated:      2026-09-25, first play of the optional-mod scenarios: two mod defe
 
 # Bill Autopilot — status
 
+## RIMMSQOL green; removal chain and BWM details written — 2026-09-25
+
+Stage stays **done**. Request `dafa` (feature 20, pass `avec-rimmsqol`): **`exitReason: passed`, 3 of 3**, tree
+unchanged since the request (checked by file dates), evidence `2026-09-25-rimmsqol-20`. The three `@review` captures
+were opened and read: RIMMSQOL's own list offers "Bill Autopilot"; its edit page shows Visible ticked; the "Bill
+Autopilot" button then sits at the right of the main bar and opens this mod's settings page. The settings page in
+that capture reads "Brewery: 1 recipe", so the plural fix is now seen in game (English). The manual RIMMSQOL test is
+**closed by automation**; its persistence across a restart stays not applicable (RIMMSQOL's own behaviour).
+
+**The save loaded without the mod: green.** Request `cf3a` (`21-removal-write.feature`, the companion
+`nelim.billautopilot.pickleremoval`, chain `-Then` / `-ThenWithout`): both launches **`exitReason: passed`**. Launch 1
+wrote a game with a bill up, checked the save holds the mod's state as plain nodes (`billAutopilot...`, a positive
+control) and no `Class="BillAutopilot` anywhere outside the header, and handed it to the companion. Launch 2's log
+lists `nelim.billautopilot.pickleremoval` as the only mod of the game it loads, so the mod really was out; the game
+loaded, ran 250 ticks, kept the bill as an ordinary bill (`the "HandTailoringBench" has 1 bills`), saved and reloaded,
+with no error logged. This is the first time `-ThenWithout` has been seen running end to end. The manual "save loaded
+with the mod removed" test is **closed by automation**. Evidence `2026-09-25-removal-chain/seq1` and `seq2`.
+
+**The two Better Workbench Management details: green.** Request `932e` (`22-bwm-restriction-and-count.feature`, pass
+with the neighbours): **`exitReason: passed`, 2 of 2**. A bill created from a tick carries the restriction set on its
+bench (non-mechs, skill range 5 to 15, values that are not a bill's defaults, so the check cannot pass by accident),
+and the count the autopilot decides with equals the bill's own with an additional product counted, at least 40.
+Both manual entries are **closed by automation**. Caveat: neither scenario has been seen red (no mutation of the
+bridge was tried), so they prove agreement today, not that they would catch a regression. Evidence
+`2026-09-25-bwm-22`.
+
+**Manual list, now:** every former manual test is automated and green or not applicable with its reason (table in
+`TESTING.md`). What remains for a person: open the `@review` captures not yet opened (the French pass ones included),
+and the owner's own validations before a `publish`.
+
 ## Red scenarios all replayed green; RIMMSQOL automated; description template — 2026-09-25
 
 Stage stays **done**. Feature 14 replay `115b`: `exitReason: passed`, 3 of 3. With `c5dd` (feature 13) and `5a32`

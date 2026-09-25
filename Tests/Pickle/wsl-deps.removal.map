@@ -1,0 +1,8 @@
+# The companion that plays the second launch of the removal chain: a game saved with Bill Autopilot, loaded without it.
+# Run with:
+#   -DepMap wsl-deps.removal.map -Filter '21-removal-write' -Then 'removal-check' -ThenWithout 'nelim.billautopilot','nelim.billautopilot.pickletests'
+#
+# The companion has no dependency on Bill Autopilot, which is the point; `-ThenWithout` takes the mod and its test
+# companion out of the list before the second launch, and this one stays. The path is relative to the collection's
+# root, and the folder's own About.xml packageId must equal the one written here.
+nelim.billautopilot.pickleremoval path:BillAutopilot/Tests/Pickle/Removal/Mod
