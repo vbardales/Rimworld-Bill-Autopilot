@@ -1,0 +1,19 @@
+{
+  "templateStamp": "a8ca11cdd9a3",
+  "workshopId": "3806709456",
+  "packageId": "nelim.billautopilot",
+  "releaseTitle": "Bill Autopilot {version}",
+  "requirePaths": [
+    "Assemblies/BillAutopilot.dll"
+  ],
+  "forbidPaths": [],
+  "previewFile": "About/Preview.png",
+  "aboutFromDescription": true,
+  "build": {
+    "project": "Source/BillAutopilot.csproj"
+  },
+  "description": {
+    "file": "Mod/README.template.md",
+    "format": "markdown"
+  }
+}
