@@ -1,0 +1,38 @@
+{
+  "title": "Bill Autopilot",
+  "titleSize": 54,
+  "titleParts": [
+    { "text": "Bill Autopilot", "scale": 1 }
+  ],
+  "suffix": "",
+  "tag": "",
+  "copyLines": ["Say once what a workbench is for, and stop rewriting its bill list."],
+  "layout": "panel",
+  "panelAnchor": "top-left",
+  "backgroundFile": "preview-background.png",
+  "backgroundPosition": "center",
+  "backgroundSize": "cover",
+  "echo": {
+    "file": "echo.png",
+    "preSized": true,
+    "color": "var(--accent)",
+    "width": 250,
+    "height": 165,
+    "opacity": 1,
+    "veil": false,
+    "panelTop": 6,
+    "panelRight": -3,
+    "panelWidth": 48,
+    "flipX": true
+  },
+  "iconBadge": {
+    "file": "ModIcon-cutout.png",
+    "corner": "bottom-left",
+    "width": 220,
+    "outline": false,
+    "veil": "radial",
+    "veilSize": 275,
+    "veilLeft": -55,
+    "veilBottom": -61
+  }
+}
