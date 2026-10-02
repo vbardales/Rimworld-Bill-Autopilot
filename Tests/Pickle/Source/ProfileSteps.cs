@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Reflection;
 using RimWorld;
@@ -53,7 +54,31 @@ namespace BillAutopilot.PickleSteps
             profiles.Clear();
 
             Driver.Mod(ctx).WriteSettings();
-            BillAutopilotState.Current?.MarkDirty();
+            ClearGameState();
+        }
+
+        /// <summary>
+        /// A run that reuses the same save across scenarios keeps one BillAutopilotState (it is tied to
+        /// the Game object, and the save is not reloaded between scenarios that name it again). Clearing
+        /// the settings profiles is not "clean configuration" without also clearing what benches this
+        /// game has already seeded: a bench switched on earlier stays seeded, so a later scenario testing
+        /// the "switch a workbench type on" confirmation would find it already given and skip asking.
+        /// </summary>
+        private static void ClearGameState()
+        {
+            var state = BillAutopilotState.Current;
+            if (state == null) return;
+
+            state.MarkDirty();
+            foreach (var name in new[] { "seeded", "known", "pending" })
+            {
+                var field = typeof(BillAutopilotState)
+                    .GetField(name, BindingFlags.Instance | BindingFlags.NonPublic);
+                // HashSet<T> implements ICollection<T> only, not the non-generic ICollection: testing for that
+                // interface matched nothing and left every set untouched (image 3 of the gallery, 2026-10-02).
+                var value = field?.GetValue(state);
+                value?.GetType().GetMethod("Clear", Type.EmptyTypes)?.Invoke(value, null);
+            }
         }
 
         [Given("Bill Autopilot is switched on for {string}")]
@@ -193,6 +218,30 @@ namespace BillAutopilot.PickleSteps
             profile.defaultMode = AutoMode.Maintain;
             profile.targetCount = target;
             profile.floorCount = floor;
+            Driver.Mod(ctx).WriteSettings();
+            BillAutopilotState.Current?.MarkDirty();
+        }
+
+        /// <summary>
+        /// A per-recipe override, set directly on the profile rather than through a running bill: the
+        /// gallery capture needs one to exist on screen before anything has synced. "Then Bill Autopilot
+        /// keeps N of X..., restarting at F" (below) reads this same override back; it is an assertion,
+        /// and using it as a setter, which the first gallery run did, does not write anything at all -
+        /// it matches by text alone, whichever Given/When/Then wrote the feature line.
+        /// </summary>
+        [Given("Bill Autopilot overrides {string} on {string} to keep {int}, restarting at {int}")]
+        public void SetRecipeOverride(PickleContext ctx, string recipeDefName, string benchDefName,
+            int target, int floor)
+        {
+            var bench = Driver.BenchDef(ctx, benchDefName);
+            var recipe = Driver.Recipe(ctx, recipeDefName);
+            var profile = Driver.Settings(ctx).ProfileForWriting(bench);
+
+            var rule = profile.RuleForWriting(recipe);
+            rule.mode = AutoMode.Maintain;
+            rule.targetCount = target;
+            rule.floorCount = floor;
+
             Driver.Mod(ctx).WriteSettings();
             BillAutopilotState.Current?.MarkDirty();
         }

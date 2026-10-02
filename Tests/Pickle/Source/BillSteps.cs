@@ -309,6 +309,18 @@ namespace BillAutopilot.PickleSteps
                 + $"the Add button is gone. {Driver.Describe(ctx, table)}");
         }
 
+        /// <summary>
+        /// The ceiling the cap is measured against, read live. With No Max Bills alone it must rise above
+        /// the game's fifteen: the mod used to read the game's constant when Better Workbench Management
+        /// was not there to report a higher one.
+        /// </summary>
+        [Then("Bill Autopilot's bill ceiling is above {int}")]
+        public void AssertCeilingAbove(PickleContext ctx, int floor)
+        {
+            int ceiling = MaxBills(ctx);
+            ctx.Assert(ceiling > floor, $"the ceiling the autopilot works against is {ceiling}, not above {floor}");
+        }
+
         [Then("Bill Autopilot counts {int} of {string} on the {string} at \\({int}, {int}\\)")]
         public void AssertCounted(PickleContext ctx, int expected, string recipeDefName, string benchDefName,
             int x, int z)
