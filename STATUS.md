@@ -1,7 +1,7 @@
 ---
 localization: complete
 translation_en: complete
-translation_fr: partial
+translation_fr: unchecked
 mod:          Bill Autopilot
 packageId:    nelim.billautopilot
 repo:         Rimworld-Bill-Autopilot

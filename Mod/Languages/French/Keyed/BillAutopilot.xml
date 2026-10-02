@@ -6,16 +6,18 @@
   <BillAutopilot.Profile.GroupCount>{0} {1}  ({2})</BillAutopilot.Profile.GroupCount>
 
   <BillAutopilot.Settings.Intro>Choisissez les types d'établi à mettre sous pilote automatique. Sur chacun, le mod tient les travaux tout seul : un travail apparaît quand il y a de quoi faire et s'efface une fois la tâche remplie, si bien que l'onglet reste court. Les recettes débloquées plus tard s'ajoutent d'elles-mêmes.</BillAutopilot.Settings.Intro>
-  <BillAutopilot.Settings.Integrations>Trouvés autour : {0}, {1}, {2}, {3}.</BillAutopilot.Settings.Integrations>
-  <BillAutopilot.Settings.IntegrationsDesc>Aucun n’est requis. Chacun est détecté tout seul, et ce que le pilote en reprend est décrit sur la page du mod.</BillAutopilot.Settings.IntegrationsDesc>
+  <BillAutopilot.Settings.Integrations>Intégrations détectées : {0}, {1}, {2}, {3}.</BillAutopilot.Settings.Integrations>
+  <BillAutopilot.Settings.IntegrationsDesc>Ces intégrations sont toutes facultatives. Elles sont détectées séparément, et ce que le pilote prend en charge est décrit sur la page du mod.</BillAutopilot.Settings.IntegrationsDesc>
   <BillAutopilot.Settings.Detected>{0} détecté</BillAutopilot.Settings.Detected>
   <BillAutopilot.Settings.NotDetected>{0} absent</BillAutopilot.Settings.NotDetected>
   <BillAutopilot.Settings.MarkBills>Marquer les travaux automatiques</BillAutopilot.Settings.MarkBills>
   <BillAutopilot.Settings.MarkBillsDesc>Ajoute une courte marque au libellé de chaque travail posé par le pilote, pour le distinguer de ceux que vous posez vous-même. Ce n’est pas cosmétique : supprimer un travail automatique exclut sa recette, et un travail non marqué qui disparaît seul ne laisse aucune trace de la raison.</BillAutopilot.Settings.MarkBillsDesc>
   <BillAutopilot.Settings.Notify>Signaler les nouvelles recettes</BillAutopilot.Settings.Notify>
-  <BillAutopilot.Settings.NotifyDesc>Une recette débloquée après la mise sous pilote arrive en travail suspendu : elle ne dépense donc jamais rien à votre insu. Ceci envoie une lettre qui les récapitule.</BillAutopilot.Settings.NotifyDesc>
+  <BillAutopilot.Settings.NotifyDesc>Une recette débloquée après la mise sous pilote arrive en travail suspendu : elle ne dépense donc jamais rien à votre insu. Une lettre les récapitule.</BillAutopilot.Settings.NotifyDesc>
   <BillAutopilot.Settings.MaxBills.One>Au plus 1 travail automatique par établi (le jeu en accepte {1})</BillAutopilot.Settings.MaxBills.One>
   <BillAutopilot.Settings.MaxBills.Many>Au plus {0} travaux automatiques par établi (le jeu en accepte {1})</BillAutopilot.Settings.MaxBills.Many>
+  <BillAutopilot.Settings.MaxBillsFree.One>Au plus 1 travail automatique par établi (le jeu n’impose aucune limite)</BillAutopilot.Settings.MaxBillsFree.One>
+  <BillAutopilot.Settings.MaxBillsFree.Many>Au plus {0} travaux automatiques par établi (le jeu n’impose aucune limite)</BillAutopilot.Settings.MaxBillsFree.Many>
   <BillAutopilot.Settings.Configure>Configurer...</BillAutopilot.Settings.Configure>
   <!-- Un nombre de recettes sous forme de groupe nominal. Il entre dans les phrases ci-dessous comme un seul
        argument : le pluriel vit ici et nulle part ailleurs. En français, 0 et 1 sont au singulier. -->
@@ -46,10 +48,10 @@ Les recettes débloquées plus tard arriveront suspendues, et ne dépenseront ja
   <BillAutopilot.Profile.Target>Maintenir un stock de</BillAutopilot.Profile.Target>
   <BillAutopilot.Profile.Floor>Relancer à</BillAutopilot.Profile.Floor>
   <BillAutopilot.Profile.Uncountable>Recettes au produit non comptable</BillAutopilot.Profile.Uncountable>
-  <BillAutopilot.Profile.UncountableDesc>Fonte d'une arme, crémation, chirurgie et tout ce que le jeu ne sait pas compter : « maintenir un stock » leur est impossible, elles suivent donc ce réglage.</BillAutopilot.Profile.UncountableDesc>
+  <BillAutopilot.Profile.UncountableDesc>Fonte d'une arme, crémation, chirurgie et tout ce que le jeu ne sait pas compter. Pour ces recettes, « maintenir un stock » est impossible ; elles suivent donc ce réglage.</BillAutopilot.Profile.UncountableDesc>
   <BillAutopilot.Profile.UncountableRecipe>Le jeu ne sait pas compter ce que produit cette recette : elle suit le réglage des recettes non comptables.</BillAutopilot.Profile.UncountableRecipe>
   <BillAutopilot.Profile.CustomCount>Nombre</BillAutopilot.Profile.CustomCount>
-  <BillAutopilot.Profile.CustomFloor>Second nombre</BillAutopilot.Profile.CustomFloor>
+  <BillAutopilot.Profile.CustomFloor>Deuxième nombre</BillAutopilot.Profile.CustomFloor>
   <BillAutopilot.Profile.CustomCountDesc>Ce mode de répétition vient d’un autre mod, qui lit ces deux nombres à sa façon : « un par personne, plus X », « X par personne », un surplus d’ingrédients. Le pilote les transmet sans les interpréter, et lui demande s’il y a du travail.</BillAutopilot.Profile.CustomCountDesc>
   <BillAutopilot.Profile.OverridesOnly>Seulement les recettes surchargées</BillAutopilot.Profile.OverridesOnly>
   <BillAutopilot.Profile.Uncategorised>Divers</BillAutopilot.Profile.Uncategorised>
