@@ -15,12 +15,17 @@
 # Composition (owner, 2026-10-02): the camera is close on the bench (distance 5), the floor is the game's wood plank
 # parquet, flowering plant pots stand around the bench, image 1 carries one bill placed by hand (no mark) beside the three
 # automatic ones, and images 1 to 3 clear the letter stack and the alerts. Image 4 keeps its letter: it is the picture.
+# Image 1 has a subject (owner, 2026-10-02: a gallery picture is staged): the tailor Soleil at her bench, a teal shirt
+# against the warm parquet, chestnut hair, a slim build chosen rather than drawn. The story of the series is a quiet
+# tailoring workshop that runs itself while its tailor keeps her own hand in. Images 2 and 3 are windows and are
+# screenshots of what they are, not staged.
 # The shots are @review because that is what makes Pickle keep them as pictures a person has to open.
 @review @gallery @requires:nelim.pickletools.screenshotmode
 Feature: the captures of the Workshop page, from the pass without the optional mods
 
   # Image 1. The whole pitch in one picture: the tab shows what is left to make, not a wall of configuration. Three
   # automatic bills, each marked, on a bench that has far more recipes than that.
+  @requires:nelim.pickletools.colonistrace
   Scenario: image 1, a bills tab holding three automatic bills on a bench with many recipes
     Given the save "nelim-zen-meadow-studio" is loaded
     And game speed is paused
@@ -35,6 +40,11 @@ Feature: the captures of the Workshop page, from the pass without the optional m
     And Bill Autopilot syncs the "HandTailoringBench" at (125, 96)
     Then Bill Autopilot has 3 bills up on the "HandTailoringBench" at (125, 96)
     When I add bill "Make_Apparel_Pants" to the "HandTailoringBench" at (125, 96)
+    When Nelim's Pickle Tools: "Soleil" body type is Thin
+    And Nelim's Pickle Tools: "Soleil" hair colour is rgb (112, 66, 38)
+    And Nelim's Pickle Tools: "Soleil" wears "Apparel_BasicShirt" dyed rgb (40, 112, 122)
+    And Nelim's Pickle Tools: "Soleil" wears "Apparel_Pants" dyed rgb (70, 52, 40)
+    And Bill Autopilot's gallery: the colonist "Soleil" stands at (125, 95) facing north
     When the camera looks at (125, 96) from a distance of 5
     And the bills tab of the Bill Autopilot bench "HandTailoringBench" at (125, 96) is opened
     And Nelim's Pickle Tools: the letters and the alerts are cleared from the screen

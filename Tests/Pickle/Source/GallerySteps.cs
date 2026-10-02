@@ -192,6 +192,28 @@ namespace BillAutopilot.PickleSteps
                 + "picture. Check the torches are placed, filled and inside the roofed room");
         }
 
+        /// <summary>
+        /// The tailor of the first picture: a free colonist, by nickname, put on a cell and turned to face a direction,
+        /// with whatever job the game had given it dropped, so that the paused picture shows it at the bench. Nothing
+        /// walks: the scenario is paused. Pickle's own steps place things, not pawns, and the colonist steps of
+        /// PickleTools dress and colour a pawn without moving it.
+        /// </summary>
+        [When("Bill Autopilot's gallery: the colonist {string} stands at \\({int}, {int}\\) facing north")]
+        public void ColonistStandsAt(PickleContext ctx, string nickname, int x, int z)
+        {
+            var map = Find.CurrentMap;
+            ctx.Require(map != null, "no map is loaded");
+            var pawn = map.mapPawns.FreeColonists.FirstOrDefault(p => p.Name != null && p.Name.ToStringShort == nickname);
+            ctx.Require(pawn != null, $"no free colonist is called {nickname}");
+
+            var cell = new IntVec3(x, 0, z);
+            ctx.Require(cell.InBounds(map) && cell.Walkable(map), $"the cell ({x}, {z}) cannot be stood on");
+            pawn.jobs?.StopAll();
+            pawn.Position = cell;
+            pawn.Rotation = Rot4.North;
+            pawn.Notify_Teleported(false, true);
+        }
+
         [Given("the Learning helper is switched off")]
         public void TutorOff(PickleContext ctx)
         {

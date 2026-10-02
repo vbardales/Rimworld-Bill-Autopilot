@@ -15,3 +15,4 @@
 # that name; the folder's own About.xml packageId must equal the one written here.
 nelim.pickletools.screenshotstudio   path:PickleTools/ScreenshotStudio/Mod
 nelim.pickletools.screenshotmode     path:PickleTools/ScreenshotMode/Mod
+nelim.pickletools.colonistrace       path:PickleTools/ColonistRace/Mod
