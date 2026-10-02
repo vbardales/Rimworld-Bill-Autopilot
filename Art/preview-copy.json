@@ -28,7 +28,7 @@
   "iconBadge": {
     "file": "ModIcon-cutout.png",
     "corner": "bottom-left",
-    "width": 220,
+    "width": 180,
     "outline": false,
     "veil": "radial",
     "veilSize": 275,
