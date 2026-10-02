@@ -68,7 +68,7 @@ They are mounted by the Pickle test passes of `Tests/Pickle/` so that the integr
 
 The About description records code written with Claude Code (Anthropic), under
 human direction, review and testing. The project records AI-generated showcase
-artwork and retains source images and composition files in `Art/`. The preview
+artwork and retains source images (`Preview-source.png`, `Preview-original.png`, `ModIcon-source.png`), the layout configuration (`Preview.config.json`, `echo.png`) and the Workshop gallery (`Gallery/`) in `Art/`. The preview
 overlay uses Segoe UI through the rendering system; no font file is distributed.
 
 These tool credits do not imply endorsement or transfer any third-party rights.

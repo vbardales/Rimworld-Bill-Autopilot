@@ -155,9 +155,9 @@ and are ready to be opened and judged: images 1, 3 and 4 for the first time on t
 step, image 2 for the first time with the real per-recipe override setter (fixed after `5d66`). Image 5
 (`24-gallery-neighbours.feature`) was already green, `0c9e`, 2026-09-26.
 
-**Still owed before they go into `Art/WorkshopScreenshots`:** open all five and judge them with the
-owner (bench indoors, Learning helper off, image 4 zoomed enough), then convert to JPEG as `01-`… to
-`05-`. **The dispatcher's queue is empty for this mod** (`-List`, checked 2026-09-27): `7c5d` was
+**Still owed before they go into `Art/Gallery`:** open all five and judge them with the
+owner (bench indoors, Learning helper off, image 4 zoomed enough), then convert to JPEG as `1-`… to
+`5-` (`0-preview.png` already there, a copy of the Preview). **The dispatcher's queue is empty for this mod** (`-List`, checked 2026-09-27): `7c5d` was
 cancelled earlier and superseded by `b2c7`, which is done; the relay's own line still naming it as
 queued is stale.
 

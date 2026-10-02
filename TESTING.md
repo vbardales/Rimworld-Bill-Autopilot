@@ -702,7 +702,7 @@ Four features added after the numbered scenarios above, none of them proving a n
   1 to 4 failed once on a mistake in the feature (a setter line that silently matched an assertion step,
   `5d66`) and once on a region-updater re-entrancy in the room-building step (`88b3`), both fixed; the
   studio-based version ran on 2026-10-02 (`a496`: images 1, 2 and 4 green, image 3 red on a test-isolation bug since fixed; images 1 and 3 replayed in queued requests `31ca` and `e8a5`). **Every accepted image still has to be opened and looked at**
-  before it becomes `Art/WorkshopScreenshots/01-`… to `05-`; a green scenario says the trip happened, not
+  before it becomes `Art/Gallery/1-`… to `5-` (`0-preview.png` is the Preview, PUBLISHING.md); a green scenario says the trip happened, not
   that the picture shows anything worth publishing.
 - **25 — the Choose Your Recipe pending-trap, generically.** `25-recipe-taken-off-the-bench.feature`,
   added 2026-09-26 with the correction it proves (see scenario 19 above): a recipe announced and then

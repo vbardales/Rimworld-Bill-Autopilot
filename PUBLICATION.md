@@ -273,4 +273,4 @@ The page still carries the wording of 2026-09-23. The block above differs from i
 not an uncountable recipe** (the game counts raw meat for it), so the "What you set" item now starts with
 "Smelting a weapon, cremation, surgery". Everything else reads the same. The publish is done with
 `update_description` (and `update_preview` if the header image is to be resent) at both the dry-run and the
-`publish`; the gallery of `Art/WorkshopScreenshots/` stays a manual upload.
+`publish`; the gallery of `Art/Gallery/` stays a manual upload.
