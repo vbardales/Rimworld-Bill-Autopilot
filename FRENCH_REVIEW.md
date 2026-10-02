@@ -9,7 +9,7 @@ No text in this mod agrees in gender with a pawn (it addresses the player or nam
 type/recipe, never a colonist), so TRANSLATIONS.md's three-segment {PAWN_gender ? ...} switch
 does not apply to any row below; read to confirm, not found by pattern search.
 
-Generated 2026-10-02, revision: b010196.
+Generated 2026-10-02, revision: bdfd660 (was b010196 before the rebase, same content).
 
 ## DefInjected/MainButtonDef/BillAutopilot.xml
 

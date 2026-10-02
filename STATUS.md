@@ -33,7 +33,7 @@ updated:      2026-10-02, audit against AUDIT.md of 2026-09-25: stage kept at do
 
 ## Translation audit
 
-- French review by the owner: **done 2026-10-02**, revision `b010196`, relayed in chat by the owner: five corrections
+- French review by the owner: **done 2026-10-02**, revision `bdfd660` (was b010196 before the rebase of 2026-10-02, same content), relayed in chat by the owner: five corrections
   (`Settings.Integrations`, `Settings.IntegrationsDesc`, `Settings.NotifyDesc`, `Profile.UncountableDesc`,
   `Profile.CustomFloor`) applied, report linked to that commit, no colon gender agreement required. `translation_fr`
   is `complete`. Any later change to a French file sets it back to `unchecked`. This line is the owner's; a session does not edit it.
@@ -1275,3 +1275,8 @@ and what the list wants is wiring.
 `licence` vocabulary: `open` an explicit licence, `silent` no licence and a dead source,
 `alive` no licence but a living source, `forbidden` a written refusal, `original` owing nothing
 to anyone — not a name, not an idea traceable to one mod, not a value derived from its assets.
+
+
+## Preview source migration — 2026-10-02
+
+Copy, typography, layout and palette are consolidated in `Art/Preview.config.json`. The canonical inputs are `Art/Preview-source.png`, `Art/echo.png` and `Art/ModIcon-source.png`; the shared renderer writes temporary diagnostics under ignored `Art/.render/`. Existing distributed Preview, gallery and ICO outputs were preserved because they were present and coherent; no render was run for this migration. Superseded JSON files and generated QA intermediates were removed. Nothing published.
