@@ -2,14 +2,19 @@
   "title": "Bill Autopilot",
   "titleSize": 54,
   "titleParts": [
-    { "text": "Bill Autopilot", "scale": 1 }
+    {
+      "text": "Bill Autopilot",
+      "scale": 1
+    }
   ],
   "suffix": "",
   "tag": "",
-  "copyLines": ["Say once what a workbench is for, and stop rewriting its bill list."],
+  "copyLines": [
+    "Say once what a workbench is for, and stop rewriting its bill list."
+  ],
   "layout": "panel",
   "panelAnchor": "top-left",
-  "backgroundFile": "preview-background.png",
+  "backgroundFile": "Preview-source.png",
   "backgroundPosition": "center",
   "backgroundSize": "cover",
   "echo": {
@@ -26,7 +31,7 @@
     "flipX": true
   },
   "iconBadge": {
-    "file": "ModIcon-cutout.png",
+    "file": "ModIcon-source.png",
     "corner": "bottom-left",
     "width": 180,
     "outline": false,
@@ -34,5 +39,12 @@
     "veilSize": 275,
     "veilLeft": -55,
     "veilBottom": -61
+  },
+  "palette": {
+    "veil": "#252F38",
+    "inkPrimary": "#F2ECE1",
+    "inkSecondary": "#9CC9E8",
+    "accent": "#FF9B21",
+    "badgeInk": "#17120E"
   }
 }
