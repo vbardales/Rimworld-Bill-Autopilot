@@ -1,0 +1,10 @@
+# No Max Bills: Redux, alone. The dedicated avec-nomaxbills pass selects 26-no-max-bills.feature.
+#
+# Kept apart from avec-facultatifs on purpose: that pass stages Better Workbench Management, which reports a
+# raised bill ceiling of its own when it sees No Max Bills. The case this pass exists for is the one where the
+# autopilot has to ask No Max Bills itself, so Better Workbench Management must not be there to answer for it.
+# Run it with:
+#     -DepMap wsl-deps.avec-nomaxbills.map
+#
+# packageId                     workshopId   what it is
+justharry.nomaxbillsredux       3526216885   No Max Bills: Redux (packageId read from its About.xml)

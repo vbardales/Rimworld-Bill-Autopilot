@@ -1,0 +1,17 @@
+# The Workshop page's capture 5 (24-gallery-neighbours.feature): the settings page naming the neighbours it found, so it
+# needs the pass WITH them: exactly the mods of wsl-deps.avec-facultatifs.map (kept identical by hand; that file's own
+# comments say why each is there), plus Nelim's Pickle Tools' zen meadow studio, the colony every gallery picture is taken
+# in (see wsl-deps.galerie.map). Run it with:
+#     -DepMap wsl-deps.galerie-voisins.map
+#
+# packageId                     workshopId   what it is
+justharry.nomaxbillsredux       3526216885   No Max Bills: Redux
+falconne.BWM                    935982361    Better Workbench Management
+Andromeda.NiceBillTab           3520130671   Nice Bill Tab
+HICON.NiceBillTabExpansion      3721023311   Nice Bill Tab - Expansion
+Dubwise.DubsMintMenus           1446523594   Dubs Mint Menus
+Memegoddess.TDSBugFixes         3529433984   TDS Bug Fixes: required by TD Find Lib, and it by Everybody Gets One
+Memegoddess.TDFindLib           3529443295   TD Find Library: Everybody Gets One's 1.6 assembly references its SearchEditorRevertableWindow
+Memegoddess.EverybodyGetsOne    3530806680   Everybody Gets One - Continued
+zal.chooseyourrecipe            3263007587   Choose Your Recipe (Continued)
+nelim.pickletools.screenshotstudio   path:PickleTools/ScreenshotStudio/Mod
