@@ -33,7 +33,9 @@ Check ($about.ModMetaData.modDependencies.li.packageId -eq 'brrainz.harmony') 'H
 Check ($about.ModMetaData.loadAfter.li -contains 'brrainz.harmony') 'Load after Harmony'
 $repo = 'https://github.com/vbardales/Rimworld-Bill-Autopilot'
 Check ($about.ModMetaData.url -eq $repo) 'Repository URL'
-Check ($about.ModMetaData.description.TrimEnd().EndsWith("[url=$repo]Source code on GitHub[/url]")) 'Description ends with the required Steam GitHub link'
+$descEnd = $about.ModMetaData.description.TrimEnd()
+# Two accepted forms: the plain text generated from the Markdown source in PUBLICATION.md (PUBLISHING.md, 2026-09-25), or the hand-written BBCode of a mod that has not migrated.
+Check ($descEnd.EndsWith("Source code on GitHub ($repo)") -or $descEnd.EndsWith("[url=$repo]Source code on GitHub[/url]")) 'Description ends with the required Steam GitHub link'
 
 $english = Read-Language 'English'
 $french = Read-Language 'French'

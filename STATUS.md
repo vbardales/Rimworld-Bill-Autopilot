@@ -1,15 +1,17 @@
 ---
 localization: complete
 translation_en: complete
-translation_fr: complete
+translation_fr: partial
 mod:          Bill Autopilot
 packageId:    nelim.billautopilot
 repo:         Rimworld-Bill-Autopilot
 visibility:   public
 detached:     yes
 stage:        done
+workflow_stage: done
 licence:      original
 licence_at:   original work
+upstream_mod_remotes: N/A
 licence_name: MIT
 licence_file: LICENSE (identical copy in Mod/LICENSE)
 dependencies: declared
@@ -18,30 +20,295 @@ settings_audit: partial
 tested_on:    2026-09-01
 workshop:      3806709456
 remaining:
-  - unverified: gate to tested, condition 1 - no scenario tagged @wip (none tagged today)
-  - unverified: gate to tested, condition 2 - every scenario with a @requires tag has RUN: they ran for the first time on 2026-09-25 (17 of 21 passed, 4 failed for three causes, two of them real defects of the mod, fixed in the source); on the fixed build feature 13 is green (request c5dd), features 14 and 15 had scenario errors and their replay is queued (request 5a32)
-  - unverified: gate to tested, condition 3 - every manual test validated green: save loaded with the mod removed, RIMMSQOL interface, Nice Bill Tab drag, two Better Workbench Management details, Choose Your Recipe, every @review screenshot
-  - unverified: the Pickle suite has produced one verdict (run 4, 2026-09-23: exitReason failed, 40 passed, 11 failed, 14 skipped of 65), and the fixes made after it have not been replayed; done -> tested still needs a clean pass without the optional mods, the pass with them, and one per language
-  - unverified: the fixes are proven in game only on the features they touch (run 5 fix-check, features 09, 18, 19: 12 of 12 passed on the new build); the other 57 scenarios have not been replayed on it, four small requests for the final pass are queued (see "Where the run evidence lives")
-  - unverified: settings_audit reset to partial on 2026-09-24 because settings-page and profile-window UI code changed; the technical tests pass (74 checks) and the run 5 captures of the settings page and the profile window were opened and read correctly, the full final pass and the French pass are still owed
-  - unverified: the "1 recipes" plural fix (settings page, switch-on confirmation, new-recipe letter): built and covered by a new scenario in feature 02, not yet played; it will be by the queued final requests, which run on this build. The same fix covers the overridden count ("1 surchargée"), the clear button, the cap label and the Dubs Mint Menus message
-  - unverified: every @review screenshot the suite attaches; a green there says the trip happened, not that the image shows anything
-  - unverified: loading a save with the mod removed, which no Pickle run can do since the mod list is fixed at startup
-  - unverified: RIMMSQOL revealing the shortcut in its own interface, and that visibility choice surviving a restart
-  - unverified: final current-build in-game scenarios, FR/EN UI, logs, new game and existing save, options persistence and RIMMSQOL shortcut integration
-  - unverified: English and French runtime translation checks described in TESTING.md, including optional integrations and clipping
-  - unverified: the mark in the bill label, in the tabs other mods redraw
-  - unverified: a change made in the bills tab being kept as a profile override
-  - unverified: the memory held per workbench, two benches of a kind set differently
-  - unverified: a repeat mode from another mod, kept and asked rather than guessed at
-  - unverified: all five compatibility bridges, Better Workbench Management the largest
-  - unverified: Nice Bill Tab's cached list, where a drag could bring a deleted bill back
-  - unverified: loading a save after removing the mod, the reason its state avoids a GameComponent
-session:      local_3527e6d8-def4-4e54-97ff-a6430f1dc569
-updated:      2026-09-25, first play of the optional-mod scenarios: two mod defects fixed (DLL changed), test environment corrected
+  - unverified: gate to tested, condition 2 - every @requires scenario has RUN: all ran green at least once (2026-10-02 reading of the kept reports: features 13-19 and 22 in French 23/23, feature 20 3/3, feature 26 2/2, gallery image 5 1/1); the one left is gallery image 3 (the switch-on confirmation), red in 1-4c on a test-isolation leak fixed in ProfileSteps, replay 24d queued, no report on disk yet
+  - unverified: gate to tested, condition 3 - manual tests: the save-with-the-mod-removed case (removal chain), RIMMSQOL, Nice Bill Tab drag, BWM details and Choose Your Recipe are now automated and green; what is left is opening every @review capture not yet read (fr1 bills tab, five in fr3 - see docs/runs/pickle-runs.md) and the gallery images with the owner
+  - unverified: full pass on the current build (DLL BA624725, sources modified since the passes of 4B89FBA7): suite 01-26 without the optional mods, with them, in English and in French; only the features touched by each fix have been replayed (v2: 13/13)
+  - unverified: settings_audit is partial because settings-page and profile-window UI code changed on 2026-09-24; technical tests pass (74 checks), the full final pass and the French pass are still owed
+  - unverified: English and French runtime translation checks on the final build (raw keys, fallback, clipping)
+  - unverified: French review by Virginie
+session:      local_25f4fbd1-6efc-46eb-a0a6-5a9f0eb26e21
+updated:      2026-10-02, audit against AUDIT.md of 2026-09-25: stage kept at done, evidence pruned, nothing in Mod/ or Source/ touched
 ---
 
 # Bill Autopilot — status
+
+## Translation audit
+
+- French review by Virginie: not started. `translation_fr` stays `partial` until she reviews;
+  no session marks its own French as reviewed or edits this line.
+- French lives in two files: `Mod/Languages/French/Keyed/BillAutopilot.xml` (68 keys) and
+  `Mod/Languages/French/DefInjected/MainButtonDef/BillAutopilot.xml` (2 keys, the hidden
+  RIMMSQOL settings shortcut).
+- `FRENCH_REVIEW.md` (mod root) generated 2026-09-30 by `_tools/Generate-FrenchReview.ps1`
+  (adapted from FoodCourt's own script) from the working tree after the 2026-09-30
+  gender-agreement rule. Every row read: none flagged, no `?` cells — no text in this mod
+  agrees in gender with a pawn (everything addresses the player or names a workbench
+  type/recipe), so the `{PAWN_gender ? ...}` switch does not apply anywhere here.
+- Original column equals English throughout: Bill Autopilot is original work (`licence: original`),
+  not a port, so there is no separate source-language text.
+
+## Audit of 2026-10-02 (AUDIT.md of 2026-09-25, protocols repository)
+
+**Retained state: `done` (`stage: done`, `workflow_stage: done`).** Previous state `done`, unchanged. This replaces
+no earlier decision paragraph: the 2026-09-21 workflow audit below stays as written, and this one is added on top.
+
+Revision audited: `f269fe9` plus the uncommitted working tree (`Source/`, `Mod/` incl. `BillAutopilot.dll`,
+`Tests/Pickle/`, `.github/`, `CHANGELOG`/`STATUS`/`TESTING`/`PUBLICATION` edits, new features 23-26 and `_tools/`).
+Nothing under `Mod/`, `Source/` or `Tests/Pickle/` was changed by this audit, so queued Pickle requests keep their tree.
+
+Checked now, outside the game (no RimWorld started, no lock taken):
+
+| Check | Result |
+| --- | --- |
+| `Tests/ValidateXml.ps1` | **476 XML CHECKS PASSED (5 files)**. It first failed on a stale rule: it demanded the hand-written BBCode link, while `About.xml` now carries the plain text generated from the Markdown source (`Source code on GitHub (URL)`, PUBLISHING.md 2026-09-25). The check now accepts both forms |
+| `dotnet run --project Tests/BillAutopilot.Tests.csproj -c Release` | **74 CHECKS PASSED** against the shipped DLL |
+| `dotnet build Source/BillAutopilot.csproj -c Release` to a scratch folder | 0 warnings, 0 errors; SHA-256 begins `ba624725f320`, identical to `Mod/Assemblies/BillAutopilot.dll` |
+| `node --test .github/tests/*.test.mjs` | 71 of 71 passed |
+| Plural keys | 15 `.One`/`.Many`/`.Zero` keys, identical in English and French. `NewRecipeLetterTitle` has `.One` and the bare key as its many-form, no `.Many`: accepted by the XML check, not the literal `<key>.Many` shape TRANSLATIONS.md names (reserve, not a defect) |
+| `@wip` | no scenario tagged `@wip` in `Tests/Pickle/Mod/Pickle/Features/` (gate to `tested`, condition 1: met) |
+| `.dds` | `Autopilot.dds` exists on disk, was never tracked (`git log --all -- '*.dds'` empty) and is ignored by `*.dds` |
+| Upstream | original work (`licence: original`): no source mod, no origin repository, nothing to fork or send a PR to. Neighbour mods are not upstreams (see BACKLOG.md) |
+| Workshop item | `Mod/About/PublishedFileId.txt` = 3806709456, committed in `13ac5ed`; `CHANGELOG.md` opens with `1.0.0 - unreleased` above `0.1.0` (creation of the publishIdFile, 2026-09-23). A working-tree edit that dated `1.0.0` was reverted: nothing has been published as 1.0.0 |
+
+Not rerun: the Pickle suite (taking the machine for a full pass is a `done -> tested` act, queued small requests only),
+the in-game French and English reading, and any `@review` capture.
+
+Evidence pruned on 2026-10-02 (the rule of AGENTS.md, "Test evidence": the latest report per scenario, an older one
+only as sole proof). 306 MB became 6.6 MB. Kept, in `docs/runs/evidence/`: `2026-09-25-fr1-01-06`, `fr2-07-12`,
+`fr3-13-22` (French passes of features 01-22 on build 4B89FBA7), `2026-09-25-removal-chain`, `2026-09-25-rimmsqol-20`,
+`2026-09-24-skipcheck-13-17` (only proof of the pass without the optional mods for the skip), `2026-09-27-replay-fixes-v2`
+(13 of 13, the later build), `2026-09-27-nomaxbills-26-retry`, `2026-09-28-galerie-studio-1-4c` (images 1, 2, 4) and
+`2026-09-28-galerie-studio-5b` (image 5). Deleted: `2026-09-25-bwm-22` (replayed in fr3), `2026-09-26-gallery-1-4`, `-gallery-5`,
+`2026-09-27-gallery-1-4-retry`, `-retry2`, `-retry3` (old colony, owner judged unusable), `2026-09-27-nomaxbills-26` and
+`replay-fixes` (0 scenarios), `2026-09-28-galerie-studio-1-4`, `-1-4b`, `-5`. In the kept folders `report.html` and
+`messages.ndjson` were removed and captures converted to JPEG (quality 88). One failure capture of image 3 in `1-4c` was
+lost in the conversion (the file could not be opened); its cause is documented in "24b2 red" below and the replay `24d`
+supersedes it. Sections below that cite a deleted folder (`gallery-1-4`, `gallery-5`, `retry3`, `1-4b`) are historical;
+no front-matter field points to any of them.
+
+**Next transition (`done -> tested`):** replay gallery image 3 on the fixed `ProfileSteps` (`24d`), run the whole suite on
+the current build without the optional mods, with them, and once per language; open every `@review` capture; the
+owner validates the gallery and the French. Optional, not a blocker: give `NewRecipeLetterTitle` a `.Many` key.
+
+## 24b2 red: test-isolation leak in ProfileSteps, not the mod — 2026-09-29
+
+`24b2` (galerie-studio-1-4c): 3/4 passed, image 3 failed — "no confirmation is open" for
+`Bill Autopilot's toggle is used to switch "HandTailoringBench" on`. Verified directly against
+`docs/runs/evidence/2026-09-28-galerie-studio-1-4c/summary.json`, not from the peer relay alone.
+
+Root cause: `ProfileSteps.ResetToDefaults` ("Bill Autopilot settings are at their defaults")
+cleared `BillAutopilotSettings.profiles` but never touched `BillAutopilotState.seeded/known/pending`.
+Images 1 and 2 (same feature file, same save, no reload between scenarios) enable
+`HandTailoringBench` and sync it, which seeds that bench type for the rest of the session. By
+image 3, `BenchActivation.Toggle` correctly sees `state.IsSeeded(bench) == true` and skips the
+confirmation on purpose — the same short-circuit that is right for "switching back on after a
+pause". Test-isolation gap, not a mod defect: `Source/UI/BenchActivation.cs` is unchanged.
+
+Fixed in `Tests/Pickle/Source/ProfileSteps.cs`: `ResetToDefaults` now also clears
+`seeded`/`known`/`pending` via reflection, same pattern already used for `profiles`. Rebuilt clean.
+Resubmitted as `24d` (label `galerie-studio-1-4d`, evidence
+`docs/runs/evidence/2026-09-29-galerie-studio-1-4d`), images 1/3/4 only.
+
+
+## 5da4 red: Pickle ran off the main thread, not our code — 2026-09-28
+
+`5da4` (images 1-4, 8 torches): 1 of 4 passed (image 2). Light check passed everywhere (the 8-torch fix
+holds); the three failures trace to one shared cause, verified in `Player.log` and `junit.xml`, not
+guessed from the relay: `RunSession.InvokeMethodBinding` ran off Unity's main thread
+(`System.Threading.ThreadPoolWorkQueue.Dispatch` in the stack). Image 1 ("0 bills, not 3"): `RecipeProbe`
+caught the resulting exception and returned `false` for every recipe, correctly (`WarningOnce`, no
+crash), which pushed every recipe to `uncountableMode` = `Excluded`. Image 3 ("no confirmation is
+open"): same zero count, and `Find.WindowStack.Add` off-thread did not register. Image 4: a direct
+engine crash (`MapPawns.AssertMainThread`), no BillAutopilot frame in the stack. Nothing to fix in this
+mod. **`6513` (image 5 retry) is green, 1 of 1**, checked directly in its `summary.json` — the
+dispatcher's relay named the stale ticket `d8bf` (the first, 4-torch attempt, already reported red
+earlier), not `6513`. Resubmitting images 1, 3, 4 once. Evidence `docs/runs/evidence/2026-09-28-galerie-studio-1-4b`
+and `-5b`.
+
+## Gallery redone in the zen studio colony, with a roof and lights — 2026-09-28
+
+The owner judged the `464d` captures **not usable as showcase images**: wrong colony (Pickle's played
+`test-colony`, with a fallen monolith and debris), and the interiors too dark. Her direction: use `zenNelim` in
+NPT, which is Nelim's Pickle Tools' zen meadow studio (fixture `nelim-zen-meadow-studio`,
+`PickleTools/ScreenshotStudio`), and put lights in the interiors. **The `464d` and `0c9e` captures are superseded**
+(kept on disk until the new ones are judged, then to be deleted per the evidence rule).
+
+What changed, all in `Tests/Pickle/`, nothing in `Mod/` or `Source/`: `23-gallery-vanilla.feature` and
+`24-gallery-neighbours.feature` now load `nelim-zen-meadow-studio` (paused) and build everything in the studio's
+"display" pavilion (cells 116-134 by 89-101, its empty interior meant for mod demonstrations, bench at (125, 96)).
+The studio leaves every roof off on purpose, which reads as "outdoors" for a bench and is dark once roofed, so the
+new step `the studio's display pavilion is closed, roofed and lit` (`GallerySteps.ClosePavilion`, replacing
+`MakeRoom`) puts a door and wall segments where the pavilion is open, roofs it, and places four standing torches
+(`TorchLamp`, filled: no power grid needed, and the warm light the studio's own lanterns already use), with the same
+region-updater guard that fixed `88b3`. Two new pass maps: `wsl-deps.galerie.map` (the studio only, so images 1 to 4
+stay "without the optional mods") and `wsl-deps.galerie-voisins.map` (the neighbours plus the studio, image 5).
+Not yet played; the torch positions, how bright they read and the camera framing are guesses until a capture is
+opened.
+
+## 464d green: gallery images 1-4, all four — 2026-09-27
+
+`464d` (gallery 23 retry, after the `MakeRoom` region-updater fix): **`exitReason: passed`, 4 of 4**,
+evidence `docs/runs/evidence/2026-09-27-gallery-1-4-retry3`. Read from `summary.json` directly. The
+region corruption seen in `88b3` does not recur. **All four gallery images now exist as real captures**
+and are ready to be opened and judged: images 1, 3 and 4 for the first time on the fixed room-building
+step, image 2 for the first time with the real per-recipe override setter (fixed after `5d66`). Image 5
+(`24-gallery-neighbours.feature`) was already green, `0c9e`, 2026-09-26.
+
+**Still owed before they go into `Art/WorkshopScreenshots`:** open all five and judge them with the
+owner (bench indoors, Learning helper off, image 4 zoomed enough), then convert to JPEG as `01-`… to
+`05-`. **The dispatcher's queue is empty for this mod** (`-List`, checked 2026-09-27): `7c5d` was
+cancelled earlier and superseded by `b2c7`, which is done; the relay's own line still naming it as
+queued is stale.
+
+## 8240 green: No Max Bills alone, the ceiling fix proven in game — 2026-09-27
+
+`8240` (feature 26 alone, pass `avec-nomaxbills`, No Max Bills: Redux staged without Better Workbench
+Management): **`exitReason: passed`, 2 of 2**, evidence `docs/runs/evidence/2026-09-27-nomaxbills-26-retry`.
+Read from `summary.json` and `Player.log` directly. `Integrations: ... No Max Bills found. Bill cap per
+workbench: 2147483647` — `NoMaxBillsCompat`'s fallback fired, exactly as intended. "a cap above
+fifteen is honoured" passed with 16 automatic bills genuinely standing, so the game's own 15-bill
+interface limit really was lifted.
+
+**The open question from 2026-09-27 is answered.** The Harmony crash (`Undefined target method` in
+`RaiseBillCountLimitForImprovedWorkbenches`) is still in this log too, unchanged. But
+`RaiseBillCountLimitForVanillaBillStackMethods` — the patch that actually lifts the interface's 15-bill
+limit — ran anyway: `Harmony.PatchAll()`'s type-enumeration order happens to reach it before the one
+that throws. So, in this build at least, **No Max Bills: Redux's own interface limit works even when it
+crashes on its Better Workbench Management bridge.** Still worth a report to its author
+(`justharry.nomaxbillsredux`, Workshop 3526216885) — the crash itself is real and logged as an ERROR on
+every load without BWM — but it is not the defect that was feared: nothing here needs No Max Bills: Redux
+to change before this mod can rely on the ceiling it reports.
+
+Both No Max Bills corrections now have in-game proof (`8240` for the ceiling, `b2c7` for the Choose Your
+Recipe pending-trap). Still queued: the gallery retry, resubmitted after fixing a real defect in
+`GallerySteps.MakeRoom` (see below).
+
+## 88b3 red: a real defect in the gallery's own room-building step — 2026-09-27
+
+`88b3` (gallery 23 retry): **`exitReason: failed`, 1 of 4 passed** (image 2 only), worse than the
+earlier `5d66` (3 of 4). Read from `junit.xml` directly. Images 1 and 3 failed on the same engine
+exception: `Exception while rebuilding dirty regions: System.InvalidOperationException: Collection was
+modified; enumeration operation may not execute`, in
+`Verse.RegionAndRoomUpdater.RegenerateNewRegionsFromDirtyCells`. Image 4 then timed out entirely at
+`Given the save "test-colony" is loaded` (180s) — consistent with the region graph left inconsistent by
+the earlier crash, in the same game process. Image 2 uses the identical room-building step and passed:
+not deterministic, which fits a re-entrancy bug rather than a bad value.
+
+**Cause, and it is this session's own code, in `GallerySteps.MakeRoom`** (the "closed roofed room" step
+added 2026-09-26): it destroyed things, spawned a wall or set terrain, and set the roof, cell by cell,
+interleaved. `GenSpawn.Spawn` of a wall and `RoofGrid.SetRoof` each notify RimWorld's region system,
+which keeps its dirty cells in a `HashSet` with no re-entrancy guard; interleaving destroys, spawns and
+roof-sets across many cells in one call risks one notification's rebuild running while another's is
+still populating that set. **Fixed 2026-09-27**: `MakeRoom` now disables `map.regionAndRoomUpdater`
+for the whole build (destroy pass, then wall/floor pass, then roof pass, each over the full rect rather
+than interleaved), and calls `RebuildAllRegionsAndRooms()` once at the end — the pattern RimWorld's own
+bulk map edits use. Compiles, Check-Steps run again. Requeued as a fresh ticket once Check-Steps
+confirms.
+
+## b2c7 green: 13 of 13, the Choose Your Recipe fix proven in game — 2026-09-27
+
+`b2c7` (features 04, 05, 10, 25, corrected filter, build `BA624725...`): **`exitReason: passed`, 13 of
+13**, evidence `docs/runs/evidence/2026-09-27-replay-fixes-v2`. Read from `summary.json` directly, not
+from the dispatcher's summary alone. Features 04, 05 and 10 (8 scenarios) replay what was already green
+on the old build, now proven again after the removal-path change. **Feature 25's one scenario is the
+first in-game proof of the Choose Your Recipe pending-trap fix**: "the announced recipe leaves and
+returns, and the question is asked again" — green. Still queued: `88b3` (gallery 23 retry), `8240` (No
+Max Bills alone). `7c5d` (the earlier, wrongly-filtered duplicate of this request) is confirmed gone
+from the queue, not merely reported gone.
+
+## Gallery run 5d66: 3 of 4 good, image 2 was never taken — 2026-09-27
+
+`5d66` came back red: `exitReason: failed`, 3 of 4 passed. Images 1, 3 and 4 are real captures, kept in
+`docs/runs/evidence/2026-09-26-gallery-1-4`. Image 2 failed on its own setup step before the profile window ever
+opened, so nothing of it exists to judge. **Not a defect of the mod, a mistake in the feature file**: the override
+line, `And Bill Autopilot keeps 200 of "Make_Patchleather" on "HandTailoringBench", restarting at 100`, matched by
+text alone to `ProfileSteps.AssertRecipeCounts`, an assertion (`[Then]`), not a setter — Pickle binds a step by its
+text regardless of the Given/When/Then word written in the feature. Nothing was ever set, so the assertion read the
+profile's own default (`BenchProfile.DefaultTargetCount = 50`) and failed with "kept at 50, not 200".
+Fixed: a new `[Given("Bill Autopilot overrides {string} on {string} to keep {int}, restarting at {int}")]` step
+(`ProfileSteps.SetRecipeOverride`) that actually writes the override; `23-gallery-vanilla.feature` now uses it.
+Check-Steps: 105 patterns, none ambiguous, every step line resolves. Queued: `ba6d` (feature 23 alone). `0c9e`
+(image 5) is green, `docs/runs/evidence/2026-09-26-gallery-5`.
+
+**Correction, 2026-09-27: `9ae9` and `92fe` were NOT a shared-tooling outage.** The dispatcher read both as
+`exitReason: infrastructure-error` and grouped them with failures on other mods; the owner asked whether that was
+really checked, and it was not — read the `Player.log` of each instead of trusting the label. Two different, real
+causes, both this session's:
+
+- **`9ae9`** (features 04, 05, 10, 25): a filter-syntax mistake of my own. `Submit-PickleRun.ps1 -Filter` passes its
+  value straight to Pickle's `-pickle-run`, and mine, `features 04,05,10,25`, is not a term Pickle understands
+  (`InvalidOperationException: filter 'features 04,05,10,25' matched no scenarios`; the log names the valid forms —
+  `@tag`, mod name, feature path, `path::name`, `path:line`, `::name`). The form that has worked before is a
+  comma-separated list of full feature file names, no spaces, no "features" word:
+  `13-better-workbenches,14-foreign-repeat-mode,...` (seen in `2026-09-25-fr3-13-22/Player.log`). `7c5d` carried the
+  same mistake and was cancelled unrun; resubmitted correctly as `b2c7`, filter
+  `04-new-recipe,05-delete-refuses,10-bill-cap,25-recipe-taken-off-the-bench`.
+- **`92fe`** (feature 26, pass `avec-nomaxbills`): **the same filter mistake as `9ae9`**, corrected a second time
+  here. `-Filter "feature 26"` is not a valid term either (`InvalidOperationException: filter 'feature 26' matched
+  no scenarios`); a single feature also wants its bare file name, no "feature" word: `26-no-max-bills` (confirmed
+  against `2026-09-25-rimmsqol-20/Player.log`: `-pickle-run=20-rimmsqol-shortcut`). **First correction of this
+  section was itself wrong**: reading the log, a real Harmony crash from No Max Bills: Redux stood out and was
+  named as the cause, but it is not — RimWorld tolerates a mod class whose constructor throws and continues
+  loading (our own startup line still printed afterwards), and the run's actual `exitReason: infrastructure-error`
+  came from the filter, later, same as `9ae9`. `ba6d` (the gallery retry) carried the identical `feature 23`
+  mistake and failed the same way. All three refiled with the corrected syntax: `88b3` (gallery 23,
+  `23-gallery-vanilla`), `8240` (No Max Bills alone, `26-no-max-bills`, same pass map as before).
+
+**The Harmony crash is still real and worth watching for.** `RaiseBillCountLimitForImprovedWorkbenches` finds its
+Harmony target by reflecting into `ImprovedWorkbenches.Main`; when Better Workbench Management is absent that
+reflection yields no method, and Harmony refuses a patch with an empty `[HarmonyTargetMethods]` result
+(`HarmonyException: ... Undefined target method`), logged as `[ERROR] Error while instantiating a mod of type
+NoMaxBillsRedux.NoMaxBillsReduxMod`. The game survives it, but `Harmony.PatchAll()` aborts the whole assembly's
+patch pass on the first exception, in type-enumeration order that is not under this mod's control: whether the
+OTHER patch in the same class (`RaiseBillCountLimitForVanillaBillStackMethods`, the one that actually lifts the
+game's 15-bill interface limit) ran before or after the one that throws is unknown until `8240`'s result is read.
+If it did not run, No Max Bills: Redux may not even raise its own interface limit when Better Workbench Management
+is absent — a real defect in that mod, still to be read from `8240`, and still a matter for its author regardless
+of how this pass fares.
+
+Queued: `88b3`, `8240`, `b2c7`.
+
+## French pass done, gallery captures redone — 2026-09-26
+
+Stage stays **done**. The three French passes are green on build `4B89FBA7`: `baba` (01-06) 27 of 27, `dd78` (07-12)
+20 of 20, `7018` (13-19 and 22) 23 of 23, all `exitReason: passed` (rows 11 to 13 of `docs/runs/pickle-runs.md`).
+Superseded evidence folders (run 4, final 1 to 3, run5-fixcheck, fixcheck 2 to 4) were deleted on 2026-09-26 to free
+disk; their results stay as text lines in `pickle-runs.md`.
+
+The first gallery requests (`9f44`, `6434`) were cancelled: the background was wrong (bench outdoors, Learning helper
+open, no zoom). `GallerySteps.cs` now has a closed roofed room step, a Learning-helper-off step and a camera framing
+step (101 patterns, all compile, every step line resolves); features 23 and 24 use them. Refiled, waiting for disk
+space (the worker starts nothing under 2 GB free): `5d66` (images 1 to 4, without the optional mods) and `0c9e`
+(image 5, with the neighbours). Room, tutor and camera steps are unproven in game until these run.
+
+The gallery images are opened and looked at one by one before they go into `Art/WorkshopScreenshots` as `01-`… to
+`05-` (converted to JPEG). The `@review` captures of the earlier runs (features 06, 15, 18, 19, the French ones) are
+still to be opened with the owner.
+
+**Two corrections made in the code, 2026-09-26 (owner's rule: a correction goes into 1.0.0, a pure check into 1.0.1).**
+The build `4B89FBA7` is superseded: the DLL is now `BA624725...` and the passes above were played on the old one.
+(1) No Max Bills alone: the cap read the game's 15 unless Better Workbench Management reported more; now
+`NoMaxBillsCompat` (type `NoMaxBills.Patch_BillStack_DoListing`) is asked when BWM does not answer, the settings
+slider spans 1 to 100 and the sentence says "the game sets no limit" when there is none (new keys, EN and FR).
+(2) Choose Your Recipe trap: a recipe announced and then taken off the bench kept its "pending" mark once the bill
+was taken down, and was never offered again; `AutoBillSync.Remove` now forgets the open question
+(`BillAutopilotState.Unannounce`). New scenarios, not played: `25-recipe-taken-off-the-bench.feature` (every pass),
+`26-no-max-bills.feature` with the new pass map `wsl-deps.avec-nomaxbills.map`; new steps `RecipeListSteps.cs`
+and one in `BillSteps.cs` (Check-Steps: 104 patterns, every step line resolves). **Queued 2026-09-27, once the disk cleared (~30 GB free):** `9ae9` (features 04, 05, 10, 25, default pass) and
+`92fe` (feature 26 alone, `wsl-deps.avec-nomaxbills.map`), both on the current tree (DLL `BA624725...`), alongside
+the gallery tickets `5d66` and `0c9e` already queued (25 requests ahead in the dispatcher). None has run yet.
+Verification-only items stay in `BACKLOG.md` for 1.0.1.
+
+**Publication prepared, not committed (2026-09-26).** The description is now one Markdown source, `## Steam
+description` of `PUBLICATION.md`; `Mod/About/About.xml` was regenerated from it (`sync-about-description.mjs
+--write`, the description is already the plain text of the source); `Mod/README.template.md` and `Mod/.steamignore`
+are deleted. The `### 1.0.0` Steam change note starts with `[b]1.0.0[/b]`; `CHANGELOG.md` says `[1.0.0] - 2026-09-26`.
+The manual publish workflow was generated with `generate-publish-workflow.sh` (`.github/publish-tag.yml`,
+`script-tests.yml`, `publish.config.json`, scripts and tests; `--build-project Source/BillAutopilot.csproj`, gallery
+dir `Art/WorkshopScreenshots`); its 68 generated tests pass locally. **Still to do before the `publish`:** commit and
+push, the dry-run of the exact SHA (with `update_description`), the gallery, her manual validations. Run ID and SHA
+of the dry-run go here once done.
+
 
 ## RIMMSQOL green; removal chain and BWM details written — 2026-09-25
 
@@ -107,7 +374,19 @@ rows and Bill Autopilot added to the `Covers` of Harmony, Pickle, RimLogging and
 the item is private. The description grew by these lines; the text was validated (463 XML checks).
 
 The CI path (manual workflow or semantic-release, tag and rollback target, gallery folder) was put to the CI/CD
-session; the repository has only `build.yml`, no tag, no `README.template.md`. No answer yet.
+session, which answered: the manual workflow, generated by them in this repository, tag and release created by the CI
+after the first upload, gallery folder committed with the five captures and numbered `01-`… (`Art/WorkshopScreenshots`),
+first-publication rollback = the owner sets the item back to private.
+
+**One source for the description (CI/CD session, 2026-09-25, `Rimworld-Release-Admin` f196148, `Rimworld-protocols`
+16f3c59; nothing forced).** The description is written once, in Markdown, in a fenced block under
+`## Steam description` of `PUBLICATION.md` (no code fence inside, last line `[Source code on GitHub](URL)`); the CI
+converts it to BBCode and **generates the `<description>` of `About.xml` from it**, and every dry-run and publish
+stops if the two differ. This **supersedes** what was done on 2026-09-25 (`Mod/README.template.md` and
+`Mod/.steamignore`): when the workflow is generated (on this standard from the start), move the text into
+`PUBLICATION.md`, delete both files, and let `sync-about-description.mjs --write` rewrite `About.xml` (read the diff:
+it will lose its BBCode links). The CI also refuses a change note whose first line lacks the version (`[b]1.0.0[/b]`).
+Do not edit `.github/` by hand.
 
 ## First play of the optional-mod scenarios — 2026-09-25
 
@@ -267,15 +546,15 @@ optional mods and **not yet played**. The full breakdown is in `docs/runs/pickle
 
 Raw evidence (reports, launcher logs, captures) is **on disk only**, in `docs/runs/evidence/`, ignored by
 git; what is tracked is the text summary `docs/runs/pickle-runs.md`, one table line per run. Under the "Test
-evidence" rule of the root AGENTS.md two reports are kept: `2026-09-24-run5-fixcheck` (features 09, 18, 19 on the
-current build) and run 4, which stays **only until the final pass replaces it** (it is a report of the previous
-build, so it proves nothing about this one; it is kept meanwhile for the 14 skipped scenarios' baseline and the
-marker captures). Runs 2 and 3 were deleted the day run 4 replayed all of them, and run 1's report was lost to
-the shared script's five-report rotation before it was copied. Captures are kept as reduced JPEG; the folder is
-under 3 MB.
+evidence" rule of the root AGENTS.md, only the latest report per scenario on build `4B89FBA7` is kept (the French
+passes `fr1`, `fr2`, `fr3`, plus `bwm-22`, `rimmsqol-20`, `removal-chain` and `skipcheck-13-17`, about 5 MB).
+Run 4, the earlier final passes and the fix checks were deleted on 2026-09-26, replaced by those passes; runs 2
+and 3 were deleted the day run 4 replayed all of them, and run 1's report was lost to the shared script's
+five-report rotation before it was copied. Captures are kept as reduced JPEG.
 
-Queued through the TicketDispatcher on 2026-09-24, all English, all `-pickle-no-http`, evidence in
-`docs/runs/evidence/2026-09-24-<name>`:
+Queued through the TicketDispatcher on 2026-09-24 and 25, all English, all `-pickle-no-http`. **Historical:
+except `skipcheck-13-17`, the evidence folders named below were deleted on 2026-09-26**; the French passes replayed
+every scenario on the current build (`pickle-runs.md` has one line per run):
 
 | Request | Filter | Mods | Purpose |
 | --- | --- | --- | --- |
@@ -295,8 +574,7 @@ green after its fix before the `publish`, which is `5a32` (features 14 and 15) a
 regression replay of the 69 scenarios may follow the publication, in small tickets, and a red there is a defect of
 the published version. The gallery and the owner's manual validations are still required before the `publish`.
 
-The French pass will be a separate request afterwards. Delete run 4 and repoint this section when the three
-final requests have replaced it.
+The French pass has since run, green (see the 2026-09-26 section above).
 
 ## Workshop item created, and the gate to tested restated — 2026-09-23
 

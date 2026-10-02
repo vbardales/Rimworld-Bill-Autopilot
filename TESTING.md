@@ -1,16 +1,16 @@
 # Testing Bill Autopilot in game
 
-Nothing has been released. Version 1.0.0 is still unpublished, so every line below describes a mod
-that has been compiled far more often than it has been played.
-
-Already seen working, by hand, in a real save, on 1 September 2026: bills put up and taken down on
-their own, a recipe unlocked by research arriving as a suspended bill, and deleting an automatic bill
-excluding its recipe. That is the base loop, and it is the only part with a witness.
-
-Never run once: everything written since. The mark in the bill label, the capture of a change made in
-the tab, the memory held per workbench rather than per workbench type, repeat modes belonging to
-other mods, and all five compatibility layers. Better Workbench Management is the largest of them and
-has never had a single line of it executed in a running game.
+Nothing has been released. Version 1.0.0 is still unpublished. Most of what is written below is no
+longer untested: as of 26 September 2026 the whole numbered suite (scenarios 1 to 22) has been played
+green at least once, most of it twice (an English pass and a French one), on build `4B89FBA7...`.
+**That build is superseded.** Two corrections landed in the code on 26 and 27 September — the No Max
+Bills ceiling when Better Workbench Management is absent, and a trap where a recipe taken off a bench
+while its "new recipe" question was still open was never offered again — and the shipped assembly is
+now `BA624725...`. The replay of features 04, 05, 10 and 25 on that build is green (`b2c7`, 2026-09-27,
+13 of 13) — the Choose Your Recipe pending-trap fix now has an in-game witness. The No Max Bills ceiling
+fix does not yet: its own isolated scenario (`8240`, feature 26) is still queued. `STATUS.md` is the
+source of truth for what has actually run and when; this file states what each scenario proves and how
+to read a failure, not the day-to-day verdicts.
 
 Each scenario says what it proves. A test whose failure you cannot interpret is not worth running.
 
@@ -38,7 +38,7 @@ those two, turned red. A suite never seen to fail proves nothing.
 
 ## The Pickle suite, and how many passes a verdict needs
 
-Twenty feature files live in `Tests/Pickle/`, written from 21 September 2026 and played since 23 September
+Twenty-six feature files live in `Tests/Pickle/`, written from 21 September 2026 and played since 23 September
 (`docs/runs/pickle-runs.md` has one line per run). They hold only what a running game can show. The decision layer — which mode applies, which target,
 which floor, the clamps, the overflow guard, the fallback for a repeat mode whose owner has gone,
 and the settings round trip through Scribe — is proven by the executable suite above and is
@@ -51,10 +51,11 @@ manual. The numbered scenarios below are what the features were written from.
 **A verdict needs three passes, and they are not interchangeable.**
 
 1. **Without the optional mods** — the default staging: Core, the DLC, Harmony, RimLogging, Pickle,
-   Harmony as this mod's only hard dependency, and the suite. It covers scenarios 1 to 12 and 18,
-   and proves the mod stands alone, which is what the mod page claims of all five bridges. The
-   scenarios for absent mods carry `@requires:` and are **skipped**, so this pass is green with a
-   dozen scenarios never played: read the skips, not only the failures.
+   Harmony as this mod's only hard dependency, and the suite. It covers scenarios 1 to 12, 17, 18,
+   20 (its non-RIMMSQOL half) and the vanilla gallery (23), and proves the mod stands alone, which is
+   what the mod page claims of all six bridges. The scenarios for absent mods carry `@requires:` and
+   are **skipped**, so this pass is green with a dozen scenarios never played: read the skips, not
+   only the failures.
 
    ```powershell
    powershell.exe -ExecutionPolicy Bypass -File scripts/Run-PickleWsl.ps1 -Mod BillAutopilot
@@ -64,7 +65,7 @@ manual. The numbered scenarios below are what the features were written from.
    declares in `loadAfter`, plus No Max Bills: Redux for the raised bill ceiling that scenario 10
    reads live rather than hard-coding, and the two libraries Everybody Gets One needs (TD Find Lib and
    TDS Bug Fixes: the staging mounts only what a map lists, and without them its assembly loads half a
-   class). It covers scenarios 13 to 16 and 19 on top of the first pass.
+   class). It covers scenarios 13 to 17, 19 and 22 on top of the first pass.
    Green on the first pass says nothing about this one, and the reverse is equally true: a scenario
    can pass *only* because an optional mod is present.
 
@@ -84,6 +85,18 @@ manual. The numbered scenarios below are what the features were written from.
    with the neighbours because it changes the main bar, which no bill feature looks at, and a red then names
    its own cause. What it does not test: that RIMMSQOL keeps its choice across a restart, which is RIMMSQOL's
    behaviour and was shown by PickleTools' own demonstration on 2026-09-21.
+
+   **A fifth set, for No Max Bills alone:** `wsl-deps.avec-nomaxbills.map` mounts only No Max Bills: Redux,
+   deliberately without Better Workbench Management, so that `26-no-max-bills.feature` exercises the
+   fallback path added 2026-09-26 (`NoMaxBillsCompat`, asked only when BWM does not answer). Queued,
+   not yet played, as `8240`. Watch for the Harmony crash logged as `[ERROR] Error while instantiating a
+   mod of type NoMaxBillsRedux.NoMaxBillsReduxMod` when reading its result (`STATUS.md`, 2026-09-27): the
+   game survives it, but whether the mod's *other* patch — the one that actually lifts the interface's
+   15-bill limit — ran before or after the one that throws is unknown until this pass has a real result.
+
+   **A sixth set, for the removal chain:** `wsl-deps.removal.map` with `-Then removal-check -ThenWithout
+   nelim.billautopilot,nelim.billautopilot.pickletests` (see scenario 21 below). Not a `-DepMap` any other
+   pass uses; it exists only to hand a save from one launch to a second launch without the mod.
 
 3. **Each language, in its own pass.** `-Language French`. The language is fixed at staging and
    never switched inside a run. No scenario spells an English string — every label, marker, dialog
@@ -106,25 +119,36 @@ played against features discovered):
    get a pass green.
 2. **Every conditional scenario has actually run.** A scenario carrying `@requires:` is skipped, not
    failed, in a pass that lacks its mod, so a pass can be green with it never played. Here that is
-   features 13 to 17 (feature 20 in its own pass). The pass with the optional mods
-   (`wsl-deps.avec-facultatifs.map`) has to play every one of them, and the report has to show
-   them played, not skipped. They ran for the first time on 2026-09-25: features 13, 14 and 15 had to
-   be repaired (two defects of the mod, and errors of the scenarios) and replayed green.
+   features 13 to 17, 19 and 22 (feature 20 in its own pass, feature 26 in its own pass, feature 21 in
+   the removal pass). **Met on build `4B89FBA7...`**: the pass with the optional mods ran every one of
+   them (English, request `479c`, then the French run `7018`), after repairing features 13, 14 and 15
+   (two defects of the mod, and errors of the scenarios) on 2026-09-25. Feature 26, new on
+   2026-09-26, has never run — its own isolated pass is queued as `8240`.
 3. **No manual test is left to validate.** `AUDIT.md`: what used to be ticked by hand is either
    automated and green, or listed as not applicable with its reason. The former manual list of
-   `Tests/Pickle/README.md` stands as follows (2026-09-25):
+   `Tests/Pickle/README.md` stands as follows (2026-09-27):
 
    | Former manual test | Now |
    | --- | --- |
    | RIMMSQOL revealing the shortcut in its own interface | Automated and green: `20-rimmsqol-shortcut.feature`, pass `avec-rimmsqol`, 3 of 3 on 2026-09-25, captures opened |
    | That RIMMSQOL keeps its visibility choice across a restart | **Not applicable**: RIMMSQOL's own behaviour, shown by PickleTools' demonstration (2026-09-21) |
-   | The Nice Bill Tab drag | **Not applicable**: a gesture inside another mod's window, where a click lands on whatever window owns the point. The cause (the cache told to rebuild) is asserted by feature 15 |
-   | Choose Your Recipe | **Not applicable**: it removes disabled recipes before this mod sees them, so nothing of this mod's is left to assert. It is mounted in the pass with the neighbours |
+   | The Nice Bill Tab drag | **Not applicable**: a gesture inside another mod's window, where a click lands on whatever window owns the point. The cause (the cache told to rebuild) is asserted by feature 15, green |
+   | Choose Your Recipe | **Revised 2026-09-26, no longer simply not applicable.** Reading its code (it removes disabled recipes from a bench's own list) turned up a real trap: a recipe announced and then taken off the bench kept its "waiting for an answer" mark once its bill came down, and was never offered again after coming back. Corrected in code (`BillAutopilotState.Unannounce`) and covered generically by `25-recipe-taken-off-the-bench.feature`, which edits the recipe list the way that mod does without needing it staged — **played and green**, `b2c7`, 2026-09-27. A pass that stages Choose Your Recipe itself and drives its own window is still not written; see `BACKLOG.md` for the scenarios owed there (1.0.1, verification only) |
    | A save loaded with the mod removed | Automated and green: `21-removal-write.feature` and the companion `nelim.billautopilot.pickleremoval`, chain `-Then` / `-ThenWithout` (pass `wsl-deps.removal.map`), both launches passed on 2026-09-25 |
-   | BWM: the workbench restriction applied to a bill created from a tick, and the agreement between the widened count and what the bill displays | Automated and green: `22-bwm-restriction-and-count.feature`, pass with the neighbours, 2 of 2 on 2026-09-25 (not yet seen red: no mutation of the bridge was tried) |
-   | Every `@review` screenshot | Opened and read, one by one, recorded in STATUS.md; the French pass captures are still to be opened |
+   | BWM: the workbench restriction applied to a bill created from a tick, and the agreement between the widened count and what the bill displays | Automated and green: `22-bwm-restriction-and-count.feature`, pass with the neighbours, 2 of 2 on 2026-09-25, and again in the French run of 2026-09-26 (not yet seen red: no mutation of the bridge was tried) |
+   | Every `@review` screenshot | Most opened and read, recorded in `STATUS.md`. Still owed: the French pass captures (`fr1`, `fr3`), the gallery images once `88b3` and `8240` come back |
 
-   An entry not yet done is pending, not passed.
+   An entry not yet done is pending, not passed. **Condition 3 is otherwise met**; the gate is held open
+   by the build change of 2026-09-26/27 (below), not by any of these three.
+
+**The build has moved twice since the passes above ran.** `4B89FBA7...` is what conditions 2 and 3 were
+proven against. Two corrections since (No Max Bills alone, the Choose Your Recipe pending-trap) changed
+`AutoBillSync` and `BetterWorkbenchesCompat`, shipping `BA624725...`. The conditions above therefore need
+a replay on the new build before `done -> tested` can be called met again, not just a first play of what
+is new: at minimum features 04, 05, 10 and 25, since the removal path every one of them exercises is
+what changed. **Done**: `b2c7`, 2026-09-27, 13 of 13. **Still owed**: feature 26 alone (queued `8240`),
+and the wider suite (13 to 24) has not been replayed on `BA624725...` at all yet — only the four
+features the removal-path change directly touches have been. `STATUS.md` has the day-to-day state.
 
 **Two things no pass here can do**, both kept in `Tests/Pickle/README.md`: loading a save with the
 mod removed, which the mod list makes impossible from inside a run and which is the whole reason the
@@ -160,6 +184,24 @@ which git ignores; what git tracks is `docs/runs/<date>-pickle-runs.md`, one tab
 - Shrink captures to JPEG (1280 wide, quality 70; the `@review` ones full size, quality 88). 78 MB became under 3.
 - Keep a file path under 260 characters, or the conversion fails: shorten the scenario's capture name.
 - Before deleting a report, check that no `STATUS.md` field points to it; repoint it first.
+
+**What proves what, for this mod (2026-10-02).** Keep one report per row, the latest on the build in the repository; delete
+the earlier ones once the new one is read. Per row, only `summary.json`, `junit.xml`, `Player.log` and the opened captures
+(JPEG); never `report.html` or `messages.ndjson`, never a whole `screenshots/` folder.
+
+| Proof | Latest report kept | What it is the proof of |
+| --- | --- | --- |
+| Features 01-12, a pass with the optional mods, per language | `fr1-01-06`, `fr2-07-12` (French), and the English twin when played | the base loop, the marker, drift, the cap, save and reload |
+| Features 13-19 and 22, with the optional mods | `fr3-13-22` | the five bridges, the settings page, the profile window, BWM details |
+| The skip of conditional scenarios in a pass without them | `skipcheck-13-17` | `@requires` scenarios are skipped, not failed, without the optional mods |
+| The mod removed from a game saved with it | `removal-chain` (`-Then` with `-ThenWithout`) | the state avoids a GameComponent |
+| RIMMSQOL reveals and hides the shortcut | `rimmsqol-20` | the hidden shortcut, its visibility, and the same settings page |
+| No Max Bills alone | `nomaxbills-26-retry` | the ceiling above 15 without BWM |
+| Fixes of 2026-09-27 | `replay-fixes-v2` | the recipe taken off a bench and brought back, deletion semantics |
+| Workshop gallery, images 1-5 | `galerie-studio-1-4c` (images 1, 2, 4), `5b` (image 5), then the replay of image 3 | the five captures the owner judges; a green says the trip ran, not that the image is good |
+
+A failure capture is kept only if its scenario has not been replayed green yet. Converting captures needs a path under 260
+characters: a name that long lost one failure capture on 2026-10-02.
 
 **Manual tests need their own evidence**, and it is small: the date, the game and mod versions, the list of active
 mods, the language and UI scale, the `Player.log` for that session, and one line per case saying what was seen. A
@@ -232,14 +274,18 @@ a selected workbench, and *Autopilot profile* next to it.
 
 ## 1 — The mod loads and says what it found
 
-**Proves** the Harmony patches and the five detection probes. Every other scenario depends on this
-one.
+**Proves** the Harmony patches and the six detection probes. Every other scenario depends on this
+one. Automated as `01-loading.feature`, green on build `4B89FBA7...` in both English and French
+(runs 11 and, before it, the standalone run of 2026-09-21).
 
 Start the game, reach the main menu, quit. Search `Player.log` for `[Bill Autopilot]`.
 
-**One line is expected, not silence**: `Integrations: … Bill cap per workbench: 15.` Each of the four
-names is followed by `found` or `not found`, and the cap reads 125 instead of 15 when Better
-Workbench Management sees No Max Bills.
+**One line is expected, not silence**: `Integrations: … Bill cap per workbench: 15.` Each of the five
+names (Better Workbench Management, hidden recipes, Dubs Mint Menus, Nice Bill Tab, No Max Bills) is
+followed by `found` or `not found`. The cap reads 125 instead of 15 when Better Workbench Management
+sees No Max Bills, or "no limit at all" (2147483647 internally, never shown as a number since
+2026-09-26) when No Max Bills is present without Better Workbench Management — that fallback is new
+and unplayed, see scenario 26.
 
 What a failure looks like:
 
@@ -255,7 +301,7 @@ What a failure looks like:
 
 **Proves** the confirmation, its count, and the silent absorption of everything already unlocked.
 This is the one moment where a great deal of production can start in a single click, which is why it
-asks.
+asks. Automated as `02-activation.feature`, green on build `4B89FBA7...`, English and French.
 
 Select a stocked workbench, a machining table or a tailor bench. Use the *Bill autopilot* toggle.
 
@@ -270,9 +316,8 @@ Select a stocked workbench, a machining table or a tailor bench. Use the *Bill a
 
 ## 3 — The base loop, and the gap that stops it flickering
 
-**Proves** the counting through the probe bill, and the two thresholds. Confirmed once, in September;
-worth replaying because the counting path has been rewritten since to agree with Better Workbench
-Management.
+**Proves** the counting through the probe bill, and the two thresholds. Automated as
+`03-base-loop.feature`, green on build `4B89FBA7...`, English and French.
 
 With a bench on autopilot, default mode *Keep in stock*, target 50 and restart at 25:
 
@@ -287,7 +332,9 @@ With a bench on autopilot, default mode *Keep in stock*, target 50 and restart a
 ## 4 — A recipe unlocked by research
 
 **Proves** the announcement path, the suspended arrival, and the rule that nothing is spent without
-an answer. Confirmed once.
+an answer. Automated as `04-new-recipe.feature`, green on build `4B89FBA7...`, English and French.
+**Replayed green on `BA624725...`** (`b2c7`, 2026-09-27): the recipe-forgotten trap fixed 2026-09-26
+touches the same removal path this scenario exercises when a bill it put up comes down.
 
 With a bench on autopilot, finish a research project that unlocks a recipe on it.
 
@@ -302,7 +349,9 @@ With a bench on autopilot, finish a research project that unlocks a recipe on it
 
 ## 5 — Deleting an automatic bill means refusing the recipe
 
-**Proves** the hook on the deletion, which is what gives the gesture a meaning. Confirmed once.
+**Proves** the hook on the deletion, which is what gives the gesture a meaning. Automated as
+`05-delete-refuses.feature`, green on build `4B89FBA7...`, English and French. **Replayed green on
+`BA624725...`** (`b2c7`, 2026-09-27), same reason as scenario 4.
 
 Delete a running automatic bill. A message names the recipe, the autopilot stops offering it, and the
 *Configure* window shows that recipe set to *Never*.
@@ -314,7 +363,9 @@ Deleting a bill **you** placed must do none of this.
 ## 6 — The mark in the label
 
 **Proves** the postfix on `Bill_Production.LabelCap`, chosen so that every interface picks it up
-without any of them being patched. Never seen on screen.
+without any of them being patched. Automated as `06-auto-marker.feature`, green on build
+`4B89FBA7...`, English and French; the `@review` capture has been opened and read: "Make patchleather
+(auto)" beside an unmarked hand-placed bill.
 
 Automatic bills carry `(auto)` at the end of their label.
 
@@ -329,7 +380,8 @@ something other than the label, and the approach needs revisiting.
 
 ## 7 — Adjusting a bill in the tab is adjusting the profile
 
-**Proves** the drift capture. Never run.
+**Proves** the drift capture. Automated as `07-drift-capture.feature`, green on build `4B89FBA7...`,
+English and French.
 
 On a running automatic bill, change the target in the tab, from 50 to 200 say.
 
@@ -346,7 +398,8 @@ set it.
 
 ## 8 — A bill placed by hand always wins
 
-**Proves** the rule that keeps the mod out of your way.
+**Proves** the rule that keeps the mod out of your way. Automated as `08-hand-placed-wins.feature`,
+green on build `4B89FBA7...`, English and French.
 
 On an autopiloted bench, place a bill yourself for a recipe the autopilot also handles.
 
@@ -356,7 +409,8 @@ On an autopiloted bench, place a bill yourself for a recipe the autopilot also h
 ## 9 — Recipes the game cannot count
 
 **Proves** the countability test, and the separate setting that exists because *keep a stock* is
-impossible for them.
+impossible for them. Automated as `09-uncountable-recipes.feature`, green on build `4B89FBA7...`,
+English and French.
 
 Put an **electric smelter** on autopilot, or a crematorium, or an electric smithy doing surgery. A **butcher
 table is not a case for this scenario**: `RecipeWorkerCounter_ButcherAnimals.CanCountProducts` returns true and
@@ -371,7 +425,9 @@ the game counts raw meat for it. This scenario said otherwise until the first fu
 ## 10 — The cap, and room left for your own bills
 
 **Proves** the arithmetic that keeps the *Add* button alive. The game accepts 15 bills per bench and
-hides the button beyond that.
+hides the button beyond that. Automated as `10-bill-cap.feature`, green on build `4B89FBA7...`,
+English and French. **Replayed green on `BA624725...`** (`b2c7`, 2026-09-27), and its slider text has a
+new case to check since 2026-09-26, still unproven: see scenario 26.
 
 On a workbench with many recipes, with the cap at its default of 8:
 
@@ -379,12 +435,14 @@ On a workbench with many recipes, with the cap at its default of 8:
 - Place several bills yourself. The automatic ones give way: the cap counts yours against the game's
   ceiling, so the *Add* button must never disappear.
 - Raise the cap in the settings and check that the slider stops at 15, or at 125 with Better
-  Workbench Management and No Max Bills.
+  Workbench Management and No Max Bills, or at 100 with No Max Bills alone (the slider's own ceiling
+  when the game sets none — the sentence beside it reads "the game sets no limit" instead of a number).
 
 ## 11 — Two benches of the same kind, set differently
 
 **Proves** the memory keyed per workbench. It used to be keyed per workbench type, and the two were
-indistinguishable until a second bench existed.
+indistinguishable until a second bench existed. Automated as `11-per-bench-memory.feature`, green on
+build `4B89FBA7...`, English and French.
 
 Build **two** benches of the same kind, both on autopilot, and give the same recipe a different
 custom name on each, through Better Workbench Management or vanilla renaming.
@@ -398,7 +456,10 @@ to the other.
 ## 12 — Save, reload, and remove the mod
 
 **Proves** the one decision that a single session cannot check: the state is grafted into the save's
-`<game>` node instead of living in a `GameComponent`, precisely so the mod can be removed.
+`<game>` node instead of living in a `GameComponent`, precisely so the mod can be removed. The
+save-and-reload half is automated as `12-save-and-reload.feature`, green on build `4B89FBA7...`,
+English and French. **The mod-removed half is scenario 21**, its own feature and its own companion
+mod, because no single Pickle run can change its own mod list mid-run; see below.
 
 With several benches on autopilot, bills up and at least one recipe refused:
 
@@ -415,7 +476,14 @@ The middle step is the whole point of the design. If it fails, say so before any
 
 **Proves** the largest compatibility layer, and the one with no witness at all. Everything here goes
 through reflection into `ImprovedWorkbenches`, so a failure is silent by construction: the feature is
-lost, nothing crashes.
+lost, nothing crashes. Automated as `13-better-workbenches.feature` (the down-and-up cycle) plus
+`22-bwm-restriction-and-count.feature` (the workbench restriction on a bill created from a tick, and
+the agreement between the widened count and what the bill displays — the two details written before an
+interface could be read, and now covered): both green on build `4B89FBA7...`, English and French. Two
+real defects of the mod were found and fixed this way on 2026-09-25 — see `STATUS.md`, "First play of
+the optional-mod scenarios". Neither scenario has been seen red on the restriction/count details (no
+mutation of the bridge was tried), so they prove agreement today, not that they would catch a
+regression.
 
 With that mod active, on one automatic bill, set as many of these as you can:
 
@@ -442,6 +510,9 @@ Then repeat the whole scenario **without** the mod. Nothing must break and the l
 
 **Proves** that a mode the autopilot does not understand is set, kept, and asked rather than guessed
 at. Everybody Gets One is the test case; any mod adding a repeat mode should behave the same.
+Automated as `14-foreign-repeat-mode.feature`, green on build `4B89FBA7...`, English and French, after
+two rounds of scenario repair on 2026-09-25 (a bill already standing before the mode was set; the
+bench cap absorbed by unrelated recipes first) — see `STATUS.md`.
 
 With Everybody Gets One active:
 
@@ -461,22 +532,27 @@ exists must fall back to *Keep in stock*, not put up a bill with no mode at all.
 
 **Proves** the single most dangerous interaction in the mod. Nice Bill Tab keeps its own cached list
 of the bills it draws, and reorders from that list before writing back into the stack. A stale entry
-is not a cosmetic problem: dragging can put a deleted bill back.
+is not a cosmetic problem: dragging can put a deleted bill back. Automated as `15-nice-bill-tab.feature`
+for the cause (the cache flag), green on build `4B89FBA7...`, English and French; its `@review` capture
+has been opened and read. **The drag itself stays manual** (see below): it is a gesture inside another
+mod's window, where a Pickle click would land on whatever window owns the point rather than testing
+this mod.
 
 With Nice Bill Tab active, on an autopiloted bench, **keep the tab open** and let a bill come down on
 its own as its stock fills.
 
-- **The row must disappear from its list.** A row that stays is the cache not being told.
+- **The row must disappear from its list.** A row that stays is the cache not being told. Automated.
 - Then **drag** the remaining rows around. No deleted bill may reappear. This is the failure the
-  integration exists to prevent, and it has never been replayed.
+  integration exists to prevent, and the drag itself has never been played — only its cause, above.
 - With **Nice Bill Tab - Expansion**, hide a recipe on that bench: the autopilot must treat it as
-  refused and never put it up.
+  refused and never put it up. This half is scenario 19, automated and green (`17-hidden-recipes.feature`).
 
 ## 16 — Dubs Mint Menus bench templates
 
 **Proves** the postfix on `MakeBenchTemplate`. Without it a template photographs the autopilot's
 passing queue, and re-applying it later turns those recipes into hand-placed bills for good, retiring
-the autopilot from them without a word.
+the autopilot from them without a word. Automated as `16-dubs-mint-menus.feature`, green on build
+`4B89FBA7...`, English and French.
 
 With Dubs Mint Menus active, on a bench running several automatic bills, **make a bench template**.
 
@@ -487,7 +563,11 @@ With Dubs Mint Menus active, on a bench running several automatic bills, **make 
 
 ## 17 — Without any of the optional mods
 
-**Proves** that the five bridges are soft, as the mod page claims.
+**Proves** that the six bridges are soft, as the mod page claims. **No feature file of its own**: this
+is what the first pass (without the optional mods, `sans-facultatifs`) proves by construction, since
+every `@requires:` scenario is skipped rather than run in it and everything else must still be green.
+Confirmed every time that pass has run, most recently the French run of 2026-09-25 (27+20+... scenarios,
+`exitReason: passed`).
 
 Turn off Better Workbench Management, Nice Bill Tab, Nice Bill Tab - Expansion, Dubs Mint Menus,
 Everybody Gets One and Choose Your Recipe, keeping Harmony. The mod must load, the settings and profile windows must open,
@@ -497,7 +577,11 @@ the base loop must work, and the log must stay silent apart from the startup lin
 ## 18 — The profile window on a Steam Deck
 
 **Proves** the one constraint that shaped the interface: it is played with a pointer, and a text
-field would summon the virtual keyboard.
+field would summon the virtual keyboard. Automated as `19-profile-window.feature` — its own file
+number and this scenario's number have drifted apart since scenario 17 above stopped being a feature
+file; go by the `@review` tag, not the number, when in doubt. Green on build `4B89FBA7...`, English and
+French; its three captures (the grouped window, one override, the uncountable group) have been opened
+and read.
 
 Open *Autopilot profile* on a workbench with many recipes.
 
@@ -512,24 +596,48 @@ Open *Autopilot profile* on a workbench with many recipes.
 
 ## 19 — Hidden recipes from optional mods
 
-**Proves** the Nice Bill Tab - Expansion hidden-recipe bridge and the recipe list supplied by
-Choose Your Recipe. Never run during the repository audit.
+**Proves** the Nice Bill Tab - Expansion hidden-recipe bridge. Automated as `17-hidden-recipes.feature`
+(again, its file number and this scenario's number disagree), green on build `4B89FBA7...`, English and
+French, for the Nice Bill Tab - Expansion half.
+
+**The Choose Your Recipe half was revised 2026-09-26.** It was marked below as "not applicable" because
+that mod removes disabled recipes from a workbench's own list before the autopilot ever sees them, so
+nothing of this mod's seemed left to assert. Reading its code (it has no public source; decompiled from
+`1.6/Assemblies/ChooseYourRecipe.dll`) turned up a real trap that claim missed: a recipe announced —
+suspended bill, letter, "waiting for an answer" — and then taken off the bench before the player
+answered had its bill removed by the "recipe left the workbench" path, but the "waiting for an answer"
+mark was not cleared with it; once the recipe came back, the mod believed the question was still open
+with no bill to answer it, and never offered the recipe again, on any bench of that type. Fixed in code
+(`BillAutopilotState.Unannounce`, called from `AutoBillSync.Remove`) and covered generically by
+`25-recipe-taken-off-the-bench.feature` — see scenario 25 below — without needing Choose Your Recipe
+staged, since any mod that edits `ThingDef.AllRecipes` hits the same path. **Played and green** (`b2c7`,
+2026-09-27, on the current build). A pass
+that stages Choose Your Recipe itself, sets its disabled list and drives its own window is still not
+written (`BACKLOG.md`, for 1.0.1): what follows is that mod's own manual procedure, still owed.
 
 Use a disposable save with an enabled bench, a countable recipe below its restart threshold,
 and no manual bill for that recipe. Test each integration separately with its required dependencies.
 
 - With Nice Bill Tab - Expansion, hide the recipe and synchronise the bench by opening its bills
-  tab. No automatic bill for it should remain or reappear on subsequent passes.
-- Unhide it: its automatic bill should return while stock is still below the threshold.
+  tab. No automatic bill for it should remain or reappear on subsequent passes. **Automated, green.**
+- Unhide it: its automatic bill should return while stock is still below the threshold. **Automated, green.**
 - With Choose Your Recipe, disable the recipe using that mod's configuration and reload if
   required by that mod. It should be absent from the bench's available recipes and should not
-  acquire an automatic bill. Re-enable it and verify it becomes eligible again.
+  acquire an automatic bill. Re-enable it and verify it becomes eligible again — **and if a "new
+  recipe" letter was pending for it when it was disabled, check that the letter and the suspended bill
+  come back too**, rather than the recipe staying silently excluded (the 2026-09-26 trap).
 - Repeat without either integration: the recipe should follow the normal profile rules.
 
 A hidden recipe being queued is an exclusion failure; one that stays excluded after being
 restored is a stale-state failure. Preserve Player.log and the active mod list with the result.
 
 ## 20 — Hidden settings shortcut and custom quantity regression
+
+Automated as two files: `18-settings-shortcut.feature` (everything below except the RIMMSQOL steps),
+green on build `4B89FBA7...`, English and French; and `20-rimmsqol-shortcut.feature` (RIMMSQOL actually
+revealing and using the shortcut), its own pass `avec-rimmsqol`, green in English (request `dafa`, 3 of
+3, its captures opened and read). RIMMSQOL keeping its visibility choice across a restart is RIMMSQOL's
+own behaviour, shown by PickleTools' own demonstration rather than repeated here.
 
 Preconditions: RimWorld 1.6, Harmony and Bill Autopilot; a disposable save. Repeat in
 English and French. Record exact game and optional-mod versions with Player.log.
@@ -550,9 +658,62 @@ English and French. Record exact game and optional-mod versions with Player.log.
    unchanged inheritance. Remove the optional mode provider: safe Maintain fallback;
    restore it and verify the inherited mode identity was retained.
 
-Not executed in game during the implementation pass. The executable tests cover
-quantity decisions, overflow and the shortcut worker's native visibility contract;
-the XML tests cover the shipped hidden default and bilingual definition fields.
+**Points 1 and 2 are automated and green** (features 18 and 20 above). **Point 3 is automated and
+green** (feature 14 above: a custom default mode, a recipe inheriting it, a quantity change, the
+provider removed and restored). **Point 4** (ordinary Maintain quantity editing, minimum 1, restart
+threshold, fallback identity) is covered out of game by the executable tests
+(`Tests/BillAutopilot.Tests.csproj`) rather than by a Pickle scenario; the shortcut worker's native
+visibility contract and the shipped hidden default are covered by the XML tests. None of the four
+points is left wholly unexecuted, but this section's own framing as one undivided manual procedure is
+stale: read it as already split across scenarios 14, 18 and 20, plus the executable suite.
+
+## 21 — A game saved with the mod, loaded without it
+
+**Proves** the one decision no other scenario can: the mod's state lives in plain named nodes grafted
+into the save's `<game>` node rather than a `GameComponent`, precisely so removing the mod raises no
+load error. No single Pickle run can change its own mod list mid-run, so this needs two launches under
+one hold of the dispatcher's lock: `-Filter 21-removal-write -Then removal-check -ThenWithout
+nelim.billautopilot,nelim.billautopilot.pickletests`. Automated as `21-removal-write.feature` (first
+launch: writes state, saves, checks the save holds `billAutopilot...` nodes and no `Class="BillAutopilot`
+anywhere, hands the file to the companion mod) and `removal-check.feature` in the companion mod
+`Tests/Pickle/Removal/Mod` (`nelim.billautopilot.pickleremoval`, never distributed, does not depend on
+this mod; second launch: loads that save with Bill Autopilot genuinely absent from the mod list, runs
+250 ticks, keeps the bill as an ordinary one, saves and reloads). Both launches green, English, request
+`cf3a`, 2026-09-25. This closes the one manual entry `Tests/Pickle/README.md` used to keep as
+unreachable from inside a run.
+
+## 23 to 26 — the Workshop gallery, and the two 2026-09-26 corrections
+
+Four features added after the numbered scenarios above, none of them proving a new mechanic on its own:
+
+- **23 and 24 — the Workshop page's own captures**, produced by a scenario rather than by hand so they
+  can be remade after any interface change (`PUBLICATION.md`, "Screenshots, in upload order").
+  `23-gallery-vanilla.feature` (images 1 to 4, `-DepMap wsl-deps.galerie.map`: the studio and nothing
+  else, so still "without the optional mods") and `24-gallery-neighbours.feature` (image 5,
+  `-DepMap wsl-deps.galerie-voisins.map`: the neighbours plus the studio) are taken in **Nelim's Pickle
+  Tools' zen meadow studio** (fixture `nelim-zen-meadow-studio`, `PickleTools/ScreenshotStudio`, chosen by
+  the owner on 2026-09-27 after the first captures, taken in Pickle's played `test-colony`, were judged
+  unfit for a Workshop page). Each scenario works in the studio's "display" pavilion, the empty interior
+  meant for mod demonstrations: it is closed (a door and wall where it is open), roofed, so that the bench
+  does not read "outdoors", and lit by four filled standing torches; the studio leaves its roofs off on
+  purpose, and a roofed room with no light is too dark to sell anything. **The light is asserted, not left
+  to the eye**: `the cell (125, 96) is lit at least 50 percent` reads the game's own glow grid on the bench
+  cell (the game's own "lit" threshold is 30). Earlier history, for the record: the first tries of images
+  1 to 4 failed once on a mistake in the feature (a setter line that silently matched an assertion step,
+  `5d66`) and once on a region-updater re-entrancy in the room-building step (`88b3`), both fixed; the
+  studio-based version is **not yet played**. **Every accepted image still has to be opened and looked at**
+  before it becomes `Art/WorkshopScreenshots/01-`… to `05-`; a green scenario says the trip happened, not
+  that the picture shows anything worth publishing.
+- **25 — the Choose Your Recipe pending-trap, generically.** `25-recipe-taken-off-the-bench.feature`,
+  added 2026-09-26 with the correction it proves (see scenario 19 above): a recipe announced and then
+  taken off a bench's own list has its bill removed, and must be announced afresh, not silently
+  forgotten, when it returns. Edits `ThingDef.AllRecipes` the way Choose Your Recipe does, without
+  needing that mod staged, so it runs in every pass. **Played and green**, `b2c7`, 2026-09-27, 13 of 13
+  (this is the scenario that proved it).
+- **26 — No Max Bills, alone, without Better Workbench Management.** `26-no-max-bills.feature`, its own
+  pass `wsl-deps.avec-nomaxbills.map` (deliberately without BWM, so the fallback added 2026-09-26 in
+  `NoMaxBillsCompat` is the thing actually asked). **Not yet played** (queued `8240`); watch for the
+  Harmony crash in that mod's own code described under pass 2 above when reading the result.
 
 ## Native settings persistence tests — 13 September 2026
 
