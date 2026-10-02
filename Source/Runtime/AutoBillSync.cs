@@ -376,6 +376,7 @@ namespace BillAutopilot
                 SuppressDeleteCapture = false;
             }
             state.Disown(bill);
+            if (table != null && recipe != null) state.Unannounce(table.def, recipe);
             NiceBillTabCompat.NotifyBillsChanged();
         }
 

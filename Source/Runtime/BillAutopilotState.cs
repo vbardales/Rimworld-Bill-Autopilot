@@ -122,6 +122,18 @@ namespace BillAutopilot
 
         public void Accept(ThingDef bench, RecipeDef recipe) => pending.Remove(Key(bench, recipe));
 
+        /// <summary>
+        /// The suspended bill of an announced recipe was taken down by us (recipe disabled by Choose Your
+        /// Recipe, hidden, excluded, bench switched off), not answered by the player. Left as it was, the recipe
+        /// would stay "pending" with no bill to accept: no bench of that type would ever start it again. It goes
+        /// back to unseen, so it is announced afresh when it comes back.
+        /// </summary>
+        public void Unannounce(ThingDef bench, RecipeDef recipe)
+        {
+            var key = Key(bench, recipe);
+            if (pending.Remove(key)) known.Remove(key);
+        }
+
         // --- Memory of bills taken down ----------------------------------------------------------
 
         /// <summary>

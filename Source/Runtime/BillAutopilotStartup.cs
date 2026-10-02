@@ -24,6 +24,7 @@ namespace BillAutopilot
                         + Found(HiddenRecipesCompat.Available)
                         + ", Dubs Mint Menus " + Found(DubsMintMenusCompat.Active)
                         + ", Nice Bill Tab " + Found(NiceBillTabCompat.Active)
+                        + ", No Max Bills " + Found(NoMaxBillsCompat.Present)
                         + ". Bill cap per workbench: " + BetterWorkbenchesCompat.MaxBills + ".");
         }
 

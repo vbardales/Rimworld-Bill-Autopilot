@@ -63,14 +63,19 @@ namespace BillAutopilot
             listing.CheckboxLabeled("BillAutopilot.Settings.MarkBills".Translate(),
                 ref Settings.markAutomaticBills, "BillAutopilot.Settings.MarkBillsDesc".Translate());
 
-            // The game's cap: 15, or 125 when Better Workbench Management sees No Max Bills.
+            // The game's cap: 15, 125 when Better Workbench Management sees No Max Bills, or none at all with
+            // No Max Bills: Redux. Without a limit the slider spans a range that means something, and the
+            // sentence says so instead of printing 2147483647.
             int gameMax = BetterWorkbenchesCompat.MaxBills;
+            bool noLimit = BetterWorkbenchesCompat.NoLimit;
+            int sliderMax = noLimit ? BetterWorkbenchesCompat.SliderMaxWhenNoLimit : gameMax;
 
             var capRow = listing.GetRect(28f);
-            Widgets.Label(capRow.LeftPart(0.6f),
-                CountForm.Text("BillAutopilot.Settings.MaxBills", Settings.maxAutoBillsPerTable, gameMax));
+            Widgets.Label(capRow.LeftPart(0.6f), noLimit
+                ? CountForm.Text("BillAutopilot.Settings.MaxBillsFree", Settings.maxAutoBillsPerTable)
+                : CountForm.Text("BillAutopilot.Settings.MaxBills", Settings.maxAutoBillsPerTable, gameMax));
             Settings.maxAutoBillsPerTable = Mathf.RoundToInt(Widgets.HorizontalSlider(
-                capRow.RightPart(0.4f), Settings.maxAutoBillsPerTable, 1f, gameMax, middleAlignment: true));
+                capRow.RightPart(0.4f), Settings.maxAutoBillsPerTable, 1f, sliderMax, middleAlignment: true));
 
             listing.GapLine(6f);
             listing.End();

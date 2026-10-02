@@ -16,6 +16,8 @@
   <BillAutopilot.Settings.NotifyDesc>A recipe unlocked after a workbench was put on autopilot arrives as a suspended bill, so it never spends anything behind your back. This sends a letter listing them.</BillAutopilot.Settings.NotifyDesc>
   <BillAutopilot.Settings.MaxBills.One>At most 1 automatic bill per workbench (the game allows {1})</BillAutopilot.Settings.MaxBills.One>
   <BillAutopilot.Settings.MaxBills.Many>At most {0} automatic bills per workbench (the game allows {1})</BillAutopilot.Settings.MaxBills.Many>
+  <BillAutopilot.Settings.MaxBillsFree.One>At most 1 automatic bill per workbench (the game sets no limit)</BillAutopilot.Settings.MaxBillsFree.One>
+  <BillAutopilot.Settings.MaxBillsFree.Many>At most {0} automatic bills per workbench (the game sets no limit)</BillAutopilot.Settings.MaxBillsFree.Many>
   <BillAutopilot.Settings.Configure>Configure...</BillAutopilot.Settings.Configure>
   <!-- A number of recipes as a noun phrase. It goes into the sentences below as one argument, so the plural
        lives here and nowhere else: a language that says "0 recipe" or has more forms edits these three. -->

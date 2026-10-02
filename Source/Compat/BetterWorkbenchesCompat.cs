@@ -352,9 +352,11 @@ namespace BillAutopilot
         private static int cachedMaxBills = -1;
 
         /// <summary>
-        /// 15 in vanilla; 125 when BWM sees No Max Bills. Read once and kept: BWM decides this from
-        /// which mods are loaded, so it cannot change while the game runs, and the sync asks for it on
-        /// every pass over every workbench. Two reflection calls each time would be paid for nothing.
+        /// 15 in vanilla; 125 when BWM sees No Max Bills, or no limit at all (int.MaxValue) with No Max Bills:
+        /// Redux, which raises BWM's own figure. When BWM is absent or does not answer, No Max Bills alone
+        /// still lifts the limit from the interface, so it is asked about directly. Read once and kept: which
+        /// mods are loaded cannot change while the game runs, and the sync asks for it on every pass over
+        /// every workbench. Two reflection calls each time would be paid for nothing.
         /// </summary>
         public static int MaxBills
         {
@@ -363,20 +365,38 @@ namespace BillAutopilot
                 if (cachedMaxBills > 0) return cachedMaxBills;
 
                 cachedMaxBills = BillStack.MaxCount;
-                if (!Active || getMaxBills == null || mainInstance == null) return cachedMaxBills;
+                bool answered = false;
 
-                try
+                if (Active && getMaxBills != null && mainInstance != null)
                 {
-                    var main = mainInstance.GetValue(null);
-                    if (main != null) cachedMaxBills = (int)getMaxBills.Invoke(main, null);
+                    try
+                    {
+                        var main = mainInstance.GetValue(null);
+                        if (main != null)
+                        {
+                            cachedMaxBills = (int)getMaxBills.Invoke(main, null);
+                            answered = true;
+                        }
+                    }
+                    catch
+                    {
+                        // Keeps the vanilla ceiling, which is never wrong, only sometimes too low.
+                    }
                 }
-                catch
-                {
-                    // Keeps the vanilla ceiling, which is never wrong, only sometimes too low.
-                }
+
+                if (!answered && NoMaxBillsCompat.Present) cachedMaxBills = int.MaxValue;
 
                 return cachedMaxBills;
             }
         }
+
+        /// <summary>
+        /// The game sets no practical limit (No Max Bills: Redux, alone or with BWM). The figure itself is then
+        /// int.MaxValue, which no page should print and no slider should span.
+        /// </summary>
+        public static bool NoLimit => MaxBills >= 100000;
+
+        /// <summary>How far the cap slider goes when the game sets no limit: far beyond any real bench.</summary>
+        public const int SliderMaxWhenNoLimit = 100;
     }
 }
