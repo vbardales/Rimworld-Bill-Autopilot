@@ -4,19 +4,19 @@ What the Workshop page asks for and the repository holds nowhere else. Written b
 and kept for whoever picks this mod up later.
 
 **The item exists, private, and only the item.** The maintainer created it on 2026-09-23 as 0.1.0, id
-**3806709456**, and `About/PublishedFileId.txt` is committed. That upload was the creation, so
-`SetItemDescription` ran once and **the description is now frozen**: it was the one committed in
-`1842dec`, with the credit line, and any change to it is made by hand on the Steam page, never from
-`About.xml`. The mod is at `done` in the workflow: the in-game gate of `done -> tested` has not been
-passed, so no functional release is due yet, and the item stays private until it is.
+**3806709456**, and `About/PublishedFileId.txt` is committed. That upload was the creation, so the game sent
+the description once, the one committed in `1842dec`. **From 1.0.0 the description is sent by the CI**, from
+the single Markdown source under `## Steam description` below (decision of 2026-09-25), which also generates the
+`<description>` of `About.xml`. The item stays private until Virginie switches it to public by hand.
 
 ## The one-way parts
 
 Three things do not get a second chance, and two of them are silent when they go wrong.
 
 - **The description.** `Verse.Steam.Workshop.SetWorkshopItemDataFrom` calls `SetItemDescription` only when
-  `creating` is true. Every later update leaves the page's text alone, so a correction after the first upload
-  is made by hand on Steam and never from `About.xml`. Read it once more in the file before clicking.
+  `creating` is true, so the game's own upload never corrects it. The CI does: a `publish` with
+  `update_description` **overwrites the page** with the block below. Compare the text the dry-run prints with
+  this block before approving, not the hash.
 - **The packageId.** `nelim.billautopilot`. It is written into every subscriber's `ModsConfig.xml` and into
   other mods' `loadAfter`. Changing it after publication disables the mod for everyone.
 - **`About/PublishedFileId.txt`.** Steam writes it into the mod folder at creation. **Commit it immediately.**
@@ -94,113 +94,170 @@ beyond its own interface strings, and touches no body, health or social system.
 ## Messages to post, one per recipient
 
 Written for the nine recipients this mod reaches: the six it works beside, and three that only the test pass
-mounts (No Max Bills, and the two libraries Everybody Gets One needs). **Posted after the item is public**: a
-link to a private item opens for nobody. Before posting any of them, look the recipient's Workshop ID up in
-`WORKSHOP_COMMENTS.md` at the root of the collection: the register decides, and every row here is `drafted`
-there. One per recipient and personalised, since the same text pasted nine times is visible from orbit. Each
-block is BBCode ready to copy, one line per paragraph so that no hard wrap reaches Steam, under the limit of
-1000 characters. Pasting a bare Workshop URL makes a thumbnail, so the link to this mod goes on its own line.
+mounts (No Max Bills, and the two libraries Everybody Gets One needs). They follow the method of
+`WORKSHOP_COMMENTS.md` ("Writing a comment", 2026-09-26): the owner's own plain voice, one true detail of the
+recipient's mod, one thanks, 150 to 350 characters, one link to this mod hidden behind `[url=]`, never a bare
+URL. **Posted after the item is public**: a link to a private item opens for nobody. Before posting any of
+them, look the recipient's Workshop ID up in the register (every row is `drafted`), read the last comments of
+the page, and put the drafts side by side: no shared opening, ending or joke. At most three a day and not in a
+row; wait for an author's reaction before the next batch. Each block is BBCode ready to copy, one line, under
+the limit of 1000 characters. Only what was played in the game is said to be tested: the Choose Your Recipe
+draft says plainly that it was read, not run.
 
 ### Better Workbench Management (`falconne.BWM`, 935982361)
 
 ```text
-I have published a mod that puts a workbench type on autopilot: it raises a bill when there is work and takes it down when the stock is full. That cycle is brutal for your extended bill data, since you clear it on BillStack.Delete, so the mod reads it before every removal and puts it back on the bill it creates: the custom name, counting away from the home map, the extra product filter, and membership of a linked set, which it rejoins rather than starting a new group. It also applies your workbench restriction to bills it creates from a tick, which your own hook cannot do since it reads the selected bench, and it uses your wider counting rules to decide whether a stock is full. Thank you for a mod that has been the reference for bill management for years 💛
-
-https://steamcommunity.com/sharedfiles/filedetails/?id=3806709456
+Your extended bill data was the tricky part of my [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3806709456]Bill Autopilot[/url]: it takes bills down and puts them back, and BWM wipes its data when a bill is deleted, so I copy the name, the linked set and the rest first and restore them after. Works in my tests. Thanks for the mod :)
 ```
 
 ### Dubs Mint Menus (`dubwise.dubsmintmenus`, 1446523594)
 
 ```text
-I have published a mod that keeps a workbench's bills up to date on its own, and it needed care around your bench templates. Making one photographs every bill on the bench, so a template taken from an autopiloted bench would have captured whatever the autopilot had up at that moment, and re-applying it later would have turned those recipes into hand-placed bills for good, retiring the autopilot from them without a word. The mod now removes its own bills from a template as it is made, and says how many it left out. Applying a template needs nothing: the bills it places read as placed by hand, which is exactly right. Thank you for the menus, and for keeping them out of the tab's way ✨
-
-https://steamcommunity.com/sharedfiles/filedetails/?id=3806709456
+Your bench templates made me stop and think: they photograph every bill on the bench, so a template made on a bench run by my [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3806709456]Bill Autopilot[/url] would keep whatever it had queued that minute. It now leaves its own bills out, tested in game. Thanks for the menus xD
 ```
 
 ### Nice Bill Tab (`Andromeda.NiceBillTab`, 3520130671)
 
 ```text
-I have published a mod that puts bills up and takes them down on its own, which is exactly the case your cached row list does not expect: a bill can disappear while your tab is open. So the mod sets your refresh flag every time it changes a stack. Without it your list would go on drawing a bill that no longer exists, and dragging the rows could put the deleted one back, which is the single most dangerous interaction I found while writing this. Thank you for a tab that is genuinely nicer than the vanilla one 😊 The mod marks its own bills in their label rather than patching any tab, so yours picks the mark up for free.
-
-https://steamcommunity.com/sharedfiles/filedetails/?id=3806709456
+My [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3806709456]Bill Autopilot[/url] adds and removes bills on its own, and a cached row list has to be told when that happens, so I set your refresh flag every time. Checked in game with your tab open, no ghost rows. Thanks for the tab
 ```
 
 ### Nice Bill Tab - Expansion (`HICON.NiceBillTabExpansion`, 3721023311)
 
 ```text
-I have published a mod that takes charge of a workbench's bills, and your hidden recipes turned out to be exactly the right signal for it: hiding a recipe on a bench says you do not want it there, so the mod treats it as excluded and never raises a bill for it. Unhide it and it comes back on the next pass. It reads your store through IsHidden and nothing else, so the worst case if it ever moves is a lost feature rather than a broken game. Thank you for the expansion ✨
-
-https://steamcommunity.com/sharedfiles/filedetails/?id=3806709456
+Your hidden recipes turned out to be a handy signal: hide one on a bench and my [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3806709456]Bill Autopilot[/url] reads it as "not wanted here" and never puts a bill up for it. Unhide it and it comes back on the next pass. Tested in game, thank you ✨
 ```
 
 ### Everybody Gets One (`Memegoddess.EverybodyGetsOne`, 3530806680)
 
 ```text
-I have published a mod that maintains bills on a workbench by itself, and yours is the reason it never tries to understand a repeat mode it does not own. A bill set to one of your modes keeps it across the mod's own remove-and-replace cycle, it can be chosen as the default for a whole bench, and when the mod needs to know whether there is work to do under one of them it asks your mode rather than comparing thresholds that mean nothing in your terms. Any mod that adds a repeat mode gets the same treatment; yours is what showed me it had to work that way. Thank you 💛
-
-https://steamcommunity.com/sharedfiles/filedetails/?id=3806709456
+Your repeat modes are why my [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3806709456]Bill Autopilot[/url] leaves any mode it doesn't own alone: a bill set to one of yours keeps it when I take it down and put it back, and I ask your mode whether there is work instead of comparing numbers. Tested in game. Thank you!
 ```
 
 ### Choose Your Recipe (`zal.chooseyourrecipe`, 3263007587)
 
 ```text
-I have published a mod that puts a workbench type on autopilot and takes every recipe it can do, which makes yours a natural fit, and pleasantly so: nothing had to be written. You remove disabled recipes from the workbench itself, so the autopilot simply never sees them and follows your choice without knowing it is doing so. That is the best kind of compatibility. Thank you for it 😊
-
-https://steamcommunity.com/sharedfiles/filedetails/?id=3806709456
+Yours needed no code from me, which is the best kind: you remove disabled recipes from the bench itself, so my [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3806709456]Bill Autopilot[/url] never sees them. That is from reading your mod, I haven't run it in game yet. Thanks :)
 ```
 
 ### No Max Bills: Redux (`justharry.nomaxbillsredux`, 3526216885) — test pass only
 
 ```text
-I have published a mod that keeps a workbench's bills up on its own, and yours has a part in its tests 😊 You raise the per-bench bill ceiling that Better Workbench Management reports, and the mod's cap reads that number live instead of assuming 15, so a game with No Max Bills gets a cap that can actually reach it. One whole test pass runs with yours mounted, just to watch the ceiling go from 15 to 125 and everything keep behaving. It is not a dependency of mine. Thank you for lifting a limit the game never needed ✨
-
-https://steamcommunity.com/sharedfiles/filedetails/?id=3806709456
+One of my test passes runs with your Redux on, to see how my [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3806709456]Bill Autopilot[/url] copes when the 15-bill limit is gone (with BWM it reads as no limit at all). It copes. Thanks for bringing the mod back.
 ```
 
 ### TD Find Lib (`Memegoddess.TDFindLib`, 3529443295) — test pass only
 
 ```text
-I have published a mod that puts workbenches on autopilot, and it is tested beside Everybody Gets One, which is how I ended up leaning on your library without writing a line for it 😊 My first run mounted that mod without you, its assembly loaded half a class, and a repeat mode threw from the middle of a tick: a very concrete lesson in how much quietly rests on TD Find Lib. It is only mounted for testing and is never a dependency of mine. Thank you for the plumbing so many mods stand on 💛
-
-https://steamcommunity.com/sharedfiles/filedetails/?id=3806709456
+I found out how much Everybody Gets One leans on you the hard way: my first test run loaded it without TD Find Lib and a repeat mode threw in the middle of a tick, lol. It is mounted now for my [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3806709456]Bill Autopilot[/url] tests only. Thanks for the plumbing
 ```
 
 ### TDS Bug Fixes (`Memegoddess.TDSBugFixes`, 3529433984) — test pass only
 
 ```text
-I have published a mod that puts workbenches on autopilot, and its test pass mounts Everybody Gets One, which needs TD Find Lib, which needs you 😊 So TDS Bug Fixes is loaded, quietly, in every one of those runs. It is for testing only and never a dependency of mine, but I wanted the chain thanked all the way to the bottom. Thank you for fixing what the game would not ✨
-
-https://steamcommunity.com/sharedfiles/filedetails/?id=3806709456
+You sit at the bottom of a chain in my tests: Everybody Gets One needs TD Find Lib, which needs TDS Bug Fixes, so you get loaded in every [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3806709456]Bill Autopilot[/url] run. Not a dependency of mine, just a thank-you for fixing what the game wouldn't :)
 ```
 
 Andreas Pardeike (Harmony), Pickle and RimLogging are thanked in the description, and their registry rows are
 already `posted` by other mods of the collection, so this mod is added to their `Covers` and nothing is posted.
 Claude Code (Anthropic) is named under `AI-GENERATED` in the description and is not repeated in the thanks.
 
-## Steam release notes
+## Steam description
 
-They are written in a tab of the upload form that nothing asks for until the form is open, which makes them
-the easiest thing to forget. Unlike the description they can be corrected afterwards and they start again at
-every update — which is no reason to arrive without one, since a first upload with no notes leaves a page
-silent about what it contains.
+The single source (Virginie, 2026-09-25): Markdown, written once. The CI converts it to Steam BBCode and
+generates the plain-text `<description>` of `Mod/About/About.xml` from it (`node
+.github/scripts/sync-about-description.mjs --write`); every run stops if the two differ. No code fence inside
+the block. The last line is the `Source code on GitHub` link.
 
-For 1.0.0, from `CHANGELOG.md`:
+```markdown
+Say once what a workbench is for, and stop rewriting its bill list.
 
-> First release.
->
-> Put a workbench type on autopilot and it takes every recipe it can do: a bill goes up when there is work and
-> comes down once the shelf is full, so the tab shows what is left to make rather than a wall of
-> configuration. A recipe unlocked later arrives suspended, with a letter naming it — unsuspend to accept,
-> delete to refuse for good.
->
-> Per workbench type, with a default of "keep N in stock" or "always", a separate setting for recipes the game
-> cannot count, and a per-recipe override that is also recorded when you adjust an automatic bill in the tab.
-> A cap keeps room for bills of your own.
->
-> Works with Better Workbench Management, Dubs Mint Menus, Nice Bill Tab and its Expansion, Everybody Gets One
-> and Choose Your Recipe. None required. Interface in English and French, reachable with a pointer alone.
->
-> Can be added to a game in progress and taken back out of one.
+Put a workbench type on autopilot and it takes every recipe it can do. A bill goes up when there is work to do, and comes down once the shelf is full, so the tab shows what is left to make, not a wall of configuration you have to scroll past.
+
+## When a recipe is unlocked
+
+The point of the mod. Finish the research, and the recipe joins its workbench on its own, as a suspended bill plus a letter naming it. Unsuspend it to accept, delete it to refuse, and the autopilot will not offer it again. Nothing is ever spent behind your back.
+
+## What you set
+
+- Per workbench type, so a bench you build later is already configured.
+- A default for every recipe: keep a stock of N, or always.
+- Or a repeat mode from another mod, when one is installed: "one per colonist" and the like can be set as the default for a whole bench.
+- Smelting a weapon, cremation, surgery and anything else the game cannot count get their own setting, since "keep N in stock" is impossible for them.
+- Any recipe can override the default, or be left out entirely.
+- A cap on how many automatic bills may stand on one bench at a time, so there is always room for bills of your own.
+
+The recipe list is grouped by product category, each group collapsible, with a filter for the ones you have overridden. No search field: every control is meant to be reachable with a pointer alone.
+
+Switching a workbench type on asks first, naming how many recipes it is about to take and at what target: the one moment where a lot of production can start at once. Switching it back on later does not ask again.
+
+Bills the autopilot put up are marked in their label, so you can tell them from the ones you placed yourself. That matters, because deleting an automatic bill is what excludes its recipe.
+
+Change a bill's target in the bills tab and the autopilot keeps it: adjusting the bill IS adjusting the profile.
+
+## Why not "do 1 time"
+
+A standing order that says "make one" would be remade the moment it finished, forever. "Keep 1 in stock" gives you what people usually want from it, and stops on its own.
+
+## Works with
+
+Nothing is replaced in the bills tab, so mods that redraw it keep working. Bills placed by hand always win over the autopilot: put one up yourself and it steps aside for that recipe.
+
+Detected automatically, none required; the settings screen names the ones it found. Every call into a neighbour is wrapped, so the worst case is a lost feature, never a broken game.
+
+- [Better Workbench Management](https://steamcommunity.com/sharedfiles/filedetails/?id=935982361): what it adds to a bill survives the autopilot taking that bill down and putting it back up (custom name, counting away from the home map, extra products counted toward the target, and membership of a linked bill set, which is rejoined rather than lost). Its workbench restriction is applied to bills the autopilot creates, which its own hook cannot do since that hook reads the selected workbench. Its wider counting rules are used when deciding whether a stock is full, so the threshold and the bill's own display agree. Its raised bill ceiling is honoured too, when [No Max Bills](https://steamcommunity.com/sharedfiles/filedetails/?id=3526216885) is present.
+- [Everybody Gets One](https://steamcommunity.com/sharedfiles/filedetails/?id=3530806680): a bill set to one of its repeat modes keeps it. The autopilot never flattens a repeat mode it does not own, and asks the mod that owns it whether there is work to do, instead of guessing at thresholds that are not its own. Any other mod adding a repeat mode gets the same treatment.
+- [Nice Bill Tab](https://steamcommunity.com/sharedfiles/filedetails/?id=3520130671): it redraws the whole tab and keeps its own cached list of the bills it shows. That list is told to rebuild whenever the autopilot puts a bill up or takes one down, without which it would go on drawing bills that no longer exist, and dragging one could bring a deleted bill back.
+- [Nice Bill Tab - Expansion](https://steamcommunity.com/sharedfiles/filedetails/?id=3721023311): a recipe you hide on a workbench is treated as one you do not want, and the autopilot leaves it alone.
+- [Dubs Mint Menus](https://steamcommunity.com/sharedfiles/filedetails/?id=1446523594): its bill menu leaves the tab alone, so nothing collides. Its bench templates do need care: making one photographs every bill on the bench, so a template taken from an autopiloted bench would capture whatever the autopilot had up at that moment, and re-applying it later would turn those recipes into hand-placed bills for good. Autopilot bills are kept out of the template. Applying one needs nothing: the bills it places read as placed by hand, which is exactly right.
+- [Choose Your Recipe](https://steamcommunity.com/sharedfiles/filedetails/?id=3263007587): nothing needed. It removes disabled recipes from the workbench itself, so the autopilot never sees them.
+
+Can be added to a game in progress, and taken back out of one. Nothing it stores is written to your save as a class of its own, so removing it raises no load error the way a mod with its own game component does; the bills it had put up simply stay behind as ordinary bills, yours to keep or delete.
+
+Interface in English and French. Every control is reachable with a pointer, no keyboard needed, with the Steam Deck in mind.
+
+## If I go quiet
+
+If I do not answer within a reasonable time after being contacted, anyone may freely update this or any other of my mods, including publishing a continuation of it. All credit must be preserved.
+
+## AI-generated
+
+This mod's code was written with Claude Code (Anthropic), under human direction, review and testing. Stated openly: designing with these tools is my job.
+
+## Thanks
+
+Andreas Pardeike for [Harmony](https://steamcommunity.com/sharedfiles/filedetails/?id=2009463077).
+
+The authors of the mods this one works beside, against whose interfaces it was written and with which it was tested: Falconne for Better Workbench Management, Andromeda for Nice Bill Tab, HICON for its Expansion, Dubwise for Dubs Mint Menus, Uuugggg for Everybody Gets One, Zaljerem for Choose Your Recipe and Just Harry for No Max Bills. Uuugggg again for [TD Find Lib](https://steamcommunity.com/sharedfiles/filedetails/?id=3529443295) and [TDS Bug Fixes](https://steamcommunity.com/sharedfiles/filedetails/?id=3529433984), which Everybody Gets One needs and which the test pass mounts for that reason only.
+
+Used for development and testing only, never a dependency of this mod: [Pickle](https://steamcommunity.com/sharedfiles/filedetails/?id=3791648678) and [RimLogging](https://steamcommunity.com/sharedfiles/filedetails/?id=3733484696).
+
+Credits, and the rights they rest on, are in ATTRIBUTION.md in the repository. This mod is MIT licensed and the notice ships with it.
+
+[Source code on GitHub](https://github.com/vbardales/Rimworld-Bill-Autopilot)
+```
+
+## Steam change notes
+
+One `### <version>` fenced block per version, sent as written (BBCode, under 8000 bytes). **The first line
+carries the exact version**, or the run stops. Unlike the description these can be corrected afterwards, and
+they start again at every update.
+
+### 1.0.0
+
+```text
+[b]1.0.0[/b]
+
+First release.
+
+Put a workbench type on autopilot and it takes every recipe it can do: a bill goes up when there is work and comes down once the shelf is full, so the tab shows what is left to make rather than a wall of configuration. A recipe unlocked later arrives suspended, with a letter naming it: unsuspend to accept, delete to refuse for good.
+
+Per workbench type, with a default of "keep N in stock" or "always", a separate setting for recipes the game cannot count, and a per-recipe override that is also recorded when you adjust an automatic bill in the tab. A cap keeps room for bills of your own.
+
+Works with Better Workbench Management, Dubs Mint Menus, Nice Bill Tab and its Expansion, Everybody Gets One and Choose Your Recipe. None required. Interface in English and French, reachable with a pointer alone.
+
+Can be added to a game in progress and taken back out of one.
+```
 
 ## Right after the upload, in this order
 
@@ -210,16 +267,10 @@ For 1.0.0, from `CHANGELOG.md`:
 4. Post the six messages above. Their links already carry the item id.
 5. ~~Write the Workshop id into `STATUS.md` under `workshop:`.~~ Done.
 
-## The Steam description needs one edit by hand
+## What the first CI publish changes on the page
 
-`SetItemDescription` ran once, at creation, so the page still carries the wording of 2026-09-23. On
-2026-09-24 `About.xml` was corrected: **butchering is not an uncountable recipe** (the game counts raw meat for
-it). On the Steam page, edit the "WHAT YOU SET" list item that says:
-
-> Butchering, smelting, cremation and anything else the game cannot count get their own setting, since "keep N in stock" is impossible for them.
-
-so that it reads:
-
-> Smelting a weapon, cremation, surgery and anything else the game cannot count get their own setting, since "keep N in stock" is impossible for them.
-
-Nothing else on the page changes. This is the only known divergence between the page and `About.xml`.
+The page still carries the wording of 2026-09-23. The block above differs from it in one place: **butchering is
+not an uncountable recipe** (the game counts raw meat for it), so the "What you set" item now starts with
+"Smelting a weapon, cremation, surgery". Everything else reads the same. The publish is done with
+`update_description` (and `update_preview` if the header image is to be resent) at both the dry-run and the
+`publish`; the gallery of `Art/WorkshopScreenshots/` stays a manual upload.

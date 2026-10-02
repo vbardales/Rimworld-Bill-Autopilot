@@ -31,3 +31,6 @@ desktop.ini
 # Run evidence stays on disk only: reports, logs and captures weigh tens of megabytes.
 # What is tracked is the text summary beside it, docs/runs/*.md.
 docs/runs/evidence/
+
+# Reproducible Preview diagnostics generated locally by the shared renderer.
+Art/.render/
