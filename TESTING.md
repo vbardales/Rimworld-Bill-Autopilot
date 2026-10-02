@@ -88,8 +88,8 @@ manual. The numbered scenarios below are what the features were written from.
 
    **A fifth set, for No Max Bills alone:** `wsl-deps.avec-nomaxbills.map` mounts only No Max Bills: Redux,
    deliberately without Better Workbench Management, so that `26-no-max-bills.feature` exercises the
-   fallback path added 2026-09-26 (`NoMaxBillsCompat`, asked only when BWM does not answer). Queued,
-   not yet played, as `8240`. Watch for the Harmony crash logged as `[ERROR] Error while instantiating a
+   fallback path added 2026-09-26 (`NoMaxBillsCompat`, asked only when BWM does not answer). Played and green
+   2026-09-27, `8240`, 2 of 2. The Harmony crash logged as `[ERROR] Error while instantiating a
    mod of type NoMaxBillsRedux.NoMaxBillsReduxMod` when reading its result (`STATUS.md`, 2026-09-27): the
    game survives it, but whether the mod's *other* patch — the one that actually lifts the interface's
    15-bill limit — ran before or after the one that throws is unknown until this pass has a real result.
@@ -123,7 +123,7 @@ played against features discovered):
    the removal pass). **Met on build `4B89FBA7...`**: the pass with the optional mods ran every one of
    them (English, request `479c`, then the French run `7018`), after repairing features 13, 14 and 15
    (two defects of the mod, and errors of the scenarios) on 2026-09-25. Feature 26, new on
-   2026-09-26, has never run — its own isolated pass is queued as `8240`.
+   2026-09-26, ran green on 2026-09-27 (`8240`, 2 of 2), in its own isolated pass.
 3. **No manual test is left to validate.** `AUDIT.md`: what used to be ticked by hand is either
    automated and green, or listed as not applicable with its reason. The former manual list of
    `Tests/Pickle/README.md` stands as follows (2026-09-27):
@@ -701,7 +701,7 @@ Four features added after the numbered scenarios above, none of them proving a n
   cell (the game's own "lit" threshold is 30). Earlier history, for the record: the first tries of images
   1 to 4 failed once on a mistake in the feature (a setter line that silently matched an assertion step,
   `5d66`) and once on a region-updater re-entrancy in the room-building step (`88b3`), both fixed; the
-  studio-based version is **not yet played**. **Every accepted image still has to be opened and looked at**
+  studio-based version ran on 2026-10-02 (`a496`: images 1, 2 and 4 green, image 3 red on a test-isolation bug since fixed; images 1 and 3 replayed in queued requests `31ca` and `e8a5`). **Every accepted image still has to be opened and looked at**
   before it becomes `Art/WorkshopScreenshots/01-`… to `05-`; a green scenario says the trip happened, not
   that the picture shows anything worth publishing.
 - **25 — the Choose Your Recipe pending-trap, generically.** `25-recipe-taken-off-the-bench.feature`,
@@ -712,8 +712,8 @@ Four features added after the numbered scenarios above, none of them proving a n
   (this is the scenario that proved it).
 - **26 — No Max Bills, alone, without Better Workbench Management.** `26-no-max-bills.feature`, its own
   pass `wsl-deps.avec-nomaxbills.map` (deliberately without BWM, so the fallback added 2026-09-26 in
-  `NoMaxBillsCompat` is the thing actually asked). **Not yet played** (queued `8240`); watch for the
-  Harmony crash in that mod's own code described under pass 2 above when reading the result.
+  `NoMaxBillsCompat` is the thing actually asked). **Played and green** (`8240`, 2026-09-27, 2 of 2); the Harmony crash
+  in that mod's own code described under pass 2 is logged on every load and does not stop its interface limit.
 
 ## Native settings persistence tests — 13 September 2026
 
