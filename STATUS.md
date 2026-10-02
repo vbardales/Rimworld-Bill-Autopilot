@@ -1,7 +1,7 @@
 ---
 localization: complete
 translation_en: complete
-translation_fr: unchecked
+translation_fr: complete
 mod:          Bill Autopilot
 packageId:    nelim.billautopilot
 repo:         Rimworld-Bill-Autopilot
@@ -25,7 +25,6 @@ remaining:
   - unverified: full pass on the current build (DLL BA624725, sources modified since the passes of 4B89FBA7): suite 01-26 without the optional mods, with them, in English and in French; only the features touched by each fix have been replayed (v2: 13/13)
   - unverified: settings_audit is partial because settings-page and profile-window UI code changed on 2026-09-24; technical tests pass (74 checks), the full final pass and the French pass are still owed
   - unverified: English and French runtime translation checks on the final build (raw keys, fallback, clipping)
-  - unverified: French review by Virginie
 session:      local_25f4fbd1-6efc-46eb-a0a6-5a9f0eb26e21
 updated:      2026-10-02, audit against AUDIT.md of 2026-09-25: stage kept at done, evidence pruned, nothing in Mod/ or Source/ touched
 ---
@@ -34,8 +33,10 @@ updated:      2026-10-02, audit against AUDIT.md of 2026-09-25: stage kept at do
 
 ## Translation audit
 
-- French review by Virginie: not started. `translation_fr` stays `partial` until she reviews;
-  no session marks its own French as reviewed or edits this line.
+- French review by the owner: **done 2026-10-02**, revision `b010196`, relayed in chat by the owner: five corrections
+  (`Settings.Integrations`, `Settings.IntegrationsDesc`, `Settings.NotifyDesc`, `Profile.UncountableDesc`,
+  `Profile.CustomFloor`) applied, report linked to that commit, no colon gender agreement required. `translation_fr`
+  is `complete`. Any later change to a French file sets it back to `unchecked`. This line is the owner's; a session does not edit it.
 - French lives in two files: `Mod/Languages/French/Keyed/BillAutopilot.xml` (68 keys) and
   `Mod/Languages/French/DefInjected/MainButtonDef/BillAutopilot.xml` (2 keys, the hidden
   RIMMSQOL settings shortcut).

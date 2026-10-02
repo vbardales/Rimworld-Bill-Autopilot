@@ -1,0 +1,17 @@
+# The Workshop page's captures 1 to 4 (23-gallery-vanilla.feature): the pass WITHOUT the optional mods, plus one thing
+# that is not a neighbour of this mod, Nelim's Pickle Tools' zen meadow studio.
+#
+# The studio is the colony the pictures are taken in, chosen by the owner on 2026-09-27: the first attempts used Pickle's own
+# `test-colony`, a played colony with a fallen monolith and debris around, which is not a picture to sell a mod with.
+# The studio (fixture `nelim-zen-meadow-studio`) is a paused photographic set built for exactly this; its "display" pavilion
+# is the empty interior the scenario closes, roofs and lights. It adds no gameplay patch, setting, main button or def, so
+# it does not change what "without the optional mods" means: Nice Bill Tab and Better Workbench Management replace or
+# extend the bills tab, and none of them is here.
+#
+# Run it with:
+#     -DepMap wsl-deps.galerie.map
+#
+# The path is relative to the collection's root, and the folder PickleTools has to be cloned beside the mods under exactly
+# that name; the folder's own About.xml packageId must equal the one written here.
+nelim.pickletools.screenshotstudio   path:PickleTools/ScreenshotStudio/Mod
+nelim.pickletools.screenshotmode     path:PickleTools/ScreenshotMode/Mod
