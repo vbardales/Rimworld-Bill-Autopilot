@@ -20,7 +20,7 @@ Feature: the capture of the Workshop page that names the neighbours it found
     And Bill Autopilot settings are at their defaults
     And I close all dialogs
     Then Bill Autopilot's integration report matches the mods this pass loaded
-    When Nelim's Pickle Tools: I am at the sanctuary "hearth-hall"
+    When Nelim's Sanctuary: I am at the sanctuary "hearth-hall"
     And Nelim's Pickle Tools: I frame the cell (181, 115) at zoom 12
     And Bill Autopilot's settings shortcut is activated
     Then a settings dialog is open for Bill Autopilot

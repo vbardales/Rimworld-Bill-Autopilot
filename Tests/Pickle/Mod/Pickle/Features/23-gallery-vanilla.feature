@@ -66,7 +66,7 @@ Feature: the captures of the Workshop page, from the pass without the optional m
     Then Bill Autopilot has 3 bills up on the "HandTailoringBench" at (181, 115)
     When I add bill "Make_Apparel_Pants" to the "HandTailoringBench" at (181, 115)
     And Bill Autopilot's gallery: the colonist "Nelim" stands at (181, 114) facing north
-    And Nelim's Pickle Tools: I am at the sanctuary "hearth-hall"
+    And Nelim's Sanctuary: I am at the sanctuary "hearth-hall"
     And Nelim's Pickle Tools: I frame the cell (181, 115) at zoom 5
     And the bills tab of the Bill Autopilot bench "HandTailoringBench" at (181, 115) is opened
     And Nelim's Pickle Tools: the letters and the alerts are cleared from the screen
@@ -104,7 +104,7 @@ Feature: the captures of the Workshop page, from the pass without the optional m
     Then the cell (181, 115) is lit at least 50 percent
     And Bill Autopilot is switched on for "HandTailoringBench"
     And Bill Autopilot overrides "Make_Patchleather" on "HandTailoringBench" to keep 200, restarting at 100
-    When Nelim's Pickle Tools: I am at the sanctuary "hearth-hall"
+    When Nelim's Sanctuary: I am at the sanctuary "hearth-hall"
     And Nelim's Pickle Tools: I frame the cell (181, 115) at zoom 5
     And Bill Autopilot's profile window for "HandTailoringBench" is opened
     And Bill Autopilot's profile window keeps open only the group of "Make_Patchleather"
@@ -142,7 +142,7 @@ Feature: the captures of the Workshop page, from the pass without the optional m
     And a "HandTailoringBench" is built at (181, 115)
     Then the cell (181, 115) is lit at least 50 percent
     And I close all dialogs
-    When Nelim's Pickle Tools: I am at the sanctuary "hearth-hall"
+    When Nelim's Sanctuary: I am at the sanctuary "hearth-hall"
     And Nelim's Pickle Tools: I frame the cell (181, 115) at zoom 5
     And Bill Autopilot's toggle is used to switch "HandTailoringBench" on
     Then Bill Autopilot asks before taking the recipes it would take on "HandTailoringBench"
@@ -187,7 +187,7 @@ Feature: the captures of the Workshop page, from the pass without the optional m
     And Bill Autopilot syncs the "FueledStove" at (181, 115)
     And I wait 120 ticks
     Then Bill Autopilot has announced "Make_Pemmican" on "FueledStove"
-    When Nelim's Pickle Tools: I am at the sanctuary "hearth-hall"
+    When Nelim's Sanctuary: I am at the sanctuary "hearth-hall"
     And Nelim's Pickle Tools: I frame the cell (181, 115) at zoom 5
     And the bills tab of the Bill Autopilot bench "FueledStove" at (181, 115) is opened
     And I take a screenshot "gallery 4: a suspended bill for a newly researched recipe, with the letter that named it"

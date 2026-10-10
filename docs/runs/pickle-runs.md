@@ -124,3 +124,4 @@ Neither is fixed by this repository (`scripts/` belongs to the monorepo):
    backspace byte, so the stall archive fails and the `Player.log` it exists to keep is lost.
 
 | 2026-10-10 | `db4e` image 3 replay, pass `galerie`, 94bbfa0 | failed, 1 scenario, 0 passed: fixture `nelim-zen-meadow-studio` not found (PickleTools ScreenshotStudio staged without content); environment, not the mod | `2026-10-10-galerie-3` |
+| 2026-10-10 | `a414` image 3 replay at the Sanctuary, pass `galerie`, 4d30105 | failed, 1 scenario: undefined step `Nelim's Pickle Tools: I am at the sanctuary` (the step is `Nelim's Sanctuary: I am at the sanctuary`); the fixture, the emptied hall and the torches ran; my feature error, not the mod | `2026-10-10-galerie-3-sanctuaire` |
