@@ -27,9 +27,10 @@ remaining:
   - unverified: settings_audit stays partial (settings page and profile window UI changed 2026-09-24): in-game checks, then English and French replay
   - unverified: English and French runtime translation checks on the final build (raw keys, fallback, clipping)
   - unverified: code review (AUDIT.md 8.m), code_review_sha absent: review 0.1.0..HEAD once the code is stable and played
+  - unverified: PUBLICATION.md checked against PUBLISHING.md on 2026-10-10 (structure, dependencies, adult boxes with the current Preview and ModIcon reopened, nine thanks drafts all in the register, description equals About.xml); the author of Choose Your Recipe ("Zaljerem") is not verified on its Workshop page, and the owner reads PUBLICATION.md and CHANGELOG.md before prepareRelease
 session:      local_af4f68d3-3ae2-45fb-852a-eed8ef2bace4
 updated:      2026-10-10, audit against AUDIT.md of 2026-10-10: playTests[1.0.0] (old done); mod root cleaned (.build to build/, _tools removed, .editorconfig moved); STATUS.md folded into docs/runs/status-history.md
-protocols_read_sha: 1405c22e11d72011390df2af5013f748f6ed374b
+protocols_read_sha: a959f76528043543b1ac9025b40dc8efcefd9e56
 ---
 
 # Bill Autopilot — status
@@ -111,8 +112,8 @@ Pickle"); the owner validates the French and English texts she has not seen and 
   (`falconne.BWM`), Nice Bill Tab (`Andromeda.NiceBillTab`) and its Expansion (`HICON.NiceBillTabExpansion`), Choose Your
   Recipe (`zal.chooseyourrecipe`), Dubs Mint Menus (`dubwise.dubsmintmenus`), Everybody Gets One (`Memegoddess.EverybodyGetsOne`).
 - No Max Bills (KiameV and Redux): found at run time by its marker type (`NoMaxBillsCompat`), so no `loadAfter` and no
-  dependency; thanked in `THANKS`, exercised by pass `avec-nomaxbills`. It is not in the "Works with" list of the
-  description (reserve for the owner's reading of `PUBLICATION.md`).
+  dependency; thanked in `THANKS`, named in the Better Workbench Management bullet of the description, exercised by
+  pass `avec-nomaxbills`.
 - RIMMSQOL: a shortcut only, tested by pass `avec-rimmsqol`, not declared.
 - DLC: Royalty, Ideology, Biotech, Anomaly, Odyssey in `loadAfter`; no `LoadFolders`, no conditional patch ships.
   `supportedVersions`: 1.6.

@@ -29,9 +29,11 @@ And one that surprises people: **Steam creates every item private.** RimWorld ne
 
 Steam shows the first one large. That slot goes to the most demonstrative image, not the prettiest.
 
-**None of these exist yet.** They are not the Preview — that is the header image, already made
-(`Mod/About/Preview.png`, 896x504). These are the page's own captures, and the intent is to produce them
-from a dedicated Pickle scenario rather than by hand, so they can be remade after any interface change.
+**State on 2026-10-10:** `Art/Gallery/` holds only `0-preview.png`, a byte copy of `Mod/About/Preview.png`
+(slot 0, the Preview itself, 896x504; the captures below follow it as `1-` to `5-`). The captures are produced by
+dedicated Pickle scenarios (`23-gallery-vanilla.feature` for 1 to 4, `24-gallery-neighbours.feature` for 5) in the zen
+studio colony, so they can be remade after any interface change. Captures of 1, 2, 4 and 5 exist in the run evidence;
+3 is being replayed. None has been opened and accepted by the owner yet, so none is in `Art/Gallery/`.
 
 | # | What it must show | Why this slot |
 | --- | --- | --- |
@@ -261,10 +263,10 @@ Can be added to a game in progress and taken back out of one.
 
 ## Right after the upload, in this order
 
-1. ~~Commit and push `Mod/About/PublishedFileId.txt`.~~ Committed (`13ac5ed`); pushing is what remains.
+1. ~~Commit and push `Mod/About/PublishedFileId.txt`.~~ Done (`13ac5ed`, pushed).
 2. Subscribe to your own item and load it, as a subscriber sees it.
 3. Switch the item to public by hand.
-4. Post the six messages above. Their links already carry the item id.
+4. Post the nine messages above (look each recipient up in the register first). Their links already carry the item id.
 5. ~~Write the Workshop id into `STATUS.md` under `workshop:`.~~ Done.
 
 ## What the first CI publish changes on the page
