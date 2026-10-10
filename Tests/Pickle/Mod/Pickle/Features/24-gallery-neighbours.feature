@@ -25,5 +25,6 @@ Feature: the capture of the Workshop page that names the neighbours it found
     And Bill Autopilot's settings shortcut is activated
     Then a settings dialog is open for Bill Autopilot
     When Nelim's Pickle Tools: the letters and the alerts are cleared from the screen
+    And Nelim's Pickle Tools: the messages are cleared from the screen
     And I take a screenshot "gallery 5: the settings page, naming the integrations it found"
     And I close all dialogs

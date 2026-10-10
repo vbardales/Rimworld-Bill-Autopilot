@@ -13,7 +13,7 @@
 #
 # SHOOTING PLAN (one line per image: place, moment, subject, composition, what it says)
 #   Place and moment, all four: the hearth hall (hearth-hall, framed on (181, 115)), midday, clear sky, game paused. The
-#     hall is emptied of its furniture and of its animals, and eight standing torches are placed and lit: it is a roofed
+#     hall is emptied of its furniture and of its animals, and four standing torches are placed and lit close around the bench: it is a roofed
 #     room, and an unlit roofed room is too dark to sell anything (GALLERY.md, "Eclairer un lieu sombre": torches,
 #     never remove the roof). The bench is built by the scenario, with recipes of its own, never borrowed from another mod.
 #   Story: a quiet tailoring workshop that runs itself while its tailor, Nelim (the only colonist of the fixture, the
@@ -40,22 +40,14 @@ Feature: the captures of the Workshop page, from the pass without the optional m
     And the Learning helper is switched off
     And Nelim's Sanctuary: the animals are removed from the sanctuary "hearth-hall"
     And Nelim's Sanctuary: the sanctuary "hearth-hall" is emptied
-    And Nelim's Pickle Tools: I place the decor "TorchLamp" at (176, 111)
-    And Nelim's Pickle Tools: the decor "TorchLamp" at (176, 111) is lit
-    And Nelim's Pickle Tools: I place the decor "TorchLamp" at (186, 111)
-    And Nelim's Pickle Tools: the decor "TorchLamp" at (186, 111) is lit
-    And Nelim's Pickle Tools: I place the decor "TorchLamp" at (176, 119)
-    And Nelim's Pickle Tools: the decor "TorchLamp" at (176, 119) is lit
-    And Nelim's Pickle Tools: I place the decor "TorchLamp" at (186, 119)
-    And Nelim's Pickle Tools: the decor "TorchLamp" at (186, 119) is lit
-    And Nelim's Pickle Tools: I place the decor "TorchLamp" at (179, 112)
-    And Nelim's Pickle Tools: the decor "TorchLamp" at (179, 112) is lit
-    And Nelim's Pickle Tools: I place the decor "TorchLamp" at (183, 112)
-    And Nelim's Pickle Tools: the decor "TorchLamp" at (183, 112) is lit
-    And Nelim's Pickle Tools: I place the decor "TorchLamp" at (179, 118)
-    And Nelim's Pickle Tools: the decor "TorchLamp" at (179, 118) is lit
-    And Nelim's Pickle Tools: I place the decor "TorchLamp" at (183, 118)
-    And Nelim's Pickle Tools: the decor "TorchLamp" at (183, 118) is lit
+    And Nelim's Pickle Tools: I place the decor "TorchLamp" at (178, 113)
+    And Nelim's Pickle Tools: the decor "TorchLamp" at (178, 113) is lit
+    And Nelim's Pickle Tools: I place the decor "TorchLamp" at (184, 113)
+    And Nelim's Pickle Tools: the decor "TorchLamp" at (184, 113) is lit
+    And Nelim's Pickle Tools: I place the decor "TorchLamp" at (178, 117)
+    And Nelim's Pickle Tools: the decor "TorchLamp" at (178, 117) is lit
+    And Nelim's Pickle Tools: I place the decor "TorchLamp" at (184, 117)
+    And Nelim's Pickle Tools: the decor "TorchLamp" at (184, 117) is lit
     And Bill Autopilot settings are at their defaults
     And a "HandTailoringBench" is built at (181, 115)
     Then the cell (181, 115) is lit at least 50 percent
@@ -70,6 +62,7 @@ Feature: the captures of the Workshop page, from the pass without the optional m
     And Nelim's Pickle Tools: I frame the cell (181, 115) at zoom 5
     And the bills tab of the Bill Autopilot bench "HandTailoringBench" at (181, 115) is opened
     And Nelim's Pickle Tools: the letters and the alerts are cleared from the screen
+    And Nelim's Pickle Tools: the messages are cleared from the screen
     And I take a screenshot "gallery 1: the bills tab, three automatic bills on a bench with many recipes"
     And I close all dialogs
     And Nelim's Pickle Tools: the decor is removed
@@ -83,32 +76,25 @@ Feature: the captures of the Workshop page, from the pass without the optional m
     And the Learning helper is switched off
     And Nelim's Sanctuary: the animals are removed from the sanctuary "hearth-hall"
     And Nelim's Sanctuary: the sanctuary "hearth-hall" is emptied
-    And Nelim's Pickle Tools: I place the decor "TorchLamp" at (176, 111)
-    And Nelim's Pickle Tools: the decor "TorchLamp" at (176, 111) is lit
-    And Nelim's Pickle Tools: I place the decor "TorchLamp" at (186, 111)
-    And Nelim's Pickle Tools: the decor "TorchLamp" at (186, 111) is lit
-    And Nelim's Pickle Tools: I place the decor "TorchLamp" at (176, 119)
-    And Nelim's Pickle Tools: the decor "TorchLamp" at (176, 119) is lit
-    And Nelim's Pickle Tools: I place the decor "TorchLamp" at (186, 119)
-    And Nelim's Pickle Tools: the decor "TorchLamp" at (186, 119) is lit
-    And Nelim's Pickle Tools: I place the decor "TorchLamp" at (179, 112)
-    And Nelim's Pickle Tools: the decor "TorchLamp" at (179, 112) is lit
-    And Nelim's Pickle Tools: I place the decor "TorchLamp" at (183, 112)
-    And Nelim's Pickle Tools: the decor "TorchLamp" at (183, 112) is lit
-    And Nelim's Pickle Tools: I place the decor "TorchLamp" at (179, 118)
-    And Nelim's Pickle Tools: the decor "TorchLamp" at (179, 118) is lit
-    And Nelim's Pickle Tools: I place the decor "TorchLamp" at (183, 118)
-    And Nelim's Pickle Tools: the decor "TorchLamp" at (183, 118) is lit
+    And Nelim's Pickle Tools: I place the decor "TorchLamp" at (178, 113)
+    And Nelim's Pickle Tools: the decor "TorchLamp" at (178, 113) is lit
+    And Nelim's Pickle Tools: I place the decor "TorchLamp" at (184, 113)
+    And Nelim's Pickle Tools: the decor "TorchLamp" at (184, 113) is lit
+    And Nelim's Pickle Tools: I place the decor "TorchLamp" at (178, 117)
+    And Nelim's Pickle Tools: the decor "TorchLamp" at (178, 117) is lit
+    And Nelim's Pickle Tools: I place the decor "TorchLamp" at (184, 117)
+    And Nelim's Pickle Tools: the decor "TorchLamp" at (184, 117) is lit
     And Bill Autopilot settings are at their defaults
     And a "HandTailoringBench" is built at (181, 115)
     Then the cell (181, 115) is lit at least 50 percent
     And Bill Autopilot is switched on for "HandTailoringBench"
     And Bill Autopilot overrides "Make_Patchleather" on "HandTailoringBench" to keep 200, restarting at 100
     When Nelim's Sanctuary: I am at the sanctuary "hearth-hall"
-    And Nelim's Pickle Tools: I frame the cell (181, 115) at zoom 5
+    And Nelim's Pickle Tools: I frame the cell (181, 115) at zoom 7
     And Bill Autopilot's profile window for "HandTailoringBench" is opened
     And Bill Autopilot's profile window keeps open only the group of "Make_Patchleather"
     And Nelim's Pickle Tools: the letters and the alerts are cleared from the screen
+    And Nelim's Pickle Tools: the messages are cleared from the screen
     And I take a screenshot "gallery 2: the profile window, one group open, an overridden recipe"
     And I close all dialogs
     And Nelim's Pickle Tools: the decor is removed
@@ -122,31 +108,24 @@ Feature: the captures of the Workshop page, from the pass without the optional m
     And the Learning helper is switched off
     And Nelim's Sanctuary: the animals are removed from the sanctuary "hearth-hall"
     And Nelim's Sanctuary: the sanctuary "hearth-hall" is emptied
-    And Nelim's Pickle Tools: I place the decor "TorchLamp" at (176, 111)
-    And Nelim's Pickle Tools: the decor "TorchLamp" at (176, 111) is lit
-    And Nelim's Pickle Tools: I place the decor "TorchLamp" at (186, 111)
-    And Nelim's Pickle Tools: the decor "TorchLamp" at (186, 111) is lit
-    And Nelim's Pickle Tools: I place the decor "TorchLamp" at (176, 119)
-    And Nelim's Pickle Tools: the decor "TorchLamp" at (176, 119) is lit
-    And Nelim's Pickle Tools: I place the decor "TorchLamp" at (186, 119)
-    And Nelim's Pickle Tools: the decor "TorchLamp" at (186, 119) is lit
-    And Nelim's Pickle Tools: I place the decor "TorchLamp" at (179, 112)
-    And Nelim's Pickle Tools: the decor "TorchLamp" at (179, 112) is lit
-    And Nelim's Pickle Tools: I place the decor "TorchLamp" at (183, 112)
-    And Nelim's Pickle Tools: the decor "TorchLamp" at (183, 112) is lit
-    And Nelim's Pickle Tools: I place the decor "TorchLamp" at (179, 118)
-    And Nelim's Pickle Tools: the decor "TorchLamp" at (179, 118) is lit
-    And Nelim's Pickle Tools: I place the decor "TorchLamp" at (183, 118)
-    And Nelim's Pickle Tools: the decor "TorchLamp" at (183, 118) is lit
+    And Nelim's Pickle Tools: I place the decor "TorchLamp" at (178, 113)
+    And Nelim's Pickle Tools: the decor "TorchLamp" at (178, 113) is lit
+    And Nelim's Pickle Tools: I place the decor "TorchLamp" at (184, 113)
+    And Nelim's Pickle Tools: the decor "TorchLamp" at (184, 113) is lit
+    And Nelim's Pickle Tools: I place the decor "TorchLamp" at (178, 117)
+    And Nelim's Pickle Tools: the decor "TorchLamp" at (178, 117) is lit
+    And Nelim's Pickle Tools: I place the decor "TorchLamp" at (184, 117)
+    And Nelim's Pickle Tools: the decor "TorchLamp" at (184, 117) is lit
     And Bill Autopilot settings are at their defaults
     And a "HandTailoringBench" is built at (181, 115)
     Then the cell (181, 115) is lit at least 50 percent
     And I close all dialogs
     When Nelim's Sanctuary: I am at the sanctuary "hearth-hall"
-    And Nelim's Pickle Tools: I frame the cell (181, 115) at zoom 5
+    And Nelim's Pickle Tools: I frame the cell (181, 115) at zoom 7
     And Bill Autopilot's toggle is used to switch "HandTailoringBench" on
     Then Bill Autopilot asks before taking the recipes it would take on "HandTailoringBench"
     When Nelim's Pickle Tools: the letters and the alerts are cleared from the screen
+    And Nelim's Pickle Tools: the messages are cleared from the screen
     And I take a screenshot "gallery 3: the confirmation naming how many recipes it is about to take"
     And the Bill Autopilot confirmation is refused
     And Nelim's Pickle Tools: the decor is removed
@@ -160,22 +139,14 @@ Feature: the captures of the Workshop page, from the pass without the optional m
     And the Learning helper is switched off
     And Nelim's Sanctuary: the animals are removed from the sanctuary "hearth-hall"
     And Nelim's Sanctuary: the sanctuary "hearth-hall" is emptied
-    And Nelim's Pickle Tools: I place the decor "TorchLamp" at (176, 111)
-    And Nelim's Pickle Tools: the decor "TorchLamp" at (176, 111) is lit
-    And Nelim's Pickle Tools: I place the decor "TorchLamp" at (186, 111)
-    And Nelim's Pickle Tools: the decor "TorchLamp" at (186, 111) is lit
-    And Nelim's Pickle Tools: I place the decor "TorchLamp" at (176, 119)
-    And Nelim's Pickle Tools: the decor "TorchLamp" at (176, 119) is lit
-    And Nelim's Pickle Tools: I place the decor "TorchLamp" at (186, 119)
-    And Nelim's Pickle Tools: the decor "TorchLamp" at (186, 119) is lit
-    And Nelim's Pickle Tools: I place the decor "TorchLamp" at (179, 112)
-    And Nelim's Pickle Tools: the decor "TorchLamp" at (179, 112) is lit
-    And Nelim's Pickle Tools: I place the decor "TorchLamp" at (183, 112)
-    And Nelim's Pickle Tools: the decor "TorchLamp" at (183, 112) is lit
-    And Nelim's Pickle Tools: I place the decor "TorchLamp" at (179, 118)
-    And Nelim's Pickle Tools: the decor "TorchLamp" at (179, 118) is lit
-    And Nelim's Pickle Tools: I place the decor "TorchLamp" at (183, 118)
-    And Nelim's Pickle Tools: the decor "TorchLamp" at (183, 118) is lit
+    And Nelim's Pickle Tools: I place the decor "TorchLamp" at (178, 113)
+    And Nelim's Pickle Tools: the decor "TorchLamp" at (178, 113) is lit
+    And Nelim's Pickle Tools: I place the decor "TorchLamp" at (184, 113)
+    And Nelim's Pickle Tools: the decor "TorchLamp" at (184, 113) is lit
+    And Nelim's Pickle Tools: I place the decor "TorchLamp" at (178, 117)
+    And Nelim's Pickle Tools: the decor "TorchLamp" at (178, 117) is lit
+    And Nelim's Pickle Tools: I place the decor "TorchLamp" at (184, 117)
+    And Nelim's Pickle Tools: the decor "TorchLamp" at (184, 117) is lit
     And Bill Autopilot settings are at their defaults
     And a "FueledStove" is built at (181, 115)
     Then the cell (181, 115) is lit at least 50 percent
@@ -190,6 +161,7 @@ Feature: the captures of the Workshop page, from the pass without the optional m
     When Nelim's Sanctuary: I am at the sanctuary "hearth-hall"
     And Nelim's Pickle Tools: I frame the cell (181, 115) at zoom 5
     And the bills tab of the Bill Autopilot bench "FueledStove" at (181, 115) is opened
+    And Nelim's Pickle Tools: the messages are cleared from the screen
     And I take a screenshot "gallery 4: a suspended bill for a newly researched recipe, with the letter that named it"
     And I close all dialogs
     And Nelim's Pickle Tools: the decor is removed
