@@ -1,12 +1,11 @@
-# The Workshop page's captures 1 to 4 (23-gallery-vanilla.feature): the pass WITHOUT the optional mods, plus one thing
-# that is not a neighbour of this mod, Nelim's Pickle Tools' zen meadow studio.
+# The Workshop page's captures 1 to 4 (23-gallery-vanilla.feature): the pass WITHOUT the optional mods, plus the tools of
+# the Sanctuary of Nelim, the colony every gallery picture is taken in (fixture Nelims-tribe, mod Nelim's Sanctuary
+# Backlot, which the staging adds by itself). The zen meadow studio this map used to mount was deleted on 2026-10-08.
 #
-# The studio is the colony the pictures are taken in, chosen by the owner on 2026-09-27: the first attempts used Pickle's own
-# `test-colony`, a played colony with a fallen monolith and debris around, which is not a picture to sell a mod with.
-# The studio (fixture `nelim-zen-meadow-studio`) is a paused photographic set built for exactly this; its "display" pavilion
-# is the empty interior the scenario closes, roofs and lights. It adds no gameplay patch, setting, main button or def, so
-# it does not change what "without the optional mods" means: Nice Bill Tab and Better Workbench Management replace or
-# extend the bills tab, and none of them is here.
+# The tools below are the ones wsl-deps.sanctuary.map of PickleTools mounts (screen studio, camera zoom, stage decor,
+# clear screen, bundled shell) plus the two this suite's steps need (screenshot mode for @requires, colonist race). None
+# of them is a neighbour of Bill Autopilot: none adds a gameplay patch, setting, main button or def, so "without the
+# optional mods" keeps its meaning.
 #
 # Run it with:
 #     -DepMap wsl-deps.galerie.map
@@ -14,5 +13,9 @@
 # The path is relative to the collection's root, and the folder PickleTools has to be cloned beside the mods under exactly
 # that name; the folder's own About.xml packageId must equal the one written here.
 nelim.pickletools.screenshotstudio   path:PickleTools/ScreenshotStudio/Mod
+nelim.pickletools.camerazoom         path:PickleTools/CameraZoom/Mod
+nelim.pickletools.stagedecor         path:PickleTools/StageDecor/Mod
+nelim.pickletools.clearscreen        path:PickleTools/ClearScreen/Mod
 nelim.pickletools.screenshotmode     path:PickleTools/ScreenshotMode/Mod
 nelim.pickletools.colonistrace       path:PickleTools/ColonistRace/Mod
+nelim.pickletools                    path:PickleTools/Tests/Pickle/StandaloneBase/Mod

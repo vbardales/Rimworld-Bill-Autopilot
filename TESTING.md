@@ -687,6 +687,7 @@ unreachable from inside a run.
 Four features added after the numbered scenarios above, none of them proving a new mechanic on its own:
 
 - **23 and 24 — the Workshop page's own captures**, produced by a scenario rather than by hand so they
+  **Update 2026-10-10: the zen meadow studio was deleted by PickleTools on 2026-10-08 (galleries are shot at the Sanctuary of Nelim, fixture `Nelims-tribe`). Features 23 and 24 and both gallery maps were rewritten the same day for the hearth hall of the Sanctuary, midday, eight lit torches, Nelim at her bench (plan in the header of `23-gallery-vanilla.feature`); the paragraph below describes the studio version and is historical. `GallerySteps.ClosePavilion` is no longer used by any scenario.**
   can be remade after any interface change (`PUBLICATION.md`, "Screenshots, in upload order").
   `23-gallery-vanilla.feature` (images 1 to 4, `-DepMap wsl-deps.galerie.map`: the studio and nothing
   else, so still "without the optional mods") and `24-gallery-neighbours.feature` (image 5,

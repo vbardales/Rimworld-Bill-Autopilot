@@ -7,105 +7,189 @@
 # what a picture shows: a green scenario says the trip happened, and each image is opened and looked at before it goes
 # into the gallery folder.
 #
-# The colony is Nelim's Pickle Tools' zen meadow studio (fixture nelim-zen-meadow-studio, chosen by the owner on
-# 2026-09-27), not Pickle's played `test-colony`. Every scene is built in its "display" pavilion, the empty interior meant
-# for mod demonstrations, which the scenario closes, roofs and lights (the studio leaves its roofs off on purpose): a bench
-# under an open sky reads "Work speed factor: 40% (outdoors)", and a roofed interior with no light is too dark to sell
-# anything. The bench is built by the scenario, with recipes of its own, and never borrowed from another mod.
-# Composition (owner, 2026-10-02): the camera is close on the bench (distance 5), the floor is the game's wood plank
-# parquet, flowering plant pots stand around the bench, image 1 carries one bill placed by hand (no mark) beside the three
-# automatic ones, and images 1 to 3 clear the letter stack and the alerts. Image 4 keeps its letter: it is the picture.
-# Image 1 has a subject (owner, 2026-10-02: a gallery picture is staged): the tailor Soleil at her bench, a teal shirt
-# against the warm parquet, chestnut hair, a slim build chosen rather than drawn. The story of the series is a quiet
-# tailoring workshop that runs itself while its tailor keeps her own hand in. Images 2 and 3 are windows and are
-# screenshots of what they are, not staged.
+# The place is the Sanctuary of Nelim (fixture Nelims-tribe, mod Nelim's Sanctuary Backlot): since 2026-10-08 galleries
+# are shot there and no longer in the zen meadow studio, which was deleted. The session stages the whole series
+# (GALLERY.md, "La session est la metteuse en scene").
+#
+# SHOOTING PLAN (one line per image: place, moment, subject, composition, what it says)
+#   Place and moment, all four: the hearth hall (hearth-hall, framed on (181, 115)), midday, clear sky, game paused. The
+#     hall is emptied of its furniture and of its animals, and eight standing torches are placed and lit: it is a roofed
+#     room, and an unlit roofed room is too dark to sell anything (GALLERY.md, "Eclairer un lieu sombre": torches,
+#     never remove the roof). The bench is built by the scenario, with recipes of its own, never borrowed from another mod.
+#   Story: a quiet tailoring workshop that runs itself while its tailor, Nelim (the only colonist of the fixture, the
+#     owner herself), keeps her own hand in.
+#   1. Nelim at her bench, close (zoom 5), the bills tab open: three marked automatic bills and one bill placed by hand
+#      (no mark) on a bench with far more recipes than that. It says: the tab shows what is left to make.
+#   2. The profile window, a screenshot of what it is (not staged): one group open, one overridden recipe in it. It
+#      says: "say it once" happens here, reachable with a pointer alone.
+#   3. The confirmation when a bench type is switched on, a window, not staged: the mod asks first and names the count.
+#   4. A stove in the same hall, its bills tab open with a suspended bill and the letter that named it, in one frame.
+#      It says: nothing is spent without an answer.
+#   Rhythm: every scenario reloads the save and sets midday again; no game time passes between images, the light stays
+#     the same on purpose (a window and a tab do not need a moving sun).
 # The shots are @review because that is what makes Pickle keep them as pictures a person has to open.
 @review @gallery @requires:nelim.pickletools.screenshotmode
 Feature: the captures of the Workshop page, from the pass without the optional mods
 
-  # Image 1. The whole pitch in one picture: the tab shows what is left to make, not a wall of configuration. Three
-  # automatic bills, each marked, on a bench that has far more recipes than that.
-  @requires:nelim.pickletools.colonistrace
+  # Image 1. The whole pitch in one picture.
   Scenario: image 1, a bills tab holding three automatic bills on a bench with many recipes
-    Given the save "nelim-zen-meadow-studio" is loaded
+    Given the save "Nelims-tribe" is loaded
     And game speed is paused
+    And I set the hour to 12
+    And I set the weather to "Clear"
     And the Learning helper is switched off
-    And the studio's display pavilion is closed, roofed and lit
+    And Nelim's Sanctuary: the animals are removed from the sanctuary "hearth-hall"
+    And Nelim's Sanctuary: the sanctuary "hearth-hall" is emptied
+    And Nelim's Pickle Tools: I place the decor "TorchLamp" at (176, 111)
+    And Nelim's Pickle Tools: the decor "TorchLamp" at (176, 111) is lit
+    And Nelim's Pickle Tools: I place the decor "TorchLamp" at (186, 111)
+    And Nelim's Pickle Tools: the decor "TorchLamp" at (186, 111) is lit
+    And Nelim's Pickle Tools: I place the decor "TorchLamp" at (176, 119)
+    And Nelim's Pickle Tools: the decor "TorchLamp" at (176, 119) is lit
+    And Nelim's Pickle Tools: I place the decor "TorchLamp" at (186, 119)
+    And Nelim's Pickle Tools: the decor "TorchLamp" at (186, 119) is lit
+    And Nelim's Pickle Tools: I place the decor "TorchLamp" at (179, 112)
+    And Nelim's Pickle Tools: the decor "TorchLamp" at (179, 112) is lit
+    And Nelim's Pickle Tools: I place the decor "TorchLamp" at (183, 112)
+    And Nelim's Pickle Tools: the decor "TorchLamp" at (183, 112) is lit
+    And Nelim's Pickle Tools: I place the decor "TorchLamp" at (179, 118)
+    And Nelim's Pickle Tools: the decor "TorchLamp" at (179, 118) is lit
+    And Nelim's Pickle Tools: I place the decor "TorchLamp" at (183, 118)
+    And Nelim's Pickle Tools: the decor "TorchLamp" at (183, 118) is lit
     And Bill Autopilot settings are at their defaults
-    And a "HandTailoringBench" is built at (125, 96)
-    Then the cell (125, 96) is lit at least 50 percent
+    And a "HandTailoringBench" is built at (181, 115)
+    Then the cell (181, 115) is lit at least 50 percent
     And Bill Autopilot allows 3 automatic bills per bench
     And Bill Autopilot keeps 50 of everything on "HandTailoringBench", restarting at 25
     And Bill Autopilot is switched on for "HandTailoringBench"
-    And Bill Autopilot syncs the "HandTailoringBench" at (125, 96)
-    Then Bill Autopilot has 3 bills up on the "HandTailoringBench" at (125, 96)
-    When I add bill "Make_Apparel_Pants" to the "HandTailoringBench" at (125, 96)
-    When Nelim's Pickle Tools: "Soleil" body type is Thin
-    And Nelim's Pickle Tools: "Soleil" hair colour is rgb (112, 66, 38)
-    And Nelim's Pickle Tools: "Soleil" wears "Apparel_BasicShirt" dyed rgb (40, 112, 122)
-    And Nelim's Pickle Tools: "Soleil" wears "Apparel_Pants" dyed rgb (70, 52, 40)
-    And Bill Autopilot's gallery: the colonist "Soleil" stands at (125, 95) facing north
-    When the camera looks at (125, 96) from a distance of 5
-    And the bills tab of the Bill Autopilot bench "HandTailoringBench" at (125, 96) is opened
+    And Bill Autopilot syncs the "HandTailoringBench" at (181, 115)
+    Then Bill Autopilot has 3 bills up on the "HandTailoringBench" at (181, 115)
+    When I add bill "Make_Apparel_Pants" to the "HandTailoringBench" at (181, 115)
+    And Bill Autopilot's gallery: the colonist "Nelim" stands at (181, 114) facing north
+    And Nelim's Pickle Tools: I am at the sanctuary "hearth-hall"
+    And Nelim's Pickle Tools: I frame the cell (181, 115) at zoom 5
+    And the bills tab of the Bill Autopilot bench "HandTailoringBench" at (181, 115) is opened
     And Nelim's Pickle Tools: the letters and the alerts are cleared from the screen
     And I take a screenshot "gallery 1: the bills tab, three automatic bills on a bench with many recipes"
     And I close all dialogs
+    And Nelim's Pickle Tools: the decor is removed
 
-  # Image 2. Where "say it once" happens: the profile window with every group collapsed but the one that holds an
-  # overridden recipe, which stands out because its numbers are its own.
+  # Image 2. Where "say it once" happens.
   Scenario: image 2, the profile window with one group open and an overridden recipe in it
-    Given the save "nelim-zen-meadow-studio" is loaded
+    Given the save "Nelims-tribe" is loaded
     And game speed is paused
+    And I set the hour to 12
+    And I set the weather to "Clear"
     And the Learning helper is switched off
-    And the studio's display pavilion is closed, roofed and lit
+    And Nelim's Sanctuary: the animals are removed from the sanctuary "hearth-hall"
+    And Nelim's Sanctuary: the sanctuary "hearth-hall" is emptied
+    And Nelim's Pickle Tools: I place the decor "TorchLamp" at (176, 111)
+    And Nelim's Pickle Tools: the decor "TorchLamp" at (176, 111) is lit
+    And Nelim's Pickle Tools: I place the decor "TorchLamp" at (186, 111)
+    And Nelim's Pickle Tools: the decor "TorchLamp" at (186, 111) is lit
+    And Nelim's Pickle Tools: I place the decor "TorchLamp" at (176, 119)
+    And Nelim's Pickle Tools: the decor "TorchLamp" at (176, 119) is lit
+    And Nelim's Pickle Tools: I place the decor "TorchLamp" at (186, 119)
+    And Nelim's Pickle Tools: the decor "TorchLamp" at (186, 119) is lit
+    And Nelim's Pickle Tools: I place the decor "TorchLamp" at (179, 112)
+    And Nelim's Pickle Tools: the decor "TorchLamp" at (179, 112) is lit
+    And Nelim's Pickle Tools: I place the decor "TorchLamp" at (183, 112)
+    And Nelim's Pickle Tools: the decor "TorchLamp" at (183, 112) is lit
+    And Nelim's Pickle Tools: I place the decor "TorchLamp" at (179, 118)
+    And Nelim's Pickle Tools: the decor "TorchLamp" at (179, 118) is lit
+    And Nelim's Pickle Tools: I place the decor "TorchLamp" at (183, 118)
+    And Nelim's Pickle Tools: the decor "TorchLamp" at (183, 118) is lit
     And Bill Autopilot settings are at their defaults
-    And a "HandTailoringBench" is built at (125, 96)
-    Then the cell (125, 96) is lit at least 50 percent
+    And a "HandTailoringBench" is built at (181, 115)
+    Then the cell (181, 115) is lit at least 50 percent
     And Bill Autopilot is switched on for "HandTailoringBench"
     And Bill Autopilot overrides "Make_Patchleather" on "HandTailoringBench" to keep 200, restarting at 100
-    When the camera looks at (125, 96) from a distance of 5
+    When Nelim's Pickle Tools: I am at the sanctuary "hearth-hall"
+    And Nelim's Pickle Tools: I frame the cell (181, 115) at zoom 5
     And Bill Autopilot's profile window for "HandTailoringBench" is opened
     And Bill Autopilot's profile window keeps open only the group of "Make_Patchleather"
     And Nelim's Pickle Tools: the letters and the alerts are cleared from the screen
     And I take a screenshot "gallery 2: the profile window, one group open, an overridden recipe"
     And I close all dialogs
+    And Nelim's Pickle Tools: the decor is removed
 
   # Image 3. The one moment a lot of production can start at once, and the mod asks first, naming its count.
   Scenario: image 3, the confirmation when a workbench type is switched on
-    Given the save "nelim-zen-meadow-studio" is loaded
+    Given the save "Nelims-tribe" is loaded
     And game speed is paused
+    And I set the hour to 12
+    And I set the weather to "Clear"
     And the Learning helper is switched off
-    And the studio's display pavilion is closed, roofed and lit
+    And Nelim's Sanctuary: the animals are removed from the sanctuary "hearth-hall"
+    And Nelim's Sanctuary: the sanctuary "hearth-hall" is emptied
+    And Nelim's Pickle Tools: I place the decor "TorchLamp" at (176, 111)
+    And Nelim's Pickle Tools: the decor "TorchLamp" at (176, 111) is lit
+    And Nelim's Pickle Tools: I place the decor "TorchLamp" at (186, 111)
+    And Nelim's Pickle Tools: the decor "TorchLamp" at (186, 111) is lit
+    And Nelim's Pickle Tools: I place the decor "TorchLamp" at (176, 119)
+    And Nelim's Pickle Tools: the decor "TorchLamp" at (176, 119) is lit
+    And Nelim's Pickle Tools: I place the decor "TorchLamp" at (186, 119)
+    And Nelim's Pickle Tools: the decor "TorchLamp" at (186, 119) is lit
+    And Nelim's Pickle Tools: I place the decor "TorchLamp" at (179, 112)
+    And Nelim's Pickle Tools: the decor "TorchLamp" at (179, 112) is lit
+    And Nelim's Pickle Tools: I place the decor "TorchLamp" at (183, 112)
+    And Nelim's Pickle Tools: the decor "TorchLamp" at (183, 112) is lit
+    And Nelim's Pickle Tools: I place the decor "TorchLamp" at (179, 118)
+    And Nelim's Pickle Tools: the decor "TorchLamp" at (179, 118) is lit
+    And Nelim's Pickle Tools: I place the decor "TorchLamp" at (183, 118)
+    And Nelim's Pickle Tools: the decor "TorchLamp" at (183, 118) is lit
     And Bill Autopilot settings are at their defaults
-    And a "HandTailoringBench" is built at (125, 96)
-    Then the cell (125, 96) is lit at least 50 percent
+    And a "HandTailoringBench" is built at (181, 115)
+    Then the cell (181, 115) is lit at least 50 percent
     And I close all dialogs
-    When the camera looks at (125, 96) from a distance of 5
+    When Nelim's Pickle Tools: I am at the sanctuary "hearth-hall"
+    And Nelim's Pickle Tools: I frame the cell (181, 115) at zoom 5
     And Bill Autopilot's toggle is used to switch "HandTailoringBench" on
     Then Bill Autopilot asks before taking the recipes it would take on "HandTailoringBench"
     When Nelim's Pickle Tools: the letters and the alerts are cleared from the screen
     And I take a screenshot "gallery 3: the confirmation naming how many recipes it is about to take"
     And the Bill Autopilot confirmation is refused
+    And Nelim's Pickle Tools: the decor is removed
 
-  # Image 4. The point of the mod: a recipe unlocked by research arrives suspended, a letter names it, and nothing is
-  # spent without an answer. The letter sits in the stack and the suspended bill in the open tab, in one frame.
+  # Image 4. The point of the mod: nothing is spent without an answer.
   Scenario: image 4, a suspended bill for a newly researched recipe, with its letter
-    Given the save "nelim-zen-meadow-studio" is loaded
+    Given the save "Nelims-tribe" is loaded
     And game speed is paused
+    And I set the hour to 12
+    And I set the weather to "Clear"
     And the Learning helper is switched off
-    And the studio's display pavilion is closed, roofed and lit
+    And Nelim's Sanctuary: the animals are removed from the sanctuary "hearth-hall"
+    And Nelim's Sanctuary: the sanctuary "hearth-hall" is emptied
+    And Nelim's Pickle Tools: I place the decor "TorchLamp" at (176, 111)
+    And Nelim's Pickle Tools: the decor "TorchLamp" at (176, 111) is lit
+    And Nelim's Pickle Tools: I place the decor "TorchLamp" at (186, 111)
+    And Nelim's Pickle Tools: the decor "TorchLamp" at (186, 111) is lit
+    And Nelim's Pickle Tools: I place the decor "TorchLamp" at (176, 119)
+    And Nelim's Pickle Tools: the decor "TorchLamp" at (176, 119) is lit
+    And Nelim's Pickle Tools: I place the decor "TorchLamp" at (186, 119)
+    And Nelim's Pickle Tools: the decor "TorchLamp" at (186, 119) is lit
+    And Nelim's Pickle Tools: I place the decor "TorchLamp" at (179, 112)
+    And Nelim's Pickle Tools: the decor "TorchLamp" at (179, 112) is lit
+    And Nelim's Pickle Tools: I place the decor "TorchLamp" at (183, 112)
+    And Nelim's Pickle Tools: the decor "TorchLamp" at (183, 112) is lit
+    And Nelim's Pickle Tools: I place the decor "TorchLamp" at (179, 118)
+    And Nelim's Pickle Tools: the decor "TorchLamp" at (179, 118) is lit
+    And Nelim's Pickle Tools: I place the decor "TorchLamp" at (183, 118)
+    And Nelim's Pickle Tools: the decor "TorchLamp" at (183, 118) is lit
     And Bill Autopilot settings are at their defaults
-    And a "FueledStove" is built at (125, 96)
-    Then the cell (125, 96) is lit at least 50 percent
+    And a "FueledStove" is built at (181, 115)
+    Then the cell (181, 115) is lit at least 50 percent
     And Bill Autopilot only takes "Make_Pemmican" on "FueledStove"
     And Bill Autopilot is switched on for "FueledStove"
-    And Bill Autopilot syncs the "FueledStove" at (125, 96)
+    And Bill Autopilot syncs the "FueledStove" at (181, 115)
     And Bill Autopilot has never met "Make_Pemmican" on "FueledStove"
     When research "Pemmican" is finished
-    And Bill Autopilot syncs the "FueledStove" at (125, 96)
+    And Bill Autopilot syncs the "FueledStove" at (181, 115)
     And I wait 120 ticks
     Then Bill Autopilot has announced "Make_Pemmican" on "FueledStove"
-    When the camera looks at (125, 96) from a distance of 5
-    And the bills tab of the Bill Autopilot bench "FueledStove" at (125, 96) is opened
+    When Nelim's Pickle Tools: I am at the sanctuary "hearth-hall"
+    And Nelim's Pickle Tools: I frame the cell (181, 115) at zoom 5
+    And the bills tab of the Bill Autopilot bench "FueledStove" at (181, 115) is opened
     And I take a screenshot "gallery 4: a suspended bill for a newly researched recipe, with the letter that named it"
     And I close all dialogs
+    And Nelim's Pickle Tools: the decor is removed

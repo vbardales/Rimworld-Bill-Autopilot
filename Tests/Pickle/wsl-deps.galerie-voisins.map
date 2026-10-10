@@ -1,6 +1,6 @@
 # The Workshop page's capture 5 (24-gallery-neighbours.feature): the settings page naming the neighbours it found, so it
 # needs the pass WITH them: exactly the mods of wsl-deps.avec-facultatifs.map (kept identical by hand; that file's own
-# comments say why each is there), plus Nelim's Pickle Tools' zen meadow studio, the colony every gallery picture is taken
+# comments say why each is there), plus the Sanctuary tools of wsl-deps.galerie.map, the colony every gallery picture is taken
 # in (see wsl-deps.galerie.map). Run it with:
 #     -DepMap wsl-deps.galerie-voisins.map
 #
@@ -15,3 +15,9 @@ Memegoddess.TDFindLib           3529443295   TD Find Library: Everybody Gets One
 Memegoddess.EverybodyGetsOne    3530806680   Everybody Gets One - Continued
 zal.chooseyourrecipe            3263007587   Choose Your Recipe (Continued)
 nelim.pickletools.screenshotstudio   path:PickleTools/ScreenshotStudio/Mod
+nelim.pickletools.camerazoom         path:PickleTools/CameraZoom/Mod
+nelim.pickletools.stagedecor         path:PickleTools/StageDecor/Mod
+nelim.pickletools.clearscreen        path:PickleTools/ClearScreen/Mod
+nelim.pickletools.screenshotmode     path:PickleTools/ScreenshotMode/Mod
+nelim.pickletools.colonistrace       path:PickleTools/ColonistRace/Mod
+nelim.pickletools                    path:PickleTools/Tests/Pickle/StandaloneBase/Mod
