@@ -35,5 +35,3 @@ docs/runs/evidence/
 # Reproducible Preview diagnostics generated locally by the shared renderer.
 Art/.render/
 
-# Image prompt, deleted once the illustration is received (STYLE_RIMWORLD.md).
-PROMPT_*.md
