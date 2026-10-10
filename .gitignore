@@ -1,7 +1,7 @@
 # Build intermediates.
 # Directory.Build.props sends them outside the published folder: they must never end up in it,
 # since the whole folder goes to the Workshop as it stands.
-.build/
+build/
 Source/obj/
 Source/bin/
 
@@ -34,3 +34,6 @@ docs/runs/evidence/
 
 # Reproducible Preview diagnostics generated locally by the shared renderer.
 Art/.render/
+
+# Image prompt, deleted once the illustration is received (STYLE_RIMWORLD.md).
+PROMPT_*.md

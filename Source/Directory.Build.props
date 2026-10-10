@@ -6,11 +6,11 @@
       Mod/ as it stands (SteamUGC.SetItemContent, no exclusion possible): an obj/ sitting there
       would ship the publicised Assembly-CSharp.dll, ~6 MB, to every subscriber.
       This must stay in a Directory.Build.props: NuGet restore reads the property before the
-      csproj. The path was ..\..\.build\ while this folder lived in the monorepo, which is one
+      csproj. The path was ..\..\build\ while this folder lived in the monorepo, which is one
       level above this repository: it now stays inside it.
     -->
-    <BaseIntermediateOutputPath>$(MSBuildThisFileDirectory)..\.build\obj\</BaseIntermediateOutputPath>
-    <BaseOutputPath>$(MSBuildThisFileDirectory)..\.build\bin\</BaseOutputPath>
+    <BaseIntermediateOutputPath>$(MSBuildThisFileDirectory)..\build\obj\</BaseIntermediateOutputPath>
+    <BaseOutputPath>$(MSBuildThisFileDirectory)..\build\bin\</BaseOutputPath>
   </PropertyGroup>
 
 </Project>

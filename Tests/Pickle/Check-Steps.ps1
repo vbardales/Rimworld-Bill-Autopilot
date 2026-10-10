@@ -143,7 +143,7 @@ foreach ($top in Get-ChildItem -LiteralPath $repo -Directory -ErrorAction Silent
     if ($top.Attributes -band [IO.FileAttributes]::ReparsePoint) { continue }
     $suiteDirs += $top.FullName
     foreach ($sub in Get-ChildItem -LiteralPath $top.FullName -Directory -ErrorAction SilentlyContinue) {
-        if ($sub.Name -in 'Tests', 'Mod', 'Source', '.git', '.build', 'Art') { continue }
+        if ($sub.Name -in 'Tests', 'Mod', 'Source', '.git', 'build', 'Art') { continue }
         if (Test-Path -LiteralPath (Join-Path $sub.FullName 'Source')) { $suiteDirs += $sub.FullName }
     }
 }

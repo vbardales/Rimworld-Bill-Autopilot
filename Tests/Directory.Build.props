@@ -6,8 +6,8 @@
       folder, and out of the way. The test project is not shipped at all, but its obj/ would still
       sit in the repository if left alone.
     -->
-    <BaseIntermediateOutputPath>$(MSBuildThisFileDirectory)..\.build\obj\tests\</BaseIntermediateOutputPath>
-    <BaseOutputPath>$(MSBuildThisFileDirectory)..\.build\bin\tests\</BaseOutputPath>
+    <BaseIntermediateOutputPath>$(MSBuildThisFileDirectory)..\build\obj\tests\</BaseIntermediateOutputPath>
+    <BaseOutputPath>$(MSBuildThisFileDirectory)..\build\bin\tests\</BaseOutputPath>
   </PropertyGroup>
 
 </Project>

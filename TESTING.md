@@ -20,7 +20,7 @@ One layer is covered by a program instead, in `Tests/`. It runs the shipped asse
 real RimWorld assemblies with no game running, and answers for itself:
 
 ```bash
-dotnet build Source/BillAutopilot.csproj -c Release && dotnet build Tests/BillAutopilot.Tests.csproj -c Release && .build/bin/tests/Release/BillAutopilot.Tests.exe
+dotnet build Source/BillAutopilot.csproj -c Release && dotnet build Tests/BillAutopilot.Tests.csproj -c Release && build/bin/tests/Release/BillAutopilot.Tests.exe
 ```
 
 Forty-four checks, and it exits non-zero when one fails. What it covers is the decision layer: given
@@ -735,7 +735,7 @@ real loadable types to GenTypes and registers the three real serialized model ty
 which the game normally discovers through its mod loader. It disables DeepProfiler,
 whose preferences are not initialized here, and uses a managed log sink that fails on
 serializer errors. No Scribe method or mod serialization method is patched or replaced.
-Generated XML fixtures are under `.build/bin/tests/Release/persistence-results/`.
+Generated XML fixtures are under `build/bin/tests/Release/persistence-results/`.
 
 This proves native file/object persistence for the settings schema. It does not test
 actual Mod.WriteSettings file selection, process restart, save-game bill memory, Unity
