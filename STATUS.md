@@ -1,6 +1,6 @@
 ---
 localization: complete
-translation_en: unchecked
+translation_en: complete
 translation_fr: complete
 mod:          Bill Autopilot
 packageId:    nelim.billautopilot
@@ -29,7 +29,7 @@ remaining:
   - unverified: code review (AUDIT.md 8.m), code_review_sha absent: review 0.1.0..HEAD once the code is stable and played
   - unverified: PUBLICATION.md checked against PUBLISHING.md on 2026-10-10 (structure, dependencies, adult boxes with the current Preview and ModIcon reopened, nine thanks drafts all in the register, description equals About.xml); the author of Choose Your Recipe ("Zaljerem") is not verified on its Workshop page, and the owner reads PUBLICATION.md and CHANGELOG.md before prepareRelease
   - unverified: writeDocs 11.b (protocols of 2026-10-10): THANKS must also name the author of every integration exercised by a test pass: RIMMSQOL (pass avec-rimmsqol) and Pickle Tools (the gallery maps now stage ScreenshotStudio, CameraZoom, StageDecor, ClearScreen, ScreenshotMode, ColonistRace; Workshop 3806142401, development only) are not in the description; look up their Workshop ids and authors on their pages, add the rows to WORKSHOP_COMMENTS.md, then the owner re-reads the changed Steam description (11.j)
-  - unverified: owner reads the two English texts added after her French review (Settings.MaxBillsFree.One and .Many, English column of FRENCH_REVIEW.md), then translation_en goes back to complete
+  - unverified: writeDocs 11.j: the Steam description changed on 2026-10-11 (the owner's two PUBLICATION.md corrections: "Newly unlocked recipes never start consuming materials without your approval." and the THANKS introduction naming Choose Your Recipe as not yet tested in game), so the owner's read of PUBLICATION.md and CHANGELOG.md is reopened before prepareRelease
 session:      local_af4f68d3-3ae2-45fb-852a-eed8ef2bace4
 updated:      2026-10-10, audit against AUDIT.md of 2026-10-10: playTests[1.0.0] (old done); mod root cleaned (.build to build/, _tools removed, .editorconfig moved); STATUS.md folded into docs/runs/status-history.md
 protocols_read_sha: a5c7cf48b349ae00e7d28fd643e852dc860dfaf2
@@ -57,7 +57,7 @@ Transitions, replayed against the current protocols:
 | `code` to `declareDependencies` | Validated: sources of `1.0.0` complete, `CHANGELOG.md` `[1.0.0] - unreleased` |
 | `declareDependencies` to `auditSettings` | Validated, see "Dependencies" |
 | `auditSettings` to `localize` | Validated at `partial`, see "Settings audit" |
-| `localize` to `writeTests` | **Defect found 2026-10-11**: two English keys (`Settings.MaxBillsFree.One` and `.Many`) were added in `edd930d` after the owner's French review of `bdfd660`; the French file did not change, but the changed English text has not been read by the owner, so `translation_en` is `unchecked` (TRANSLATIONS.md, text edit after validation). 65 Keyed keys, identical in both languages, plus 2 DefInjected keys |
+| `localize` to `writeTests` | Validated after the owner's second review of 2026-10-11 (see "Translation audit"): 65 Keyed keys identical in both languages, plus 2 DefInjected keys |
 | `writeTests` to `playTests` | Validated: automated 74 and XML 476 replayed now, green; 26 Pickle features, 82 scenarios, no `@wip`; scenarios and passes declared in `TESTING.md` |
 | `playTests` | **Open**, see `remaining` |
 
@@ -82,7 +82,8 @@ Pickle"); the owner validates the French and English texts she has not seen and 
 
 ## Translation audit
 
-- French review by the owner: **done 2026-10-02**, revision `bdfd660`, relayed in chat by the owner: five corrections
+- French and English review by the owner, second round: **done 2026-10-11**, relayed in chat by the owner: the two English texts added after the first review (`Settings.MaxBillsFree.One` and `.Many`) read correct in both languages, no pawn gender agreement anywhere; six corrections she dictated applied verbatim: `Settings.Intro` (FR), `Settings.NotifyDesc` (FR and EN), `Settings.Integrations` (EN: "Detected integrations"), `Profile.Uncountable` and `Profile.UncountableRecipe` (FR: "dénombrable"), `Confirm.BodyMaintain` (FR first line); `FRENCH_REVIEW.md` regenerated (its revision stamp reads `84b1787`, a quirk of the generator: the texts come from the working tree). `translation_en` and `translation_fr` are `complete`.
+- French review by the owner, first round: **done 2026-10-02**, revision `bdfd660`, relayed in chat by the owner: five corrections
   (`Settings.Integrations`, `Settings.IntegrationsDesc`, `Settings.NotifyDesc`, `Profile.UncountableDesc`,
   `Profile.CustomFloor`) applied, report linked to that commit, no colon gender agreement required. `translation_fr`
   is `complete`. Any later change to a French file sets it back to `unchecked`. This line is the owner's; a session does not edit it.
@@ -138,7 +139,7 @@ and 5 have captures in evidence, all taken in the deleted zen studio and so supe
 
 The 2026-10-10 audit leaned on the 2026-10-02 one for dependencies, settings and translation. Rechecked now on `8117372`:
 `Check-DefInjected.ps1` 2 keys, 0 errors; 65 Keyed keys identical in English and French, none empty; `ATTRIBUTION.md` and
-`LICENSE` identical to their `Mod/` copies; `.gitignore` carries `build/`, `*.dds` (none tracked) and `Art/.render/`;
+`LICENSE` identical to their `Mod/` copies (translation defect found then, resolved the same day by the owner's review); `.gitignore` carries `build/`, `*.dds` (none tracked) and `Art/.render/`;
 no `LoadFolders.xml` and no `Patches/` ship; no em dash left in the repository documents (removed from `PUBLICATION.md`,
 `STATUS.md`, `TESTING.md`, `BACKLOG.md`; `About.xml` had none). One defect found (translation, above). Still open and
 outside this recheck: the Art findings, the other gallery captures, the code review, the thanks owed to RIMMSQOL and

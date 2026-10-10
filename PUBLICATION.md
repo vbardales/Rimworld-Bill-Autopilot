@@ -42,7 +42,7 @@ and accepted by the owner yet, so none is in `Art/Gallery/`.
 | 2 | The profile window, groups collapsed except one, with an overridden recipe visible | Where the "say it once" happens, and the proof it is reachable with a pointer alone |
 | 3 | The confirmation dialog when a workbench type is switched on, naming its count | The one moment a lot of production can start at once, and the mod asks first |
 | 4 | A suspended bill for a newly researched recipe, with the letter that named it | The point of the mod: nothing is spent without an answer |
-| 5 | The settings page, with the "found around it" line naming the integrations detected | Answers "does it work with X" before anyone asks |
+| 5 | The settings page, with the "Detected integrations" line naming the integrations detected | Answers "does it work with X" before anyone asks |
 
 Rules for every one of them: no developer tools, no debug overlay, no other mod's overlay, no Pickle launcher
 panel in a corner, no column sitting on its prompt text. A window with nothing in it sells nothing. The scene
@@ -179,7 +179,7 @@ Put a workbench type on autopilot and it takes every recipe it can do. A bill go
 
 ## When a recipe is unlocked
 
-The point of the mod. Finish the research, and the recipe joins its workbench on its own, as a suspended bill plus a letter naming it. Unsuspend it to accept, delete it to refuse, and the autopilot will not offer it again. Nothing is ever spent behind your back.
+The point of the mod. Finish the research, and the recipe joins its workbench on its own, as a suspended bill plus a letter naming it. Unsuspend it to accept, delete it to refuse, and the autopilot will not offer it again. Newly unlocked recipes never start consuming materials without your approval.
 
 ## What you set
 
@@ -231,7 +231,7 @@ This mod's code was written with Claude Code (Anthropic), under human direction,
 
 Andreas Pardeike for [Harmony](https://steamcommunity.com/sharedfiles/filedetails/?id=2009463077).
 
-The authors of the mods this one works beside, against whose interfaces it was written and with which it was tested: Falconne for Better Workbench Management, Andromeda for Nice Bill Tab, HICON for its Expansion, Dubwise for Dubs Mint Menus, Uuugggg for Everybody Gets One, Zaljerem for Choose Your Recipe and Just Harry for No Max Bills. Uuugggg again for [TD Find Lib](https://steamcommunity.com/sharedfiles/filedetails/?id=3529443295) and [TDS Bug Fixes](https://steamcommunity.com/sharedfiles/filedetails/?id=3529433984), which Everybody Gets One needs and which the test pass mounts for that reason only.
+The authors of the companion mods whose interfaces informed this integration; Choose Your Recipe was inspected in source but has not yet been tested in game: Falconne for Better Workbench Management, Andromeda for Nice Bill Tab, HICON for its Expansion, Dubwise for Dubs Mint Menus, Uuugggg for Everybody Gets One, Zaljerem for Choose Your Recipe and Just Harry for No Max Bills. Uuugggg again for [TD Find Lib](https://steamcommunity.com/sharedfiles/filedetails/?id=3529443295) and [TDS Bug Fixes](https://steamcommunity.com/sharedfiles/filedetails/?id=3529433984), which Everybody Gets One needs and which the test pass mounts for that reason only.
 
 Used for development and testing only, never a dependency of this mod: [Pickle](https://steamcommunity.com/sharedfiles/filedetails/?id=3791648678) and [RimLogging](https://steamcommunity.com/sharedfiles/filedetails/?id=3733484696).
 

@@ -264,7 +264,7 @@ keep each untested case in `remaining`. Static completion does not prove this pa
    scenario seems to do nothing, open the tab before concluding anything.
 5. **Note which of the five optional mods are active.** Better Workbench Management, Nice Bill Tab,
    Nice Bill Tab - Expansion, Dubs Mint Menus, Everybody Gets One. The settings screen names the ones
-   it found, under *Found around it*, and that line is the fastest way to learn that a feature is
+   it found, under *Detected integrations*, and that line is the fastest way to learn that a feature is
    missing because a mod is, not because the code is wrong.
 6. **Start from a save you can throw away.** Scenario 2 begins real production immediately, by
    design.
