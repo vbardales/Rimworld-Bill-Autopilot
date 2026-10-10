@@ -28,6 +28,7 @@ remaining:
   - unverified: English and French runtime translation checks on the final build (raw keys, fallback, clipping)
   - unverified: code review (AUDIT.md 8.m), code_review_sha absent: review 0.1.0..HEAD once the code is stable and played
   - unverified: PUBLICATION.md checked against PUBLISHING.md on 2026-10-10 (structure, dependencies, adult boxes with the current Preview and ModIcon reopened, nine thanks drafts all in the register, description equals About.xml); the author of Choose Your Recipe ("Zaljerem") is not verified on its Workshop page, and the owner reads PUBLICATION.md and CHANGELOG.md before prepareRelease
+  - unverified: writeDocs 11.b (protocols of 2026-10-10): THANKS must also name the author of every integration exercised by a test pass: RIMMSQOL (pass avec-rimmsqol) and Pickle Tools (the gallery maps now stage ScreenshotStudio, CameraZoom, StageDecor, ClearScreen, ScreenshotMode, ColonistRace; Workshop 3806142401, development only) are not in the description; look up their Workshop ids and authors on their pages, add the rows to WORKSHOP_COMMENTS.md, then the owner re-reads the changed Steam description (11.j)
 session:      local_af4f68d3-3ae2-45fb-852a-eed8ef2bace4
 updated:      2026-10-10, audit against AUDIT.md of 2026-10-10: playTests[1.0.0] (old done); mod root cleaned (.build to build/, _tools removed, .editorconfig moved); STATUS.md folded into docs/runs/status-history.md
 protocols_read_sha: a959f76528043543b1ac9025b40dc8efcefd9e56
