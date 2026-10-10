@@ -122,3 +122,5 @@ Neither is fixed by this repository (`scripts/` belongs to the monorepo):
    `wsl-deps.map` gets it staged even in its minimal pass.
 2. `Run-PickleWsl.ps1:367` writes `"pickle-reports-archive\bloque-..."` where `\b` is a literal
    backspace byte, so the stall archive fails and the `Player.log` it exists to keep is lost.
+
+| 2026-10-10 | `db4e` image 3 replay, pass `galerie`, 94bbfa0 | failed, 1 scenario, 0 passed: fixture `nelim-zen-meadow-studio` not found (PickleTools ScreenshotStudio staged without content); environment, not the mod | `2026-10-10-galerie-3` |
