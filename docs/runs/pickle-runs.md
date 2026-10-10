@@ -125,3 +125,4 @@ Neither is fixed by this repository (`scripts/` belongs to the monorepo):
 
 | 2026-10-10 | `db4e` image 3 replay, pass `galerie`, 94bbfa0 | failed, 1 scenario, 0 passed: fixture `nelim-zen-meadow-studio` not found (PickleTools ScreenshotStudio staged without content); environment, not the mod | `2026-10-10-galerie-3` |
 | 2026-10-10 | `a414` image 3 replay at the Sanctuary, pass `galerie`, 4d30105 | failed, 1 scenario: undefined step `Nelim's Pickle Tools: I am at the sanctuary` (the step is `Nelim's Sanctuary: I am at the sanctuary`); the fixture, the emptied hall and the torches ran; my feature error, not the mod | `2026-10-10-galerie-3-sanctuaire` |
+| 2026-10-10 | `be07` image 3 replay at the Sanctuary, pass `galerie`, 10725e7 | passed, 1 of 1; capture opened (dialog readable, bench hidden behind it, torches dominate, a stray message top left) | `2026-10-10-galerie-3-sanctuaire-2` |
