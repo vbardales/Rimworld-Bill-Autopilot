@@ -47,12 +47,12 @@ A correction goes into 1.0.0; a check that only verifies behaviour already right
   `RaiseBillCountLimitForImprovedWorkbenches` finds its Harmony target by reflecting into `ImprovedWorkbenches.Main`
   (BWM); absent BWM, that reflection yields no method, Harmony refuses the empty `[HarmonyTargetMethods]` result
   (`Undefined target method`), and the mod's own constructor throws, logged as `[ERROR] Error while instantiating a
-  mod of type NoMaxBillsRedux.NoMaxBillsReduxMod` — present in `8240`'s log too, unchanged. **Answered by the green
+  mod of type NoMaxBillsRedux.NoMaxBillsReduxMod`: present in `8240`'s log too, unchanged. **Answered by the green
   result: `RaiseBillCountLimitForVanillaBillStackMethods` (the patch that actually lifts the game's 15-bill interface
-  limit) ran anyway** — `Harmony.PatchAll()`'s type-enumeration order happens to reach it before the one that throws,
+  limit) ran anyway**: `Harmony.PatchAll()`'s type-enumeration order happens to reach it before the one that throws,
   in this build. So No Max Bills: Redux's own interface limit works even though it logs an error on every load
-  without BWM. Worth a report to its author (`justharry.nomaxbillsredux`, Workshop 3526216885) for the error itself —
-  owner's call whether to send it — but it blocks nothing here.
+  without BWM. Worth a report to its author (`justharry.nomaxbillsredux`, Workshop 3526216885) for the error itself,
+  owner's call whether to send it: but it blocks nothing here.
   **Still to do:** the description says the raised ceiling is honoured "when No Max Bills is present" through BWM
   only; reword it now that the fallback is proven, and check that feature 10 or the settings page does not read the
   old "the game allows" sentence in a pass that has both No Max Bills and BWM.
@@ -92,7 +92,7 @@ A correction goes into 1.0.0; a check that only verifies behaviour already right
   `STATUS.md` and `docs/runs/pickle-runs.md` show most of the suite green since 2026-09-25 (French passes included).
   It also says Choose Your Recipe is "Not applicable" to test because "nothing of this mod's is left to assert",
   which the pending-trap finding above contradicts. A rewrite against the current `STATUS.md`/`pickle-runs.md` is
-  owed before `tested`, but is a separate, larger pass — not attempted here to stay in scope of the README.template
+  owed before `tested`, but is a separate, larger pass: not attempted here to stay in scope of the README.template
   check.
 
 ## Suite audit: the setter/assertion text-collision bug class (2026-09-27)
@@ -100,11 +100,11 @@ A correction goes into 1.0.0; a check that only verifies behaviour already right
 - [x] **Checked every other feature for the same defect that broke `5d66`'s image 2.** DONE: Pickle binds a step by
   its literal text, ignoring the `Given`/`When`/`Then` word written in the feature, so a line meant to *set*
   something that happens to share its exact wording with a `[Then]` assertion elsewhere silently binds to the
-  assertion and sets nothing — `Check-Steps.ps1` cannot catch this, since it only proves every line resolves to
+  assertion and sets nothing: `Check-Steps.ps1` cannot catch this, since it only proves every line resolves to
   *some* step, not the *intended* one. Read all 26 feature files against the full list of `[Then(...)]` texts across
   every step file (`ProfileSteps`, `BillSteps`, `ActivationSteps`, `StateSteps`, `LetterSteps`, `ShortcutSteps`,
   `RemovalSteps`, `BwmDetailSteps`, `IntegrationSteps`). One other line uses the exact assertion text that bit us
   (`19-profile-window.feature:42`, `Then Bill Autopilot keeps 200 of "Make_Patchleather"...`), but correctly: it
   follows a real setter (`is set to keep 200, restarting at 100`, `BillSteps.Retarget`) and a sync, asserting that
-  feature 07's drift capture wrote the override to the profile — `Then` is the right word there. No other collision
+  feature 07's drift capture wrote the override to the profile: `Then` is the right word there. No other collision
   found. Nothing to fix.

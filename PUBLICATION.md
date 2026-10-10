@@ -46,7 +46,7 @@ and accepted by the owner yet, so none is in `Art/Gallery/`.
 
 Rules for every one of them: no developer tools, no debug overlay, no other mod's overlay, no Pickle launcher
 panel in a corner, no column sitting on its prompt text. A window with nothing in it sells nothing. The scene
-is built by the scenario — a group created and filled under a readable name, never one borrowed from another
+is built by the scenario: a group created and filled under a readable name, never one borrowed from another
 mod whose raw defName shows.
 
 **Each image has to be opened and looked at before it is uploaded.** A capture scenario passing green says the
@@ -87,9 +87,9 @@ So are the two libraries that pass mounts for Everybody Gets One (TD Find Lib, T
 
 **No to all of them.** Both images were opened and looked at on 2026-09-21, not judged by their file names:
 
-- `Mod/About/Preview.png` — a title, a tagline, and an overhead workshop scene: a machining table, a lamp, a
+- `Mod/About/Preview.png`: a title, a tagline, and an overhead workshop scene: a machining table, a lamp, a
   crate of components, and a small rear-facing colonist in orange with no readable face. A `1.6` corner badge.
-- `Mod/About/ModIcon.png` — a stylised orange face, winking, with a ponytail, a clipboard and a gear.
+- `Mod/About/ModIcon.png`: a stylised orange face, winking, with a ponytail, a clipboard and a gear.
 
 Nothing sexual, nothing graphic, no nudity, no gore. The mod adds no art beyond one gizmo icon, no text
 beyond its own interface strings, and touches no body, health or social system.
@@ -143,19 +143,19 @@ Your repeat modes are why my [url=https://steamcommunity.com/sharedfiles/filedet
 Yours needed no code from me, which is the best kind: you remove disabled recipes from the bench itself, so my [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3806709456]Bill Autopilot[/url] never sees them. That is from reading your mod, I haven't run it in game yet. Thanks :)
 ```
 
-### No Max Bills: Redux (`justharry.nomaxbillsredux`, 3526216885) — test pass only
+### No Max Bills: Redux (`justharry.nomaxbillsredux`, 3526216885): test pass only
 
 ```text
 One of my test passes runs with your Redux on, to see how my [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3806709456]Bill Autopilot[/url] copes when the 15-bill limit is gone (with BWM it reads as no limit at all). It copes. Thanks for bringing the mod back.
 ```
 
-### TD Find Lib (`Memegoddess.TDFindLib`, 3529443295) — test pass only
+### TD Find Lib (`Memegoddess.TDFindLib`, 3529443295): test pass only
 
 ```text
 I found out how much Everybody Gets One leans on you the hard way: my first test run loaded it without TD Find Lib and a repeat mode threw in the middle of a tick, lol. It is mounted now for my [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3806709456]Bill Autopilot[/url] tests only. Thanks for the plumbing
 ```
 
-### TDS Bug Fixes (`Memegoddess.TDSBugFixes`, 3529433984) — test pass only
+### TDS Bug Fixes (`Memegoddess.TDSBugFixes`, 3529433984): test pass only
 
 ```text
 You sit at the bottom of a chain in my tests: Everybody Gets One needs TD Find Lib, which needs TDS Bug Fixes, so you get loaded in every [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3806709456]Bill Autopilot[/url] run. Not a dependency of mine, just a thank-you for fixing what the game wouldn't :)
