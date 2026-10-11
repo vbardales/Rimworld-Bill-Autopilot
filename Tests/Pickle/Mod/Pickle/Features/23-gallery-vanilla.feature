@@ -23,7 +23,7 @@
 #   2. The profile window, a screenshot of what it is (not staged): one group open, one overridden recipe in it. It
 #      says: "say it once" happens here, reachable with a pointer alone.
 #   3. The confirmation when a bench type is switched on, a window, not staged: the mod asks first and names the count.
-#   4. A stove in the same hall, its bills tab open with a suspended bill and the letter that named it, in one frame. Only 5 ticks pass, then the filth is cleaned: with 120 ticks (run 8f81) the emptied hall lost its roof ("Roof collapse" letter, rubble everywhere, "Unroofed").
+#   4. A stove in the same hall, its bills tab open with a suspended bill and the letter that named it, in one frame. Only 30 ticks pass (5 were too few: run 6274 timed out waiting for the letter), then the filth is cleaned: with 120 ticks (run 8f81) the emptied hall lost its roof ("Roof collapse" letter, rubble everywhere, "Unroofed").
 #      It says: nothing is spent without an answer.
 #   Rhythm: every scenario reloads the save and sets midday again; no game time passes between images, the light stays
 #     the same on purpose (a window and a tab do not need a moving sun).
@@ -156,7 +156,7 @@ Feature: the captures of the Workshop page, from the pass without the optional m
     And Bill Autopilot has never met "Make_Pemmican" on "FueledStove"
     When research "Pemmican" is finished
     And Bill Autopilot syncs the "FueledStove" at (181, 115)
-    And Nelim's Pickle Tools: I let 5 ticks pass
+    And Nelim's Pickle Tools: I let 30 ticks pass
     And Nelim's Pickle Tools: all filth is cleaned
     Then Bill Autopilot has announced "Make_Pemmican" on "FueledStove"
     When Nelim's Sanctuary: I am at the sanctuary "hearth-hall"
