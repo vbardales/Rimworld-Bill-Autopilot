@@ -128,3 +128,5 @@ Neither is fixed by this repository (`scripts/` belongs to the monorepo):
 | 2026-10-10 | `be07` image 3 replay at the Sanctuary, pass `galerie`, 10725e7 | passed, 1 of 1; capture opened (dialog readable, bench hidden behind it, torches dominate, a stray message top left) | `2026-10-10-galerie-3-sanctuaire-2` |
 | 2026-10-10 | `8f81` images 1-4 at the Sanctuary, pass `galerie`, 8117372 | passed, 4 of 4; captures opened: 1, 2, 3 good; 4 defective (roof collapse after 120 ticks, rubble, Unroofed) | `2026-10-10-galerie-1-4-sanctuaire` |
 | 2026-10-10 | `e2b7` image 5 at the Sanctuary, pass `galerie-voisins`, 8117372 | passed, 1 of 1; capture opened, readable, old text "Found around it" | `2026-10-10-galerie-5-sanctuaire` |
+| 2026-10-11 | `7874` image 5 at the Sanctuary, pass `galerie-voisins`, 5dd8e0a | passed, 1 of 1; capture opened: reads "Detected integrations", four neighbours named (the key has four slots) | `2026-10-11-galerie-5-sanctuaire` |
+| 2026-10-11 | `6274` image 4 at the Sanctuary, pass `galerie`, 5dd8e0a | failed, 0 of 1: `Bill Autopilot has announced` timed out after 5 s with only 5 ticks; replayed with 30 | `2026-10-11-galerie-4-sanctuaire` |
