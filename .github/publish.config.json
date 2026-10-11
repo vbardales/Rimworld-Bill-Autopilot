@@ -1,5 +1,5 @@
 {
-  "templateStamp": "289c71f74e3b",
+  "templateStamp": "7a8f3a601751",
   "workshopId": "3806709456",
   "packageId": "nelim.billautopilot",
   "releaseTitle": "Bill Autopilot {version}",
@@ -8,7 +8,7 @@
   ],
   "forbidPaths": [],
   "previewFile": "About/Preview.png",
-  "galleryDir": "Art/WorkshopScreenshots",
+  "galleryDir": "Art/Gallery",
   "aboutFromDescription": true,
   "build": {
     "project": "Source/BillAutopilot.csproj"
