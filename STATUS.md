@@ -22,7 +22,7 @@ publication_changelog_review_sha: 91438fa4cf8d98c600195b15e34650f0b2561932
 remaining:
   - defect: Art/ModIcon-source.png (2026-10-04) and Art/Preview-source.png (2026-10-10), both modified and not committed, are newer than their derivatives (Mod/About/ModIcon.png 2026-10-02, Art/ModIcon.ico, Mod/About/Preview.png and Art/Gallery/0-preview.png 2026-10-03, Art/Preview.ico): stale (AUDIT.md 2.b); regenerate once the owner confirms the new sources are final
   - unverified: Art/Preview-source.png of 2026-10-10 measures 896 x 503 (the renderer expects 504) and a mean value of 0.196 (AUDIT.md 2.e asks at least 0.30, Measure-Palette.sh), one hue family, dominant 91%; the owner's call
-  - unverified: gallery image 3 (the switch-on confirmation) is green at the Sanctuary (`be07`, 2026-10-10, 4d30105 plus the framing fix, evidence docs/runs/evidence/2026-10-10-galerie-3-sanctuaire-2) and its capture was opened: the dialog reads (17 recipes, 50 each, Go back / Confirm) but the bench is hidden behind it, the eight torches dominate the frame, and the message "A royal bed is no longer assigned to Nelim." shows top left; the owner accepts or refuses; images 1, 2, 4 and 5 are still to be played at the Sanctuary
+  - unverified: gallery at the Sanctuary (hearth hall, midday, four torches), run 8f81 and e2b7 of 2026-10-10, captures opened: images 1, 2 and 3 read well (bills tab with three marked bills and Nelim at her bench; profile window with one group open; confirmation dialog); image 4 is defective (120 ticks collapsed the roof of the emptied hall: Roof collapse letter, rubble, Unroofed) and is replayed with 5 ticks and filth cleaned (6274); image 5 predates the new texts ("Found around it") and is replayed (7874); the beige carpet at the top left shows in every frame; the owner accepts or refuses all five
   - unverified: playTests 8.d and 8.k, the @review captures not yet opened (fr1 bills tab, five in fr3, see docs/runs/pickle-runs.md) and the five gallery images, with the owner
   - unverified: playTests 8.c, 8.f and 8.h, full pass on the current build (DLL BA624725): suite 01-26 without the optional mods, with them, in English and in French; only the features touched by each fix have been replayed (v2: 13/13). It is a non-regression pass: file it after the commit, in small tickets
   - unverified: settings_audit stays partial (settings page and profile window UI changed 2026-09-24): in-game checks, then English and French replay
@@ -133,7 +133,7 @@ replayed green, except gallery image 3 (never green, `remaining`). History of th
 
 Five images planned (`PUBLICATION.md`), shot in the hearth hall of the Sanctuary of Nelim (fixture `Nelims-tribe`, midday, torches, Nelim at her bench; plan in the header of `23-gallery-vanilla.feature`); the zen studio no longer exists
 `Art/Gallery/` holds only `0-preview.png` (a byte copy of `Mod/About/Preview.png` of 2026-10-03). Images 1, 2, 4
-and 5 have captures in evidence, all taken in the deleted zen studio and so superseded; image 3 has a first capture at the Sanctuary (`be07`). None has been accepted by the owner: `showcase: partial`.
+and 5 have older captures in evidence taken in the deleted zen studio (superseded); the Sanctuary captures of 2026-10-10 are in `docs/runs/evidence/2026-10-10-galerie-*-sanctuaire*`. None has been accepted by the owner: `showcase: partial`.
 
 ## Complement of the audit, 2026-10-11
 
