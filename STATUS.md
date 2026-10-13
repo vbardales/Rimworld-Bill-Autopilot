@@ -21,7 +21,7 @@ workshop:      3806709456
 publication_changelog_review_sha: 91438fa4cf8d98c600195b15e34650f0b2561932
 remaining:
   - unverified: Art/Preview-source.png of 2026-10-10 measures 896 x 503 (the renderer expects 504) and a mean value of 0.196 (AUDIT.md 2.e asks at least 0.30), one hue family, dominant 91%; the owner declared both sources final on 2026-10-13 and asked for the regeneration, so these two measures are accepted by her
-  - unverified: Preview.png regenerated 2026-10-13 and opened by this session: the echo (lathe line-art) overlaps the letters O and T of "AUTOPILOT"; the owner validated the overlap as it is (2026-10-13), Preview.config.json unchanged. The corner badge reads 1.6 (follows supportedVersions); whether it may read 1.7 before a green 1.7 run is with the Audit workflow session, the owner has not chosen
+  - unverified: Preview.png regenerated 2026-10-13 and opened by this session: the echo (lathe line-art) overlaps the letters O and T of "AUTOPILOT"; the owner validated the overlap as it is (2026-10-13), Preview.config.json unchanged. The corner badge reads 1.6 (follows supportedVersions); Audit ruled (9a33932, STYLE_RIMWORLD.md "Badge de version", AUDIT.md 1.7): the badge follows supportedVersions, so it stays 1.6 until a green 1.7 run and the owner confirms the tag; then add <li>1.7</li>, set tested_1_7, redo the Preview in the same commit, release a patch (update_tags=true)
   - unverified: gallery at the Sanctuary (hearth hall, midday, four torches), run 8f81 and e2b7 of 2026-10-10, captures opened: images 1, 2 and 3 read well (bills tab with three marked bills and Nelim at her bench; profile window with one group open; confirmation dialog); image 4 (bdf9, 30 ticks, filth cleaned) shows the suspended bill and its letter but still a "Roof collapse" letter, dust haze and "Unroofed": emptying the hall removes what holds its roof, so the scenario must not empty the hall (open); image 5 replayed with the new texts and reads well (7874, "Detected integrations", four neighbours named); the beige carpet at the top left shows in every frame; the owner accepts or refuses all five
   - unverified: playTests 8.d and 8.k, the @review captures not yet opened (fr1 bills tab, five in fr3, see docs/runs/pickle-runs.md) and the five gallery images, with the owner
   - unverified: playTests 8.c, 8.f and 8.h, full pass on the current build (DLL BA624725): suite 01-26 without the optional mods, with them, in English and in French; only the features touched by each fix have been replayed (v2: 13/13). It is a non-regression pass: file it after the commit, in small tickets
@@ -32,7 +32,7 @@ remaining:
   - unverified: writeDocs 11.b (protocols of 2026-10-10): THANKS must also name the author of every integration exercised by a test pass: RIMMSQOL (pass avec-rimmsqol) and Pickle Tools (the gallery maps now stage ScreenshotStudio, CameraZoom, StageDecor, ClearScreen, ScreenshotMode, ColonistRace; Workshop 3806142401, development only) are not in the description; look up their Workshop ids and authors on their pages, add the rows to WORKSHOP_COMMENTS.md, then the owner re-reads the changed Steam description (11.j)
 session:      local_af4f68d3-3ae2-45fb-852a-eed8ef2bace4
 updated:      2026-10-13, owner declared ModIcon-source.png and Preview-source.png final; ModIcon.png, ModIcon.ico, Preview.png, 0-preview.png and Preview.ico regenerated (AUDIT.md 2.b closed)
-protocols_read_sha: 990a7ae732f2d6e9757c7ecf9163d4b869052701
+protocols_read_sha: 9a33932f3cb73920e93184ca044f1744422e0025
 ---
 
 # Bill Autopilot: status
