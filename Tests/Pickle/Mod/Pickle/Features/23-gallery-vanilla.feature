@@ -25,7 +25,7 @@
 #   3. The confirmation when a bench type is switched on, a window, not staged: the mod asks first and names the count.
 #   4. A stove in the same hall, its bills tab open with a suspended bill and the letter that named it, in one frame. Only 30 ticks pass (5 were too few: run 6274 timed out waiting for the letter), then the filth is cleaned: with 120 ticks (run 8f81) the emptied hall lost its roof ("Roof collapse" letter, rubble everywhere, "Unroofed").
 #      It says: nothing is spent without an answer.
-#   The hall's four supporting columns, (178, 115), (185, 116), (185, 111) and (190, 115), are put back right after the emptying (before any tick): the emptying removes them, and without them the roof collapses on the first tick (run bdf9).
+#   Image 4 empties the hall by the area step that keeps the roof holders (the four columns stay: destroying them collapses the roof at once, and putting them back afterwards is too late, run 5309): "the area from (172, 106) to (190, 124) is emptied, the roof holders kept" (PickleTools ScreenshotStudio, 2026-10-13). Images 1 to 3 keep the old emptying and the columns put back.
 #   Rhythm: every scenario reloads the save and sets midday again; no game time passes between images, the light stays
 #     the same on purpose (a window and a tab do not need a moving sun).
 # The shots are @review because that is what makes Pickle keep them as pictures a person has to open.
@@ -151,11 +151,7 @@ Feature: the captures of the Workshop page, from the pass without the optional m
     And I set the weather to "Clear"
     And the Learning helper is switched off
     And Nelim's Sanctuary: the animals are removed from the sanctuary "hearth-hall"
-    And Nelim's Sanctuary: the sanctuary "hearth-hall" is emptied
-    And Nelim's Pickle Tools: I place the decor "Column" at (178, 115)
-    And Nelim's Pickle Tools: I place the decor "Column" at (185, 116)
-    And Nelim's Pickle Tools: I place the decor "Column" at (185, 111)
-    And Nelim's Pickle Tools: I place the decor "Column" at (190, 115)
+    And Nelim's Pickle Tools: the area from (172, 106) to (190, 124) is emptied, the roof holders kept
     And Nelim's Pickle Tools: I place the decor "TorchLamp" at (178, 113)
     And Nelim's Pickle Tools: the decor "TorchLamp" at (178, 113) is lit
     And Nelim's Pickle Tools: I place the decor "TorchLamp" at (184, 113)
