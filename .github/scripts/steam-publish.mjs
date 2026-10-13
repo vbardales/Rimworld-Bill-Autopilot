@@ -11,7 +11,7 @@ import { digest, checkPreview } from './preview.mjs';
 import { formatDiff, isIdentical, lineDiff } from './line-diff.mjs';
 import { relocatingExec } from './relocate-vdf.mjs';
 import { formatSummary, measure, topLevelSummary } from './stage-summary.mjs';
-import { fetchImageDigest, fetchPage } from './steam-page.mjs';
+import { fetchImageDigest, fetchPage, missingTags } from './steam-page.mjs';
 
 const APP_ID = '294100';
 
@@ -184,4 +184,13 @@ if (dryRun) {
     logger: console,
   });
   console.log(`uploaded to Workshop item ${config.workshopId}. Verify the public page before recording it as published.`);
+  if (tags) {
+    // Steam answers Success even when it drops a tag it does not accept (1.7 on 2026-10-12): read the page back. A warning, not a failure.
+    try {
+      const lost = missingTags(tags, (await fetchPage(config.workshopId)).tags);
+      console.log(lost.length === 0 ? 'tags on the page after the upload: all requested tags are present' : `::warning::the page does not carry the requested tag(s) ${lost.join(', ')} after the upload: Steam dropped them (the game may not allow them yet)`);
+    } catch (error) {
+      console.log(`::warning::could not read the tags back from the page: ${error.message}`);
+    }
+  }
 }
