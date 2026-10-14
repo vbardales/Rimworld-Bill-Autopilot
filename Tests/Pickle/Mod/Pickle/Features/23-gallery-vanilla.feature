@@ -172,7 +172,8 @@ Feature: the captures of the Workshop page, from the pass without the optional m
     And Nelim's Pickle Tools: I let 30 ticks pass
     And Nelim's Pickle Tools: all filth is cleaned
     Then Bill Autopilot has announced "Make_Pemmican" on "FueledStove"
-    When Nelim's Sanctuary: I am at the sanctuary "hearth-hall"
+    When Bill Autopilot's gallery: the colonist "Nelim" stands at (181, 114) facing north
+    And Nelim's Sanctuary: I am at the sanctuary "hearth-hall"
     And Nelim's Pickle Tools: I frame the cell (181, 115) at zoom 5
     And the bills tab of the Bill Autopilot bench "FueledStove" at (181, 115) is opened
     And Nelim's Pickle Tools: the messages are cleared from the screen
