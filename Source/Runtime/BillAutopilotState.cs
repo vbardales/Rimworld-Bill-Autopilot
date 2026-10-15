@@ -209,7 +209,9 @@ namespace BillAutopilot
             int interval = settings.syncIntervalTicks < 60 ? 60 : settings.syncIntervalTicks;
             int now = Find.TickManager.TicksGame;
 
-            if (dirty || now - lastRefillTick >= interval)
+            // A pass still draining is left alone: refilling would restart the queue before its tail was
+            // reached, and with more workbenches than ticks in the interval the tail would never sync.
+            if (dirty || (queue.Count == 0 && now - lastRefillTick >= interval))
             {
                 Refill();
                 lastRefillTick = now;

@@ -62,6 +62,15 @@ namespace BillAutopilot
             state.Disown(bill);
             state.Accept(__instance.def, bill.recipe);
 
+            // A "Do X times" bill that ran out is deleted by the game itself, not refused by the player
+            // (repeatCount is zero once the last iteration is done; a bill deleted by hand still has some).
+            if (bill is Bill_Production finished
+                && finished.repeatMode == BillRepeatModeDefOf.RepeatCount
+                && finished.repeatCount <= 0)
+            {
+                return;
+            }
+
             // An explicit refusal: the memory of what the bill carried has no reason to survive.
             state.Forget(__instance, bill.recipe);
 

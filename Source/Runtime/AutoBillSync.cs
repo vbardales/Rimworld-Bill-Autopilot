@@ -102,9 +102,12 @@ namespace BillAutopilot
                     // No room left: it is not marked as seen, so it comes back on the next pass.
                     if (budget <= 0) continue;
 
+                    // No bill made (not a Bill_Production): nothing is announced, or the recipe would stay
+                    // pending with no bill to accept.
+                    if (!Create(state, table, recipe, profile, mode, suspended: true)) continue;
+
                     state.MarkKnown(table.def, recipe);
                     state.MarkPending(table.def, recipe);
-                    Create(state, table, recipe, profile, mode, suspended: true);
                     state.QueueNewRecipeNotice(table.def, recipe);
                     budget--;
                     continue;
@@ -257,10 +260,10 @@ namespace BillAutopilot
 
         // --- Writing ----------------------------------------------------------------------------
 
-        private static void Create(BillAutopilotState state, Building_WorkTable table,
+        private static bool Create(BillAutopilotState state, Building_WorkTable table,
             RecipeDef recipe, BenchProfile profile, AutoMode mode, bool suspended)
         {
-            if (!(recipe.MakeNewBill() is Bill_Production bill)) return;
+            if (!(recipe.MakeNewBill() is Bill_Production bill)) return false;
 
             var stamp = new BillStamp
             {
@@ -299,6 +302,8 @@ namespace BillAutopilot
 
                 BetterWorkbenchesCompat.Restore(bill, memory);
             }
+
+            return true;
         }
 
         private static void Apply(Bill_Production bill, BillStamp stamp)
