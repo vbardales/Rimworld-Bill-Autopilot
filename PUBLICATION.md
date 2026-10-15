@@ -52,6 +52,18 @@ mod whose raw defName shows.
 **Each image has to be opened and looked at before it is uploaded.** A capture scenario passing green says the
 trip happened, not that the picture shows anything.
 
+### Gallery subtitles
+
+One line of English written at the bottom of each scene image, like a film subtitle (`GALLERY.md`, "Sous-titres").
+Scenes without an interface window only: images 1 and 4. The windows (2, 3, 5) and `0-preview.png` carry none.
+The unsubtitled originals live in `Art/Gallery-clean/`; the file names below are the planned ones and are fixed when
+the owner accepts the captures and the gallery is reindexed.
+
+| index | file | line |
+| --- | --- | --- |
+| 1 | `1-bench.png` | Nelim said it once, and the bench keeps its own list. |
+| 4 | `4-stove.png` | A new recipe waits, suspended, until she says yes. |
+
 ## Dependencies and DLC to declare
 
 Read from the sources on 2026-09-21, not from intent.

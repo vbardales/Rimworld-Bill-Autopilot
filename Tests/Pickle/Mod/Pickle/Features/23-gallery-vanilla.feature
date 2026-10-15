@@ -16,8 +16,13 @@
 #     hall is emptied of its furniture and of its animals, and four standing torches are placed and lit close around the bench: it is a roofed
 #     room, and an unlit roofed room is too dark to sell anything (GALLERY.md, "Eclairer un lieu sombre": torches,
 #     never remove the roof). The bench is built by the scenario, with recipes of its own, never borrowed from another mod.
-#   Story: a quiet tailoring workshop that runs itself while its tailor, Nelim (the only colonist of the fixture, the
-#     owner herself), keeps her own hand in.
+#   Story (one afternoon in the hearth hall): Nelim, a tailor, has stopped rewriting her bench's bill list by hand. She said once what
+#     the bench is for, and the bench keeps its own list. Image 1 shows the list it keeps while she works; image 2 the window where she
+#     said it once; image 3 the one question it asked before taking her at her word; image 4 the stove in the corner of the same hall:
+#     she has just finished researching pemmican, and its bill waits, suspended, for her answer instead of cooking on its own.
+#   Nelim's look (images 1 and 4, the two scenes with her in them): ponytail (the hair of her ModIcon), copper hair, a teal shirt that
+#     sets her apart from the orange bench, her own face (two brows, smirk). At zoom 4 or 5 the face is a few pixels: the look serves the
+#     silhouette and the colour; the expression is set so that it is right, not because it can be read. No other pawn: the story has one.
 #   1. Nelim at her bench, close (zoom 5), the bills tab open: three marked automatic bills and one bill placed by hand
 #      (no mark) on a bench with far more recipes than that. It says: the tab shows what is left to make.
 #   2. The profile window, a screenshot of what it is (not staged): one group open, one overridden recipe in it. It
@@ -63,6 +68,10 @@ Feature: the captures of the Workshop page, from the pass without the optional m
     Then Bill Autopilot has 3 bills up on the "HandTailoringBench" at (181, 115)
     When I add bill "Make_Apparel_Pants" to the "HandTailoringBench" at (181, 115)
     And Bill Autopilot's gallery: the colonist "Nelim" stands at (181, 114) facing north
+    And Nelim's Pickle Tools: "Nelim" hairstyle is "Ponytail"
+    And Nelim's Pickle Tools: "Nelim" hair colour is rgb (150, 75, 35)
+    And Nelim's Pickle Tools: "Nelim" wears "Apparel_BasicShirt" dyed rgb (40, 110, 120)
+    And Nelim's Sanctuary: Nelim has her own face
     And Nelim's Sanctuary: I am at the sanctuary "hearth-hall"
     And Nelim's Pickle Tools: I frame the cell (181, 115) at zoom 5
     And the bills tab of the Bill Autopilot bench "HandTailoringBench" at (181, 115) is opened
@@ -173,8 +182,12 @@ Feature: the captures of the Workshop page, from the pass without the optional m
     And Nelim's Pickle Tools: all filth is cleaned
     Then Bill Autopilot has announced "Make_Pemmican" on "FueledStove"
     When Bill Autopilot's gallery: the colonist "Nelim" stands at (181, 114) facing north
+    And Nelim's Pickle Tools: "Nelim" hairstyle is "Ponytail"
+    And Nelim's Pickle Tools: "Nelim" hair colour is rgb (150, 75, 35)
+    And Nelim's Pickle Tools: "Nelim" wears "Apparel_BasicShirt" dyed rgb (40, 110, 120)
+    And Nelim's Sanctuary: Nelim has her own face
     And Nelim's Sanctuary: I am at the sanctuary "hearth-hall"
-    And Nelim's Pickle Tools: I frame the cell (181, 115) at zoom 5
+    And Nelim's Pickle Tools: I frame the cell (181, 115) at zoom 4
     And the bills tab of the Bill Autopilot bench "FueledStove" at (181, 115) is opened
     And Nelim's Pickle Tools: the messages are cleared from the screen
     And I take a screenshot "gallery 4: a suspended bill for a newly researched recipe, with the letter that named it"
