@@ -5,15 +5,15 @@
   <BillAutopilot.Profile.CountValue>{0} : {1}</BillAutopilot.Profile.CountValue>
   <BillAutopilot.Profile.GroupCount>{0} {1}  ({2})</BillAutopilot.Profile.GroupCount>
 
-  <BillAutopilot.Settings.Intro>Choisissez les types d’établi à mettre sous pilote automatique. Le mod gère leurs travaux : un travail apparaît lorsqu’une production est nécessaire et disparaît une fois l’objectif atteint, ce qui garde la liste courte. Les recettes débloquées par la suite sont ajoutées automatiquement sous forme de travaux suspendus.</BillAutopilot.Settings.Intro>
+  <BillAutopilot.Settings.Intro>Choix des types d’établi à mettre sous pilote automatique. Le mod gère leurs travaux : un travail apparaît lorsqu’une production est nécessaire et disparaît une fois l’objectif atteint, ce qui garde la liste courte. Les recettes débloquées par la suite sont ajoutées automatiquement sous forme de travaux suspendus.</BillAutopilot.Settings.Intro>
   <BillAutopilot.Settings.Integrations>Intégrations détectées : {0}, {1}, {2}, {3}.</BillAutopilot.Settings.Integrations>
   <BillAutopilot.Settings.IntegrationsDesc>Ces intégrations sont toutes facultatives. Elles sont détectées séparément, et ce que le pilote prend en charge est décrit sur la page du mod.</BillAutopilot.Settings.IntegrationsDesc>
   <BillAutopilot.Settings.Detected>{0} détecté</BillAutopilot.Settings.Detected>
   <BillAutopilot.Settings.NotDetected>{0} absent</BillAutopilot.Settings.NotDetected>
   <BillAutopilot.Settings.MarkBills>Marquer les travaux automatiques</BillAutopilot.Settings.MarkBills>
-  <BillAutopilot.Settings.MarkBillsDesc>Ajoute une courte marque au libellé de chaque travail posé par le pilote, pour le distinguer de ceux que vous posez vous-même. Ce n’est pas cosmétique : supprimer un travail automatique exclut sa recette, et un travail non marqué qui disparaît seul ne laisse aucune trace de la raison.</BillAutopilot.Settings.MarkBillsDesc>
+  <BillAutopilot.Settings.MarkBillsDesc>Ajoute une courte marque au libellé de chaque travail posé par le pilote, pour le distinguer de ceux posés à la main. Ce n’est pas cosmétique : supprimer un travail automatique exclut sa recette, et un travail non marqué qui disparaît seul ne laisse aucune trace de la raison.</BillAutopilot.Settings.MarkBillsDesc>
   <BillAutopilot.Settings.Notify>Signaler les nouvelles recettes</BillAutopilot.Settings.Notify>
-  <BillAutopilot.Settings.NotifyDesc>Les recettes débloquées après l’activation du pilote automatique sont ajoutées sous forme de travaux suspendus : aucune production ne démarre sans votre accord. Cette option envoie une lettre qui les récapitule.</BillAutopilot.Settings.NotifyDesc>
+  <BillAutopilot.Settings.NotifyDesc>Les recettes débloquées après l’activation du pilote automatique sont ajoutées sous forme de travaux suspendus : aucune production ne démarre sans accord préalable. Cette option envoie une lettre qui les récapitule.</BillAutopilot.Settings.NotifyDesc>
   <BillAutopilot.Settings.MaxBills.One>Au plus 1 travail automatique par établi (le jeu en accepte {1})</BillAutopilot.Settings.MaxBills.One>
   <BillAutopilot.Settings.MaxBills.Many>Au plus {0} travaux automatiques par établi (le jeu en accepte {1})</BillAutopilot.Settings.MaxBills.Many>
   <BillAutopilot.Settings.MaxBillsFree.One>Au plus 1 travail automatique par établi (le jeu n’impose aucune limite)</BillAutopilot.Settings.MaxBillsFree.One>
@@ -33,17 +33,17 @@
   <BillAutopilot.Confirm.Title>Pilote automatique : {0}</BillAutopilot.Confirm.Title>
   <BillAutopilot.Confirm.BodyMaintain>Le pilote va prendre en charge {0} sur chaque établi « {1} », avec une cible de stock de {2} pour chaque recette.
 
-Il démarre dès que vous confirmez, et tout ce qui vous manque sera mis en file d’un coup : sur un grand établi, cela fait beaucoup de production et beaucoup de matériaux. Réglez la cible d’abord si {2} ne vous convient pas.
+Il démarre dès la confirmation, et tout ce qui manque sera mis en file d’un coup : sur un grand établi, cela fait beaucoup de production et beaucoup de matériaux. Mieux vaut régler la cible d’abord si {2} ne convient pas.
 
-Les recettes débloquées plus tard arriveront suspendues, et ne dépenseront jamais rien sans votre accord.</BillAutopilot.Confirm.BodyMaintain>
-  <BillAutopilot.Confirm.BodyCustom>Le pilote va prendre en charge {0} sur chaque établi « {1} », chacune réglée sur « {2} », un mode de répétition venu d’un autre mod.\n\nIl démarre dès que vous confirmez, et c’est ce mod qui décide seul quand un travail a de quoi faire. Sur un grand établi, cela peut faire beaucoup de production d’un coup.\n\nLes recettes débloquées plus tard arriveront suspendues, et ne dépenseront jamais rien sans votre accord.</BillAutopilot.Confirm.BodyCustom>
+Les recettes débloquées plus tard arriveront suspendues, et ne dépenseront jamais rien sans accord préalable.</BillAutopilot.Confirm.BodyMaintain>
+  <BillAutopilot.Confirm.BodyCustom>Le pilote va prendre en charge {0} sur chaque établi « {1} », chacune réglée sur « {2} », un mode de répétition venu d’un autre mod.\n\nIl démarre dès la confirmation, et c’est ce mod qui décide seul quand un travail a de quoi faire. Sur un grand établi, cela peut faire beaucoup de production d’un coup.\n\nLes recettes débloquées plus tard arriveront suspendues, et ne dépenseront jamais rien sans accord préalable.</BillAutopilot.Confirm.BodyCustom>
   <BillAutopilot.Confirm.BodyAlways>Le pilote va prendre en charge {0} sur chaque établi « {1} », et fera tourner chacune sans fin.
 
 Dans ce mode un travail ne s’arrête jamais de lui-même : il consommera des matériaux tant qu’il y en aura. « Maintenir un stock » est le réglage prudent.
 
-Les recettes débloquées plus tard arriveront suspendues, et ne dépenseront jamais rien sans votre accord.</BillAutopilot.Confirm.BodyAlways>
+Les recettes débloquées plus tard arriveront suspendues, et ne dépenseront jamais rien sans accord préalable.</BillAutopilot.Confirm.BodyAlways>
   <BillAutopilot.Profile.Enabled>Pilote automatique actif sur ce type d'établi</BillAutopilot.Profile.Enabled>
-  <BillAutopilot.Profile.EnabledDesc>Vaut pour tous les établis de ce type, y compris ceux que vous construirez ensuite.</BillAutopilot.Profile.EnabledDesc>
+  <BillAutopilot.Profile.EnabledDesc>Vaut pour tous les établis de ce type, y compris ceux construits ensuite.</BillAutopilot.Profile.EnabledDesc>
   <BillAutopilot.Profile.DefaultMode>Par défaut, pour chaque recette</BillAutopilot.Profile.DefaultMode>
   <BillAutopilot.Profile.Target>Maintenir un stock de</BillAutopilot.Profile.Target>
   <BillAutopilot.Profile.Floor>Relancer à</BillAutopilot.Profile.Floor>
@@ -76,10 +76,10 @@ Les recettes débloquées plus tard arriveront suspendues, et ne dépenseront ja
   <BillAutopilot.NewRecipeLine>{0} - {1}</BillAutopilot.NewRecipeLine>
   <BillAutopilot.NewRecipeLetterTitle>{0} nouvelles recettes disponibles</BillAutopilot.NewRecipeLetterTitle>
   <BillAutopilot.NewRecipeLetterTitle.One>1 nouvelle recette disponible</BillAutopilot.NewRecipeLetterTitle.One>
-  <BillAutopilot.NewRecipeLetterBody>Le pilote les a posées en travaux suspendus. Réactivez celles que vous voulez ; supprimez les autres, il ne les proposera plus.\n\n{0}</BillAutopilot.NewRecipeLetterBody>
+  <BillAutopilot.NewRecipeLetterBody>Le pilote les a posées en travaux suspendus. Réactiver celles voulues, supprimer les autres : il ne les proposera plus.\n\n{0}</BillAutopilot.NewRecipeLetterBody>
   <BillAutopilot.DriftCaptured>{0} retenue comme surcharge du profil « {1} ».</BillAutopilot.DriftCaptured>
-  <BillAutopilot.TemplateStripped.One>1 travail du pilote a été laissé hors du modèle : il retient ce que vous avez posé, pas ce que le pilote avait en cours.</BillAutopilot.TemplateStripped.One>
-  <BillAutopilot.TemplateStripped.Many>{0} travaux du pilote ont été laissés hors du modèle : il retient ce que vous avez posé, pas ce que le pilote avait en cours.</BillAutopilot.TemplateStripped.Many>
+  <BillAutopilot.TemplateStripped.One>1 travail du pilote a été laissé hors du modèle : il retient ce qui a été posé à la main, pas ce que le pilote avait en cours.</BillAutopilot.TemplateStripped.One>
+  <BillAutopilot.TemplateStripped.Many>{0} travaux du pilote ont été laissés hors du modèle : il retient ce qui a été posé à la main, pas ce que le pilote avait en cours.</BillAutopilot.TemplateStripped.Many>
   <BillAutopilot.RecipeExcluded>{0} ne sera plus posée sur un établi « {1} ».</BillAutopilot.RecipeExcluded>
 
 </LanguageData>
