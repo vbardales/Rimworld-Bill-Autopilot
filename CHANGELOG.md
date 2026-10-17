@@ -15,7 +15,7 @@ This file serves the repository and the writing of Steam patch notes; RimWorld d
 - *Keep a stock* and *Always* modes, with a target and a restart threshold. The gap between the two
   stops a bill from flickering on every unit produced.
 - A separate setting for recipes with an uncountable product (smelting a weapon, cremation,
-  surgery) for which the game cannot count and "keep a stock" is impossible.
+  surgery) whose output the game cannot count, so "keep a stock" is impossible.
 - Per-recipe override, also recorded when you adjust an automatic bill directly in the tab.
 - Deleting an automatic bill excludes its recipe from the autopilot, so the gesture means something.
 - A recipe unlocked after a bench went on autopilot arrives as a suspended bill, with a letter

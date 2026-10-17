@@ -52,7 +52,7 @@ Les recettes débloquées plus tard arriveront suspendues, et ne dépenseront ja
   <BillAutopilot.Profile.UncountableRecipe>Le jeu ne peut pas dénombrer les produits de cette recette : elle suit le réglage des recettes sans produit dénombrable.</BillAutopilot.Profile.UncountableRecipe>
   <BillAutopilot.Profile.CustomCount>Nombre</BillAutopilot.Profile.CustomCount>
   <BillAutopilot.Profile.CustomFloor>Deuxième nombre</BillAutopilot.Profile.CustomFloor>
-  <BillAutopilot.Profile.CustomCountDesc>Ce mode de répétition vient d’un autre mod, qui lit ces deux nombres à sa façon : « un par personne, plus X », « X par personne », un surplus d’ingrédients. Le pilote les transmet sans les interpréter, et lui demande s’il y a du travail.</BillAutopilot.Profile.CustomCountDesc>
+  <BillAutopilot.Profile.CustomCountDesc>Ce mode de répétition vient d’un autre mod, qui lit ces deux nombres à sa façon : « un par personne, plus X », « X par personne », un surplus d’ingrédients. Le pilote les transmet sans les interpréter, et demande à ce mod s’il y a du travail.</BillAutopilot.Profile.CustomCountDesc>
   <BillAutopilot.Profile.OverridesOnly>Seulement les recettes surchargées</BillAutopilot.Profile.OverridesOnly>
   <BillAutopilot.Profile.Uncategorised>Divers</BillAutopilot.Profile.Uncategorised>
   <BillAutopilot.Profile.CollapseAll>Tout replier</BillAutopilot.Profile.CollapseAll>
