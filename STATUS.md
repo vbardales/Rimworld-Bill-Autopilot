@@ -1,7 +1,7 @@
 ---
 localization: complete
-translation_en: unchecked
-translation_fr: unchecked
+translation_en: complete
+translation_fr: complete
 mod:          Bill Autopilot
 packageId:    nelim.billautopilot
 repo:         Rimworld-Bill-Autopilot
@@ -18,7 +18,7 @@ showcase:     partial
 settings_audit: partial
 tested_on:    2026-09-01
 workshop:      3806709456
-publication_changelog_review_sha: 5683bee16012423faa0326f86e28ecf219e5d116
+publication_changelog_review_sha: be642a4a8f4abb79abbb11ba0f487e9856f228e0
 code_review_sha: 84156f4483e7f3512d6f96413dab844da9c6d987
 remaining:
   - unverified: Art/Preview-source.png of 2026-10-10 measures 896 x 503 (the renderer expects 504) and a mean value of 0.196 (AUDIT.md 2.e asks at least 0.30), one hue family, dominant 91%; the owner declared both sources final on 2026-10-13 and asked for the regeneration, so these two measures are accepted by her
@@ -75,6 +75,7 @@ Run now, outside game (no RimWorld started, no lock taken, nothing submitted):
 ## Translation audit
 
 - Fourth ChatGPT review (2026-10-17), owner said "applique ce qui te semble cohérent": applied three of five: `RecipeExcluded` (English "A bill for {0} will no longer be put up on a {1}.", French "{0} ne donnera plus lieu à un travail sur un établi « {1} »."), `NewRecipeLetterBody` French ("Réactiver les recettes retenues, supprimer les autres"), `PUBLICATION.md` line 6 wording. Left: double space in `Profile.GroupCount` (layout), "keeps bills alive" in `Settings.Intro`. `translation_fr` and `translation_en` back to `unchecked` until the owner reads the changed rows in `FRENCH_REVIEW.md` (two French, one English); `publication_changelog_review_sha` stale for `PUBLICATION.md`.
+- French and English review by owner, fourth round: **done 2026-10-17**, relayed in chat ("relu, validé"), revision `be642a4`: `RecipeExcluded` (en, fr), `NewRecipeLetterBody` (fr), `Confirm.BodyCustom` (fr) and `PUBLICATION.md` line 6, after the fourth to sixth ChatGPT reviews (the sixth returned no correction). `translation_fr` and `translation_en` back to `complete`; `publication_changelog_review_sha` moved to that revision.
 - Fifth ChatGPT review (2026-10-17), owner said "applique ce qui est cohérent": applied one: `Confirm.BodyCustom` French ("c’est ce mod qui décide seul s’il y a du travail à faire"). Left: two style points in the Steam description of `PUBLICATION.md` ("The point of the mod.", "Smelting a weapon, cremation, surgery and anything else"): cosmetic, and they would reopen the description review. Rows to read since the third round: `RecipeExcluded` (en, fr), `NewRecipeLetterBody` (fr), `Confirm.BodyCustom` (fr).
 - French review by owner, third round: **done 2026-10-17**, relayed in chat ("je valide"), revision `5683bee`: rewrite without vous, tu or imperative (nine rows, TRANSLATIONS.md of 2026-10-17) and `Profile.CustomCountDesc` ("demande à ce mod"), `FRENCH_REVIEW.md` regenerated; she also validated `CHANGELOG.md` (uncountable-recipe wording). Three ChatGPT reviews read: `.Zero` forms stay singular (project rule), last one returned no recommendation. `translation_fr` back to `complete`; `publication_changelog_review_sha` moved to that revision.
 - French and English review by owner, second round: **done 2026-10-11**, relayed in chat by owner: two English texts added after first review (`Settings.MaxBillsFree.One` and `.Many`) read correct in both languages, no pawn gender agreement anywhere; six corrections she dictated applied verbatim: `Settings.Intro` (FR), `Settings.NotifyDesc` (FR and EN), `Settings.Integrations` (EN: "Detected integrations"), `Profile.Uncountable` and `Profile.UncountableRecipe` (FR: "dénombrable"), `Confirm.BodyMaintain` (FR first line); `FRENCH_REVIEW.md` regenerated (revision stamp reads `84b1787`, generator quirk: texts come from working tree). `translation_en` and `translation_fr` are `complete`.
