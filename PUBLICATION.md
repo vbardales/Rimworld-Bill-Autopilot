@@ -3,7 +3,7 @@
 What the Workshop page asks for and the repository holds nowhere else. Written before the first upload,
 and kept for whoever picks this mod up later.
 
-**The item exists, private, and only the item.** The maintainer created it on 2026-09-23 as 0.1.0, id
+**The item exists and is private; only the item has been uploaded.** The maintainer created it on 2026-09-23 as 0.1.0, id
 **3806709456**, and `About/PublishedFileId.txt` is committed. That upload was the creation, so the game sent
 the description once, the one committed in `1842dec`. **From 1.0.0 the description is sent by the CI**, from
 the single Markdown source under `## Steam description` below (decision of 2026-09-25), which also generates the

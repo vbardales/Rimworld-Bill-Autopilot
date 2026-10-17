@@ -80,6 +80,6 @@ Recipes unlocked later will arrive suspended, and will never spend anything with
   <BillAutopilot.DriftCaptured>{0} kept as an override on the {1} profile.</BillAutopilot.DriftCaptured>
   <BillAutopilot.TemplateStripped.One>1 autopilot bill was left out of the template: it keeps what you put on the bench, not what the autopilot had up at that moment.</BillAutopilot.TemplateStripped.One>
   <BillAutopilot.TemplateStripped.Many>{0} autopilot bills were left out of the template: it keeps what you put on the bench, not what the autopilot had up at that moment.</BillAutopilot.TemplateStripped.Many>
-  <BillAutopilot.RecipeExcluded>{0} will no longer be put up on a {1}.</BillAutopilot.RecipeExcluded>
+  <BillAutopilot.RecipeExcluded>A bill for {0} will no longer be put up on a {1}.</BillAutopilot.RecipeExcluded>
 
 </LanguageData>

@@ -1,7 +1,7 @@
 ---
 localization: complete
-translation_en: complete
-translation_fr: complete
+translation_en: unchecked
+translation_fr: unchecked
 mod:          Bill Autopilot
 packageId:    nelim.billautopilot
 repo:         Rimworld-Bill-Autopilot
@@ -74,6 +74,7 @@ Run now, outside game (no RimWorld started, no lock taken, nothing submitted):
 
 ## Translation audit
 
+- Fourth ChatGPT review (2026-10-17), owner said "applique ce qui te semble cohérent": applied three of five: `RecipeExcluded` (English "A bill for {0} will no longer be put up on a {1}.", French "{0} ne donnera plus lieu à un travail sur un établi « {1} »."), `NewRecipeLetterBody` French ("Réactiver les recettes retenues, supprimer les autres"), `PUBLICATION.md` line 6 wording. Left: double space in `Profile.GroupCount` (layout), "keeps bills alive" in `Settings.Intro`. `translation_fr` and `translation_en` back to `unchecked` until the owner reads the changed rows in `FRENCH_REVIEW.md` (two French, one English); `publication_changelog_review_sha` stale for `PUBLICATION.md`.
 - French review by owner, third round: **done 2026-10-17**, relayed in chat ("je valide"), revision `5683bee`: rewrite without vous, tu or imperative (nine rows, TRANSLATIONS.md of 2026-10-17) and `Profile.CustomCountDesc` ("demande à ce mod"), `FRENCH_REVIEW.md` regenerated; she also validated `CHANGELOG.md` (uncountable-recipe wording). Three ChatGPT reviews read: `.Zero` forms stay singular (project rule), last one returned no recommendation. `translation_fr` back to `complete`; `publication_changelog_review_sha` moved to that revision.
 - French and English review by owner, second round: **done 2026-10-11**, relayed in chat by owner: two English texts added after first review (`Settings.MaxBillsFree.One` and `.Many`) read correct in both languages, no pawn gender agreement anywhere; six corrections she dictated applied verbatim: `Settings.Intro` (FR), `Settings.NotifyDesc` (FR and EN), `Settings.Integrations` (EN: "Detected integrations"), `Profile.Uncountable` and `Profile.UncountableRecipe` (FR: "dénombrable"), `Confirm.BodyMaintain` (FR first line); `FRENCH_REVIEW.md` regenerated (revision stamp reads `84b1787`, generator quirk: texts come from working tree). `translation_en` and `translation_fr` are `complete`.
 - French review by owner, first round: **done 2026-10-02**, revision `bdfd660`, relayed in chat by owner: five corrections
