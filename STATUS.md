@@ -34,7 +34,7 @@ remaining:
   - unverified: writeDocs 11.b (protocols of 2026-10-10): THANKS must also name the author of every integration exercised by a test pass: RIMMSQOL (pass avec-rimmsqol) and Pickle Tools (the gallery maps now stage ScreenshotStudio, CameraZoom, StageDecor, ClearScreen, ScreenshotMode, ColonistRace; Workshop 3806142401, development only) are not in the description; look up their Workshop ids and authors on their pages, add the rows to WORKSHOP_COMMENTS.md, then the owner re-reads the changed Steam description (11.j)
 session:      local_3a8a05c7-7219-41d0-8306-35bbfe80986d
 updated:      2026-10-13, owner declared ModIcon-source.png and Preview-source.png final; ModIcon.png, ModIcon.ico, Preview.png, 0-preview.png and Preview.ico regenerated (AUDIT.md 2.b closed)
-protocols_read_sha: 416d9051ad19d11c6352665809adbb5e5cb0ecaa
+protocols_read_sha: c1ed82d6fddf14f21115395369fced68bace6832
 ---
 # Bill Autopilot: status
 
