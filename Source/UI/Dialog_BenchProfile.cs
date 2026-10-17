@@ -397,6 +397,7 @@ namespace BillAutopilot
                     var written = profile.RuleForWriting(recipe);
                     written.mode = captured;
                     written.repeatMode = null;
+                    if (captured == AutoMode.Maintain && written.targetCount == 0) written.targetCount = 1;
                     Save();
                 }));
             }
@@ -416,6 +417,20 @@ namespace BillAutopilot
             Find.WindowStack.Add(new FloatMenu(options));
         }
 
+        /// <summary>
+        /// A foreign mode lets a target sit at zero, which means "none" there. Under Maintain, a target
+        /// of zero never starts a bill and the bench silently makes nothing, and the window's own
+        /// buttons stop at 1: leaving a foreign mode for Maintain lifts every zero that would inherit it.
+        /// </summary>
+        private static void LiftZeroTargets(BenchProfile profile)
+        {
+            if (profile.targetCount < 1) profile.targetCount = 1;
+            foreach (var rule in profile.Rules.Values)
+            {
+                if (rule.mode == AutoMode.Inherit && rule.targetCount == 0) rule.targetCount = 1;
+            }
+        }
+
         /// <summary>The default mode menu: ours, then those another mod has added.</summary>
         private static void OpenBenchModeMenu(BenchProfile profile)
         {
@@ -425,6 +440,7 @@ namespace BillAutopilot
                 {
                     profile.defaultMode = AutoMode.Maintain;
                     profile.defaultRepeatMode = null;
+                    LiftZeroTargets(profile);
                     Save();
                 }),
                 new FloatMenuOption(ModeLabel(AutoMode.Always), () =>
