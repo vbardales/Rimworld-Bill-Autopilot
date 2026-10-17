@@ -30,9 +30,9 @@ remaining:
   - unverified: code review (AUDIT.md 8.m) is partial, code_review_sha stays absent: 2026-10-15 /code-review read AutoBillSync, BillAutopilotState, BillAutopilotPatches, RecipeProbe, BillAutopilotSettings, BenchActivation, BetterWorkbenchesCompat and BillAutopilotMod; NOT yet read: Dialog_BenchProfile, DubsMintMenusCompat, NiceBillTabCompat, HiddenRecipesCompat, NoMaxBillsCompat, BillMemory, Startup, RecipeCount, CountForm. Three defects fixed (a finished "Do X times" auto bill excluded its recipe for good; Create() failure left a recipe pending; Refill restarted the queue before it drained, starving benches). Left open, judged minor: counter edits under a foreign repeat mode not captured (CaptureDrift), memory of a minified bench pruned, LabelCap postfix allocates per call, two small simplifications
   - unverified: PUBLICATION.md checked against PUBLISHING.md on 2026-10-10 (structure, dependencies, adult boxes with the current Preview and ModIcon reopened, nine thanks drafts all in the register, description equals About.xml); the author of Choose Your Recipe ("Zaljerem") is not verified on its Workshop page, and the owner reads PUBLICATION.md and CHANGELOG.md before prepareRelease
   - unverified: writeDocs 11.b (protocols of 2026-10-10): THANKS must also name the author of every integration exercised by a test pass: RIMMSQOL (pass avec-rimmsqol) and Pickle Tools (the gallery maps now stage ScreenshotStudio, CameraZoom, StageDecor, ClearScreen, ScreenshotMode, ColonistRace; Workshop 3806142401, development only) are not in the description; look up their Workshop ids and authors on their pages, add the rows to WORKSHOP_COMMENTS.md, then the owner re-reads the changed Steam description (11.j)
-session:      local_af4f68d3-3ae2-45fb-852a-eed8ef2bace4
+session:      local_3a8a05c7-7219-41d0-8306-35bbfe80986d
 updated:      2026-10-13, owner declared ModIcon-source.png and Preview-source.png final; ModIcon.png, ModIcon.ico, Preview.png, 0-preview.png and Preview.ico regenerated (AUDIT.md 2.b closed)
-protocols_read_sha: e733386f133716f60efbad53c37602935eda7050
+protocols_read_sha: 730ee92b2ee520dd415b7fd71180b3b859538aac
 ---
 
 # Bill Autopilot: status
