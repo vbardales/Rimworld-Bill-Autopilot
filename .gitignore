@@ -39,3 +39,4 @@ Art/.render/
 # Pickle triage: runs arrive in Inbox/, held failures in Parked/ (never tracked).
 Tests/Pickle/Inbox/
 Tests/Pickle/Parked/
+Tests/Pickle/Evidence/
