@@ -1,7 +1,7 @@
 ---
 localization: complete
 translation_en: complete
-translation_fr: unchecked
+translation_fr: complete
 mod:          Bill Autopilot
 packageId:    nelim.billautopilot
 repo:         Rimworld-Bill-Autopilot
@@ -74,6 +74,8 @@ Run now, outside game (no RimWorld started, no lock taken, nothing submitted):
 **Next transition (`playTests` to `shootGallery`):** replay gallery image 3 (`24d`, one small ticket), open `@review` captures, code review (8.m), then commit and file non-regression passes (after commit: AUDIT.md "Passes Pickle"); owner validates French and English texts she has not seen, and gallery.
 
 ## Translation audit
+
+- French review by owner, fifth round: **done 2026-10-19**, relayed in chat ("relu et validé"), revision `6f72bff`: `Confirm.BodyCustom` (fr) reworded after the seventh ChatGPT review (applied as the owner said "applique ce qui te semble pertinent"; the eighth returned no correction). `translation_fr` back to `complete`. The Steam description change (RIMMSQOL line) is not covered: `publication_changelog_review_sha` stays stale.
 
 - Fourth ChatGPT review (2026-10-17), owner said "applique ce qui te semble cohérent": applied three of five: `RecipeExcluded` (English "A bill for {0} will no longer be put up on a {1}.", French "{0} ne donnera plus lieu à un travail sur un établi « {1} »."), `NewRecipeLetterBody` French ("Réactiver les recettes retenues, supprimer les autres"), `PUBLICATION.md` line 6 wording. Left: double space in `Profile.GroupCount` (layout), "keeps bills alive" in `Settings.Intro`. `translation_fr` and `translation_en` back to `unchecked` until the owner reads the changed rows in `FRENCH_REVIEW.md` (two French, one English); `publication_changelog_review_sha` stale for `PUBLICATION.md`.
 - French and English review by owner, fourth round: **done 2026-10-17**, relayed in chat ("relu, validé"), revision `be642a4`: `RecipeExcluded` (en, fr), `NewRecipeLetterBody` (fr), `Confirm.BodyCustom` (fr) and `PUBLICATION.md` line 6, after the fourth to sixth ChatGPT reviews (the sixth returned no correction). `translation_fr` and `translation_en` back to `complete`; `publication_changelog_review_sha` moved to that revision.
