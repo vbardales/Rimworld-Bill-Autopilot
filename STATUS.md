@@ -24,7 +24,8 @@ remaining:
   - unverified: Art/Preview-source.png of 2026-10-10 measures 896 x 503 (the renderer expects 504) and a mean value of 0.196 (AUDIT.md 2.e asks at least 0.30), one hue family, dominant 91%; the owner declared both sources final on 2026-10-13 and asked for the regeneration, so these two measures are accepted by her
   - unverified: Preview.png regenerated 2026-10-13 and opened by this session: the echo (lathe line-art) overlaps the letters O and T of "AUTOPILOT"; the owner validated the overlap as it is (2026-10-13), Preview.config.json unchanged. The corner badge reads 1.6 (follows supportedVersions); Audit ruled (9a33932, STYLE_RIMWORLD.md "Badge de version", AUDIT.md 1.7): the badge follows supportedVersions, so it stays 1.6 until a green 1.7 run and the owner confirms the tag; then add <li>1.7</li>, set tested_1_7, redo the Preview in the same commit, release a patch (update_tags=true)
   - unverified: gallery at the Sanctuary (hearth hall, midday, four torches), run 8f81 and e2b7 of 2026-10-10, captures opened: images 1, 2 and 3 read well (bills tab with three marked bills and Nelim at her bench; profile window with one group open; confirmation dialog); image 4 (bdf9, 30 ticks, filth cleaned) shows the suspended bill and its letter but still a "Roof collapse" letter, dust haze and "Unroofed": emptying the hall removes what holds its roof, so the scenario must not empty the hall (open); image 5 replayed with the new texts and reads well (7874, "Detected integrations", four neighbours named); the beige carpet at the top left shows in every frame; the owner accepts or refuses all five | UPDATE 2026-10-15: image 4 fixed (area emptying that keeps the roof holders, Nelim added at the stove, run 2c7e green, capture opened: roof defect gone); candidate Art/Gallery/4-candidate-stove.png awaits the owner. Owed after acceptance and reindex (GALLERY.md, "Sous-titres", rule of 2026-10-15): the one-line English subtitle on scene images 1 and 4 (originals in Art/Gallery-clean/, lines in a PUBLICATION.md table "Gallery subtitles"); windows 2, 3, 5 and 0- carry none
-  - done 2026-10-17, ticket `20261017-163425-516-be34` RUN_DONE (features 14 and 19, zero-target fix `b8d2ace`, evidence `Tests/Pickle/Evidence/zero-target-fix-14-19`, set sans-facultatifs): 4 passed, 0 failed, 2 skipped (the two foreign-mode scenarios "the bench default reaches the bill" and "a mode set by hand in the tab is recorded and comes back" are skipped without the optional mods; replay them in the with-mods set). No scenario covers the zero target itself (a target of 0 set under a foreign repeat mode, then Maintain): write one if wanted. Open: `code_review_sha` (`84156f4`) is stale since that code commit, re-confirm it; review points (b) to (e) stay open
+  - done 2026-10-17, ticket `20261017-163425-516-be34` RUN_DONE (features 14 and 19, zero-target fix `b8d2ace`, evidence `Tests/Pickle/Parked/zero-target-fix-14-19`, set sans-facultatifs): 4 passed, 0 failed, 2 skipped (the two foreign-mode scenarios "the bench default reaches the bill" and "a mode set by hand in the tab is recorded and comes back" are skipped without the optional mods; replay them in the with-mods set). No scenario covers the zero target itself (a target of 0 set under a foreign repeat mode, then Maintain): write one if wanted. Open: `code_review_sha` (`84156f4`) is stale since that code commit, re-confirm it; review points (b) to (e) stay open
+  - waiting 2026-10-19, ticket `20261019-161033-926-e216` (`14-foreign-repeat-mode.feature`, the two skipped scenarios, set avec-facultatifs, evidence `Tests/Pickle/Inbox/foreign-mode-14`): green releases `Tests/Pickle/Parked/zero-target-fix-14-19` (RELEASE.md), then `Prune-Evidence.ps1 -Mod BillAutopilot -Apply`
   - unverified: playTests 8.d and 8.k, the @review captures not yet opened (fr1 bills tab, five in fr3, see docs/runs/pickle-runs.md) and the five gallery images, with the owner
   - unverified: playTests 8.c, 8.f and 8.h, full pass on the current build (DLL 7E329F9FDE9A since the 2026-10-15 review fixes; BA624725 before): suite 01-26 without the optional mods, with them, in English and in French; only the features touched by each fix have been replayed (v2: 13/13). It is a non-regression pass: file it after the commit, in small tickets
   - unverified: settings_audit stays partial (settings page and profile window UI changed 2026-09-24): in-game checks, then English and French replay
@@ -34,7 +35,7 @@ remaining:
   - unverified: writeDocs 11.b (protocols of 2026-10-10): THANKS must also name the author of every integration exercised by a test pass: RIMMSQOL (pass avec-rimmsqol) and Pickle Tools (the gallery maps now stage ScreenshotStudio, CameraZoom, StageDecor, ClearScreen, ScreenshotMode, ColonistRace; Workshop 3806142401, development only) are not in the description; look up their Workshop ids and authors on their pages, add the rows to WORKSHOP_COMMENTS.md, then the owner re-reads the changed Steam description (11.j)
 session:      local_3a8a05c7-7219-41d0-8306-35bbfe80986d
 updated:      2026-10-13, owner declared ModIcon-source.png and Preview-source.png final; ModIcon.png, ModIcon.ico, Preview.png, 0-preview.png and Preview.ico regenerated (AUDIT.md 2.b closed)
-protocols_read_sha: c1ed82d6fddf14f21115395369fced68bace6832
+protocols_read_sha: 7d3b1f5a26a32c297c2c12758979e0a909f674a1
 ---
 # Bill Autopilot: status
 
@@ -118,16 +119,14 @@ Run now, outside game (no RimWorld started, no lock taken, nothing submitted):
 
 ## Evidence
 
-Raw evidence on disk only, `docs/runs/evidence/` (git-ignored); tracked is one-line-per-run summary
-`docs/runs/pickle-runs.md`. Kept: French passes `fr1`, `fr2`, `fr3` (features 01 to 22, build `4B89FBA7`),
-`rimmsqol-20`, `removal-chain`, `skipcheck-13-17`, `replay-fixes-v2` (13 of 13, build `BA624725`),
-`nomaxbills-26-retry`, `galerie-studio-1-4c` (images 1, 2, 4) and `-5b` (image 5). Every red scenario replayed green, except gallery image 3 (never green, `remaining`). History of folded sections: `docs/runs/status-history.md`.
+Evidence is kept on disk only (`Tests/Pickle/Inbox/` arrivals, `Evidence/` proofs, `Parked/` held failures; untracked or git-ignored); tracked is one-line-per-run summary
+`docs/runs/pickle-runs.md`. Nothing kept in `Evidence/` after the 2026-10-19 triage (older greens had no deletion condition, deleted). Only `Parked/zero-target-fix-14-19` stays (see its RELEASE.md). Gallery image 3 never green (`remaining`). History of folded sections: `docs/runs/status-history.md`.
 
 ## Gallery
 
 Five images planned (`PUBLICATION.md`), shot in hearth hall of Sanctuary of Nelim (fixture `Nelims-tribe`, midday, torches, Nelim at her bench; plan in header of `23-gallery-vanilla.feature`); zen studio no longer exists
 `Art/Gallery/` holds only `0-preview.png` (byte copy of `Mod/About/Preview.png` of 2026-10-03). Images 1, 2, 4
-and 5 have older captures in evidence from deleted zen studio (superseded); Sanctuary captures of 2026-10-10 in `docs/runs/evidence/2026-10-10-galerie-*-sanctuaire*`. None accepted by owner: `showcase: partial`.
+and 5 had older zen-studio captures (superseded); Sanctuary captures of 2026-10-10 were deleted in the 2026-10-19 evidence triage, reshoot needed. None accepted by owner: `showcase: partial`.
 
 ## Complement of the audit, 2026-10-11
 
