@@ -36,7 +36,7 @@
 Il démarre dès la confirmation, et tout ce qui manque sera mis en file d’un coup : sur un grand établi, cela fait beaucoup de production et beaucoup de matériaux. Mieux vaut régler la cible d’abord si {2} ne convient pas.
 
 Les recettes débloquées plus tard arriveront suspendues, et ne dépenseront jamais rien sans accord préalable.</BillAutopilot.Confirm.BodyMaintain>
-  <BillAutopilot.Confirm.BodyCustom>Le pilote va prendre en charge {0} sur chaque établi « {1} », chacune réglée sur « {2} », un mode de répétition venu d’un autre mod.\n\nIl démarre dès la confirmation, et c’est ce mod qui décide seul s’il y a du travail à faire. Sur un grand établi, cela peut faire beaucoup de production d’un coup.\n\nLes recettes débloquées plus tard arriveront suspendues, et ne dépenseront jamais rien sans accord préalable.</BillAutopilot.Confirm.BodyCustom>
+  <BillAutopilot.Confirm.BodyCustom>Le pilote va prendre en charge {0} sur chaque établi « {1} », avec le mode de répétition « {2} » venu d’un autre mod.\n\nIl démarre dès la confirmation, et c’est ce mod qui décide seul s’il y a du travail à faire. Sur un grand établi, cela peut faire beaucoup de production d’un coup.\n\nLes recettes débloquées plus tard arriveront suspendues, et ne dépenseront jamais rien sans accord préalable.</BillAutopilot.Confirm.BodyCustom>
   <BillAutopilot.Confirm.BodyAlways>Le pilote va prendre en charge {0} sur chaque établi « {1} », et fera tourner chacune sans fin.
 
 Dans ce mode un travail ne s’arrête jamais de lui-même : il consommera des matériaux tant qu’il y en aura. « Maintenir un stock » est le réglage prudent.
