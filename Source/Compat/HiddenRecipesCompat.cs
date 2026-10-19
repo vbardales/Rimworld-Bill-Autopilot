@@ -57,6 +57,12 @@ namespace BillAutopilot
                             Log.Message("[Bill Autopilot] Nice Bill Tab - Expansion found: "
                                         + "its hidden recipes will be treated as excluded.");
                         }
+                        else
+                        {
+                            Log.Warning("[Bill Autopilot] Nice Bill Tab - Expansion found, but "
+                                        + "HiddenRecipeStore.IsHidden(Building_WorkTable, RecipeDef) is missing: "
+                                        + "its hidden recipes will not be read.");
+                        }
                         return;
                     }
                 }

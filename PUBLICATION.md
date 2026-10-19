@@ -245,7 +245,7 @@ Andreas Pardeike for [Harmony](https://steamcommunity.com/sharedfiles/filedetail
 
 The authors of the companion mods whose interfaces informed this integration; Choose Your Recipe was inspected in source but has not yet been tested in game: Falconne for Better Workbench Management, Andromeda for Nice Bill Tab, HICON for its Expansion, Dubwise for Dubs Mint Menus, Uuugggg for Everybody Gets One, Zaljerem for Choose Your Recipe and Just Harry for No Max Bills. Uuugggg again for [TD Find Lib](https://steamcommunity.com/sharedfiles/filedetails/?id=3529443295) and [TDS Bug Fixes](https://steamcommunity.com/sharedfiles/filedetails/?id=3529433984), which Everybody Gets One needs and which the test pass mounts for that reason only.
 
-Used for development and testing only, never a dependency of this mod: [Pickle](https://steamcommunity.com/sharedfiles/filedetails/?id=3791648678) and [RimLogging](https://steamcommunity.com/sharedfiles/filedetails/?id=3733484696).
+Used for development and testing only, never a dependency of this mod: [Pickle](https://steamcommunity.com/sharedfiles/filedetails/?id=3791648678), [RimLogging](https://steamcommunity.com/sharedfiles/filedetails/?id=3733484696) and [RIMMSQOL](https://steamcommunity.com/sharedfiles/filedetails/?id=1084452457), the last one only to reach this mod's settings page from the main button bar in one test pass.
 
 Credits, and the rights they rest on, are in ATTRIBUTION.md in the repository. This mod is MIT licensed and the notice ships with it.
 
