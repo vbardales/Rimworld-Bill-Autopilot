@@ -38,7 +38,7 @@ remaining:
   - unverified: writeDocs 11.b: RIMMSQOL (1084452457) added 2026-10-19 to the development-and-testing line of the Steam description (link only, no author name: its page answered 429, Workshop comments tag Razuhl as developer, not confirmed); its register row is already `posted` with Bill Autopilot in Covers. Pickle Tools (3806142401) is the owner's own (author nelim17), so not thanked. Owner re-read and validated the changed description on 2026-10-19 (11.j), `publication_changelog_review_sha` moved; author confirmed 2026-10-19 in Chrome on the RIMMSQOL page: "Créé par Razuhl"; description names no author for the testing line
 session:      local_3a8a05c7-7219-41d0-8306-35bbfe80986d
 updated:      2026-10-13, owner declared ModIcon-source.png and Preview-source.png final; ModIcon.png, ModIcon.ico, Preview.png, 0-preview.png and Preview.ico regenerated (AUDIT.md 2.b closed)
-protocols_read_sha: e0c927d0d1eaafa51ae7b91b601e8be2113cb080
+protocols_read_sha: 014c74a804b7cbfdc5fc105210e9c31037c24a95
 ---
 # Bill Autopilot: status
 
