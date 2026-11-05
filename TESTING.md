@@ -124,15 +124,17 @@ Failure capture kept only if its scenario not replayed green yet. Converting cap
 
 ## Before anything
 
-### XML checks (no game required)
+### Static checks (no game required)
 
-Run from repository root:
+Run from repository root (the shared checks come first, then this mod's own values):
 
 ```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File Tests/ValidateXml.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File ../scripts/Check-ModBasics.ps1 -ModRoot .
+powershell -NoProfile -ExecutionPolicy Bypass -File ../scripts/Check-Translations.ps1 -ModRoot .
+powershell -NoProfile -ExecutionPolicy Bypass -File Tests/Rule-OwnValues.ps1 -ModRoot .
 ```
 
-Checks every shipped XML file for parsing errors, About metadata and Harmony dependency, GitHub link inside description, duplicate or empty translation entries, English/French key and placeholder parity, literal translation keys referenced in C#. Exits non-zero on failure. On 12 September 2026, all 376 XML checks and all 44 C# checks passed; both Release builds completed without warnings. No Defs or XML patches in this mod. XML written into saves still needs scenario 12 in running game.
+`Rule-OwnValues.ps1` holds what no shared check covers: About identity, Harmony as the only dependency, the generated GitHub link ending the description, literal translation keys referenced in C# (a counted family is accepted as `key.One` plus `key.Many`), and the hidden settings shortcut with its French DefInjected. Exits non-zero on failure. XML written into saves still needs scenario 12 in running game.
 
 ### Translation gate and runtime pass (added 13 September 2026)
 
