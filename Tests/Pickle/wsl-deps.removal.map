@@ -6,3 +6,4 @@
 # companion out of the list before the second launch, and this one stays. The path is relative to the collection's
 # root, and the folder's own About.xml packageId must equal the one written here.
 nelim.billautopilot.pickleremoval path:BillAutopilot/Tests/Pickle/Removal/Mod
+nelim.pickletools.savesteps path:PickleTools/SaveSteps/Mod

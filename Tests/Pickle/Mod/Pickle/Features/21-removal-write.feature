@@ -13,7 +13,7 @@
 # was written.
 #
 # Played only by the pass wsl-deps.removal.map: without the companion the tag makes it a skip.
-@requires:nelim.billautopilot.pickleremoval
+@requires:nelim.billautopilot.pickleremoval @requires:nelim.pickletools.savesteps
 Feature: a game saved with Bill Autopilot, handed over to a launch without it
 
   Scenario: state written, save checked, hand over
@@ -26,7 +26,7 @@ Feature: a game saved with Bill Autopilot, handed over to a launch without it
     And the Bill Autopilot test stockpile holds 10 "Leather_Patch"
     And Bill Autopilot syncs the "HandTailoringBench" at (140, 155)
     Then Bill Autopilot has a bill up for "Make_Patchleather" on the "HandTailoringBench" at (140, 155)
-    When Bill Autopilot saves the game as "billautopilot-with-mod"
+    When Nelim's Pickle Tools: the game is saved as "billautopilot-with-mod"
     Then Bill Autopilot save "billautopilot-with-mod" keeps its state as plain nodes, with no class of the mod in it
-    When Bill Autopilot hands the saved game "billautopilot-with-mod" to the mod "nelim.billautopilot.pickleremoval"
+    When Nelim's Pickle Tools: the saved game "billautopilot-with-mod" is handed to the mod "nelim.billautopilot.pickleremoval"
     Then no errors were logged
