@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
-import { fetchImageDigest, fetchPage, missingTags } from '../scripts/steam-page.mjs';
+import { fetchImageDigest, fetchPage } from '../scripts/steam-page.mjs';
 
 const answer = (body, ok = true, status = 200) => async () => ({ ok, status, json: async () => body, arrayBuffer: async () => Buffer.from(body) });
 
@@ -37,10 +37,4 @@ test('hashes the image the page serves', async () => {
   const expected = createHash('sha256').update('image bytes').digest('hex');
   assert.deepEqual(await fetchImageDigest('https://img', answer('image bytes')), { bytes: 11, sha256: expected });
   await assert.rejects(fetchImageDigest('https://img', answer('', false, 404)), /answered 404/);
-});
-
-test('names the requested tags the page does not carry', () => {
-  assert.deepEqual(missingTags(['Mod', '1.6', '1.7'], ['Mod', '1.6']), ['1.7']);
-  assert.deepEqual(missingTags(['Mod', '1.6'], ['Mod', '1.6', 'Other']), []);
-  assert.deepEqual(missingTags([], []), []);
 });

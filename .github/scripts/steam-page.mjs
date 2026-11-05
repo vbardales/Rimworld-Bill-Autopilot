@@ -18,9 +18,6 @@ export async function fetchPage(workshopId, fetchImpl = fetch) {
   return { title: item.title, description: item.description ?? '', previewUrl: item.preview_url ?? '', updated: item.time_updated, tags: (item.tags ?? []).map((entry) => entry.tag) };
 }
 
-// The tags a run asked for that the page does not carry: Steam drops a tag the game does not allow without saying so.
-export const missingTags = (requested, published) => requested.filter((tag) => !published.includes(tag));
-
 export async function fetchImageDigest(url, fetchImpl = fetch) {
   const response = await fetchImpl(url, { signal: AbortSignal.timeout(TIMEOUT_MS) });
   if (!response.ok) throw new Error(`the preview image answered ${response.status}`);
