@@ -74,7 +74,7 @@ Les recettes débloquées plus tard arriveront suspendues, et ne dépenseront ja
 
   <BillAutopilot.AutoMarker>(auto)</BillAutopilot.AutoMarker>
   <BillAutopilot.NewRecipeLine>{0} - {1}</BillAutopilot.NewRecipeLine>
-  <BillAutopilot.NewRecipeLetterTitle>{0} nouvelles recettes disponibles</BillAutopilot.NewRecipeLetterTitle>
+  <BillAutopilot.NewRecipeLetterTitle.Many>{0} nouvelles recettes disponibles</BillAutopilot.NewRecipeLetterTitle.Many>
   <BillAutopilot.NewRecipeLetterTitle.One>1 nouvelle recette disponible</BillAutopilot.NewRecipeLetterTitle.One>
   <BillAutopilot.NewRecipeLetterBody>Le pilote les a posées en travaux suspendus. Réactiver les recettes retenues, supprimer les autres : il ne les proposera plus.\n\n{0}</BillAutopilot.NewRecipeLetterBody>
   <BillAutopilot.DriftCaptured>{0} retenue comme surcharge du profil « {1} ».</BillAutopilot.DriftCaptured>

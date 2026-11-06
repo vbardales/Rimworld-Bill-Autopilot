@@ -190,9 +190,7 @@ namespace BillAutopilot
             if (BillAutopilotMod.Settings.notifyNewRecipes)
             {
                 Find.LetterStack.ReceiveLetter(
-                    pendingNews.Count == 1
-                        ? "BillAutopilot.NewRecipeLetterTitle.One".Translate()
-                        : "BillAutopilot.NewRecipeLetterTitle".Translate(pendingNews.Count),
+                    CountForm.Text("BillAutopilot.NewRecipeLetterTitle", pendingNews.Count),
                     "BillAutopilot.NewRecipeLetterBody".Translate(string.Join("\n", pendingNews.ToArray())),
                     LetterDefOf.NeutralEvent);
             }

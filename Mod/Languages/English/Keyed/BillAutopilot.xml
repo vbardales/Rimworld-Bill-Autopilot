@@ -74,7 +74,7 @@ Recipes unlocked later will arrive suspended, and will never spend anything with
 
   <BillAutopilot.AutoMarker>(auto)</BillAutopilot.AutoMarker>
   <BillAutopilot.NewRecipeLine>{0} - {1}</BillAutopilot.NewRecipeLine>
-  <BillAutopilot.NewRecipeLetterTitle>{0} new recipes available</BillAutopilot.NewRecipeLetterTitle>
+  <BillAutopilot.NewRecipeLetterTitle.Many>{0} new recipes available</BillAutopilot.NewRecipeLetterTitle.Many>
   <BillAutopilot.NewRecipeLetterTitle.One>1 new recipe available</BillAutopilot.NewRecipeLetterTitle.One>
   <BillAutopilot.NewRecipeLetterBody>The autopilot has put these up as suspended bills. Unsuspend the ones you want; delete the ones you do not, and it will leave them alone from now on.\n\n{0}</BillAutopilot.NewRecipeLetterBody>
   <BillAutopilot.DriftCaptured>{0} kept as an override on the {1} profile.</BillAutopilot.DriftCaptured>
