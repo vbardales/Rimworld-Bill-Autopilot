@@ -45,7 +45,7 @@ remaining:
   - done 2026-11-06, Audit rulings on the new shared checks: AccessChecks.cs added (IgnoresAccessChecksTo, Check-HarmonyContract 7/7), NewRecipeLetterTitle bare key renamed .Many (EN, FR; code asks CountForm), Check-Translations PASS, 74 unit checks and Rule-OwnValues green. DLL changed (new hash): ticket 75d4 (feature 26) was filed on 2730fb9, relaunch it on the new revision; feature 14 and 19 replay not owed (no logic change), letter title (counted new recipes letter) not replayed in game. Check-ModBasics WARN on the About tail waits for the CI/CD regenerate
 session:      local_3a8a05c7-7219-41d0-8306-35bbfe80986d
 updated:      2026-10-13, owner declared ModIcon-source.png and Preview-source.png final; ModIcon.png, ModIcon.ico, Preview.png, 0-preview.png and Preview.ico regenerated (AUDIT.md 2.b closed)
-protocols_read_sha: f19f4980859a25c39295dfc37761de0f552b36da
+protocols_read_sha: 7206a6e67021379bfd9194a6bb2bda385f8cc0f5
 ---
 # Bill Autopilot: status
 
