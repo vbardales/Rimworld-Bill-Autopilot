@@ -44,7 +44,7 @@ remaining:
   - done 2026-11-05, Preview re-rendered from the new `Preview.config.json` format (title fit 41 px on two lines, one-string description, default echo), committed; owner validated it the same day (echo clear of title, inside panel, badge 1.6)
 session:      local_3a8a05c7-7219-41d0-8306-35bbfe80986d
 updated:      2026-10-13, owner declared ModIcon-source.png and Preview-source.png final; ModIcon.png, ModIcon.ico, Preview.png, 0-preview.png and Preview.ico regenerated (AUDIT.md 2.b closed)
-protocols_read_sha: e7962b483699dc1410dce4b1bdd34b6393c84454
+protocols_read_sha: 5574d91d2dd934385abae1b2efc380d693bc9bcd
 ---
 # Bill Autopilot: status
 
