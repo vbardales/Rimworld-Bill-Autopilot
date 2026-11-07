@@ -16,7 +16,7 @@ licence_file: LICENSE (identical copy in Mod/LICENSE)
 dependencies: declared
 showcase:     partial
 settings_audit: partial
-tested_on:    2026-09-01
+tested_on:    2026-11-05 pickle 34a5209
 workshop:      3806709456
 publication_changelog_review_sha: 66acf05179c23fa2e50ec48d22c044da6729dcb5
 code_review_sha: 9595ccccd1074574286f690a4d15b0edb85a974f
@@ -44,9 +44,10 @@ remaining:
   - done 2026-11-05, Preview re-rendered from the new `Preview.config.json` format (title fit 41 px on two lines, one-string description, default echo), committed; owner validated it the same day (echo clear of title, inside panel, badge 1.6)
   - done 2026-11-06, Audit rulings on the new shared checks: AccessChecks.cs added (IgnoresAccessChecksTo, Check-HarmonyContract 7/7), NewRecipeLetterTitle bare key renamed .Many (EN, FR; code asks CountForm), Check-Translations PASS, 74 unit checks and Rule-OwnValues green. DLL changed (new hash): ticket 75d4 (feature 26) was filed on 2730fb9, relaunch it on the new revision; feature 14 and 19 replay not owed (no logic change), letter title (counted new recipes letter) not replayed in game. Check-ModBasics WARN on the About tail waits for the CI/CD regenerate
   - unverified: 2026-11-06, ticket `20261106-152258-402-04a4` filed (feature 26, avec-nomaxbills EN, c7b9336, `Tests/Pickle/Inbox/nr-nomaxbills-en`) replaces 75d4 (not in queue); keep `Mod/` and `Source/` untouched until RUN_DONE; then feature 21 savesteps ticket
+  - done 2026-11-07, resume: protocol diffs read (AUDIT 4.b/4.e OptionalCompat.xml, 8.b/8.i/8.l, PICKLE scenario D n/a, AGENTS contact rule), protocols_read_sha moved; Check-OptionalCompat OK (0 patched, 0 declared), ModBasics PASS (WARN About tail waits for CI/CD regenerate), Translations PASS, 74 unit checks green; no `*-addition.feature` here (8.i D n/a nothing to remove); `tested_on` now dated sha of last green Pickle run. Open: No Max Bills is reached at run time with no loadAfter, so by AUDIT 4.b it likely belongs in `Mod/About/OptionalCompat.xml` (packageId and workshopId to look up; touches `Mod/`, do after 04a4 RUN_DONE, reopens code_review only if judged so). Waiting: ticket 04a4
 session:      local_3a8a05c7-7219-41d0-8306-35bbfe80986d
 updated:      2026-10-13, owner declared ModIcon-source.png and Preview-source.png final; ModIcon.png, ModIcon.ico, Preview.png, 0-preview.png and Preview.ico regenerated (AUDIT.md 2.b closed)
-protocols_read_sha: 7206a6e67021379bfd9194a6bb2bda385f8cc0f5
+protocols_read_sha: 611c34587974a0b8f04c37a33eba91aa6911f252
 ---
 # Bill Autopilot: status
 
