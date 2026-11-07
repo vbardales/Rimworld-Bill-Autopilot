@@ -137,3 +137,4 @@ Neither is fixed by this repository (`scripts/` belongs to the monorepo):
 | 2026-11-05 | non-regression `08ce`, set avec-facultatifs FR, 34a5209 | passed, 73 of 82, 0 failed, 9 skipped by design (RIMMSQOL x3, hand-over, gallery images 1 to 5); Inbox run deleted |
 | 2026-11-05 | non-regression `457c` tail `2229` (avec-facultatifs EN), 7fd55e7 tags 24 | 3 passed, 4 skipped by design, 1 failed (image 5, Sanctuary tag missing, fixed in 7fd55e7); Inbox run deleted |
 | 2026-11-05 | non-regression `0ebc` (avec-nomaxbills EN, feature 26) | no run: launcher exit 125 after 24 s, no report; refile owed |
+| 2026-11-08 | `2ab7` removal chain with shared savesteps (feature 21, set removal), 6e03d9f | passed, 2 of 2 (seq1 state written and save checked, seq2 loads without the mod, bills stay); kept minified in Evidence/removal-savesteps |
