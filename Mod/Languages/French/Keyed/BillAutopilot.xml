@@ -39,13 +39,13 @@ Les recettes débloquées plus tard arriveront suspendues, et ne dépenseront ja
   <BillAutopilot.Confirm.BodyCustom>Le pilote va prendre en charge {0} sur chaque établi « {1} », avec le mode de répétition « {2} » venu d’un autre mod.\n\nIl démarre dès la confirmation, et c’est ce mod qui décide seul s’il y a du travail à faire. Sur un grand établi, cela peut faire beaucoup de production d’un coup.\n\nLes recettes débloquées plus tard arriveront suspendues, et ne dépenseront jamais rien sans accord préalable.</BillAutopilot.Confirm.BodyCustom>
   <BillAutopilot.Confirm.BodyAlways>Le pilote va prendre en charge {0} sur chaque établi « {1} », et fera tourner chacune sans fin.
 
-Dans ce mode un travail ne s’arrête jamais de lui-même : il consommera des matériaux tant qu’il y en aura. « Maintenir un stock » est le réglage prudent.
+Dans ce mode un travail ne s’arrête jamais de lui-même : il consommera des matériaux tant qu’il y en aura. « Garder un stock » est le réglage prudent.
 
 Les recettes débloquées plus tard arriveront suspendues, et ne dépenseront jamais rien sans accord préalable.</BillAutopilot.Confirm.BodyAlways>
   <BillAutopilot.Profile.Enabled>Pilote automatique actif sur ce type d'établi</BillAutopilot.Profile.Enabled>
   <BillAutopilot.Profile.EnabledDesc>Vaut pour tous les établis de ce type, y compris ceux construits ensuite.</BillAutopilot.Profile.EnabledDesc>
   <BillAutopilot.Profile.DefaultMode>Par défaut, pour chaque recette</BillAutopilot.Profile.DefaultMode>
-  <BillAutopilot.Profile.Target>Maintenir un stock de</BillAutopilot.Profile.Target>
+  <BillAutopilot.Profile.Target>Garder un stock de</BillAutopilot.Profile.Target>
   <BillAutopilot.Profile.Floor>Relancer à</BillAutopilot.Profile.Floor>
   <BillAutopilot.Profile.Uncountable>Recettes sans produit dénombrable</BillAutopilot.Profile.Uncountable>
   <BillAutopilot.Profile.UncountableDesc>Fonte d'une arme, crémation, chirurgie et tout ce que le jeu ne sait pas compter. Pour ces recettes, « maintenir un stock » est impossible ; elles suivent donc ce réglage.</BillAutopilot.Profile.UncountableDesc>
@@ -60,12 +60,12 @@ Les recettes débloquées plus tard arriveront suspendues, et ne dépenseront ja
   <BillAutopilot.Profile.ClearOverrides.One>Effacer la surcharge</BillAutopilot.Profile.ClearOverrides.One>
   <BillAutopilot.Profile.ClearOverrides.Many>Effacer les {0} surcharges</BillAutopilot.Profile.ClearOverrides.Many>
 
-  <BillAutopilot.Mode.Maintain>Maintenir un stock</BillAutopilot.Mode.Maintain>
+  <BillAutopilot.Mode.Maintain>Garder un stock</BillAutopilot.Mode.Maintain>
   <BillAutopilot.Mode.Always>Toujours</BillAutopilot.Mode.Always>
   <BillAutopilot.Mode.Excluded>Jamais</BillAutopilot.Mode.Excluded>
   <BillAutopilot.Mode.Custom>Autre mod</BillAutopilot.Mode.Custom>
-  <BillAutopilot.Mode.Inherit>Par défaut ({0})</BillAutopilot.Mode.Inherit>
-  <BillAutopilot.Mode.InheritShort>Par défaut</BillAutopilot.Mode.InheritShort>
+  <BillAutopilot.Mode.Inherit>Défaut ({0})</BillAutopilot.Mode.Inherit>
+  <BillAutopilot.Mode.InheritShort>Défaut</BillAutopilot.Mode.InheritShort>
 
   <BillAutopilot.Gizmo.Toggle>Pilote automatique</BillAutopilot.Gizmo.Toggle>
   <BillAutopilot.Gizmo.ToggleDesc>Mettre tous les établis « {0} » sous pilote automatique : les travaux se posent et se retirent seuls, et les recettes débloquées ensuite s'y ajoutent.</BillAutopilot.Gizmo.ToggleDesc>
