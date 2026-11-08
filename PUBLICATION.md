@@ -93,7 +93,7 @@ never in the required items.
 
 No Max Bills is not an integration, and is not declared: it raises the per-bench bill ceiling that Better Workbench Management
 reports, and the cap honours whatever that number is. It is named in the text, and thanked, because the test pass mounts it.
-So are the two libraries that pass mounts for Everybody Gets One (TD Find Lib, TDS Bug Fixes): none is a dependency of this mod.
+So are the two libraries that the test pass mounts for Everybody Gets One (TD Find Lib, TDS Bug Fixes): none is a dependency of this mod.
 
 ## Adult content boxes
 
