@@ -50,9 +50,10 @@ remaining:
   - unverified: 2026-11-08 tickets `20261108-211048-576-c087` (EN) and `20261108-211051-207-3678` (FR) filed on 1f6c4a3 (features 18 and 19, set avec-facultatifs, `Tests/Pickle/Inbox/ui-en` and `ui-fr`) for 8.h and 8.i; keep `Mod/` and `Source/` untouched until RUN_DONE. Feature 20 (RIMMSQOL, set avec-rimmsqol) not filed here, played green 2026-10-25
   - unverified: 2026-11-08 CI/CD regenerate done (template 9ca15db5b703, commit 1f6c4a3, Test-Mod 6/6). Check-ModBasics still WARNs the About tail: `Mod/About/About.xml` ends with plain text, not `[url=https://github.com/vbardales/Rimworld-Bill-Autopilot]Source code on GitHub[/url]`; fix in About.xml and PUBLICATION.md together, only after ticket RUN_DONE (touches Mod/); owner has not asked yet. Publish dry-run at prepareRelease
   - done 2026-11-08, resume: ticket `2ab7` arrived green (feature 21 removal chain with shared savesteps, 6e03d9f): 2 of 2 passed (seq1 state written and save checked, seq2 loads without the mod, bills stay); minified in `Tests/Pickle/Evidence/removal-savesteps` with RELEASE.md, line in `docs/runs/pickle-runs.md`, Inbox empty. Protocols read to e509280. TRANSLATION_REVIEW.md rename done (resume 2026-11-08 later: protocols read to ed6e1557, Check-ModBasics PASS with the known About-tail WARN, Translations PASS, 74 unit checks green, Preview committed 2026-11-05 so no re-render, no ticket queued). Owed: settings and UI FR/EN replay (8.h, 8.i); CI/CD regenerate (asked via TM 2026-11-08); Rule-OwnValues validated and stamped by Audit (2026-11-05, hash D3A8A122, re-run OK 2026-11-08)
-session:      local_3a8a05c7-7219-41d0-8306-35bbfe80986d
+  - done 2026-11-09, ticket `20261108-211048-576-c087` RUN_DONE green (ui-en, avec-facultatifs, features 18 and 19): 6 of 6 passed, exitReason passed, peak RAM 2269 MiB; four captures opened and judged (settings page via shortcut, profile window groups, one overridden recipe, smelter with uncountable recipes): no raw key, no clipping, EN reads well; known small note stays (button "Clear the 0 overrides" at zero). Inbox ui-en deleted (green, read). 8.h and 8.i EN done; FR waits for ticket 3678 (ui-fr); keep Mod/ and Source/ untouched until then
+&-7219-41d0-8306-35bbfe80986d
 updated:      2026-10-13, owner declared ModIcon-source.png and Preview-source.png final; ModIcon.png, ModIcon.ico, Preview.png, 0-preview.png and Preview.ico regenerated (AUDIT.md 2.b closed)
-protocols_read_sha: ed6e15572138a456e23db87e8d0dbd73ad3be5dc
+protocols_read_sha: d1dfc91e74d91646942e91a4b3ba16c055356a01
 ---
 # Bill Autopilot: status
 
