@@ -232,7 +232,7 @@ foreach ($n in 'README.md', 'ATTRIBUTION.md', 'LICENSE', 'STATUS.md') {
   if ($hits -ge 8 -and $accents -ge 3) { $warnings.Add("$n looks French ($hits function-word hits, $accents accented letters); docs are English only") }
 }
 # 9.6 closed list of the mod root and of Art/ (owner 2026-10-28, STYLE_RIMWORLD.md "Dossiers a la racine d'un mod"): tracked or untracked-not-ignored entries only
-$rootOk = 'Mod', 'Art', 'Source', 'Tests', 'Docs', 'Build', '.github', '.git', '.claude', 'STATUS.md', 'README.md', 'ATTRIBUTION.md', 'CHANGELOG.md', 'LICENSE', 'TESTING.md', 'PUBLICATION.md', 'FRENCH_REVIEW.md', 'BACKLOG.md', 'mod.json', '.gitignore', '.gitattributes', 'desktop.ini'
+$rootOk = 'Mod', 'Art', 'Source', 'Tests', 'Docs', 'Build', '.github', '.git', '.claude', 'STATUS.md', 'README.md', 'ATTRIBUTION.md', 'CHANGELOG.md', 'LICENSE', 'TESTING.md', 'PUBLICATION.md', 'TRANSLATION_REVIEW.md', 'FRENCH_REVIEW.md', 'BACKLOG.md', 'mod.json', '.gitignore', '.gitattributes', 'desktop.ini'
 $artOk = 'Preview-source.png', 'ModIcon-source.png', 'echo-source.png', 'echo-preview.png', 'echo-concept.png', 'Preview.config.json', 'Preview.ico', 'ModIcon.ico', 'Gallery', 'Gallery-clean', '.render', 'desktop.ini'
 $listed = $null
 if (Test-Path (Join-Path $ModRoot '.git')) {
