@@ -60,7 +60,7 @@ Les recettes débloquées plus tard arriveront suspendues, et ne dépenseront ja
   <BillAutopilot.Profile.ClearOverrides.One>Effacer la surcharge</BillAutopilot.Profile.ClearOverrides.One>
   <BillAutopilot.Profile.ClearOverrides.Many>Effacer les {0} surcharges</BillAutopilot.Profile.ClearOverrides.Many>
 
-  <BillAutopilot.Mode.Maintain>Garder un stock</BillAutopilot.Mode.Maintain>
+  <BillAutopilot.Mode.Maintain>Maintenir</BillAutopilot.Mode.Maintain>
   <BillAutopilot.Mode.Always>Toujours</BillAutopilot.Mode.Always>
   <BillAutopilot.Mode.Excluded>Jamais</BillAutopilot.Mode.Excluded>
   <BillAutopilot.Mode.Custom>Autre mod</BillAutopilot.Mode.Custom>
