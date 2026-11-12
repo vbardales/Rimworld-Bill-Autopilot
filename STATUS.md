@@ -14,9 +14,10 @@ upstream_mod_remotes: N/A
 licence_name: MIT
 licence_file: LICENSE (identical copy in Mod/LICENSE)
 dependencies: declared
+workshop_required_items: n/a, not released yet
 showcase:     partial
-settings_audit: partial
-tested_on:    2026-11-05 pickle 34a5209
+settings_audit: passed
+tested_on:    2026-11-12 pickle 4afaa49
 workshop:      3806709456
 publication_changelog_review_sha: 66acf05179c23fa2e50ec48d22c044da6729dcb5
 code_review_sha: b71b5353446f58a4a4ef099dcd2e9c2c296cc773
@@ -57,7 +58,7 @@ remaining:
   - done 2026-11-12, resume: ticket `3609` arrived green (ui-fr3, features 18 and 19, French, 4afaa49): 6 of 6 passed, exitReason passed; two profile-window captures opened: recipe row button "Défaut (Maintenir)" and top button "Maintenir" fit, no clipping, "Effacer la surcharge" fits. FR defect (8.i) closed; 8.h and 8.i done in EN and FR. Inbox ui-fr3 deleted. TRANSLATION_REVIEW.md regenerated at 4afaa49 (owner reads the `Mode.Maintain` row); `code_review_sha` moved (Source untouched, only French Keyed text changed). Protocols read to 2891efb9. Still owed: owner reading of the French rows, `settings_audit` stays partial until she accepts, About-tail WARN waits for her ask
   - done 2026-11-12, TM missions read: Ecosystem: none found, scan 2026-11-12; .gitignore holds desktop.ini and the three Pickle folders; Mod/desktop.ini kept; no upstream (upstream_mod_remotes N/A), so items 21 and 22 n/a; BillAutopilot not in the 20-mod ecosystem worklist; Preview.config.json has no `layout` line
 session:      local_ba8e7e94-c3d2-4309-ab8a-9898909dd2f7
-updated:      2026-10-13, owner declared ModIcon-source.png and Preview-source.png final; ModIcon.png, ModIcon.ico, Preview.png, 0-preview.png and Preview.ico regenerated (AUDIT.md 2.b closed)
+updated:      2026-11-12, replay-audit from zero: first open 8.b (owner French reading), settings_audit passed after EN and FR replay (c087, 3609)
 protocols_read_sha: 2891efb963f097e7e9cfa6b39e14cf2a20f5196c
 ---
 # Bill Autopilot: status
