@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
 
-  <BillAutopilot.Settings.Title>Bill Autopilot</BillAutopilot.Settings.Title>
+  <BillAutopilot.Settings.Title>Bill Autopilot (Pilote automatique des commandes)</BillAutopilot.Settings.Title>
   <BillAutopilot.Profile.CountValue>{0} : {1}</BillAutopilot.Profile.CountValue>
   <BillAutopilot.Profile.GroupCount>{0} {1}  ({2})</BillAutopilot.Profile.GroupCount>
 
