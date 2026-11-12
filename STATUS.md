@@ -19,7 +19,7 @@ settings_audit: partial
 tested_on:    2026-11-05 pickle 34a5209
 workshop:      3806709456
 publication_changelog_review_sha: 66acf05179c23fa2e50ec48d22c044da6729dcb5
-code_review_sha: b71b535
+code_review_sha: b71b5353446f58a4a4ef099dcd2e9c2c296cc773
 remaining:
   - done 2026-10-29, audit replay (replay-audit): first unfulfilled sub-step is 8.c (non-regression tickets 0ebc, 2229 and 08ce pending), then 8.h and 8.i (settings and UI in French and English); stage stays playTests. 8.m re-confirmed: `git diff 84156f4 HEAD -- Source` read, it is only fixes (a) and (c) of the 2026-10-17 review (LiftZeroTargets and the Maintain target lift in Dialog_BenchProfile, a warning in HiddenRecipesCompat), no new defect; the other `Mod/` changes are About.xml, Preview.png, DLL and Keyed texts. Shared checks: Check-Status 0 errors, ModBasics PASS, Translations PASS, unit tests 74 green, Check-Steps patterns compile. Open for the session: Check-Steps REQUIRES lines on `23-gallery-vanilla.feature` and `24-gallery-neighbours.feature` (steps of CameraZoom, ColonistRace, ScreenshotStudio, StageDecor, ScreenshotMode used with no `@requires:nelim.pickletools.*` tag; 7.d), and two step patterns no feature uses (dead weight); not fixed by the audit, `Tests/` is out of its reach
   - unverified: Art/Preview-source.png of 2026-10-10 measures 896 x 503 (the renderer expects 504) and a mean value of 0.196 (AUDIT.md 2.e asks at least 0.30), one hue family, dominant 91%; the owner declared both sources final on 2026-10-13 and asked for the regeneration, so these two measures are accepted by her
