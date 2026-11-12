@@ -59,6 +59,7 @@ Recipes unlocked later will arrive suspended, and will never spend anything with
   <BillAutopilot.Profile.ExpandAll>Expand all</BillAutopilot.Profile.ExpandAll>
   <BillAutopilot.Profile.ClearOverrides.One>Clear the override</BillAutopilot.Profile.ClearOverrides.One>
   <BillAutopilot.Profile.ClearOverrides.Many>Clear the {0} overrides</BillAutopilot.Profile.ClearOverrides.Many>
+  <BillAutopilot.Profile.ClearOverrides.Zero>No overrides to clear</BillAutopilot.Profile.ClearOverrides.Zero>
 
   <BillAutopilot.Mode.Maintain>Keep in stock</BillAutopilot.Mode.Maintain>
   <BillAutopilot.Mode.Always>Always</BillAutopilot.Mode.Always>
