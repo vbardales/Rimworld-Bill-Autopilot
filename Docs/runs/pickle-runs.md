@@ -138,3 +138,8 @@ Neither is fixed by this repository (`scripts/` belongs to the monorepo):
 | 2026-11-05 | non-regression `457c` tail `2229` (avec-facultatifs EN), 7fd55e7 tags 24 | 3 passed, 4 skipped by design, 1 failed (image 5, Sanctuary tag missing, fixed in 7fd55e7); Inbox run deleted |
 | 2026-11-05 | non-regression `0ebc` (avec-nomaxbills EN, feature 26) | no run: launcher exit 125 after 24 s, no report; refile owed |
 | 2026-11-08 | `2ab7` removal chain with shared savesteps (feature 21, set removal), 6e03d9f | passed, 2 of 2 (seq1 state written and save checked, seq2 loads without the mod, bills stay); kept minified in Evidence/removal-savesteps |
+| 2026-11-07 | `04a4` feature 26, set avec-nomaxbills EN, c7b9336 | passed, 2 of 2, exitReason passed; Inbox run minified into Evidence/nr-nomaxbills-en |
+| 2026-11-09 | `c087` features 18 and 19, set avec-facultatifs EN, 1f6c4a3 | passed, 6 of 6, peak RAM 2269 MiB; four captures read, no raw key, no clipping; Inbox run deleted |
+| 2026-11-09 | `3678` features 18 and 19, set avec-facultatifs FR, 1f6c4a3 | passed, 6 of 6, peak RAM 2290 MiB; read: recipe row button "Par défaut (Maintenir un stock)" clipped (8.i defect, fixed in 680ae5d and 4afaa49); Inbox run deleted |
+| 2026-11-09 | `c137` features 18 and 19, set avec-facultatifs FR, 680ae5d | passed, 6 of 6; read: "Défaut (Garder un stock)" still clipped at 150 px, wording changed to "Maintenir" in 4afaa49; Inbox run deleted |
+| 2026-11-12 | `3609` features 18 and 19, set avec-facultatifs FR, 4afaa49 | passed, 6 of 6, exitReason passed; read: "Défaut (Maintenir)", "Maintenir" and "Effacer la surcharge" fit; Inbox run deleted |
