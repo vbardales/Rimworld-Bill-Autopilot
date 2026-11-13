@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<OptionalCompat>
+  <li>
+    <packageId>nomaxbills.kv.rw</packageId>
+    <workshopId>1588831229</workshopId>
+    <kind>synergy</kind>
+  </li>
+  <li>
+    <packageId>justharry.nomaxbillsredux</packageId>
+    <workshopId>3526216885</workshopId>
+    <kind>synergy</kind>
+  </li>
+</OptionalCompat>
