@@ -33,10 +33,10 @@
 #      "colonist at the bench and working" plus a few ticks, gaze toward the bench), Atticus asleep beside the brazier facing the
 #      camera. Decor in frame, grouped around the bench: HandTailoringBench, Brazier lit beside it, PlantPot with Plant_Daylily
 #      fully grown x2 within 3 cells, TorchLamp x4 lit, Column x4 (roof holders), parquet kept. The decor is removed after the
-#      shot. Legibility (j): the auto mark must read at 268 px: ask NPT for a UI-scale step; fallback recompose at zoom 4 and
-#      crop on tab and bench. Subtitle: "Nelim sews. The bench keeps its own list."
+#      shot. Legibility (j): the auto mark must read at 268 px: step "Nelims Pickle Tools: the interface scale is 175 percent" (NPT 2026-11-13: exists, restored after the scenario;
+#      175 first, then 150 to 200 if the mark is still thin), mark width checked on the 268 px shrink; fallback zoom 4 and crop. Subtitle: "Nelim sews. The bench keeps its own list."
 #      Instant: she is in the middle of the next pair; the tab already lists what follows. Director remarks: grouped decor, Atticus
-#      for the animal criterion, camera off the tab, gaze, "just finished a pair" claim dropped: KEPT. UI scale: KEPT as a request.
+#      for the animal criterion, camera off the tab, gaze, "just finished a pair" claim dropped: KEPT. UI scale: KEPT, the step exists.
 #   2. tailor-2-profile, interface window (set aside, no subtitle): the profile window, one group open, one overridden recipe.
 #      Says: "say it once" happens here, reachable with a pointer alone. Taken on window-backdrop-for-height, cropped.
 #   3. tailor-3-confirm, interface window (set aside, no subtitle): the confirmation when a bench type is switched on, naming how
@@ -50,7 +50,7 @@
 #      bill forced at the stove, paused on the state check "colonist at the stove and working" plus a few ticks. Subtitle: "A new recipe waits for her answer."
 #      Instant: the letter has just arrived and she looks at it before touching anything. Director remarks: stove refused (the
 #      stove scene was played green, run 2c7e, and Nelim feeds the Sanctuary, NELIM-PROFIL), letter kept instead of cleared,
-#      only in-frame decor named, continuity: KEPT. Same UI-scale request as image 1.
+#      only in-frame decor named, continuity: KEPT. Same UI scale step as image 1.
 #   5. tailor-5-neighbours, interface window (set aside): the settings page naming the neighbours it found (24-gallery-neighbours).
 #   6. tailor-6-answered, story scene, MEDIUM (zoom 4 on the bench, (181, 115)). Same hall, 12:45, clear. Subject: the closing:
 #      every bill in the tab is marked automatic and the recipe she accepted is among them, unsuspended. Says: she answered once,
