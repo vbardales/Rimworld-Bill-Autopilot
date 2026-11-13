@@ -7,7 +7,7 @@ packageId:    nelim.billautopilot
 repo:         Rimworld-Bill-Autopilot
 visibility:   public
 detached:     yes
-workflow_stage: playTests[1.0.0]
+workflow_stage: declareDependencies[1.0.0]
 licence:      original
 licence_at:   original work
 upstream_mod_remotes: N/A
@@ -22,6 +22,7 @@ workshop:      3806709456
 publication_changelog_review_sha: 66acf05179c23fa2e50ec48d22c044da6729dcb5
 code_review_sha: b71b5353446f58a4a4ef099dcd2e9c2c296cc773
 remaining:
+  - open 2026-11-13, audit replay (replay-audit, ledger `.replays/BillAutopilot-20261113.tsv`): first unfulfilled sub-step is 4.b (stage `declareDependencies`): No Max Bills (KiameV and Redux) is reached at run time by reflection (`Source/Compat/NoMaxBillsCompat.cs`, marker type, no `loadAfter`) and `Mod/About/OptionalCompat.xml` does not exist, while AUDIT.md 4.b asks for it for every interaction outside `modDependencies` and `loadAfter`. Redo 4.b properly here (packageId and workshopId to look up, `kind`; `Check-OptionalCompat.ps1`), then 4.e and 4.g again, then replay. Seen on the way, sections not replayed (stop rule): (1) 6.g `Docs/review-refusals.md` is absent while two ChatGPT suggestions were refused (`Déf. {0}` 2026-11-09, FR main-button label 2026-11-13); (2) 8.i: French texts changed after the last green FR UI run (`4afaa49`): `Settings.Title` now 49 characters (shown as the Mod options entry via `SettingsCategory`) and `ClearOverrides.Zero`, not seen in game; (3) 8.m: `code_review_sha` b71b535 is behind three text-only commits under `Mod/Languages` (Source untouched). Shared checks: Check-Status 0, ModBasics 0 (About tail WARN), Translations 0, unit tests 74 green, Check-Steps 0
   - done 2026-10-29, audit replay (replay-audit): first unfulfilled sub-step is 8.c (non-regression tickets 0ebc, 2229 and 08ce pending), then 8.h and 8.i (settings and UI in French and English); stage stays playTests. 8.m re-confirmed: `git diff 84156f4 HEAD -- Source` read, it is only fixes (a) and (c) of the 2026-10-17 review (LiftZeroTargets and the Maintain target lift in Dialog_BenchProfile, a warning in HiddenRecipesCompat), no new defect; the other `Mod/` changes are About.xml, Preview.png, DLL and Keyed texts. Shared checks: Check-Status 0 errors, ModBasics PASS, Translations PASS, unit tests 74 green, Check-Steps patterns compile. Open for the session: Check-Steps REQUIRES lines on `23-gallery-vanilla.feature` and `24-gallery-neighbours.feature` (steps of CameraZoom, ColonistRace, ScreenshotStudio, StageDecor, ScreenshotMode used with no `@requires:nelim.pickletools.*` tag; 7.d), and two step patterns no feature uses (dead weight); not fixed by the audit, `Tests/` is out of its reach
   - unverified: Art/Preview-source.png of 2026-10-10 measures 896 x 503 (the renderer expects 504) and a mean value of 0.196 (AUDIT.md 2.e asks at least 0.30), one hue family, dominant 91%; the owner declared both sources final on 2026-10-13 and asked for the regeneration, so these two measures are accepted by her
   - unverified: Preview.png regenerated 2026-10-13 and opened by this session: the echo (lathe line-art) overlaps the letters O and T of "AUTOPILOT"; the owner validated the overlap as it is (2026-10-13), Preview.config.json unchanged. The corner badge reads 1.6 (follows supportedVersions); Audit ruled (9a33932, STYLE_RIMWORLD.md "Badge de version", AUDIT.md 1.7): the badge follows supportedVersions, so it stays 1.6 until a green 1.7 run and the owner confirms the tag; then add <li>1.7</li>, set tested_1_7, redo the Preview in the same commit, release a patch (update_tags=true)
@@ -64,7 +65,7 @@ remaining:
   - done 2026-11-13, Ecosystem (AUDIT 1.a, 8.0, answer of PiI, pushed e4ad269, `docs/inventory/ecosystem-steam/BillAutopilot.md`): Steam study by PiI, corpus scan `same-classify` no hit, no defName or label shared with ours. Neighbours by theme: Auto Bill Restore 3542342928, Periodic Bills 3685837355 (decision uninstall), AdaptiveMealBill 3668761367 (owner keep). Functional overlap is the owner's call. No upstream. Subscriptions handled by PiI, none by this session.
 session:      local_ba8e7e94-c3d2-4309-ab8a-9898909dd2f7
 updated:      2026-11-13, Ecosystem answer from PiI recorded
-protocols_read_sha: 2891efb963f097e7e9cfa6b39e14cf2a20f5196c
+protocols_read_sha: 5af4c2c14c4c9dba0b099c7dfe251e0f9c34ff1f
 ---
 # Bill Autopilot: status
 
