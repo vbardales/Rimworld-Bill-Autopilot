@@ -63,113 +63,6 @@ namespace BillAutopilot.PickleSteps
 
         private static bool? tutorBefore;
 
-        // Nelim's Pickle Tools' zen meadow studio (fixture nelim-zen-meadow-studio) is built around cell (125, 125). Its
-        // "display" pavilion, the large empty interior meant for mod demonstrations, is the wall rectangle below, with its
-        // door side to the north (z = -24, opened over x = -2..2). The studio leaves every roof off on purpose, which is
-        // right for its own pictures and wrong for a bench: an unroofed room is "outdoors" for work (the malus that read
-        // "Work speed factor: 40% (outdoors)" on the first gallery attempt) and, once roofed, is dark without a light.
-        private const int StudioX = 125, StudioZ = 125;
-        private const int PavilionX0 = -9, PavilionZ0 = -36, PavilionWidth = 19, PavilionHeight = 13;
-
-        /// <summary>
-        /// Closes the studio's display pavilion (a door and four wall segments where it is open), roofs it and lights it
-        /// with four standing torches, filled: a torch burns wood, needs no power grid, and is the warm light the studio
-        /// already uses for its own lanterns.
-        ///
-        /// Built with the region updater held off, then rebuilt once. Doing this cell by cell lets a spawn's own region
-        /// notification and the roof notifications interleave, and RimWorld's dirty-cell set is a HashSet with no
-        /// re-entrancy guard: on 2026-09-27, run `88b3` hit "Collection was modified; enumeration operation may not
-        /// execute" inside Verse.RegionAndRoomUpdater.RegenerateNewRegionsFromDirtyCells, not deterministically, and a
-        /// later scenario timed out loading its save with the region graph left inconsistent. Disabling the updater for
-        /// the whole build and rebuilding once afterwards is the pattern RimWorld's own bulk map edits use.
-        /// </summary>
-        [When("the studio's display pavilion is closed, roofed and lit")]
-        public void ClosePavilion(PickleContext ctx)
-        {
-            var map = Find.CurrentMap;
-            ctx.Require(map != null, "no map is loaded");
-
-            var rect = new CellRect(StudioX + PavilionX0, StudioZ + PavilionZ0, PavilionWidth, PavilionHeight);
-            ctx.Require(rect.InBounds(map), "the pavilion would leave the map: this is not the studio's map");
-            var corner = new IntVec3(rect.minX, 0, rect.minZ);
-            ctx.Require(corner.GetEdifice(map)?.def == ThingDefOf.Wall,
-                "no wall at the display pavilion's corner: load the save \"nelim-zen-meadow-studio\", with the "
-                + "nelim.pickletools.screenshotstudio mod in the pass");
-
-            var updater = map.regionAndRoomUpdater;
-            bool wasEnabled = updater.Enabled;
-            updater.Enabled = false;
-            try
-            {
-                var wood = ThingDefOf.WoodLog;
-
-                // The door side: a door in the middle, wall on either side of it.
-                int doorZ = rect.maxZ;
-                for (int dx = -2; dx <= 2; dx++)
-                {
-                    var cell = new IntVec3(StudioX + dx, 0, doorZ);
-                    foreach (var thing in cell.GetThingList(map).ToList())
-                    {
-                        if (!(thing is Pawn) && thing.def.destroyable) thing.Destroy();
-                    }
-
-                    var def = dx == 0 ? ThingDefOf.Door : ThingDefOf.Wall;
-                    var built = ThingMaker.MakeThing(def, wood);
-                    built.SetFaction(Faction.OfPlayer);
-                    GenSpawn.Spawn(built, cell, map);
-                }
-
-                foreach (var cell in rect) map.roofGrid.SetRoof(cell, RoofDefOf.RoofConstructed);
-
-                // The game's own wood plank floor over the whole interior: the studio's dark green ground swallowed the
-                // picture (owner, 2026-10-02).
-                var parquet = DefDatabase<TerrainDef>.GetNamed("WoodPlankFloor");
-                foreach (var cell in rect.ContractedBy(1)) map.terrainGrid.SetTerrain(cell, parquet);
-
-                // Four flowering plant pots beside the bench (at x 0, z -29), none on a torch cell nor in front of the
-                // bills tab. A pot grows nothing by itself, so each gets a grown flower on its cell.
-                var flowers = new[] { "Plant_Rose", "Plant_Daylily" };
-                int flower = 0;
-                foreach (var spot in new[] { new IntVec2(-3, -30), new IntVec2(3, -30), new IntVec2(-3, -28), new IntVec2(3, -28) })
-                {
-                    var cell = new IntVec3(StudioX + spot.x, 0, StudioZ + spot.z);
-                    foreach (var thing in cell.GetThingList(map).ToList())
-                    {
-                        if (!(thing is Pawn) && thing.def.destroyable) thing.Destroy();
-                    }
-
-                    var pot = ThingMaker.MakeThing(DefDatabase<ThingDef>.GetNamed("PlantPot"), ThingDefOf.WoodLog);
-                    pot.SetFaction(Faction.OfPlayer);
-                    GenSpawn.Spawn(pot, cell, map);
-
-                    var plant = (Plant)ThingMaker.MakeThing(DefDatabase<ThingDef>.GetNamed(flowers[flower++ % flowers.Length]));
-                    plant.Growth = 1f;
-                    GenSpawn.Spawn(plant, cell, map);
-                }
-
-                // Four in the corners, four close to the bench: the corners alone lit the bench cell at 25 percent (run c1fe,
-                // 2026-09-28), a torch's light falling off well before the 8 cells that separate them from the middle.
-                foreach (var spot in new[]
-                {
-                    new IntVec2(-7, -34), new IntVec2(7, -34), new IntVec2(-7, -26), new IntVec2(7, -26),
-                    new IntVec2(-4, -32), new IntVec2(4, -32), new IntVec2(-4, -26), new IntVec2(4, -26),
-                })
-                {
-                    var cell = new IntVec3(StudioX + spot.x, 0, StudioZ + spot.z);
-                    var lamp = ThingMaker.MakeThing(DefDatabase<ThingDef>.GetNamed("TorchLamp"));
-                    lamp.SetFaction(Faction.OfPlayer);
-                    GenSpawn.Spawn(lamp, cell, map);
-                    var fuel = lamp.TryGetComp<CompRefuelable>();
-                    fuel?.Refuel(fuel.Props.fuelCapacity);
-                }
-            }
-            finally
-            {
-                updater.Enabled = wasEnabled;
-            }
-
-            updater.RebuildAllRegionsAndRooms();
-        }
         /// <summary>
         /// The owner's remark on the first captures, "in an interior, put lights, otherwise it is too dark", as a check
         /// rather than a judgement after the fact: the light the game itself computes on a cell, ground level, sky
@@ -192,47 +85,12 @@ namespace BillAutopilot.PickleSteps
                 + "picture. Check the torches are placed, filled and inside the roofed room");
         }
 
-        /// <summary>
-        /// The tailor of the first picture: a free colonist, by nickname, put on a cell and turned to face a direction,
-        /// with whatever job the game had given it dropped, so that the paused picture shows it at the bench. Nothing
-        /// walks: the scenario is paused. Pickle's own steps place things, not pawns, and the colonist steps of
-        /// PickleTools dress and colour a pawn without moving it.
-        /// </summary>
-        [When("Bill Autopilot's gallery: the colonist {string} stands at \\({int}, {int}\\) facing north")]
-        public void ColonistStandsAt(PickleContext ctx, string nickname, int x, int z)
-        {
-            var map = Find.CurrentMap;
-            ctx.Require(map != null, "no map is loaded");
-            var pawn = map.mapPawns.FreeColonists.FirstOrDefault(p => p.Name != null && p.Name.ToStringShort == nickname);
-            ctx.Require(pawn != null, $"no free colonist is called {nickname}");
-
-            var cell = new IntVec3(x, 0, z);
-            ctx.Require(cell.InBounds(map) && cell.Walkable(map), $"the cell ({x}, {z}) cannot be stood on");
-            pawn.jobs?.StopAll();
-            pawn.Position = cell;
-            pawn.Rotation = Rot4.North;
-            pawn.Notify_Teleported(false, true);
-        }
-
         [Given("the Learning helper is switched off")]
         public void TutorOff(PickleContext ctx)
         {
             if (tutorBefore == null) tutorBefore = Prefs.AdaptiveTrainingEnabled;
             Prefs.AdaptiveTrainingEnabled = false;
             Find.ActiveLesson?.Deactivate();
-        }
-
-        [When("the camera looks at \\({int}, {int}\\) from a distance of {int}")]
-        public void FrameCamera(PickleContext ctx, int x, int z, int size)
-        {
-            var driver = Find.CameraDriver;
-            ctx.Require(driver != null, "no camera driver");
-            driver.JumpToCurrentMapLoc(new IntVec3(x, 0, z));
-            foreach (var name in new[] { "rootSize", "desiredSize" })
-            {
-                var field = typeof(CameraDriver).GetField(name, Any);
-                if (field != null && field.FieldType == typeof(float)) field.SetValue(driver, (float)size);
-            }
         }
 
         [AfterScenario]

@@ -29,20 +29,22 @@ And one that surprises people: **Steam creates every item private.** RimWorld ne
 
 Steam shows the first one large. That slot goes to the most demonstrative image, not the prettiest.
 
-**State on 2026-10-10:** `Art/Gallery/` holds only `0-preview.png`, a byte copy of `Mod/About/Preview.png`
-(slot 0, the Preview itself, 896x504; the captures below follow it as `1-` to `5-`). The captures are produced by
-dedicated Pickle scenarios (`23-gallery-vanilla.feature` for 1 to 4, `24-gallery-neighbours.feature` for 5) in the Sanctuary of Nelim,
-so they can be remade after any interface change. Older captures exist in the run evidence but were taken in
-the deleted zen studio, so all five are to be shot again at the Sanctuary (image 3 first, as a replay). None has been opened
-and accepted by the owner yet, so none is in `Art/Gallery/`.
+**State on 2026-11-14:** `Art/Gallery/` holds only `0-preview.png`, a byte copy of `Mod/About/Preview.png`
+(slot 0, the Preview itself, 896x504; the captures below follow it as `1-` to `6-`). Six images, one story: midday of
+one day in the hearth hall of the Sanctuary of Nelim, where Nelim stops rewriting her bench's list (shotlist v2 of
+2026-11-13, header of `23-gallery-vanilla.feature`; plan scores 5, 5, 5). The captures are produced by
+dedicated Pickle scenarios (`23-gallery-vanilla.feature` for 1 to 4 and 6, `24-gallery-neighbours.feature` for 5) in the Sanctuary,
+so they can be remade after any interface change. Older captures were taken in the deleted zen studio or under the
+previous five-image plan and are gone. No capture of the current plan exists yet, so none is in `Art/Gallery/`.
 
-| # | What it must show | Why this slot |
-| --- | --- | --- |
-| 1 | A bills tab holding two or three automatic bills, each marked, on a bench with far more recipes than that | The whole pitch in one image: the tab shows what is left to make, not a wall of configuration |
-| 2 | The profile window, groups collapsed except one, with an overridden recipe visible | Where the "say it once" happens, and the proof it is reachable with a pointer alone |
-| 3 | The confirmation dialog when a workbench type is switched on, naming its count | The one moment a lot of production can start at once, and the mod asks first |
-| 4 | A suspended bill for a newly researched recipe, with the letter that named it | The point of the mod: nothing is spent without an answer |
-| 5 | The settings page, with the "Detected integrations" line naming the integrations detected | Answers "does it work with X" before anyone asks |
+| # | Shotlist id | What it must show | Why this slot |
+| --- | --- | --- | --- |
+| 1 | `tailor-1-hall` (wide, 12:00) | The hall at midday, Nelim at her bench, a bills tab with auto bills marked next to a hand-placed one | The whole pitch in one image: the bench keeps its own list, and the tab shows what is left to make |
+| 2 | `tailor-2-profile` (window) | The profile window, groups collapsed except one, with an overridden recipe visible | Where the "say it once" happens, and the proof it is reachable with a pointer alone |
+| 3 | `tailor-3-confirm` (window) | The confirmation dialog when a workbench type is switched on, naming its count | The one moment a lot of production can start at once, and the mod asks first |
+| 4 | `tailor-4-stove` (tight, 12:15) | A suspended bill for a newly researched recipe (pemmican) at the stove, with the letter that named it | The point of the mod: nothing is spent without an answer |
+| 5 | `tailor-5-neighbours` (window) | The settings page, with the "Detected integrations" line naming the integrations detected | Answers "does it work with X" before anyone asks |
+| 6 | `tailor-6-answered` (medium, 12:45) | The same bill taken up after the answer: no longer suspended, Nelim working at the stove | Closes the story: she said yes, the mod did the rest |
 
 Rules for every one of them: no developer tools, no debug overlay, no other mod's overlay, no Pickle launcher
 panel in a corner, no column sitting on its prompt text. A window with nothing in it sells nothing. The scene
@@ -55,14 +57,15 @@ trip happened, not that the picture shows anything.
 ### Gallery subtitles
 
 One line of English written at the bottom of each scene image, like a film subtitle (`GALLERY.md`, "Sous-titres").
-Scenes without an interface window only: images 1 and 4. The windows (2, 3, 5) and `0-preview.png` carry none.
+Scenes without an interface window only: images 1, 4 and 6. The windows (2, 3, 5) and `0-preview.png` carry none.
 The unsubtitled originals live in `Art/Gallery-clean/`; the file names below are the planned ones and are fixed when
 the owner accepts the captures and the gallery is reindexed.
 
 | index | file | line |
 | --- | --- | --- |
-| 1 | `1-bench.png` | Nelim said it once, and the bench keeps its own list. |
+| 1 | `1-hall.png` | Nelim said it once, and the bench keeps its own list. |
 | 4 | `4-stove.png` | A new recipe waits, suspended, until she says yes. |
+| 6 | `6-answered.png` | She said yes, and the stove took it up. |
 
 ## Dependencies and DLC to declare
 

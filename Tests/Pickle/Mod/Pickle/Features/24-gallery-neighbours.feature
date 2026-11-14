@@ -1,10 +1,10 @@
-# Image 5 of the Workshop page's captures (PUBLICATION.md): the settings page, with the "found around it" line naming the
+# Image 5 of the six Workshop page captures (PUBLICATION.md, shotlist v2): the settings page, with the "found around it" line naming the
 # integrations it detected. It answers "does it work with X" before anyone asks, so it has to be taken in the pass with the
-# neighbours; in the pass without them the same line says "not found" four times. Images 1 to 4 are in
+# neighbours; in the pass without them the same line says "not found" four times. Images 1, 2, 3, 4 and 6 are in
 # 23-gallery-vanilla.feature, in the pass without the optional mods.
 #
 # Played with wsl-deps.galerie-voisins.map, which is the neighbours plus the Sanctuary's tools (see
-# wsl-deps.galerie.map). SHOOTING PLAN: the same place as the other four, the hearth hall of the Sanctuary of Nelim, midday,
+# wsl-deps.galerie.map). SHOOTING PLAN: the same place as the other five, the hearth hall of the Sanctuary of Nelim, midday,
 # clear sky, game paused; the window is the subject, so the hall is left as it is behind it (animals sent away, nothing
 # else touched) and the camera stays wide (zoom 12). It says: the mod names the neighbours it found.
 @review @gallery @requires:falconne.BWM @requires:nelim.pickletools.screenshotmode
