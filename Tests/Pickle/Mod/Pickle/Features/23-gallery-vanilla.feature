@@ -74,7 +74,7 @@ Feature: the captures of the Workshop page, from the pass without the optional m
     And I set the weather to "Clear"
     And the Learning helper is switched off
     And Nelim's Pickle Tools: the interface scale is 175 percent
-    And Nelim's Sanctuary: the sanctuary "hearth-hall" is emptied
+    And Nelim's Pickle Tools: the area from (172, 106) to (190, 124) is emptied, the roof holders kept
     And Nelim's Pickle Tools: I place the decor "Column" at (178, 115)
     And Nelim's Pickle Tools: I place the decor "Column" at (185, 116)
     And Nelim's Pickle Tools: I place the decor "Column" at (185, 111)
