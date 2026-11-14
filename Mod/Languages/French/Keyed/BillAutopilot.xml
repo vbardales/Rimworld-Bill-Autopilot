@@ -8,8 +8,8 @@
   <BillAutopilot.Settings.Intro>Choix des types d’établi à mettre sous pilote automatique. Le mod gère leurs travaux : un travail apparaît lorsqu’une production est nécessaire et disparaît une fois l’objectif atteint, ce qui garde la liste courte. Les recettes débloquées par la suite sont ajoutées automatiquement sous forme de travaux suspendus.</BillAutopilot.Settings.Intro>
   <BillAutopilot.Settings.Integrations>Intégrations détectées : {0}, {1}, {2}, {3}.</BillAutopilot.Settings.Integrations>
   <BillAutopilot.Settings.IntegrationsDesc>Ces intégrations sont toutes facultatives. Elles sont détectées séparément, et ce que le pilote prend en charge est décrit sur la page du mod.</BillAutopilot.Settings.IntegrationsDesc>
-  <BillAutopilot.Settings.Detected>{0} détecté</BillAutopilot.Settings.Detected>
-  <BillAutopilot.Settings.NotDetected>{0} absent</BillAutopilot.Settings.NotDetected>
+  <BillAutopilot.Settings.Detected>Détecté : {0}</BillAutopilot.Settings.Detected>
+  <BillAutopilot.Settings.NotDetected>Absent : {0}</BillAutopilot.Settings.NotDetected>
   <BillAutopilot.Settings.MarkBills>Marquer les travaux automatiques</BillAutopilot.Settings.MarkBills>
   <BillAutopilot.Settings.MarkBillsDesc>Ajoute une courte marque au libellé de chaque travail posé par le pilote, pour le distinguer de ceux posés à la main. Ce n’est pas cosmétique : supprimer un travail automatique exclut sa recette, et un travail non marqué qui disparaît seul ne laisse aucune trace de la raison.</BillAutopilot.Settings.MarkBillsDesc>
   <BillAutopilot.Settings.Notify>Signaler les nouvelles recettes</BillAutopilot.Settings.Notify>
@@ -28,7 +28,7 @@
   <BillAutopilot.Overridden.One>1 surchargée</BillAutopilot.Overridden.One>
   <BillAutopilot.Overridden.Many>{0} surchargées</BillAutopilot.Overridden.Many>
   <BillAutopilot.Settings.SummaryMaintain>{0}, maintenir {1}, {2}</BillAutopilot.Settings.SummaryMaintain>
-  <BillAutopilot.Settings.SummaryAlways>{0}, toujours actives, {1}</BillAutopilot.Settings.SummaryAlways>
+  <BillAutopilot.Settings.SummaryAlways>{0}, en continu, {1}</BillAutopilot.Settings.SummaryAlways>
 
   <BillAutopilot.Confirm.Title>Pilote automatique : {0}</BillAutopilot.Confirm.Title>
   <BillAutopilot.Confirm.BodyMaintain>Le pilote va prendre en charge {0} sur chaque établi « {1} », avec une cible de stock de {2} pour chaque recette.
