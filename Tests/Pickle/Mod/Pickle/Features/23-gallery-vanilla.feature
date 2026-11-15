@@ -75,10 +75,6 @@ Feature: the captures of the Workshop page, from the pass without the optional m
     And the Learning helper is switched off
     And Nelim's Pickle Tools: the interface scale is 175 percent
     And Nelim's Pickle Tools: the area from (172, 106) to (190, 124) is emptied, the roof holders kept
-    And Nelim's Pickle Tools: I place the decor "Column" at (178, 115)
-    And Nelim's Pickle Tools: I place the decor "Column" at (185, 116)
-    And Nelim's Pickle Tools: I place the decor "Column" at (185, 111)
-    And Nelim's Pickle Tools: I place the decor "Column" at (190, 115)
     And Nelim's Pickle Tools: I place the decor "TorchLamp" at (178, 113)
     And Nelim's Pickle Tools: the decor "TorchLamp" at (178, 113) is lit
     And Nelim's Pickle Tools: I place the decor "TorchLamp" at (184, 113)
