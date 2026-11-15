@@ -100,8 +100,9 @@ Feature: the captures of the Workshop page, from the pass without the optional m
     And Nelim's Pickle Tools: the animal "Rain" lies at (188, 113) facing South
     And Nelim's Pickle Tools: "Nelim" wears "Apparel_BasicShirt" dyed rgb (40, 110, 120)
     And Nelim's Sanctuary: Nelim has her own face
+    And Nelim's Pickle Tools: 50 of the item "Cloth" are spawned at (182, 116)
     And Nelim's Pickle Tools: "Nelim" is forced into the job "DoBill" on the building "HandTailoringBench" at (181, 115)
-    And Nelim's Pickle Tools: I let 60 ticks pass
+    And Nelim's Pickle Tools: I let 120 ticks pass
     Then Nelim's Pickle Tools: "Nelim" is at the building "HandTailoringBench" at (181, 115) and working
     When Nelim's Sanctuary: I am at the sanctuary "hearth-hall"
     And Nelim's Pickle Tools: I frame the cell (183, 114) at zoom 3
@@ -214,7 +215,7 @@ Feature: the captures of the Workshop page, from the pass without the optional m
     And Nelim's Pickle Tools: "Nelim" wears "Apparel_BasicShirt" dyed rgb (40, 110, 120)
     And Nelim's Sanctuary: Nelim has her own face
     And Nelim's Pickle Tools: "Nelim" is forced into the job "DoBill" on the building "FueledStove" at (181, 115)
-    And Nelim's Pickle Tools: I let 60 ticks pass
+    And Nelim's Pickle Tools: I let 240 ticks pass
     Then Nelim's Pickle Tools: "Nelim" is at the building "FueledStove" at (181, 115) and working
     When Nelim's Sanctuary: I am at the sanctuary "hearth-hall"
     And Nelim's Pickle Tools: I frame the cell (181, 115) at zoom 5
@@ -257,7 +258,7 @@ Feature: the captures of the Workshop page, from the pass without the optional m
     And Nelim's Pickle Tools: "Nelim" wears "Apparel_BasicShirt" dyed rgb (40, 110, 120)
     And Nelim's Sanctuary: Nelim has her own face
     And Nelim's Pickle Tools: "Nelim" is forced into the job "DoBill" on the building "FueledStove" at (181, 115)
-    And Nelim's Pickle Tools: I let 60 ticks pass
+    And Nelim's Pickle Tools: I let 240 ticks pass
     Then Nelim's Pickle Tools: "Nelim" is at the building "FueledStove" at (181, 115) and working
     When Nelim's Sanctuary: I am at the sanctuary "hearth-hall"
     And Nelim's Pickle Tools: I frame the cell (181, 115) at zoom 4
