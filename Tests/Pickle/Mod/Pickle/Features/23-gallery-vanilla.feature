@@ -63,7 +63,7 @@
 #      Subtitle: "She answered once. The list is hers again."
 #   Series: wide (1), tight (4), medium (6), an opener that places the hall (1), a closer that answers the story (6), windows
 #   between them; the tab and the letter stay vanilla (pass without the optional mods).
-@review @gallery @requires:nelim.pickletools.screenshotmode
+@review @gallery @requires:nelim.pickletools.screenshotmode @requires:nelim.pickletools.camerazoom @requires:nelim.pickletools.colonistrace @requires:nelim.pickletools.interfacescale @requires:nelim.pickletools.screenshotstudio @requires:nelim.pickletools.stagedecor
 Feature: the captures of the Workshop page, from the pass without the optional mods
 
   # Image 1. The whole pitch in one picture.
@@ -201,6 +201,7 @@ Feature: the captures of the Workshop page, from the pass without the optional m
     And Nelim's Pickle Tools: I place the decor "PlantPot" holding "Plant_Daylily" fully grown near (183, 118)
     And Bill Autopilot settings are at their defaults
     And a "FueledStove" is built at (181, 115)
+    And Nelim's Pickle Tools: the building "FueledStove" at (181, 115) is fuelled
     Then the cell (181, 115) is lit at least 50 percent
     And Bill Autopilot only takes "Make_Pemmican" on "FueledStove"
     And Bill Autopilot is switched on for "FueledStove"
@@ -245,6 +246,7 @@ Feature: the captures of the Workshop page, from the pass without the optional m
     And Nelim's Pickle Tools: I place the decor "PlantPot" holding "Plant_Daylily" fully grown near (183, 118)
     And Bill Autopilot settings are at their defaults
     And a "FueledStove" is built at (181, 115)
+    And Nelim's Pickle Tools: the building "FueledStove" at (181, 115) is fuelled
     Then the cell (181, 115) is lit at least 50 percent
     And Bill Autopilot only takes "Make_Pemmican" on "FueledStove"
     And Bill Autopilot is switched on for "FueledStove"

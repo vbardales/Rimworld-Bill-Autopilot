@@ -7,7 +7,7 @@
 # wsl-deps.galerie.map). SHOOTING PLAN: the same place as the other five, the hearth hall of the Sanctuary of Nelim, midday,
 # clear sky, game paused; the window is the subject, so the hall is left as it is behind it (animals sent away, nothing
 # else touched) and the camera stays wide (zoom 12). It says: the mod names the neighbours it found.
-@review @gallery @requires:falconne.BWM @requires:nelim.pickletools.screenshotmode
+@review @gallery @requires:falconne.BWM @requires:nelim.pickletools.screenshotmode @requires:nelim.pickletools.camerazoom
 Feature: the capture of the Workshop page that names the neighbours it found
 
   Scenario: image 5, the settings page with the integrations it found
