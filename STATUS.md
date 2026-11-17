@@ -184,7 +184,9 @@ Series k: ok (one story with place, day, rhythm; wide 1, medium 6, tight 4; open
 
 Sync 2026-11-13 (sync-nsb-npt, first one for this mod, at `shootGallery` before the shotlist). Rules said back: everything in NSB is free; a colonist or domestic animal outside NSB, and any change of a colonist's properties, need the owner's express validation quoted here; every outfit is free; every animal the mod includes must be in the gallery (this mod adds none). Changed in NSB since the plan of 2026-10-08: the hearth hall and its four corners are decorated and validated (lot 5h, ticket 1140, 2026-11-08); the final fixture is `Nelims-tribe-decor-mods-z3.rws`, `Nelims-tribe.rws` (undecorated) stays beside it; the folder `docs/` is now `Docs/`; NPT gained the step "the main bar, the speed controls and the mouse-over readout are hidden". Left as is: scenarios 23 and 24 (shotlist not rewritten yet, `write-shotlist` is next; they still load `Nelims-tribe` and empty the hall). One finding: the plan sets Nelim's hair colour rgb (150, 75, 35) and hairstyle "Ponytail" while the validated canon is hair "brun presque noir" (`Hair_DarkSaturatedReddish`) and `Roo_HD_Hair_Highpony` (VALIDE.md, NELIM-PROFIL.md): a property change with no quoted validation, PENDING (owner question).
 
-Places read: 2026-11-13 Tribe read: 2026-11-13 Steps read: 2026-11-16
+Sync 2026-11-17 (second): NSB commits of 2026-11-17 read (VALIDE.md: Soren Chaleur, Ada, Lyra validated; VTW body-type notes; neutral heads): none touches Nelim, the hearth hall, the animals catalogue or a place doc; NPT docs unchanged since 2026-11-16. Nothing updated, nothing left to rewrite. Table rows below unchanged (Nelim played with canon hair, no property change).
+
+Places read: 2026-11-13 Tribe read: 2026-11-17 Steps read: 2026-11-17
 
 | Place | Shots that use it | Changes made for the gallery | Last read |
 | --- | --- | --- | --- |
