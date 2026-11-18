@@ -28,7 +28,7 @@
            (-Unofficial or a name ending "(unofficial)"), starts with `UNOFFICIAL.` (PUBLISHING.md);
        9.3 nothing ships in Mod/ that must not: .pdb, a .dds with no PNG sibling, editor or intermediate files
            (.psd .xcf .kra .blend .aseprite .bak .tmp .orig .user .log, Thumbs.db), a DLL when the repo has no Source/;
-       9.4 every IfModActive id of LoadFolders.xml is in About.xml loadAfter (WARN); a loadAfter id that gates no
+       9.4 every IfModActive or IfModActiveAll id of LoadFolders.xml is in About.xml loadAfter (WARN); a loadAfter id that gates no
            folder is only a NOTE;
        9.5 README.md, ATTRIBUTION.md, LICENSE and STATUS.md at the mod root hold no French (8+ French function
            words and 3+ accented letters, code and URLs ignored).
@@ -192,7 +192,13 @@ if ($about2) {
 $hasSource = $null   # computed on the first DLL only
 foreach ($f in Get-ChildItem $mod -Recurse -File) {
   $r = Rel $f.FullName; $ext = $f.Extension.ToLower()
-  if ($f.DirectoryName -eq $mod -and $f.Name -in 'STATUS.md', 'README.md', 'CHANGELOG.md') { if ($Strict) { Find "${r}: this document belongs at the repo root, not in Mod/" } else { $warnings.Add("${r}: this document belongs at the repo root, not in Mod/") } }
+  # A CHANGELOG.md copy in the distributed folder is allowed (AUDIT 1.g, "copies dans dossier distribue si requises", ParaBellum and JapaneseHomestead 2026-11-12) as long as it
+  # is byte for byte the root one; a different copy is a stale copy and is reported.
+  if ($f.DirectoryName -eq $mod -and $f.Name -eq 'CHANGELOG.md' -and (Test-Path (Join-Path $ModRoot 'CHANGELOG.md'))) {
+    $same = ([IO.File]::ReadAllText($f.FullName) -ceq [IO.File]::ReadAllText((Join-Path $ModRoot 'CHANGELOG.md')))
+    if (-not $same) { $warnings.Add("${r}: differs from the root CHANGELOG.md (the copy in Mod/ must be identical; resync it)") }
+  }
+  elseif ($f.DirectoryName -eq $mod -and $f.Name -in 'STATUS.md', 'README.md', 'CHANGELOG.md') { if ($Strict) { Find "${r}: this document belongs at the repo root, not in Mod/" } else { $warnings.Add("${r}: this document belongs at the repo root, not in Mod/") } }
   elseif ($ext -eq '.pdb') { $warnings.Add("${r}: debug symbols must not ship") }
   elseif ($ext -eq '.dds') { if (-not (Test-Path ([IO.Path]::ChangeExtension($f.FullName, '.png')))) { $warnings.Add("${r}: .dds with no PNG sibling (.dds is a local derivative, never the only copy)") } }
   elseif ($ext -in '.psd', '.xcf', '.kra', '.blend', '.aseprite', '.ase', '.bak', '.tmp', '.orig', '.rej', '.user', '.log' -or $f.Name -eq 'Thumbs.db') { $warnings.Add("${r}: intermediate or editor file must not ship") }
@@ -211,11 +217,14 @@ if ($lfPath -and $about2) {
   $gated = @{}
   try {
     $lf.Load($lfPath)
-    foreach ($li in $lf.SelectNodes('//li[@IfModActive]')) { foreach ($id in ($li.GetAttribute('IfModActive') -split ',')) { if ($id.Trim()) { $gated[$id.Trim().ToLower()] = $true } } }
+    # IfModActive (any of) and IfModActiveAll (all of) both gate a folder on mods that must be in loadAfter; IfModNotActive gates too (no loadAfter demanded, it only stops the NOTE below)
+    foreach ($li in $lf.SelectNodes('//li[@IfModActive or @IfModActiveAll]')) { foreach ($attr in 'IfModActive', 'IfModActiveAll') { foreach ($id in ($li.GetAttribute($attr) -split ',')) { if ($id.Trim()) { $gated[$id.Trim().ToLower()] = $true } } } }
+    $gatedNot = @{}
+    foreach ($li in $lf.SelectNodes('//li[@IfModNotActive]')) { foreach ($id in ($li.GetAttribute('IfModNotActive') -split ',')) { if ($id.Trim()) { $gatedNot[$id.Trim().ToLower()] = $true } } }
     $after = @{}
     foreach ($li in $about2.DocumentElement.SelectNodes('loadAfter/li | loadAfterByVersion//li')) { $after[$li.InnerText.Trim().ToLower()] = $true }
     foreach ($id in $gated.Keys) { if (-not $after.ContainsKey($id)) { $warnings.Add("LoadFolders.xml gates a folder on $id, which is not in About.xml loadAfter") } }
-    foreach ($id in $after.Keys) { if (-not $gated.ContainsKey($id) -and $id -notlike 'ludeon.*' -and $id -ne 'brrainz.harmony') { $notes.Add("About.xml loadAfter $id gates no folder in LoadFolders.xml") } }
+    foreach ($id in $after.Keys) { if (-not $gated.ContainsKey($id) -and -not $gatedNot.ContainsKey($id) -and $id -notlike 'ludeon.*' -and $id -ne 'brrainz.harmony') { $notes.Add("About.xml loadAfter $id gates no folder in LoadFolders.xml") } }
   } catch { $warnings.Add("LoadFolders.xml is not readable: $($_.Exception.Message)") }
 }
 # 9.5 root docs in English: cheap scan of French function words (code, links and URLs removed first)
@@ -233,7 +242,7 @@ foreach ($n in 'README.md', 'ATTRIBUTION.md', 'LICENSE', 'STATUS.md') {
 }
 # 9.6 closed list of the mod root and of Art/ (owner 2026-10-28, STYLE_RIMWORLD.md "Dossiers a la racine d'un mod"): tracked or untracked-not-ignored entries only
 $rootOk = 'Mod', 'Art', 'Source', 'Tests', 'Docs', 'Build', '.github', '.git', '.claude', 'STATUS.md', 'README.md', 'ATTRIBUTION.md', 'CHANGELOG.md', 'LICENSE', 'TESTING.md', 'PUBLICATION.md', 'TRANSLATION_REVIEW.md', 'FRENCH_REVIEW.md', 'BACKLOG.md', 'mod.json', '.gitignore', '.gitattributes', 'desktop.ini'
-$artOk = 'Preview-source.png', 'ModIcon-source.png', 'echo-source.png', 'echo-preview.png', 'echo-concept.png', 'Preview.config.json', 'Preview.ico', 'ModIcon.ico', 'Gallery', 'Gallery-clean', '.render', 'desktop.ini'
+$artOk = 'Preview-source.png', 'ModIcon-source.png', 'echo-source.png', 'echo-preview.png', 'echo-concept.png', 'Preview.config.json', 'Preview.ico', 'preview.psd', 'ModIcon.ico', 'Gallery', 'Gallery-clean', 'Work', 'Locations', 'Assets', '.render', 'desktop.ini'
 $listed = $null
 if (Test-Path (Join-Path $ModRoot '.git')) {
   $listed = @(& git -C $ModRoot -c core.quotepath=off ls-files --cached --others --exclude-standard 2>$null)

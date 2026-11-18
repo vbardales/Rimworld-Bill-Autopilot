@@ -47,7 +47,8 @@ param(
   [Parameter(Mandatory)][string]$ModRoot,
   [string[]]$AlsoScan = @(),
   [switch]$Full,
-  [switch]$NoOrphans
+  [switch]$NoOrphans,
+  [switch]$NoDependencies   # do not add the Workshop folders of the About.xml modDependencies to -AlsoScan (lib/Dependencies.ps1)
 )
 $ErrorActionPreference = 'Stop'
 # Resolved, not joined as given: a root still carrying a `Tests\..` hop is longer than the paths measured into it, which
@@ -55,6 +56,10 @@ $ErrorActionPreference = 'Stop'
 $ModRoot = (Resolve-Path -LiteralPath $ModRoot).Path.TrimEnd('\')
 $mod = Join-Path $ModRoot 'Mod'
 if (-not (Test-Path -LiteralPath $mod)) { throw "No Mod/ folder under $ModRoot" }
+# Dependencies (2026-11-11, SerenBiotechExtended): like Check-DefRefs, the Workshop folders of the mods declared in About.xml modDependencies are
+# scanned for textures too (lib/Dependencies.ps1); -NoDependencies turns that off.
+. (Join-Path $PSScriptRoot 'lib\Dependencies.ps1')
+if (-not $NoDependencies) { $AlsoScan = Add-DependencyRoots -Existing $AlsoScan -ModPath $mod -Quiet }
 
 $errors = New-Object System.Collections.Generic.List[string]
 $warns = New-Object System.Collections.Generic.List[string]
@@ -65,7 +70,10 @@ $ignored = New-Object System.Collections.Generic.HashSet[string] ([StringCompare
 $inGit = $false
 try { $inGit = (& git -C $ModRoot rev-parse --is-inside-work-tree 2>$null) -eq 'true' } catch { }
 if ($inGit) {
-  foreach ($rel in (& git -C $ModRoot -c core.quotePath=false ls-files -o -i --exclude-standard 2>$null)) { if ($rel) { [void]$ignored.Add((Join-Path $ModRoot ($rel -replace '/', '\'))) } }
+  # A git warning on stderr (a dangling ignored symlink, 2026-11-09, EdenGarden) is a NativeCommandError under Stop: run this call under Continue.
+  $eap = $ErrorActionPreference; $ErrorActionPreference = 'Continue'
+  try { foreach ($rel in (& git -C $ModRoot -c core.quotePath=false ls-files -o -i --exclude-standard 2>$null)) { if ($rel) { [void]$ignored.Add((Join-Path $ModRoot ($rel -replace '/', '\'))) } } }
+  finally { $ErrorActionPreference = $eap }
 }
 
 # ---- content roots
@@ -298,6 +306,7 @@ foreach ($r in $refs) {
   elseif ($r.Kind -eq 'multi' -and $anyDir -and -not $strict) { $warns.Add("WARN: partial directions (the game falls back to another one): $where $($r.Element) '$($r.Path)' ($cls): missing $shown") }
   elseif ($nonBody) { $warns.Add("WARN: worn texture suffix is not a body type (animal apparel of another mod?): $where $($r.Element) '$($r.Path)' ($cls): wanted $shown") }
   elseif ($fileForFolder) { $warns.Add("WARN: $where $($r.Element) '$($r.Path)' ($cls) is a file where a folder is expected; works only if the game accepts a single file for that class") }
+  elseif ($r.Path -ceq 'Blank') { $warns.Add("WARN: texture 'Blank' is the game's own, not verifiable here: $where $($r.Element) ($cls)") }
   elseif ($parentShipped) { $errors.Add("ERROR: missing texture: $where $($r.Element) '$($r.Path)' ($cls): $shown") }
   else { $warns.Add("WARN: texture outside Mod/Textures (vanilla or another mod?): $where $($r.Element) '$($r.Path)' ($cls); pass -AlsoScan to verify") }
 }
