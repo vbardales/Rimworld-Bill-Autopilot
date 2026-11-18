@@ -73,9 +73,9 @@ remaining:
   - done 2026-11-13, 8.b owner reading: Virginie validated the review (TRANSLATION_REVIEW.md, FR rows Mode.Maintain "Maintenir", Mode.Inherit "Défaut ({0})", ClearOverrides.Zero "Aucune surcharge à effacer", title FR in Settings.Title and description). Main-button label left "Bill Autopilot" (clip risk), her call still open.
   - done 2026-11-14, Ecosystem second pass (PiI, `docs/inventory/ecosystem-steam/BillAutopilot.md`, ECOSYSTEM? answer): no fork, no replacement. Closest by theme: Bill Presets 3752731886 (1.6 1.7, updated 2026-10-13, manual bill templates and stockpile settings), Nutrition Based Bill Repeat Modes 3530977220 (cooking repeat modes), AdaptiveMealBill 3668761367 (meal automation). New: [B98] Random Bills 3839561553 and [B98] Clear Bills 3839559710 (bills tab overhaul; check against our bills-tab label marker, no button added there by us). Nothing subscribed by this session. Functional overlap stays the owner's call.
   - done 2026-11-13, Ecosystem (AUDIT 1.a, 8.0, answer of PiI, pushed e4ad269, `docs/inventory/ecosystem-steam/BillAutopilot.md`): Steam study by PiI, corpus scan `same-classify` no hit, no defName or label shared with ours. Neighbours by theme: Auto Bill Restore 3542342928, Periodic Bills 3685837355 (decision uninstall), AdaptiveMealBill 3668761367 (owner keep). Functional overlap is the owner's call. No upstream. Subscriptions handled by PiI, none by this session.
-session:      local_ba8e7e94-c3d2-4309-ab8a-9898909dd2f7
+session:      local_3a8a05c7-7219-41d0-8306-35bbfe80986d
 updated:      2026-11-18, shotlist v3, scenarios 23 and 24 recomposed, tickets 0f1b and 3445 filed
-protocols_read_sha: b58eb97505b7e92ad5b0d3c9bdbc011b76053159
+protocols_read_sha: c75e709ad14b7a6f8640d3660311fbd18e5242b0
 ---
 # Bill Autopilot: status
 
