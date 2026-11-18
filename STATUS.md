@@ -75,7 +75,7 @@ remaining:
   - done 2026-11-13, Ecosystem (AUDIT 1.a, 8.0, answer of PiI, pushed e4ad269, `docs/inventory/ecosystem-steam/BillAutopilot.md`): Steam study by PiI, corpus scan `same-classify` no hit, no defName or label shared with ours. Neighbours by theme: Auto Bill Restore 3542342928, Periodic Bills 3685837355 (decision uninstall), AdaptiveMealBill 3668761367 (owner keep). Functional overlap is the owner's call. No upstream. Subscriptions handled by PiI, none by this session.
 session:      local_ba8e7e94-c3d2-4309-ab8a-9898909dd2f7
 updated:      2026-11-18, shotlist v3, scenarios 23 and 24 recomposed, tickets 0f1b and 3445 filed
-protocols_read_sha: a644abeaf2d5d277f425731961b67997b576fb3e
+protocols_read_sha: b58eb97505b7e92ad5b0d3c9bdbc011b76053159
 ---
 # Bill Autopilot: status
 
