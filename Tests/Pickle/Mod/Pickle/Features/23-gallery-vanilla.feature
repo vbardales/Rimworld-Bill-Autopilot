@@ -7,62 +7,92 @@
 # what a picture shows: a green scenario says the trip happened, and each image is opened and looked at before it goes
 # into the gallery folder.
 #
-# SHOTLIST of 2026-11-13 (write-shotlist, v2; director pass by an Opus sub-agent, remarks kept or refused below)
+# SHOTLIST of 2026-11-18 (write-shotlist, v3, rewrite after the REDO verdict of score-gallery on the captures of runs 9a90 and 1718 and
+# the earlier ones of 2b53 and efe3; v2 of 2026-11-13 kept below it in git history)
 #
 # Place: Sanctuary of Nelim (fixture Nelims-tribe, mod Nelim's Sanctuary Backlot), hearth hall (hearth-hall, framed on
 #   (181, 115)). The undecorated fixture is kept: the decorated fixture z3 needs a large decor mod set, and the tab must stay
 #   vanilla. The hall is emptied by the area step that keeps the roof holders (the four columns stay), then staged as a
-#   tailor's corner. Roofed room: four standing torches and a brazier, lit (never remove the roof).
+#   tailor's corner. Roofed room: four standing torches and a brazier, lit (never remove the roof). NSB 2026-11-18 plans a
+#   rebuilt save Nelims-tribe-v2 (nothing built): this shotlist keeps Nelims-tribe.
 # Protagonist: Nelim (NSB, free). Look, kept in all her scenes (continuity): canon hair (Roo_HD_Hair_Highpony, canon colour,
-#   no change: the copper-hair override of the older plan needs the owner's validation, PENDING, so it is dropped), a basic
-#   shirt dyed teal rgb (40, 110, 120) (outfit free; teal against the orange bench and the warm light), default fixture pants,
-#   her own face, a smile. Animal: Atticus (NSB thrumbo, free, lives in the hall) asleep beside the brazier, seen from the front,
-#   in image 1 only; the mod adds no animal, so rule 5 has nothing to show.
+#   no change, no property change to validate), a basic shirt dyed teal rgb (40, 110, 120) (outfit free; teal against the orange
+#   bench and the warm light), default fixture pants, her own face, a smile. Animals: Atticus and Rain (NSB thrumbos, free, live in
+#   the hall) asleep by the brazier in image 1 only, Atticus facing the camera (South), Rain in profile (East); the mod adds no animal,
+#   so rule 5 has nothing to show.
 # Story, midday of one day (clear sky, game paused for each capture, 2,500 ticks per game hour): Nelim, a tailor who also feeds
 #   the Sanctuary, has stopped rewriting her bench's bill list by hand. She said once what the bench is for and the bench keeps
-#   its own list. Image 1 12:00 (+60 ticks of set-up): she works while the tab shows the list the bench keeps. Image 2 and 3 are
+#   its own list. Image 1 12:00 (+120 ticks of set-up): she works while the tab shows the list the bench keeps. Image 2 and 3 are
 #   the windows where she said it once and the one question it asked. Image 4 12:15 (+625 ticks, staged, research does not
 #   finish in 15 game minutes): a new recipe waits suspended for her answer. Image 5 the neighbours it found. Image 6 12:45
 #   (+1,875 ticks): she answered, the list is hers again.
 #
 # SHOTS (one line per image: place, hour, subject, composition, living things, decor, what it says, instant, how obtained)
-#   1. tailor-1-hall, story scene, WIDE (zoom 3 on (181, 115), camera centre (183, 114), Nelim and the bench right of centre,
-#      clear of the tab at the bottom left; foreground the bench and the brazier, background the four columns and the torches).
-#      Hearth hall, 12:00, clear, warm torch and brazier light on the parquet. Subject: Nelim at the hand tailoring bench with the
-#      bills tab open: three marked automatic bills and one hand-placed bill (no mark). Says: the tab shows what is left to make,
-#      not a wall. Living: Nelim mid-stitch (the job DoBill forced on the bench, then 60 ticks, then the state check "at the
-#      building and working", gaze toward the bench), the two NSB thrumbos Atticus and Rain asleep by the brazier (Atticus facing
-#      the camera). Decor in frame, grouped around the bench: HandTailoringBench, Brazier lit at (186, 114), PlantPot with
-#      Plant_Daylily fully grown x2 near (179, 113) and (183, 119), TorchLamp x4 lit, Column x4 (roof holders), parquet kept. The
-#      decor is removed after the shot. Legibility (j): step "the interface scale is 175 percent" (NPT 2026-11-13: exists,
-#      restored after the scenario; 175 first, then 150 to 200 if the mark is still thin), mark width checked on the 268 px
-#      shrink; fallback zoom 4 and crop. Subtitle: "Nelim sews. The bench keeps its own list."
-#      Instant: she is in the middle of the next pair; the tab already lists what follows.
+#   1. tailor-1-hall, story scene, WIDE (zoom 7 on the cell (184, 114): Nelim and the bench right of the tab, which covers the left
+#      third of the screen; foreground the bench and the brazier, background the four columns and the torches, both thrumbos in
+#      frame on the right). Hearth hall, 12:00, clear, warm torch and brazier light on the parquet. Subject: Nelim at the hand
+#      tailoring bench with the bills tab open: three marked automatic bills and one hand-placed bill (no mark). Says: the tab shows
+#      what is left to make, not a wall. Living: Nelim mid-stitch (the job DoBill forced on the bench, then 120 ticks, then the state
+#      check "at the building and working", gaze toward the bench), the two NSB thrumbos asleep by the brazier: Atticus at (188, 116)
+#      facing South (front), Rain at (190, 113) facing East (profile). Decor in frame, grouped around the bench: HandTailoringBench,
+#      Brazier lit at (184, 115), PlantPot with Plant_Daylily fully grown x2 near (179, 113) and (183, 119), Shelf near (176, 114),
+#      TorchLamp x4 lit, Column x4 (roof holders), parquet kept. The decor is removed after the shot. Legibility (j): the step
+#      "the interface scale is 125 percent" (restored after the scenario), HUD hidden so the tab, the bench and the thrumbos are the
+#      brightest blocks; mark width checked on the 268 px shrink, fallback zoom 5 and a tighter crop (scene 6 is then zoom 6) on the tab and the bench.
+#      Subtitle: "Nelim sews. The bench keeps its own list."
+#      Instant: she is in the middle of the next pair of pants (the hand-placed bill Make_Apparel_Pants, cloth stacked on the bench); the tab already lists what follows.
 #   2. tailor-2-profile, interface window (set aside, no subtitle): the profile window, one group open, one overridden recipe.
-#      Says: "say it once" happens here, reachable with a pointer alone. Taken on the hall, cropped.
+#      Says: "say it once" happens here, reachable with a pointer alone. Taken on window-backdrop-for-height, scale 125, HUD hidden,
+#      cropped sideways.
 #   3. tailor-3-confirm, interface window (set aside, no subtitle): the confirmation when a bench type is switched on, naming how
-#      many recipes it takes and at what target. Taken on the hall, cropped.
-#   4. tailor-4-stove, story scene, TIGHT (zoom 5 on the stove at (181, 115)). Same hall, 12:15, clear. Subject: the suspended
+#      many recipes it takes and at what target. Taken on window-backdrop-for-height, scale 125, HUD hidden, cropped sideways.
+#   4. tailor-4-stove, story scene, TIGHT (zoom 3 on the stove at (181, 115); a higher zoom number is wider, so 3 tight, 5 medium, 7 wide). Same hall, 12:15, clear. Subject: the suspended
 #      bill row of a newly researched recipe (pemmican) in the stove's bills tab, with the letter icon that named it kept in the
 #      right-hand stack (not cleared). Says: nothing is spent without an answer. Living: Nelim beside the stove (she feeds the
 #      Sanctuary), working a hand-placed meal bill while the new one waits, same teal shirt, same hair, smile, gaze toward the
-#      tab. Decor in frame only: FueledStove, Brazier lit at (184, 115), two PlantPot with Plant_Daylily fully grown, one
-#      TorchLamp lit, parquet; filth removed. Composition: foreground Nelim and the stove, background the torch and the pots,
-#      subject (the tab row) at the left, Nelim right of centre. How obtained: the job DoBill forced on the stove, then a few
-#      ticks and the state check "at the building and working". Same UI scale step as image 1.
+#      tab. Decor in frame only: FueledStove, Brazier lit at (184, 115), two PlantPot with Plant_Daylily fully grown, four
+#      TorchLamp lit, Shelf near (176, 114), parquet; filth removed. Composition: foreground Nelim and the stove, background the
+#      torch and the pots, subject (the tab row) at the left, Nelim right of centre. How obtained: the job DoBill forced on the
+#      stove, then 120 ticks and the state check "at the building and working". Same interface scale (125 percent) and hidden HUD as
+#      image 1; the tab now shows its first row because it fits the screen.
+#      Legibility (j): the suspended row and its "SUSPENDED" overlay are checked on the 268 px shrink; fallback: zoom 2 and the tab row kept inside the crop.
 #      Subtitle: "A new recipe waits for her answer."
-#      Instant: the letter has just arrived and she looks at it before touching anything.
-#   5. tailor-5-neighbours, interface window (set aside): the settings page naming the neighbours it found (24-gallery-neighbours).
-#   6. tailor-6-answered, story scene, MEDIUM (zoom 4 on the stove at (181, 115), the columns and torches visible). Same hall, 12:45,
+#      Instant: a new recipe has just been announced; she goes on with the meal bill she has on, her gaze on the stove, and the new row waits (the letter stays in the right-hand stack as a trace, not a co-subject).
+#   5. tailor-5-neighbours, interface window (set aside): the settings page naming the neighbours it found (24-gallery-neighbours),
+#      on window-backdrop-for-height, scale 125, HUD hidden, cropped sideways.
+#   6. tailor-6-answered, story scene, MEDIUM (zoom 5 on the stove at (181, 115), the columns and torches visible). Same hall, 12:45,
 #      clear. Subject: the closing: the pemmican bill she accepted is no longer suspended and the stove has taken it up. Says: she
 #      answered once, the list is hers again. Living: Nelim at the stove cooking the accepted recipe, same look, smile. Decor in
-#      frame: FueledStove, Brazier lit at (184, 115), two PlantPot with Plant_Daylily fully grown, TorchLamp x2 lit, Column x4.
-#      Composition: foreground Nelim and the stove, background the torches and columns, tab at the left. Instant: she has just
-#      unsuspended the bill and the stove has taken it up. How obtained: the bill unsuspended by the step, the job DoBill forced,
-#      then a few ticks and the state check "at the building and working". Same UI scale step as image 1.
+#      frame: FueledStove, Brazier lit at (184, 115), two PlantPot with Plant_Daylily fully grown, Shelf near (176, 114), TorchLamp
+#      x4 lit, Column x4. Composition: foreground Nelim and the stove, background the torches and columns, tab at the left showing the
+#      Pemmican row (no longer suspended). Instant: she has just unsuspended the bill and the stove has taken it up. How obtained:
+#      the bill unsuspended by the step, the job DoBill forced (meat and potatoes spawned beside the stove), then 120 ticks and the
+#      state check "at the building and working". Same interface scale and hidden HUD as image 1.
+#      Legibility (j): the Pemmican row without its suspended mark is checked on the 268 px shrink; fallback: zoom 4.
 #      Subtitle: "She answered once. The list is hers again."
 #   Series: wide (1), tight (4), medium (6), an opener that places the hall (1), a closer that answers the story (6), windows
-#   between them; the tab and the letter stay vanilla (pass without the optional mods).
+#   between them; the tab and the letter stay vanilla (pass without the optional mods). Props: vanilla only, none from a mod, so no
+#   thank-you line owed (Cat asked for more hall furnishing, answer not awaited; vanilla stays the default).
+#   Director pass (Opus sub-agent, 2026-11-18): KEPT: scene 4 instant no longer has her read the letter (a pawn cannot look at the interface), letter
+#   is a trace not a co-subject; zoom direction fixed (3 tight, 5 medium, 7 wide); hall layout frozen across scenes 1, 4, 6 (brazier (184, 115),
+#   four torches, pots near (179, 113) and (183, 118), Shelf near (176, 114)); scene 1 names the pants bill. REFUSED: one bench for the whole
+#   series (needs a Complex Clothing research and new recipe steps on the tailoring bench: cost and risk, the stove carries the new-recipe
+#   moment), finished pemmican or awake thrumbos in scene 6 (the bill was just accepted, nothing is produced yet), cutting the clock times.
+#
+# WHAT THE CAPTURES TAUGHT (read on the pictures, 2026-11-14 to 2026-11-18)
+#   - Interface scale 175 percent makes the bills tab taller than the screen: its top rows leave the frame (image 1: first auto
+#     bill cut, image 4 and 6: the list is an empty dark panel, the rows are above the top edge). Measured on the captures: the tab is
+#     480 x scale tall and ends above the inspect pane, so it fits only up to about 150 percent. v3 uses 125 percent (tab top about
+#     35 percent below the screen top), the safe side.
+#   - Zoom number 3 is very tight in this build (one cell about 135 px at 1920): Atticus asleep at (187, 116) filled the top right of image 1.
+#     v3 frames image 1 at zoom 7 so the hall, the columns, the torches and both thrumbos read.
+#   - HUD noise in every frame (resource list, mouse-over readout, weather panel, speed controls, colonist bar, a second "Nelim" label,
+#     selection brackets, the beige carpet corner of the hall). v3 hides them with the NPT presentation steps (Given: colonist bar,
+#     resource readout, main bar speed controls and mouse-over readout, alerts, tooltips, selection brackets, item and name labels).
+#   - Windows (images 2, 3, 5) sat over the busy hall with the full HUD and small text. v3 takes them on the bamboo backdrop
+#     (window-backdrop-for-height, GALLERY.md "Relire les captures"), at interface scale 125 percent, HUD hidden, then crops them
+#     sideways (Crop-SettingsShot.ps1 for the settings page; the other two by the same 5 px rule).
+#
 @review @gallery @requires:nelim.pickletools.screenshotmode @requires:nelim.pickletools.camerazoom @requires:nelim.pickletools.colonistrace @requires:nelim.pickletools.interfacescale @requires:nelim.pickletools.screenshotstudio @requires:nelim.pickletools.stagedecor
 Feature: the captures of the Workshop page, from the pass without the optional mods
 
@@ -73,7 +103,14 @@ Feature: the captures of the Workshop page, from the pass without the optional m
     And I set the hour to 12
     And I set the weather to "Clear"
     And the Learning helper is switched off
-    And Nelim's Pickle Tools: the interface scale is 175 percent
+    And Nelim's Pickle Tools: the colonist bar is hidden
+    And Nelim's Pickle Tools: the resource readout is hidden
+    And Nelim's Pickle Tools: the main bar, the speed controls and the mouse-over readout are hidden
+    And Nelim's Pickle Tools: the alerts are hidden
+    And Nelim's Pickle Tools: the tooltips are hidden
+    And Nelim's Pickle Tools: the selection brackets are hidden
+    And Nelim's Pickle Tools: the item and name labels are hidden
+    And Nelim's Pickle Tools: the interface scale is 125 percent
     And Nelim's Pickle Tools: the area from (172, 106) to (190, 124) is emptied, the roof holders kept
     And Nelim's Pickle Tools: I place the decor "TorchLamp" at (178, 113)
     And Nelim's Pickle Tools: the decor "TorchLamp" at (178, 113) is lit
@@ -83,10 +120,11 @@ Feature: the captures of the Workshop page, from the pass without the optional m
     And Nelim's Pickle Tools: the decor "TorchLamp" at (178, 117) is lit
     And Nelim's Pickle Tools: I place the decor "TorchLamp" at (184, 117)
     And Nelim's Pickle Tools: the decor "TorchLamp" at (184, 117) is lit
-    And Nelim's Pickle Tools: I place the decor "Brazier" at (186, 114)
-    And Nelim's Pickle Tools: the decor "Brazier" at (186, 114) is lit
+    And Nelim's Pickle Tools: I place the decor "Brazier" at (184, 115)
+    And Nelim's Pickle Tools: the decor "Brazier" at (184, 115) is lit
     And Nelim's Pickle Tools: I place the decor "PlantPot" holding "Plant_Daylily" fully grown near (179, 113)
-    And Nelim's Pickle Tools: I place the decor "PlantPot" holding "Plant_Daylily" fully grown near (183, 119)
+    And Nelim's Pickle Tools: I place the decor "Shelf" near (176, 114)
+    And Nelim's Pickle Tools: I place the decor "PlantPot" holding "Plant_Daylily" fully grown near (183, 118)
     And Bill Autopilot settings are at their defaults
     And a "HandTailoringBench" is built at (181, 115)
     Then the cell (181, 115) is lit at least 50 percent
@@ -96,8 +134,8 @@ Feature: the captures of the Workshop page, from the pass without the optional m
     And Bill Autopilot syncs the "HandTailoringBench" at (181, 115)
     Then Bill Autopilot has 3 bills up on the "HandTailoringBench" at (181, 115)
     When I add bill "Make_Apparel_Pants" to the "HandTailoringBench" at (181, 115)
-    And Nelim's Pickle Tools: the animal "Atticus" lies at (187, 116) facing South
-    And Nelim's Pickle Tools: the animal "Rain" lies at (188, 113) facing South
+    And Nelim's Pickle Tools: the animal "Atticus" lies at (188, 116) facing South
+    And Nelim's Pickle Tools: the animal "Rain" lies at (190, 113) facing East
     And Nelim's Pickle Tools: "Nelim" wears "Apparel_BasicShirt" dyed rgb (40, 110, 120)
     And Nelim's Sanctuary: Nelim has her own face
     And Nelim's Pickle Tools: 50 of the item "Cloth" are spawned at (182, 116)
@@ -105,7 +143,7 @@ Feature: the captures of the Workshop page, from the pass without the optional m
     And Nelim's Pickle Tools: I let 120 ticks pass
     Then Nelim's Pickle Tools: "Nelim" is at the building "HandTailoringBench" at (181, 115) and working
     When Nelim's Sanctuary: I am at the sanctuary "hearth-hall"
-    And Nelim's Pickle Tools: I frame the cell (183, 114) at zoom 3
+    And Nelim's Pickle Tools: I frame the cell (184, 114) at zoom 7
     And the bills tab of the Bill Autopilot bench "HandTailoringBench" at (181, 115) is opened
     And Nelim's Pickle Tools: the letters and the alerts are cleared from the screen
     And Nelim's Pickle Tools: the messages are cleared from the screen
@@ -120,6 +158,14 @@ Feature: the captures of the Workshop page, from the pass without the optional m
     And I set the hour to 12
     And I set the weather to "Clear"
     And the Learning helper is switched off
+    And Nelim's Pickle Tools: the colonist bar is hidden
+    And Nelim's Pickle Tools: the resource readout is hidden
+    And Nelim's Pickle Tools: the main bar, the speed controls and the mouse-over readout are hidden
+    And Nelim's Pickle Tools: the alerts are hidden
+    And Nelim's Pickle Tools: the tooltips are hidden
+    And Nelim's Pickle Tools: the selection brackets are hidden
+    And Nelim's Pickle Tools: the item and name labels are hidden
+    And Nelim's Pickle Tools: the interface scale is 125 percent
     And Nelim's Sanctuary: the animals are removed from the sanctuary "hearth-hall"
     And Nelim's Sanctuary: the sanctuary "hearth-hall" is emptied
     And Nelim's Pickle Tools: I place the decor "Column" at (178, 115)
@@ -139,8 +185,7 @@ Feature: the captures of the Workshop page, from the pass without the optional m
     Then the cell (181, 115) is lit at least 50 percent
     And Bill Autopilot is switched on for "HandTailoringBench"
     And Bill Autopilot overrides "Make_Patchleather" on "HandTailoringBench" to keep 200, restarting at 100
-    When Nelim's Sanctuary: I am at the sanctuary "hearth-hall"
-    And Nelim's Pickle Tools: I frame the cell (181, 115) at zoom 7
+    When Nelim's Sanctuary: I am at the sanctuary "window-backdrop-for-height"
     And Bill Autopilot's profile window for "HandTailoringBench" is opened
     And Bill Autopilot's profile window keeps open only the group of "Make_Patchleather"
     And Nelim's Pickle Tools: the letters and the alerts are cleared from the screen
@@ -156,6 +201,14 @@ Feature: the captures of the Workshop page, from the pass without the optional m
     And I set the hour to 12
     And I set the weather to "Clear"
     And the Learning helper is switched off
+    And Nelim's Pickle Tools: the colonist bar is hidden
+    And Nelim's Pickle Tools: the resource readout is hidden
+    And Nelim's Pickle Tools: the main bar, the speed controls and the mouse-over readout are hidden
+    And Nelim's Pickle Tools: the alerts are hidden
+    And Nelim's Pickle Tools: the tooltips are hidden
+    And Nelim's Pickle Tools: the selection brackets are hidden
+    And Nelim's Pickle Tools: the item and name labels are hidden
+    And Nelim's Pickle Tools: the interface scale is 125 percent
     And Nelim's Sanctuary: the animals are removed from the sanctuary "hearth-hall"
     And Nelim's Sanctuary: the sanctuary "hearth-hall" is emptied
     And Nelim's Pickle Tools: I place the decor "Column" at (178, 115)
@@ -174,8 +227,7 @@ Feature: the captures of the Workshop page, from the pass without the optional m
     And a "HandTailoringBench" is built at (181, 115)
     Then the cell (181, 115) is lit at least 50 percent
     And I close all dialogs
-    When Nelim's Sanctuary: I am at the sanctuary "hearth-hall"
-    And Nelim's Pickle Tools: I frame the cell (181, 115) at zoom 7
+    When Nelim's Sanctuary: I am at the sanctuary "window-backdrop-for-height"
     And Bill Autopilot's toggle is used to switch "HandTailoringBench" on
     Then Bill Autopilot asks before taking the recipes it would take on "HandTailoringBench"
     When Nelim's Pickle Tools: the letters and the alerts are cleared from the screen
@@ -191,13 +243,27 @@ Feature: the captures of the Workshop page, from the pass without the optional m
     And I set the hour to 12
     And I set the weather to "Clear"
     And the Learning helper is switched off
-    And Nelim's Pickle Tools: the interface scale is 175 percent
+    And Nelim's Pickle Tools: the colonist bar is hidden
+    And Nelim's Pickle Tools: the resource readout is hidden
+    And Nelim's Pickle Tools: the main bar, the speed controls and the mouse-over readout are hidden
+    And Nelim's Pickle Tools: the alerts are hidden
+    And Nelim's Pickle Tools: the tooltips are hidden
+    And Nelim's Pickle Tools: the selection brackets are hidden
+    And Nelim's Pickle Tools: the item and name labels are hidden
+    And Nelim's Pickle Tools: the interface scale is 125 percent
     And Nelim's Pickle Tools: the area from (172, 106) to (190, 124) is emptied, the roof holders kept
     And Nelim's Pickle Tools: I place the decor "TorchLamp" at (178, 113)
     And Nelim's Pickle Tools: the decor "TorchLamp" at (178, 113) is lit
+    And Nelim's Pickle Tools: I place the decor "TorchLamp" at (184, 113)
+    And Nelim's Pickle Tools: the decor "TorchLamp" at (184, 113) is lit
+    And Nelim's Pickle Tools: I place the decor "TorchLamp" at (178, 117)
+    And Nelim's Pickle Tools: the decor "TorchLamp" at (178, 117) is lit
+    And Nelim's Pickle Tools: I place the decor "TorchLamp" at (184, 117)
+    And Nelim's Pickle Tools: the decor "TorchLamp" at (184, 117) is lit
     And Nelim's Pickle Tools: I place the decor "Brazier" at (184, 115)
     And Nelim's Pickle Tools: the decor "Brazier" at (184, 115) is lit
     And Nelim's Pickle Tools: I place the decor "PlantPot" holding "Plant_Daylily" fully grown near (179, 113)
+    And Nelim's Pickle Tools: I place the decor "Shelf" near (176, 114)
     And Nelim's Pickle Tools: I place the decor "PlantPot" holding "Plant_Daylily" fully grown near (183, 118)
     And Bill Autopilot settings are at their defaults
     And a "FueledStove" is built at (181, 115)
@@ -220,7 +286,7 @@ Feature: the captures of the Workshop page, from the pass without the optional m
     And Nelim's Pickle Tools: I let 120 ticks pass
     Then Nelim's Pickle Tools: "Nelim" is at the building "FueledStove" at (181, 115) and working
     When Nelim's Sanctuary: I am at the sanctuary "hearth-hall"
-    And Nelim's Pickle Tools: I frame the cell (181, 115) at zoom 5
+    And Nelim's Pickle Tools: I frame the cell (181, 115) at zoom 3
     And the bills tab of the Bill Autopilot bench "FueledStove" at (181, 115) is opened
     And Nelim's Pickle Tools: the messages are cleared from the screen
     And I take a screenshot "gallery 4: a suspended bill for a newly researched recipe, with the letter that named it"
@@ -234,15 +300,27 @@ Feature: the captures of the Workshop page, from the pass without the optional m
     And I set the hour to 12
     And I set the weather to "Clear"
     And the Learning helper is switched off
-    And Nelim's Pickle Tools: the interface scale is 175 percent
+    And Nelim's Pickle Tools: the colonist bar is hidden
+    And Nelim's Pickle Tools: the resource readout is hidden
+    And Nelim's Pickle Tools: the main bar, the speed controls and the mouse-over readout are hidden
+    And Nelim's Pickle Tools: the alerts are hidden
+    And Nelim's Pickle Tools: the tooltips are hidden
+    And Nelim's Pickle Tools: the selection brackets are hidden
+    And Nelim's Pickle Tools: the item and name labels are hidden
+    And Nelim's Pickle Tools: the interface scale is 125 percent
     And Nelim's Pickle Tools: the area from (172, 106) to (190, 124) is emptied, the roof holders kept
     And Nelim's Pickle Tools: I place the decor "TorchLamp" at (178, 113)
     And Nelim's Pickle Tools: the decor "TorchLamp" at (178, 113) is lit
+    And Nelim's Pickle Tools: I place the decor "TorchLamp" at (184, 113)
+    And Nelim's Pickle Tools: the decor "TorchLamp" at (184, 113) is lit
+    And Nelim's Pickle Tools: I place the decor "TorchLamp" at (178, 117)
+    And Nelim's Pickle Tools: the decor "TorchLamp" at (178, 117) is lit
     And Nelim's Pickle Tools: I place the decor "TorchLamp" at (184, 117)
     And Nelim's Pickle Tools: the decor "TorchLamp" at (184, 117) is lit
     And Nelim's Pickle Tools: I place the decor "Brazier" at (184, 115)
     And Nelim's Pickle Tools: the decor "Brazier" at (184, 115) is lit
     And Nelim's Pickle Tools: I place the decor "PlantPot" holding "Plant_Daylily" fully grown near (179, 113)
+    And Nelim's Pickle Tools: I place the decor "Shelf" near (176, 114)
     And Nelim's Pickle Tools: I place the decor "PlantPot" holding "Plant_Daylily" fully grown near (183, 118)
     And Bill Autopilot settings are at their defaults
     And a "FueledStove" is built at (181, 115)
@@ -266,7 +344,7 @@ Feature: the captures of the Workshop page, from the pass without the optional m
     And Nelim's Pickle Tools: I let 120 ticks pass
     Then Nelim's Pickle Tools: "Nelim" is at the building "FueledStove" at (181, 115) and working
     When Nelim's Sanctuary: I am at the sanctuary "hearth-hall"
-    And Nelim's Pickle Tools: I frame the cell (181, 115) at zoom 4
+    And Nelim's Pickle Tools: I frame the cell (181, 115) at zoom 5
     And the bills tab of the Bill Autopilot bench "FueledStove" at (181, 115) is opened
     And Nelim's Pickle Tools: the letters and the alerts are cleared from the screen
     And Nelim's Pickle Tools: the messages are cleared from the screen
