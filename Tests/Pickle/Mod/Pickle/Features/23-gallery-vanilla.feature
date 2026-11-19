@@ -33,9 +33,9 @@
 #      frame on the right). Hearth hall, 12:00, clear, warm torch and brazier light on the parquet. Subject: Nelim at the hand
 #      tailoring bench with the bills tab open: three marked automatic bills and one hand-placed bill (no mark). Says: the tab shows
 #      what is left to make, not a wall. Living: Nelim mid-stitch (the job DoBill forced on the bench, then 120 ticks, then the state
-#      check "at the building and working", gaze toward the bench), the two NSB thrumbos asleep by the brazier: Atticus at (188, 116)
-#      facing South (front), Rain at (190, 113) facing East (profile). Decor in frame, grouped around the bench: HandTailoringBench,
-#      Brazier lit at (184, 115), PlantPot with Plant_Daylily fully grown x2 near (179, 113) and (183, 119), Shelf near (176, 114),
+#      check "at the building and working", gaze toward the bench), the two NSB thrumbos asleep by the brazier: Atticus at (185, 116)
+#      facing South (front), Rain at (185, 113) facing East (profile). Decor in frame, grouped around the bench: HandTailoringBench,
+#      Brazier lit at (184, 115), PlantPot with Plant_Daylily fully grown x2 near (179, 113) and (183, 118), Shelf near (176, 114),
 #      TorchLamp x4 lit, Column x4 (roof holders), parquet kept. The decor is removed after the shot. Legibility (j): the step
 #      "the interface scale is 125 percent" (restored after the scenario), HUD hidden so the tab, the bench and the thrumbos are the
 #      brightest blocks; mark width checked on the 268 px shrink, fallback zoom 5 and a tighter crop (scene 6 is then zoom 6) on the tab and the bench.
@@ -78,6 +78,29 @@
 #   four torches, pots near (179, 113) and (183, 118), Shelf near (176, 114)); scene 1 names the pants bill. REFUSED: one bench for the whole
 #   series (needs a Complex Clothing research and new recipe steps on the tailoring bench: cost and risk, the stove carries the new-recipe
 #   moment), finished pemmican or awake thrumbos in scene 6 (the bill was just accepted, nothing is produced yet), cutting the clock times.
+#
+# SHOTLIST v4 of 2026-11-19 (write-shotlist after the REDO verdict of score-gallery on the captures of run 0f1b: images 1, 4, 6 all
+#   under 4 on a note; windows 2, 3, 5 kept as candidates, cropped). Changes to images 1, 4 and 6 only, everything else of v3 stands:
+#   - Decor (b, decoration under 4 at 3.5 on image 4: one torch visible, pots cropped): the hall is furnished as a lived-in tailor's
+#     and cook's corner with the vanilla Core pieces Cat photographed (catalogue bap-hearth-furniture, answer of 2026-11-18, vanilla,
+#     no power, no dependency, nothing added to About.xml, so no thank-you line owed). Placed above and below the subject's column, since
+#     the crop shows only about four cells beside the tab: Table2x2c near (179, 118), DiningChair near (181, 118), Armchair near (178, 116),
+#     Bookcase near (180, 111), Dresser near (182, 111), Stool near (183, 112), plus the v3 Shelf, two PlantPot with Plant_Daylily
+#     (the second near (183, 118)), Brazier and four TorchLamp. Same layout in images 1, 4 and 6 (hall layout frozen). Not used:
+#     Carpet_MindbendA (Ideology, dependency), no vanilla rug exists.
+#   - Legibility (j weak at 268 px on all three, the tab is only 525 px of 1920): the capture is CROPPED sideways after the shot to the
+#     left 1100 px of the frame (full height), which holds the bills tab and the subject; rate-gallery crops it and score-gallery rates
+#     the crop at 268 px (ffmpeg shrink), judging j on shapes (row marks, the SUSPENDED band), not on words. Interface scale stays 125
+#     (the tab grows with the scale, so 150 would leave less map in the crop). The camera is framed so the subject lands near pixel 800:
+#     image 1 centre (184, 114) at zoom 7, image 4 centre (182, 115) at zoom 3, image 6 centre (183, 115) at zoom 5.
+#   - Living things (c): the thrumbos move inside the crop of image 1: Atticus at (185, 116) facing South, Rain at (185, 113) facing East.
+#   - Image 4 no longer carries the letter in frame (the letter stack sits at the right edge, outside the crop): the story "nothing is
+#     spent without an answer" is carried by the large SUSPENDED overlay on the pemmican row (read legible on the capture of 0f1b), Nelim
+#     at the stove and the furniture around her. The scenario still leaves the letter on screen; it is cut by the crop, not hidden.
+#   - Paused mid-play: check on each capture that the work progress bar over Nelim and the sleep marks over the thrumbos survive the
+#     HUD-hiding steps. Shared landmark of images 1 and 6: the Brazier at (184, 115); the pemmican row sits in the same screen spot in 4 and 6.
+#   - Director pass v4 (Opus sub-agent, 2026-11-19): KEPT remarks 1, 2, 3, 5, 6, 7 and 8 (landmark for 1 and 6 only: the Brazier is outside
+#     the crop of 4), the crop judged on shapes (4). REFUSED the 150 percent scale of 4 (the tab scales with it, the crop would hold less map).
 #
 # WHAT THE CAPTURES TAUGHT (read on the pictures, 2026-11-14 to 2026-11-18)
 #   - Interface scale 175 percent makes the bills tab taller than the screen: its top rows leave the frame (image 1: first auto
@@ -125,6 +148,12 @@ Feature: the captures of the Workshop page, from the pass without the optional m
     And Nelim's Pickle Tools: I place the decor "PlantPot" holding "Plant_Daylily" fully grown near (179, 113)
     And Nelim's Pickle Tools: I place the decor "Shelf" near (176, 114)
     And Nelim's Pickle Tools: I place the decor "PlantPot" holding "Plant_Daylily" fully grown near (183, 118)
+    And Nelim's Pickle Tools: I place the decor "Table2x2c" near (179, 118)
+    And Nelim's Pickle Tools: I place the decor "DiningChair" near (181, 118)
+    And Nelim's Pickle Tools: I place the decor "Armchair" near (178, 116)
+    And Nelim's Pickle Tools: I place the decor "Bookcase" near (180, 111)
+    And Nelim's Pickle Tools: I place the decor "Dresser" near (182, 111)
+    And Nelim's Pickle Tools: I place the decor "Stool" near (183, 112)
     And Bill Autopilot settings are at their defaults
     And a "HandTailoringBench" is built at (181, 115)
     Then the cell (181, 115) is lit at least 50 percent
@@ -134,8 +163,8 @@ Feature: the captures of the Workshop page, from the pass without the optional m
     And Bill Autopilot syncs the "HandTailoringBench" at (181, 115)
     Then Bill Autopilot has 3 bills up on the "HandTailoringBench" at (181, 115)
     When I add bill "Make_Apparel_Pants" to the "HandTailoringBench" at (181, 115)
-    And Nelim's Pickle Tools: the animal "Atticus" lies at (188, 116) facing South
-    And Nelim's Pickle Tools: the animal "Rain" lies at (190, 113) facing East
+    And Nelim's Pickle Tools: the animal "Atticus" lies at (185, 116) facing South
+    And Nelim's Pickle Tools: the animal "Rain" lies at (185, 113) facing East
     And Nelim's Pickle Tools: "Nelim" wears "Apparel_BasicShirt" dyed rgb (40, 110, 120)
     And Nelim's Sanctuary: Nelim has her own face
     And Nelim's Pickle Tools: 50 of the item "Cloth" are spawned at (182, 116)
@@ -265,6 +294,12 @@ Feature: the captures of the Workshop page, from the pass without the optional m
     And Nelim's Pickle Tools: I place the decor "PlantPot" holding "Plant_Daylily" fully grown near (179, 113)
     And Nelim's Pickle Tools: I place the decor "Shelf" near (176, 114)
     And Nelim's Pickle Tools: I place the decor "PlantPot" holding "Plant_Daylily" fully grown near (183, 118)
+    And Nelim's Pickle Tools: I place the decor "Table2x2c" near (179, 118)
+    And Nelim's Pickle Tools: I place the decor "DiningChair" near (181, 118)
+    And Nelim's Pickle Tools: I place the decor "Armchair" near (178, 116)
+    And Nelim's Pickle Tools: I place the decor "Bookcase" near (180, 111)
+    And Nelim's Pickle Tools: I place the decor "Dresser" near (182, 111)
+    And Nelim's Pickle Tools: I place the decor "Stool" near (183, 112)
     And Bill Autopilot settings are at their defaults
     And a "FueledStove" is built at (181, 115)
     And Nelim's Pickle Tools: the building "FueledStove" at (181, 115) is fuelled
@@ -286,7 +321,7 @@ Feature: the captures of the Workshop page, from the pass without the optional m
     And Nelim's Pickle Tools: I let 120 ticks pass
     Then Nelim's Pickle Tools: "Nelim" is at the building "FueledStove" at (181, 115) and working
     When Nelim's Sanctuary: I am at the sanctuary "hearth-hall"
-    And Nelim's Pickle Tools: I frame the cell (181, 115) at zoom 3
+    And Nelim's Pickle Tools: I frame the cell (182, 115) at zoom 3
     And the bills tab of the Bill Autopilot bench "FueledStove" at (181, 115) is opened
     And Nelim's Pickle Tools: the messages are cleared from the screen
     And I take a screenshot "gallery 4: a suspended bill for a newly researched recipe, with the letter that named it"
@@ -322,6 +357,12 @@ Feature: the captures of the Workshop page, from the pass without the optional m
     And Nelim's Pickle Tools: I place the decor "PlantPot" holding "Plant_Daylily" fully grown near (179, 113)
     And Nelim's Pickle Tools: I place the decor "Shelf" near (176, 114)
     And Nelim's Pickle Tools: I place the decor "PlantPot" holding "Plant_Daylily" fully grown near (183, 118)
+    And Nelim's Pickle Tools: I place the decor "Table2x2c" near (179, 118)
+    And Nelim's Pickle Tools: I place the decor "DiningChair" near (181, 118)
+    And Nelim's Pickle Tools: I place the decor "Armchair" near (178, 116)
+    And Nelim's Pickle Tools: I place the decor "Bookcase" near (180, 111)
+    And Nelim's Pickle Tools: I place the decor "Dresser" near (182, 111)
+    And Nelim's Pickle Tools: I place the decor "Stool" near (183, 112)
     And Bill Autopilot settings are at their defaults
     And a "FueledStove" is built at (181, 115)
     And Nelim's Pickle Tools: the building "FueledStove" at (181, 115) is fuelled
@@ -344,7 +385,7 @@ Feature: the captures of the Workshop page, from the pass without the optional m
     And Nelim's Pickle Tools: I let 120 ticks pass
     Then Nelim's Pickle Tools: "Nelim" is at the building "FueledStove" at (181, 115) and working
     When Nelim's Sanctuary: I am at the sanctuary "hearth-hall"
-    And Nelim's Pickle Tools: I frame the cell (181, 115) at zoom 5
+    And Nelim's Pickle Tools: I frame the cell (183, 115) at zoom 5
     And the bills tab of the Bill Autopilot bench "FueledStove" at (181, 115) is opened
     And Nelim's Pickle Tools: the letters and the alerts are cleared from the screen
     And Nelim's Pickle Tools: the messages are cleared from the screen
