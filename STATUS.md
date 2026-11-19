@@ -26,7 +26,7 @@ remaining:
   - open 2026-11-19, Audit rules read at resume: session accepts or refuses each image alone (no Parked for gallery takes, a REDO take is deleted with its run folder); STATUS.md migration done (Docs/PROTOCOLS-READ.md and Docs/runs/status-history.md deleted, pickle-runs.md renamed pickle.md, old dated sections dropped). Check-Status WARN npt-sync: NPT changed 2026-11-19 after Steps read 2026-11-18, run sync-nsb-npt before the next scenario edit
 session:      local_3a8a05c7-7219-41d0-8306-35bbfe80986d
 updated:      2026-11-19, resume 5, image 5 result read, STATUS.md migrated
-protocols_read_sha: 564cc359781896404d2018b3ce73bcc00d27a5d7
+protocols_read_sha: c8d9d4aa2742b2fe40f6cb776649de9d943c171a
 ---
 # Bill Autopilot: status
 
