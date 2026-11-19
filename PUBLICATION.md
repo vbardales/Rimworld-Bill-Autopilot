@@ -59,14 +59,14 @@ trip happened, not that the picture shows anything.
 
 One line of English written at the bottom of each scene image, like a film subtitle (`GALLERY.md`, "Sous-titres").
 Scenes without an interface window only: images 1, 4 and 6. The windows (2, 3, 5) and `0-preview.png` carry none.
-The unsubtitled originals live in `Art/Gallery-clean/`; the file names below are the planned ones and are fixed when
-the owner accepts the captures and the gallery is reindexed.
+The unsubtitled originals live in `Art/Gallery-clean/` (images 1, 4, 6, posed 2026-11-19, names final);
+the subtitled copies are in `Art/Gallery/`.
 
 | index | file | line |
 | --- | --- | --- |
-| 1 | `1-hall.png` | Nelim said it once, and the bench keeps its own list. |
-| 4 | `4-stove.png` | A new recipe waits, suspended, until she says yes. |
-| 6 | `6-answered.png` | She said yes, and the stove took it up. |
+| 1 | `1-tailor-1-hall.png` | Nelim said it once, and the bench keeps its own list. |
+| 4 | `4-tailor-4-stove.png` | A new recipe waits, suspended, until she says yes. |
+| 6 | `6-tailor-6-answered.png` | She said yes, and the stove took it up. |
 
 ## Dependencies and DLC to declare
 

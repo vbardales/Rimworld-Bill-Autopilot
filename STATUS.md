@@ -23,7 +23,7 @@ workshop:      3806709456
 publication_changelog_review_sha: 66acf05179c23fa2e50ec48d22c044da6729dcb5
 code_review_sha: e70a6e39dea9cfba5019870b3a02288c55dca18b
 remaining:
-  - open 2026-11-19, gallery six images kept (1 from ticket `daab` green, 4 and 6 from `ffb0`, 2, 3, 5 windows), all cropped in `Art/Gallery/`; PUBLICATION.md gallery table updated; next: replay-audit decides the stage. Subtitles for 1, 4, 6 (PUBLICATION.md) fixed at publish; clean originals in `Art/Gallery-clean/` not made yet
+  - open 2026-11-19, gallery done: six images kept, subtitles burned on 1, 4, 6, PUBLICATION.md tables updated; next: mountPreview (echo from gallery, preview_source_decision, Preview redo)
   - open 2026-11-19, Audit rules read at resume: session accepts or refuses each image alone (no Parked for gallery takes, a REDO take is deleted with its run folder); STATUS.md migration done (Docs/PROTOCOLS-READ.md and Docs/runs/status-history.md deleted, pickle-runs.md renamed pickle.md, old dated sections dropped). Check-Status WARN npt-sync: NPT changed 2026-11-19 after Steps read 2026-11-18, run sync-nsb-npt before the next scenario edit
 session:      local_3a8a05c7-7219-41d0-8306-35bbfe80986d
 updated:      2026-11-19, resume 6, ticket daab green, image 1 kept, six images done
@@ -86,7 +86,7 @@ Evidence is kept on disk only (`Tests/Pickle/Inbox/` arrivals, `Evidence/` proof
 
 ## Gallery
 
-Six images kept (2026-11-19), shot in the hearth hall of the Sanctuary of Nelim (fixture `Nelims-tribe`, scenario `23-gallery-vanilla.feature`, window 5 from feature 24; plan in the header of feature 23, shotlist v4). `Art/Gallery/` holds `0-preview.png` (byte copy of `Mod/About/Preview.png`) and the cropped captures below; none accepted by the owner yet (`showcase: partial`); no subtitle posed, `Art/Gallery-clean/` not created (9.e bis, `rate-gallery` to run).
+Six images kept (2026-11-19), shot in the hearth hall of the Sanctuary of Nelim (fixture `Nelims-tribe`, scenario `23-gallery-vanilla.feature`, window 5 from feature 24; plan in the header of feature 23, shotlist v4). `Art/Gallery/` holds `0-preview.png` (byte copy of `Mod/About/Preview.png`) and the cropped captures below; subtitles of 1, 4, 6 burned 2026-11-19 (clean originals in `Art/Gallery-clean/`, copies in `Art/Gallery/`), score-gallery verdict candidate on all three (image, adequacy, understanding, decoration 4 or more; j ok on shapes at 268 px); the owner validates only "ready to publish" (`showcase: partial`).
 
 | Index | File | Source run | Crop |
 | --- | --- | --- | --- |
