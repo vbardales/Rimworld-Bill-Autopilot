@@ -33,8 +33,8 @@
 #      frame on the right). Hearth hall, 12:00, clear, warm torch and brazier light on the parquet. Subject: Nelim at the hand
 #      tailoring bench with the bills tab open: three marked automatic bills and one hand-placed bill (no mark). Says: the tab shows
 #      what is left to make, not a wall. Living: Nelim mid-stitch (the job DoBill forced on the bench, then 120 ticks, then the state
-#      check "at the building and working", gaze toward the bench), the two NSB thrumbos asleep by the brazier: Atticus at (185, 116)
-#      facing South (front), Rain at (185, 113) facing East (profile). Decor in frame, grouped around the bench: HandTailoringBench,
+#      check "at the building and working", gaze toward the bench), the two NSB thrumbos asleep by the brazier: Atticus at (186, 116)
+#      facing South (front), Rain at (186, 113) facing East (profile). Decor in frame, grouped around the bench: HandTailoringBench,
 #      Brazier lit at (184, 115), PlantPot with Plant_Daylily fully grown x2 near (179, 113) and (183, 118), Shelf near (176, 114),
 #      TorchLamp x4 lit, Column x4 (roof holders), parquet kept. The decor is removed after the shot. Legibility (j): the step
 #      "the interface scale is 125 percent" (restored after the scenario), HUD hidden so the tab, the bench and the thrumbos are the
@@ -93,7 +93,7 @@
 #     the crop at 268 px (ffmpeg shrink), judging j on shapes (row marks, the SUSPENDED band), not on words. Interface scale stays 125
 #     (the tab grows with the scale, so 150 would leave less map in the crop). The camera is framed so the subject lands near pixel 800:
 #     image 1 centre (184, 114) at zoom 7, image 4 centre (182, 115) at zoom 3, image 6 centre (183, 115) at zoom 5.
-#   - Living things (c): the thrumbos move inside the crop of image 1: Atticus at (185, 116) facing South, Rain at (185, 113) facing East.
+#   - Living things (c): the thrumbos move inside the crop of image 1: Atticus at (186, 116) facing South, Rain at (186, 113) facing East.
 #   - Image 4 no longer carries the letter in frame (the letter stack sits at the right edge, outside the crop): the story "nothing is
 #     spent without an answer" is carried by the large SUSPENDED overlay on the pemmican row (read legible on the capture of 0f1b), Nelim
 #     at the stove and the furniture around her. The scenario still leaves the letter on screen; it is cut by the crop, not hidden.
@@ -163,8 +163,8 @@ Feature: the captures of the Workshop page, from the pass without the optional m
     And Bill Autopilot syncs the "HandTailoringBench" at (181, 115)
     Then Bill Autopilot has 3 bills up on the "HandTailoringBench" at (181, 115)
     When I add bill "Make_Apparel_Pants" to the "HandTailoringBench" at (181, 115)
-    And Nelim's Pickle Tools: the animal "Atticus" lies at (185, 116) facing South
-    And Nelim's Pickle Tools: the animal "Rain" lies at (185, 113) facing East
+    And Nelim's Pickle Tools: the animal "Atticus" lies at (186, 116) facing South
+    And Nelim's Pickle Tools: the animal "Rain" lies at (186, 113) facing East
     And Nelim's Pickle Tools: "Nelim" wears "Apparel_BasicShirt" dyed rgb (40, 110, 120)
     And Nelim's Sanctuary: Nelim has her own face
     And Nelim's Pickle Tools: 50 of the item "Cloth" are spawned at (182, 116)
