@@ -29,13 +29,14 @@ And one that surprises people: **Steam creates every item private.** RimWorld ne
 
 Steam shows the first one large. That slot goes to the most demonstrative image, not the prettiest.
 
-**State on 2026-11-14:** `Art/Gallery/` holds only `0-preview.png`, a byte copy of `Mod/About/Preview.png`
-(slot 0, the Preview itself, 896x504; the captures below follow it as `1-` to `6-`). Six images, one story: midday of
+**State on 2026-11-19:** `Art/Gallery/` holds `0-preview.png`, a byte copy of `Mod/About/Preview.png`
+(slot 0, the Preview itself, 896x504), and the six captures `1-tailor-1-hall.png` to `6-tailor-6-answered.png`
+(images 1, 4 and 6 cropped to the left 1100 px, 1200 px and 1150 px of 1920; windows 2, 3 and 5 cropped to the window). Six images, one story: midday of
 one day in the hearth hall of the Sanctuary of Nelim, where Nelim stops rewriting her bench's list (shotlist v2 of
 2026-11-13, header of `23-gallery-vanilla.feature`; plan scores 5, 5, 5). The captures are produced by
 dedicated Pickle scenarios (`23-gallery-vanilla.feature` for 1 to 4 and 6, `24-gallery-neighbours.feature` for 5) in the Sanctuary,
 so they can be remade after any interface change. Older captures were taken in the deleted zen studio or under the
-previous five-image plan and are gone. No capture of the current plan exists yet, so none is in `Art/Gallery/`.
+previous five-image plan and are gone.
 
 | # | Shotlist id | What it must show | Why this slot |
 | --- | --- | --- | --- |
