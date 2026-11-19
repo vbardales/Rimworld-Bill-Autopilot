@@ -104,7 +104,7 @@ Series k: ok (one story with place, day, rhythm; wide 1, medium 6, tight 4; open
 
 ## Ecosystem
 
-Report `docs/inventory/ecosystem-steam/BillAutopilot.md` (PiI, 2026-11-13, second pass 2026-11-14; delta asked 2026-11-19). Original work: no parent, translation, retexture or patch of ours. No fork, no replacement. Closest ideas: Bill Presets 3752731886 (manual templates), AdaptiveMealBill 3668761367 (meals only, kept). Others: Auto Bill Restore, Periodic Bills, Nutrition Based Bill Repeat Modes, [B98] Random Bills, [B98] Clear Bills, No Max Bills (Redux, KV), Nice Bill Tab and Expansion, Categorized Bill Dropdown, Bill Manager (dead). To check in play tests: bills-tab overhauls (B98 Clear Bills, Nice Bill Tab) against our gizmo, Bill Presets with our saved state. Verdict: no duplicate, mod stays.
+Report `docs/inventory/ecosystem-steam/BillAutopilot.md` (PiI, 2026-11-13, second pass 2026-11-14; delta 2026-11-19: nothing new since 2026-11-14, neighbours unchanged). Original work: no parent, translation, retexture or patch of ours. No fork, no replacement. Closest ideas: Bill Presets 3752731886 (manual templates), AdaptiveMealBill 3668761367 (meals only, kept). Others: Auto Bill Restore, Periodic Bills, Nutrition Based Bill Repeat Modes, [B98] Random Bills, [B98] Clear Bills, No Max Bills (Redux, KV), Nice Bill Tab and Expansion, Categorized Bill Dropdown, Bill Manager (dead). To check in play tests: bills-tab overhauls (B98 Clear Bills, Nice Bill Tab) against our gizmo, Bill Presets with our saved state. Verdict: no duplicate, mod stays.
 
 ## NSB
 
