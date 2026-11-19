@@ -21,7 +21,7 @@ Itself checked by breaking clamp on purpose and confirming those two checks, onl
 
 ## The Pickle suite, and how many passes a verdict needs
 
-Twenty-six feature files in `Tests/Pickle/`, written from 21 September 2026, played since 23 September (`docs/runs/pickle-runs.md` has one line per run). Hold only what running game can show. Decision layer: which mode applies, which target, which floor, clamps, overflow guard, fallback for repeat mode whose owner gone, settings round trip through Scribe: proven by executable suite above, deliberately not restated there: Pickle run takes whole machine for tens of minutes, scenario repeating unit test would cost that every time and add nothing.
+Twenty-six feature files in `Tests/Pickle/`, written from 21 September 2026, played since 23 September (`Docs/runs/pickle.md` has one line per run). Hold only what running game can show. Decision layer: which mode applies, which target, which floor, clamps, overflow guard, fallback for repeat mode whose owner gone, settings round trip through Scribe: proven by executable suite above, deliberately not restated there: Pickle run takes whole machine for tens of minutes, scenario repeating unit test would cost that every time and add nothing.
 
 `Tests/Pickle/README.md` says per feature why game needed, keeps list of what stays manual. Numbered scenarios below are what features were written from.
 

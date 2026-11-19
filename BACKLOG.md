@@ -89,9 +89,9 @@ Correction go into 1.0.0; check only verify behaviour already right go into 1.0.
   lines together), neither mention it. Nothing to fix before commit.
 - [ ] **`TESTING.md` badly stale (found 2026-09-27, not fixed).** Still read "Nothing has been released...
   Never run once: everything written since" and mark most scenarios "Confirmed once" or "Never run", though
-  `STATUS.md` and `docs/runs/pickle-runs.md` show most of suite green since 2026-09-25 (French passes included).
+  `STATUS.md` and `Docs/runs/pickle.md` show most of suite green since 2026-09-25 (French passes included).
   Also say Choose Your Recipe "Not applicable" to test because "nothing of this mod's is left to assert",
-  which pending-trap finding above contradict. Rewrite against current `STATUS.md`/`pickle-runs.md` owed
+  which pending-trap finding above contradict. Rewrite against current `STATUS.md`/`pickle.md` owed
   before `tested`, but separate, larger pass: not attempted here to stay in scope of README.template
   check.
 

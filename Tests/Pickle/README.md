@@ -1,6 +1,6 @@
 # The Pickle suite for Bill Autopilot
 
-Twenty feature files, played since 2026-09-23 (`docs/runs/pickle-runs.md`). They hold what only a running game can show;
+Twenty feature files, played since 2026-09-23 (`Docs/runs/pickle.md`). They hold what only a running game can show;
 everything provable outside one is proven outside one, in `Tests/BillAutopilot.Tests.csproj`.
 
 A run takes the whole machine — real rendering, real clicks, real screenshots — for tens of

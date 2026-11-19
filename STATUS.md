@@ -81,7 +81,7 @@ Version aimed: **1.0.0**, unreleased. Workshop item 3806709456 exists, private (
 ## Evidence
 
 Evidence is kept on disk only (`Tests/Pickle/Inbox/` arrivals, `Evidence/` proofs, `Parked/` held failures; untracked or git-ignored); tracked is one-line-per-run summary
-`Docs/runs/pickle.md`. Older greens had no deletion condition and were deleted in the 2026-10-19 triage. Now kept: `Evidence/foreign-mode-14` (minified proof, RELEASE.md); Inbox and Parked empty. Gallery image 3 never green (`remaining`). History of folded sections: `docs/runs/status-history.md`.
+`Docs/runs/pickle.md`. Older greens had no deletion condition and were deleted in the 2026-10-19 triage. Now kept: `Evidence/foreign-mode-14` (minified proof, RELEASE.md); Inbox and Parked empty. Gallery image 3 never green (`remaining`).
 
 ## Gallery
 
