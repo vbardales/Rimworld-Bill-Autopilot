@@ -25,10 +25,11 @@ code_review_sha: e70a6e39dea9cfba5019870b3a02288c55dca18b
 remaining:
   - open 2026-11-19, owner order in chat: stage sent back to shootGallery, no stage move without her explicit OK; waiting for her validation of the gallery before mountPreview. Done meanwhile: six images kept, subtitles on 1, 4, 6, echo kept (her words "je valide echo review", echo_review_sha written). Open for mountPreview: 10.a bis keep or redo of Preview-source (her answer), 10.b to 10.d, 10.f
   - open 2026-11-19, Audit rules read at resume: session accepts or refuses each image alone (no Parked for gallery takes, a REDO take is deleted with its run folder); STATUS.md migration done (Docs/PROTOCOLS-READ.md and Docs/runs/status-history.md deleted, pickle-runs.md renamed pickle.md, old dated sections dropped). Check-Status WARN npt-sync: NPT changed 2026-11-19 after Steps read 2026-11-18, run sync-nsb-npt before the next scenario edit
+  - open 2026-11-20, protocols read (f9313f96): 11.j gallery-credits (ATTRIBUTION.md section "Gallery set" for every third-party mod the gallery scenes use, or a "Not used in the captures" line; WARN at writeReleaseDocs, ERROR at publish) - ATTRIBUTION.md has no Gallery set section yet; stage moves 12.h now precede the dry-run
 session:      local_3a8a05c7-7219-41d0-8306-35bbfe80986d
 echo_review_sha: edeb39b1b134c64e175827bf6a44ea7104d79997
-updated:      2026-11-19, stage back to shootGallery by owner order
-protocols_read_sha: 5c23584b9365be164bdfe3bb09037685eb17b7b2
+updated: 2026-11-20, protocols read, gallery-credits to do before publish
+protocols_read_sha: f9313f96f5d5caa8a6026c687afaaaae3f4c5675
 ---
 # Bill Autopilot: status
 
