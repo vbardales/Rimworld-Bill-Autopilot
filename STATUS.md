@@ -86,9 +86,16 @@ Evidence is kept on disk only (`Tests/Pickle/Inbox/` arrivals, `Evidence/` proof
 
 ## Gallery
 
-Five images planned (`PUBLICATION.md`), shot in hearth hall of Sanctuary of Nelim (fixture `Nelims-tribe`, midday, torches, Nelim at her bench; plan in header of `23-gallery-vanilla.feature`); zen studio no longer exists
-`Art/Gallery/` holds only `0-preview.png` (byte copy of `Mod/About/Preview.png` of 2026-10-03). Images 1, 2, 4
-and 5 had older zen-studio captures (superseded); Sanctuary captures of 2026-10-10 were deleted in the 2026-10-19 evidence triage, reshoot needed. None accepted by owner: `showcase: partial`.
+Six images kept (2026-11-19), shot in the hearth hall of the Sanctuary of Nelim (fixture `Nelims-tribe`, scenario `23-gallery-vanilla.feature`, window 5 from feature 24; plan in the header of feature 23, shotlist v4). `Art/Gallery/` holds `0-preview.png` (byte copy of `Mod/About/Preview.png`) and the cropped captures below; none accepted by the owner yet (`showcase: partial`); no subtitle posed, `Art/Gallery-clean/` not created (9.e bis, `rate-gallery` to run).
+
+| Index | File | Source run | Crop |
+| --- | --- | --- | --- |
+| 1 | `1-tailor-1-hall.png` | `daab` (3a31eb7) | left 1100 px of 1920 |
+| 2 | `2-tailor-2-profile.png` | `gallery-j` | window |
+| 3 | `3-tailor-3-confirm.png` | `gallery-j` | window |
+| 4 | `4-tailor-4-stove.png` | `ffb0` | left 1200 px |
+| 5 | `5-tailor-5-neighbours.png` | `gallery-l` | window |
+| 6 | `6-tailor-6-answered.png` | `ffb0` | left 1150 px |
 
 ## Shotlist (write-shotlist, 2026-11-13, v2)
 
