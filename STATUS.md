@@ -23,10 +23,11 @@ workshop:      3806709456
 publication_changelog_review_sha: 66acf05179c23fa2e50ec48d22c044da6729dcb5
 code_review_sha: e70a6e39dea9cfba5019870b3a02288c55dca18b
 remaining:
-  - open 2026-11-19, mountPreview: 10.a echo from the gallery (echo_review_sha absent), 10.a bis keep or redo of Preview-source (owner answer, preview_source_decision), then 10.b to 10.d render and checks, 10.f social preview sha256 (public repo)
+  - open 2026-11-19, mountPreview: 10.a echo kept (owner, 2026-11-19, said "je valide echo review"; conceptual bench and worker, line-art of Art/echo-preview.png, gallery shows the bench and bills tab), echo_review_sha written; 10.a bis keep or redo of Preview-source (owner answer, preview_source_decision), then 10.b to 10.d render and checks, 10.f social preview sha256 (public repo)
   - open 2026-11-19, Audit rules read at resume: session accepts or refuses each image alone (no Parked for gallery takes, a REDO take is deleted with its run folder); STATUS.md migration done (Docs/PROTOCOLS-READ.md and Docs/runs/status-history.md deleted, pickle-runs.md renamed pickle.md, old dated sections dropped). Check-Status WARN npt-sync: NPT changed 2026-11-19 after Steps read 2026-11-18, run sync-nsb-npt before the next scenario edit
 session:      local_3a8a05c7-7219-41d0-8306-35bbfe80986d
-updated:      2026-11-19, resume 6, replay: gallery done, stage mountPreview
+echo_review_sha: edeb39b1b134c64e175827bf6a44ea7104d79997
+updated:      2026-11-19, echo validated by owner (keep echo-preview.png) with the six-image gallery in hand
 protocols_read_sha: 7058cc281523968e3e76f541907b051e805ed558
 ---
 # Bill Autopilot: status
