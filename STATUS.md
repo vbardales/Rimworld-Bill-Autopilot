@@ -17,6 +17,7 @@ dependencies: declared
 workshop_required_items: n/a, not released yet
 showcase:     partial
 settings_audit: passed
+ecosystem_line: 1.0
 tested_on:    2026-11-12 pickle 4afaa49
 workshop:      3806709456
 publication_changelog_review_sha: 66acf05179c23fa2e50ec48d22c044da6729dcb5
@@ -26,7 +27,7 @@ remaining:
   - open 2026-11-19, Audit rules read at resume: session accepts or refuses each image alone (no Parked for gallery takes, a REDO take is deleted with its run folder); STATUS.md migration done (Docs/PROTOCOLS-READ.md and Docs/runs/status-history.md deleted, pickle-runs.md renamed pickle.md, old dated sections dropped). Check-Status WARN npt-sync: NPT changed 2026-11-19 after Steps read 2026-11-18, run sync-nsb-npt before the next scenario edit
 session:      local_3a8a05c7-7219-41d0-8306-35bbfe80986d
 updated:      2026-11-19, resume 5, image 5 result read, STATUS.md migrated
-protocols_read_sha: 76c4b480788e0583cac3f19acc2174d65f16edcb
+protocols_read_sha: 4ecc4435ac0fda5dcc8d57f3bbbc07a1690dd737
 ---
 # Bill Autopilot: status
 
