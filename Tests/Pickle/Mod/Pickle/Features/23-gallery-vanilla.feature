@@ -46,7 +46,7 @@
 #      cropped sideways.
 #   3. tailor-3-confirm, interface window (set aside, no subtitle): the confirmation when a bench type is switched on, naming how
 #      many recipes it takes and at what target. Taken on window-backdrop-for-height, scale 125, HUD hidden, cropped sideways.
-#   4. tailor-4-stove, story scene, TIGHT (zoom 3 on the stove at (181, 115); a higher zoom number is wider, so 3 tight, 5 medium, 7 wide). Same hall, 12:15, clear. Subject: the suspended
+#   4. tailor-4-stove, story scene, MEDIUM-TIGHT (zoom 4 on the cell (183, 115) beside the stove at (181, 115), v4 of 2026-11-20 after the REDO of the zoom 3 take: Nelim cut at the frame edge, bare background; a higher zoom number is wider, so 4 keeps her whole with the shelf, pots and torches in frame). Same hall, 12:15, clear. Subject: the suspended
 #      bill row of a newly researched recipe (pemmican) in the stove's bills tab, with the letter icon that named it kept in the
 #      right-hand stack (not cleared). Says: nothing is spent without an answer. Living: Nelim beside the stove (she feeds the
 #      Sanctuary), working a hand-placed meal bill while the new one waits, same teal shirt, same hair, smile, gaze toward the
@@ -92,7 +92,7 @@
 #     left 1100 px of the frame (full height), which holds the bills tab and the subject; rate-gallery crops it and score-gallery rates
 #     the crop at 268 px (ffmpeg shrink), judging j on shapes (row marks, the SUSPENDED band), not on words. Interface scale stays 125
 #     (the tab grows with the scale, so 150 would leave less map in the crop). The camera is framed so the subject lands near pixel 800:
-#     image 1 centre (184, 114) at zoom 7, image 4 centre (182, 115) at zoom 3, image 6 centre (183, 115) at zoom 5.
+#     image 1 centre (184, 114) at zoom 7, image 4 centre (183, 115) at zoom 4, image 6 centre (183, 115) at zoom 5.
 #   - Living things (c): the thrumbos move inside the crop of image 1: Atticus at (186, 116) facing South, Rain at (186, 113) facing East.
 #   - Image 4 no longer carries the letter in frame (the letter stack sits at the right edge, outside the crop): the story "nothing is
 #     spent without an answer" is carried by the large SUSPENDED overlay on the pemmican row (read legible on the capture of 0f1b), Nelim
@@ -321,7 +321,7 @@ Feature: the captures of the Workshop page, from the pass without the optional m
     And Nelim's Pickle Tools: I let 120 ticks pass
     Then Nelim's Pickle Tools: "Nelim" is at the building "FueledStove" at (181, 115) and working
     When Nelim's Sanctuary: I am at the sanctuary "hearth-hall"
-    And Nelim's Pickle Tools: I frame the cell (182, 115) at zoom 3
+    And Nelim's Pickle Tools: I frame the cell (183, 115) at zoom 4
     And the bills tab of the Bill Autopilot bench "FueledStove" at (181, 115) is opened
     And Nelim's Pickle Tools: the messages are cleared from the screen
     And I take a screenshot "gallery 4: a suspended bill for a newly researched recipe, with the letter that named it"
