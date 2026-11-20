@@ -94,10 +94,10 @@ Six images kept (2026-11-19), shot in the hearth hall of the Sanctuary of Nelim 
 | Index | File | Source run | Crop |
 | --- | --- | --- | --- |
 | 1 | `1-tailor-1-hall.png` | refused 2026-11-20, REDO | recompose, crop left 1100 px |
-| 2 | `2-tailor-2-profile.png` | `gallery-j` | window |
-| 3 | `3-tailor-3-confirm.png` | `gallery-j` | window |
+| 2 | `2-tailor-2-profile.png` | deleted 2026-11-20 (height was cut), refiled `6a72` | window, sides only, full height |
+| 3 | `3-tailor-3-confirm.png` | deleted 2026-11-20 (height was cut), refiled `6a72` | window, sides only, full height |
 | 4 | `4-tailor-4-stove.png` | refused 2026-11-20, REDO | recompose, crop left 1200 px |
-| 5 | `5-tailor-5-neighbours.png` | `gallery-l` | window |
+| 5 | `5-tailor-5-neighbours.png` | deleted 2026-11-20 (height was cut), refiled `a04c` | window, sides only, full height |
 | 6 | `6-tailor-6-answered.png` | refused 2026-11-20, REDO | recompose, crop left 1150 px |
 
 ## Shotlist (write-shotlist, 2026-11-13, v2)
