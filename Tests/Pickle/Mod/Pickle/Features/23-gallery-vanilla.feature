@@ -51,7 +51,7 @@
 #      right-hand stack (not cleared). Says: nothing is spent without an answer. Living: Nelim beside the stove (she feeds the
 #      Sanctuary), working a hand-placed meal bill while the new one waits, same teal shirt, same hair, smile, gaze toward the
 #      tab. Decor in frame only: FueledStove, Brazier lit at (184, 115), two PlantPot with Plant_Daylily fully grown, four
-#      TorchLamp lit, Shelf near (176, 114), parquet; filth removed. Composition: foreground Nelim and the stove, background the
+#      TorchLamp lit, Shelf near (190, 114), parquet; filth removed. Composition: foreground Nelim and the stove, background the
 #      torch and the pots, subject (the tab row) at the left, Nelim right of centre. How obtained: the job DoBill forced on the
 #      stove, then 120 ticks and the state check "at the building and working". Same interface scale (125 percent) and hidden HUD as
 #      image 1; the tab now shows its first row because it fits the screen.
@@ -94,6 +94,7 @@
 #     (the tab grows with the scale, so 150 would leave less map in the crop). The camera is framed so the subject lands near pixel 800:
 #     image 1 centre (184, 114) at zoom 7, image 4 centre (183, 115) at zoom 4, image 6 centre (183, 115) at zoom 5.
 #   - Living things (c): the thrumbos move inside the crop of image 1: Atticus at (186, 116) facing South, Rain at (186, 113) facing East.
+#   - Image 4 v5 (2026-11-20, take 4 scored REDO: Nelim whole but decor all under the bills tab or off frame): furniture moved to the free map east of the stove (cells 185 to 190, rows 111 to 118), potatoes at (184, 116).
 #   - Image 4 no longer carries the letter in frame (the letter stack sits at the right edge, outside the crop): the story "nothing is
 #     spent without an answer" is carried by the large SUSPENDED overlay on the pemmican row (read legible on the capture of 0f1b), Nelim
 #     at the stove and the furniture around her. The scenario still leaves the letter on screen; it is cut by the crop, not hidden.
@@ -292,14 +293,14 @@ Feature: the captures of the Workshop page, from the pass without the optional m
     And Nelim's Pickle Tools: I place the decor "Brazier" at (184, 115)
     And Nelim's Pickle Tools: the decor "Brazier" at (184, 115) is lit
     And Nelim's Pickle Tools: I place the decor "PlantPot" holding "Plant_Daylily" fully grown near (179, 113)
-    And Nelim's Pickle Tools: I place the decor "Shelf" near (176, 114)
-    And Nelim's Pickle Tools: I place the decor "PlantPot" holding "Plant_Daylily" fully grown near (183, 118)
+    And Nelim's Pickle Tools: I place the decor "Shelf" near (190, 114)
+    And Nelim's Pickle Tools: I place the decor "PlantPot" holding "Plant_Daylily" fully grown near (188, 113)
     And Nelim's Pickle Tools: I place the decor "Table2x2c" near (179, 118)
     And Nelim's Pickle Tools: I place the decor "DiningChair" near (181, 118)
-    And Nelim's Pickle Tools: I place the decor "Armchair" near (178, 116)
-    And Nelim's Pickle Tools: I place the decor "Bookcase" near (180, 111)
-    And Nelim's Pickle Tools: I place the decor "Dresser" near (182, 111)
-    And Nelim's Pickle Tools: I place the decor "Stool" near (183, 112)
+    And Nelim's Pickle Tools: I place the decor "Armchair" near (186, 116)
+    And Nelim's Pickle Tools: I place the decor "Bookcase" near (187, 111)
+    And Nelim's Pickle Tools: I place the decor "Dresser" near (189, 111)
+    And Nelim's Pickle Tools: I place the decor "Stool" near (186, 112)
     And Bill Autopilot settings are at their defaults
     And a "FueledStove" is built at (181, 115)
     And Nelim's Pickle Tools: the building "FueledStove" at (181, 115) is fuelled
