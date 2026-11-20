@@ -7,7 +7,7 @@ packageId:    nelim.billautopilot
 repo:         Rimworld-Bill-Autopilot
 visibility:   public
 detached:     yes
-workflow_stage: shootGallery[1.0.0]
+workflow_stage: mountPreview[1.0.0]
 licence:      original
 licence_at:   original work
 upstream_mod_remotes: N/A
@@ -23,13 +23,13 @@ workshop:      3806709456
 publication_changelog_review_sha: 66acf05179c23fa2e50ec48d22c044da6729dcb5
 code_review_sha: e70a6e39dea9cfba5019870b3a02288c55dca18b
 remaining:
-  - open 2026-11-19, owner order in chat: stage sent back to shootGallery, no stage move without her explicit OK; waiting for her validation of the gallery before mountPreview. Done meanwhile: six images kept, subtitles on 1, 4, 6, echo kept (her words "je valide echo review", echo_review_sha written). Open for mountPreview: 10.a bis keep or redo of Preview-source (her answer), 10.b to 10.d, 10.f
+  - open 2026-11-20, owner-typed replay shootGallery.. moved the stage to mountPreview (ledger BillAutopilot-20261120-shootGallery-end). Open: 10.a bis keep or redo of Preview-source (her answer, then preview_source_decision), 10.b to 10.d render and checks, 10.e cleanup check, 10.f social_preview_sha256 (public repo), 10.g
   - open 2026-11-19, Audit rules read at resume: session accepts or refuses each image alone (no Parked for gallery takes, a REDO take is deleted with its run folder); STATUS.md migration done (Docs/PROTOCOLS-READ.md and Docs/runs/status-history.md deleted, pickle-runs.md renamed pickle.md, old dated sections dropped). Check-Status WARN npt-sync: NPT changed 2026-11-19 after Steps read 2026-11-18, run sync-nsb-npt before the next scenario edit
   - open 2026-11-20, protocols read (f9313f96): 11.j gallery-credits (ATTRIBUTION.md section "Gallery set" for every third-party mod the gallery scenes use, or a "Not used in the captures" line; WARN at writeReleaseDocs, ERROR at publish) - ATTRIBUTION.md has no Gallery set section yet; stage moves 12.h now precede the dry-run
 session:      local_3a8a05c7-7219-41d0-8306-35bbfe80986d
 echo_review_sha: edeb39b1b134c64e175827bf6a44ea7104d79997
-updated: 2026-11-20, protocols read, gallery-credits to do before publish
-protocols_read_sha: f9313f96f5d5caa8a6026c687afaaaae3f4c5675
+updated: 2026-11-20, replay shootGallery.. typed by owner, stage mountPreview
+protocols_read_sha: 1e9e37a177051e5623b4e276e247264e1d4938ed
 ---
 # Bill Autopilot: status
 
