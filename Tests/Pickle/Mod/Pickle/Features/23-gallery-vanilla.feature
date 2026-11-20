@@ -47,8 +47,8 @@
 #   3. tailor-3-confirm, interface window (set aside, no subtitle): the confirmation when a bench type is switched on, naming how
 #      many recipes it takes and at what target. Taken on window-backdrop-for-height, scale 125, HUD hidden, cropped sideways.
 #   4. tailor-4-stove, story scene, MEDIUM-TIGHT (zoom 4 on the cell (183, 115) beside the stove at (181, 115), v4 of 2026-11-20 after the REDO of the zoom 3 take: Nelim cut at the frame edge, bare background; a higher zoom number is wider, so 4 keeps her whole with the shelf, pots and torches in frame). Same hall, 12:15, clear. Subject: the suspended
-#      bill row of a newly researched recipe (pemmican) in the stove's bills tab, with the letter icon that named it kept in the
-#      right-hand stack (not cleared). Says: nothing is spent without an answer. Living: Nelim beside the stove (she feeds the
+#      bill row of a newly researched recipe (pemmican) in the stove's bills tab, with the letter that named it left out of the frame (it sits in the
+#      right-hand stack, outside the crop of this take, not a co-subject). Says: nothing is spent without an answer. Living: Nelim beside the stove (she feeds the
 #      Sanctuary), working a hand-placed meal bill while the new one waits, same teal shirt, same hair, smile, gaze toward the
 #      tab. Decor in frame only: FueledStove, Brazier lit at (184, 115), two PlantPot with Plant_Daylily fully grown, four
 #      TorchLamp lit, Shelf near (190, 114), parquet; filth removed. Composition: foreground Nelim and the stove, background the
