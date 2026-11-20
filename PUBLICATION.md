@@ -43,7 +43,7 @@ previous five-image plan and are gone.
 | 1 | `tailor-1-hall` (wide, 12:00) | The hall at midday, Nelim at her bench, a bills tab with auto bills marked next to a hand-placed one | The whole pitch in one image: the bench keeps its own list, and the tab shows what is left to make |
 | 2 | `tailor-2-profile` (window) | The profile window, groups collapsed except one, with an overridden recipe visible | Where the "say it once" happens, and the proof it is reachable with a pointer alone |
 | 3 | `tailor-3-confirm` (window) | The confirmation dialog when a workbench type is switched on, naming its count | The one moment a lot of production can start at once, and the mod asks first |
-| 4 | `tailor-4-stove` (tight, 12:15) | A suspended bill for a newly researched recipe (pemmican) at the stove, with the letter that named it | The point of the mod: nothing is spent without an answer |
+| 4 | `tailor-4-stove` (tight, 12:15) | A suspended bill for a newly researched recipe (pemmican) at the stove | The point of the mod: nothing is spent without an answer |
 | 5 | `tailor-5-neighbours` (window) | The settings page, with the "Detected integrations" line naming the integrations detected | Answers "does it work with X" before anyone asks |
 | 6 | `tailor-6-answered` (medium, 12:45) | The same bill taken up after the answer: no longer suspended, Nelim working at the stove | Closes the story: she said yes, the mod did the rest |
 

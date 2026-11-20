@@ -150,3 +150,4 @@ Neither is fixed by this repository (`scripts/` belongs to the monorepo):
 | 2026-11-20 | `1d15` feature 23 image 4 (zoom 4), set galerie | passed, 1 of 1; read: image 4 scored REDO (Nelim head hidden by potato pile, letter not in frame, decor sparse, adequacy about 3); Inbox run deleted, refiled as `c592` |
 | 2026-11-20 | `c592` feature 23 image 4, set galerie | passed, 1 of 1; read: image 4 scored REDO (Nelim hidden under the bills tab); Inbox run deleted, refiled |
 | 2026-11-20 | `3ed1` feature 23 image 4, set galerie | passed, 1 of 1; read: image 4 scored REDO (decor under the bills tab or off frame, letter absent); Inbox run deleted, refiled |
+| 2026-11-20 | `8e13` feature 23 image 4, set galerie | passed, 1 of 1; read: image 4 kept (cropped left 1200 px, subtitled); Inbox run deleted |

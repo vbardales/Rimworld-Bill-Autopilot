@@ -23,7 +23,7 @@ workshop:      3806709456
 publication_changelog_review_sha: 66acf05179c23fa2e50ec48d22c044da6729dcb5
 code_review_sha: e70a6e39dea9cfba5019870b3a02288c55dca18b
 remaining:
-  - open 2026-11-20, owner order: no stage move until the gallery is ready and she validates it. Image 4: take 2 (ticket 1d15, zoom 4) scored REDO 2026-11-20 (Nelim head hidden by potato pile, letter absent, decor sparse; run folder deleted), potatoes moved to (180, 117), ticket c592 green but REDO again (Nelim stood west under the bills tab, hidden), potatoes moved to (184, 116), ticket 3ed1 green but REDO (Nelim whole carrying potatoes, but decor under the tab, letter absent), furniture moved east of the stove (v5), ticket c045 green, near candidate (furniture, torches, brazier shown, Nelim whole carrying potatoes), run folder deleted before the verdict, plan now says the letter stays outside the frame, refiled to judge again; on RUN_DONE open the capture, crop, subtitle (PUBLICATION.md line 4), update Gallery table. Asked of Audit: replay-audit must require her gallery validation (again after any gallery change). Open for mountPreview: 10.a bis keep or redo of Preview-source, 10.b to 10.d, 10.f
+  - open 2026-11-20, owner order: no stage move until the gallery is ready and she validates it. Image 4: take 2 (ticket 1d15, zoom 4) scored REDO 2026-11-20 (Nelim head hidden by potato pile, letter absent, decor sparse; run folder deleted), potatoes moved to (180, 117), ticket c592 green but REDO again (Nelim stood west under the bills tab, hidden), potatoes moved to (184, 116), ticket 3ed1 green but REDO (Nelim whole carrying potatoes, but decor under the tab, letter absent), furniture moved east of the stove (v5), image 4 kept 2026-11-20 (run 8e13, crop left 1200 px, subtitle burned, a candidate with known weak points: Nelim face half hidden by the potatoes she carries, armchair cut by the crop, letter outside the frame). The six images exist; owner validation of the whole gallery (gallery_validated_sha) still owed before mountPreview. Asked of Audit: replay-audit must require her gallery validation (again after any gallery change). Open for mountPreview: 10.a bis keep or redo of Preview-source, 10.b to 10.d, 10.f
   - open 2026-11-19, Audit rules read at resume: session accepts or refuses each image alone (no Parked for gallery takes, a REDO take is deleted with its run folder); STATUS.md migration done (Docs/PROTOCOLS-READ.md and Docs/runs/status-history.md deleted, pickle-runs.md renamed pickle.md, old dated sections dropped). Check-Status WARN npt-sync: NPT changed 2026-11-19 after Steps read 2026-11-18, run sync-nsb-npt before the next scenario edit
   - open 2026-11-20, protocols read (f9313f96): 11.j gallery-credits (ATTRIBUTION.md section "Gallery set" for every third-party mod the gallery scenes use, or a "Not used in the captures" line; WARN at writeReleaseDocs, ERROR at publish) - ATTRIBUTION.md has no Gallery set section yet; stage moves 12.h now precede the dry-run
 session:      local_3a8a05c7-7219-41d0-8306-35bbfe80986d
@@ -95,7 +95,7 @@ Six images kept (2026-11-19), shot in the hearth hall of the Sanctuary of Nelim 
 | 1 | `1-tailor-1-hall.png` | `daab` (3a31eb7) | left 1100 px of 1920 |
 | 2 | `2-tailor-2-profile.png` | `gallery-j` | window |
 | 3 | `3-tailor-3-confirm.png` | `gallery-j` | window |
-| 4 | `4-tailor-4-stove.png` | `ffb0` | left 1200 px |
+| 4 | `4-tailor-4-stove.png` | `8e13` | left 1200 px |
 | 5 | `5-tailor-5-neighbours.png` | `gallery-l` | window |
 | 6 | `6-tailor-6-answered.png` | `ffb0` | left 1150 px |
 
