@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Seed for the Sanctuary pass: Vanilla Experimentals for Facial Animation (VEFA, sd.fa.movingvanillaeyes, 3753978140), 2026-10-08.
+  Everything is left at the mod's defaults EXCEPT enableBlushLimiting, set to False.
+  Why: with it on, the mod's patch HasNegativeBlushThought (Patch_FAHelper_FilterAnimationListWithCurrentStatus) calls Thought.MoodOffset() on the pawn's
+  "Thought_Naked" thoughts; for a pawn just dressed one of them has no valid stage and Thought.CurStage throws ArgumentOutOfRangeException, which Pickle counts as a failure
+  (run d445). The patch is only reached when this option is on. Off, the Naked blush is the base Facial Animation one, for pawns with a Naked thought only.
+  This is a test-only deviation from the default; the defect is the mod's, to report to its author.
+-->
+<SettingsBlock>
+  <ModSettings Class="MovingVanillaEyes.MovingVanillaEyesSettings">
+    <enableBlushLimiting>False</enableBlushLimiting>
+  </ModSettings>
+</SettingsBlock>

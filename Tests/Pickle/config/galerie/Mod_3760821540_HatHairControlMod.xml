@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Seed for the look validation pass: Hat Hair Control (lordfelix.HatHairControl, 3760821540), 2026-10-20.
+  Hair is shown under every hat the look scenarios put on (the owner wants to see the hairstyles of the profiles). Everything else at the defaults.
+-->
+<SettingsBlock>
+  <ModSettings Class="HatHairControl.HatHairControlSettings">
+    <hideHatsIndoors>False</hideHatsIndoors>
+    <hideHatsWhileSleeping>False</hideHatsWhileSleeping>
+    <showHatsOnlyWhenDrafted>False</showHatsOnlyWhenDrafted>
+    <showHairDefs>
+      <li>Apparel_Headwrap</li>
+      <li>LisaWork_ApparelCap</li>
+      <li>LisaWork_ApparelHardHat</li>
+      <li>Apparel_Flophat</li>
+      <li>Apparel_Beret</li>
+      <li>Apparel_Tuque</li>
+      <li>Apparel_HatLadies</li>
+      <li>Apparel_SimpleHelmet</li>
+      <li>Apparel_ArmorHelmetRecon</li>
+      <li>Apparel_ArmorHelmetReconPrestige</li>
+      <li>Apparel_CowboyHat</li>
+      <li>Apparel_Hood</li>
+      <li>FCA2_RoseWitchHat</li>
+      <li>Apparel_CinderellaTiara</li>
+      <li>KRJS_gat</li>
+      <li>KRJS_Sangtu</li>
+      <li>KRJS_jungjagwan</li>
+      <li>Apparel_FSFurHat</li>
+      <li>Apparel_PAHHeadband</li>
+      <li>Apparel_Headwrap</li>
+    </showHairDefs>
+  </ModSettings>
+</SettingsBlock>
