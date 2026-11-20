@@ -149,3 +149,4 @@ Neither is fixed by this repository (`scripts/` belongs to the monorepo):
 | 2026-11-19 | `daab` feature 23 image 1, set galerie, 3a31eb7 | passed, 1 of 1; read: auto marks, bench, Nelim, thrumbos asleep readable; image 1 kept, cropped to the left 1100 px (`Art/Gallery/1-tailor-1-hall.png`); Inbox run deleted |
 | 2026-11-20 | `1d15` feature 23 image 4 (zoom 4), set galerie | passed, 1 of 1; read: image 4 scored REDO (Nelim head hidden by potato pile, letter not in frame, decor sparse, adequacy about 3); Inbox run deleted, refiled as `c592` |
 | 2026-11-20 | `c592` feature 23 image 4, set galerie | passed, 1 of 1; read: image 4 scored REDO (Nelim hidden under the bills tab); Inbox run deleted, refiled |
+| 2026-11-20 | `3ed1` feature 23 image 4, set galerie | passed, 1 of 1; read: image 4 scored REDO (decor under the bills tab or off frame, letter absent); Inbox run deleted, refiled |
