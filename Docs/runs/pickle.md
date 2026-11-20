@@ -148,3 +148,4 @@ Neither is fixed by this repository (`scripts/` belongs to the monorepo):
 | 2026-11-19 | `ffb0` feature 23, set galerie, d23a15a | failed, 2 of 3; images 4 and 6 kept (cropped, Art/Gallery), image 1 failed (cell (185, 116) is a roof-holder column), refiled as `daab`; Inbox run deleted |
 | 2026-11-19 | `daab` feature 23 image 1, set galerie, 3a31eb7 | passed, 1 of 1; read: auto marks, bench, Nelim, thrumbos asleep readable; image 1 kept, cropped to the left 1100 px (`Art/Gallery/1-tailor-1-hall.png`); Inbox run deleted |
 | 2026-11-20 | `1d15` feature 23 image 4 (zoom 4), set galerie | passed, 1 of 1; read: image 4 scored REDO (Nelim head hidden by potato pile, letter not in frame, decor sparse, adequacy about 3); Inbox run deleted, refiled as `c592` |
+| 2026-11-20 | `c592` feature 23 image 4, set galerie | passed, 1 of 1; read: image 4 scored REDO (Nelim hidden under the bills tab); Inbox run deleted, refiled |
