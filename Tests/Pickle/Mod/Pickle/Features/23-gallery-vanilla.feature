@@ -170,7 +170,6 @@ Feature: the captures of the Workshop page, from the pass without the optional m
     And Nelim's Pickle Tools: "Nelim" also wears "Apparel_BasicShirt" dyed rgb (40, 110, 120)
     And Nelim's Pickle Tools: "Nelim" hairstyle is "Roo_HD_Hair_Highpony"
     And Nelim's Pickle Tools: the clothes worn by "Nelim" are logged
-    And Nelim's Sanctuary: Nelim has her own face
     And Nelim's Pickle Tools: 50 of the item "Cloth" are spawned at (182, 116)
     And Nelim's Pickle Tools: "Nelim" is forced into the job "DoBill" on the building "HandTailoringBench" at (181, 115)
     And Nelim's Pickle Tools: I let 120 ticks pass
@@ -180,6 +179,7 @@ Feature: the captures of the Workshop page, from the pass without the optional m
     And the bills tab of the Bill Autopilot bench "HandTailoringBench" at (181, 115) is opened
     And Nelim's Pickle Tools: the letters and the alerts are cleared from the screen
     And Nelim's Pickle Tools: the messages are cleared from the screen
+    And Nelim's Sanctuary: Nelim has her own face
     And I take a screenshot "gallery 1: the bills tab, three automatic bills on a bench with many recipes"
     And I close all dialogs
     And Nelim's Pickle Tools: the decor is removed
