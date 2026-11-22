@@ -18,6 +18,7 @@
 # Protagonist: Nelim (NSB, free). Look, kept in all her scenes (continuity): canon hair (Roo_HD_Hair_Highpony, canon colour,
 #   no change, no property change to validate), a basic shirt dyed teal rgb (40, 110, 120) (outfit free; teal against the orange
 #   bench and the warm light), Apparel_Pants worn explicitly (2026-11-22: the fixture pants were not drawn, captures 1, 4, 6 of 2026-11-20 showed bare legs), her own face, a smile. Animals: Atticus and Rain (NSB thrumbos, free, live in
+#   2026-11-22 (her verdict): a DiningChair stands on a cardinal cell next to the bench or the stove in images 1, 4 and 6 (a seat in front of the work surface).
 #   the hall) asleep by the brazier in image 1 only, Atticus facing the camera (South), Rain in profile (East); the mod adds no animal,
 #   so rule 5 has nothing to show.
 # Story, midday of one day (clear sky, game paused for each capture, 2,500 ticks per game hour): Nelim, a tailor who also feeds
@@ -157,6 +158,7 @@ Feature: the captures of the Workshop page, from the pass without the optional m
     And Nelim's Pickle Tools: I place the decor "Stool" near (183, 112)
     And Bill Autopilot settings are at their defaults
     And a "HandTailoringBench" is built at (181, 115)
+    And Nelim's Pickle Tools: I place the decor "DiningChair" on a cardinal cell next to the nearest "HandTailoringBench"
     Then the cell (181, 115) is lit at least 50 percent
     And Bill Autopilot allows 3 automatic bills per bench
     And Bill Autopilot keeps 50 of everything on "HandTailoringBench", restarting at 25
@@ -307,6 +309,7 @@ Feature: the captures of the Workshop page, from the pass without the optional m
     And Bill Autopilot settings are at their defaults
     And a "FueledStove" is built at (181, 115)
     And Nelim's Pickle Tools: the building "FueledStove" at (181, 115) is fuelled
+    And Nelim's Pickle Tools: I place the decor "DiningChair" on a cardinal cell next to the nearest "FueledStove"
     Then the cell (181, 115) is lit at least 50 percent
     And Bill Autopilot only takes "Make_Pemmican" on "FueledStove"
     And Bill Autopilot is switched on for "FueledStove"
@@ -374,6 +377,7 @@ Feature: the captures of the Workshop page, from the pass without the optional m
     And Bill Autopilot settings are at their defaults
     And a "FueledStove" is built at (181, 115)
     And Nelim's Pickle Tools: the building "FueledStove" at (181, 115) is fuelled
+    And Nelim's Pickle Tools: I place the decor "DiningChair" on a cardinal cell next to the nearest "FueledStove"
     Then the cell (181, 115) is lit at least 50 percent
     And Bill Autopilot only takes "Make_Pemmican" on "FueledStove"
     And Bill Autopilot is switched on for "FueledStove"
