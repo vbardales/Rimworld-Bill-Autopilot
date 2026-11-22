@@ -389,8 +389,8 @@ Feature: the captures of the Workshop page, from the pass without the optional m
     And Nelim's Pickle Tools: "Nelim" hairstyle is "Roo_HD_Hair_Highpony"
     And Nelim's Pickle Tools: the clothes worn by "Nelim" are logged
     And Nelim's Sanctuary: Nelim has her own face
-    And Nelim's Pickle Tools: 20 of the item "RawPotatoes" are spawned at (182, 116)
-    And Nelim's Pickle Tools: 40 of the item "Meat_Muffalo" are spawned at (182, 116)
+    And Nelim's Pickle Tools: 20 of the item "RawPotatoes" are spawned at (184, 116)
+    And Nelim's Pickle Tools: 40 of the item "Meat_Muffalo" are spawned at (184, 116)
     And Nelim's Pickle Tools: "Nelim" is forced into the job "DoBill" on the building "FueledStove" at (181, 115)
     And Nelim's Pickle Tools: I let 120 ticks pass
     Then Nelim's Pickle Tools: "Nelim" is at the building "FueledStove" at (181, 115) and working
