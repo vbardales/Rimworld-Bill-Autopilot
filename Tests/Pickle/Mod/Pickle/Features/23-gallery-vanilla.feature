@@ -17,7 +17,7 @@
 #   rebuilt save Nelims-tribe-v2 (nothing built): this shotlist keeps Nelims-tribe.
 # Protagonist: Nelim (NSB, free). Look, kept in all her scenes (continuity): canon hair (Roo_HD_Hair_Highpony, canon colour,
 #   no change, no property change to validate), a basic shirt dyed teal rgb (40, 110, 120) (outfit free; teal against the orange
-#   bench and the warm light), default fixture pants, her own face, a smile. Animals: Atticus and Rain (NSB thrumbos, free, live in
+#   bench and the warm light), Apparel_Pants worn explicitly (2026-11-22: the fixture pants were not drawn, captures 1, 4, 6 of 2026-11-20 showed bare legs), her own face, a smile. Animals: Atticus and Rain (NSB thrumbos, free, live in
 #   the hall) asleep by the brazier in image 1 only, Atticus facing the camera (South), Rain in profile (East); the mod adds no animal,
 #   so rule 5 has nothing to show.
 # Story, midday of one day (clear sky, game paused for each capture, 2,500 ticks per game hour): Nelim, a tailor who also feeds
@@ -167,7 +167,9 @@ Feature: the captures of the Workshop page, from the pass without the optional m
     And Nelim's Pickle Tools: the animal "Atticus" lies at (186, 116) facing South
     And Nelim's Pickle Tools: the animal "Rain" lies at (186, 113) facing East
     And Nelim's Pickle Tools: "Nelim" wears "Apparel_BasicShirt" dyed rgb (40, 110, 120)
+    And Nelim's Pickle Tools: "Nelim" also wears "Apparel_Pants"
     And Nelim's Pickle Tools: "Nelim" hairstyle is "Roo_HD_Hair_Highpony"
+    And Nelim's Pickle Tools: the clothes worn by "Nelim" are logged
     And Nelim's Sanctuary: Nelim has her own face
     And Nelim's Pickle Tools: 50 of the item "Cloth" are spawned at (182, 116)
     And Nelim's Pickle Tools: "Nelim" is forced into the job "DoBill" on the building "HandTailoringBench" at (181, 115)
@@ -317,7 +319,9 @@ Feature: the captures of the Workshop page, from the pass without the optional m
     Then Bill Autopilot has announced "Make_Pemmican" on "FueledStove"
     When I add bill "CookMealSimple" to the "FueledStove" at (181, 115)
     And Nelim's Pickle Tools: "Nelim" wears "Apparel_BasicShirt" dyed rgb (40, 110, 120)
+    And Nelim's Pickle Tools: "Nelim" also wears "Apparel_Pants"
     And Nelim's Pickle Tools: "Nelim" hairstyle is "Roo_HD_Hair_Highpony"
+    And Nelim's Pickle Tools: the clothes worn by "Nelim" are logged
     And Nelim's Sanctuary: Nelim has her own face
     And Nelim's Pickle Tools: 20 of the item "RawPotatoes" are spawned at (184, 116)
     And Nelim's Pickle Tools: "Nelim" is forced into the job "DoBill" on the building "FueledStove" at (181, 115)
@@ -381,7 +385,9 @@ Feature: the captures of the Workshop page, from the pass without the optional m
     Then Bill Autopilot has announced "Make_Pemmican" on "FueledStove"
     When Bill Autopilot's bill for "Make_Pemmican" on the "FueledStove" at (181, 115) is unsuspended
     And Nelim's Pickle Tools: "Nelim" wears "Apparel_BasicShirt" dyed rgb (40, 110, 120)
+    And Nelim's Pickle Tools: "Nelim" also wears "Apparel_Pants"
     And Nelim's Pickle Tools: "Nelim" hairstyle is "Roo_HD_Hair_Highpony"
+    And Nelim's Pickle Tools: the clothes worn by "Nelim" are logged
     And Nelim's Sanctuary: Nelim has her own face
     And Nelim's Pickle Tools: 20 of the item "RawPotatoes" are spawned at (182, 116)
     And Nelim's Pickle Tools: 40 of the item "Meat_Muffalo" are spawned at (182, 116)

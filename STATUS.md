@@ -24,13 +24,11 @@ publication_changelog_review_sha: 66acf05179c23fa2e50ec48d22c044da6729dcb5
 code_review_sha: e70a6e39dea9cfba5019870b3a02288c55dca18b
 remaining:
   - open 2026-11-20, owner order: no stage move until the gallery is ready and she validates it. Image 4: take 2 (ticket 1d15, zoom 4) scored REDO 2026-11-20 (Nelim head hidden by potato pile, letter absent, decor sparse; run folder deleted), potatoes moved to (180, 117), ticket c592 green but REDO again (Nelim stood west under the bills tab, hidden), potatoes moved to (184, 116), ticket 3ed1 green but REDO (Nelim whole carrying potatoes, but decor under the tab, letter absent), furniture moved east of the stove (v5), image 4 kept 2026-11-20 (run 8e13, crop left 1200 px, subtitle burned, a candidate with known weak points: Nelim face half hidden by the potatoes she carries, armchair cut by the crop, letter outside the frame). The six images exist; owner validation of the whole gallery (gallery_validated_sha) still owed before mountPreview. Asked of Audit: replay-audit must require her gallery validation (again after any gallery change). Open for mountPreview: 10.a bis keep or redo of Preview-source, 10.b to 10.d, 10.f
-  - 2026-11-20, owner verdict: images 1, 4, 6 refused (Nelim bare-bottomed, wrong hairstyle). Cause found: `Tests/Pickle/config/galerie/` held no seed, so AB Visible Pants drew nothing and hat hair was unset; seeds copied from SanctuaryBacklot `config/sanctuary`, step `hairstyle is Roo_HD_Hair_Highpony` added before the face step. Art files of 1, 4, 6 deleted; refiled in one ticket (filter image 1, 4, 6). Image 4 still has the potato pile over her face (adequacy 3.5): judge it again on the new capture.
-  - 2026-11-20, owner: windows 2, 3, 5 must be cropped SIDES ONLY (5 px each side, full 1080 height); old ones deleted, refiled (tickets 6a72 images 2+3, a04c image 5; 88e7 images 1, 4, 6). On RUN_DONE: open captures, measure window edges on the 1920x1080 original, crop sides, keep original in Art/Gallery-clean (under 2 MB), score-gallery 1, 4, 6 (judge pants, Highpony hair, image 4 face), burn subtitles on candidates, then replay-audit.
-  - open 2026-11-19, Audit rules read at resume: session accepts or refuses each image alone (no Parked for gallery takes, a REDO take is deleted with its run folder); STATUS.md migration done (Docs/PROTOCOLS-READ.md and Docs/runs/status-history.md deleted, pickle-runs.md renamed pickle.md, old dated sections dropped). Check-Status WARN npt-sync: NPT changed 2026-11-19 after Steps read 2026-11-18, run sync-nsb-npt before the next scenario edit
-  - open 2026-11-20, protocols read (f9313f96): 11.j gallery-credits (ATTRIBUTION.md section "Gallery set" for every third-party mod the gallery scenes use, or a "Not used in the captures" line; WARN at writeReleaseDocs, ERROR at publish) - ATTRIBUTION.md has no Gallery set section yet; stage moves 12.h now precede the dry-run
+  - 2026-11-22: captures of tickets 88e7, 6a72, a04c read. Windows 2, 3, 5 kept (cropped sides only, full height, no subtitle). Images 1, 4, 6 REDO: hair Highpony is right, but legs are still bare (zoom on Nelim: teal shirt, then orange skin; the fixture pants are not drawn, seeds were loaded, AB.VPLRF in the run). Fix: scenario 23 now also dresses her in `Apparel_Pants` and logs `clothes-worn`. Refiled as ticket 7dea (filter image 1, 4, 6, map wsl-deps.galerie.map, evidence Inbox/gallery-pants). On RUN_DONE: read the clothes-worn log first, open captures, zoom on her legs; if pants are in the log but not drawn, tell NPT (capture + log); else crop (1: keep left 1320 px, 4: 1200, 6: 1150), score-gallery, burn subtitles on kept images (Art/Gallery-clean + Art/Gallery), replay-audit.
+  - open 2026-11-19, Audit rules read at resume: session accepts or refuses each image alone (no Parked for gallery takes, a REDO take is deleted with its run folder); STATUS.md migration done (Docs/PROTOCOLS-READ.md and Docs/runs/status-history.md deleted, pickle-runs.md renamed pickle.md, old dated sections dropped)  - open 2026-11-20, protocols read (f9313f96): 11.j gallery-credits (ATTRIBUTION.md section "Gallery set" for every third-party mod the gallery scenes use, or a "Not used in the captures" line; WARN at writeReleaseDocs, ERROR at publish) - ATTRIBUTION.md has no Gallery set section yet; stage moves 12.h now precede the dry-run
 session:      local_3a8a05c7-7219-41d0-8306-35bbfe80986d
 echo_review_sha: edeb39b1b134c64e175827bf6a44ea7104d79997
-updated: 2026-11-20, stage back to shootGallery by owner order, gallery not validated by her
+updated: 2026-11-22, windows 2, 3, 5 kept, images 1, 4, 6 refiled (pants), gallery not validated by her
 protocols_read_sha: 594cd3b3900dd4d873f4145c4228f5932399c0cf
 ---
 # Bill Autopilot: status
@@ -94,12 +92,12 @@ Six images kept (2026-11-19), shot in the hearth hall of the Sanctuary of Nelim 
 
 | Index | File | Source run | Crop |
 | --- | --- | --- | --- |
-| 1 | `1-tailor-1-hall.png` | refused 2026-11-20, REDO | recompose, crop left 1100 px |
-| 2 | `2-tailor-2-profile.png` | deleted 2026-11-20 (height was cut), refiled `6a72` | window, sides only, full height |
-| 3 | `3-tailor-3-confirm.png` | deleted 2026-11-20 (height was cut), refiled `6a72` | window, sides only, full height |
-| 4 | `4-tailor-4-stove.png` | refused 2026-11-20, REDO | recompose, crop left 1200 px |
-| 5 | `5-tailor-5-neighbours.png` | deleted 2026-11-20 (height was cut), refiled `a04c` | window, sides only, full height |
-| 6 | `6-tailor-6-answered.png` | refused 2026-11-20, REDO | recompose, crop left 1150 px |
+| 1 | `1-tailor-1-hall.png` | refused 2026-11-22, REDO (bare legs again, pants not drawn), refiled with Apparel_Pants | crop to keep left 1320 px (animals in frame) |
+| 2 | `2-tailor-2-profile.png` | kept 2026-11-22 (run gallery-146) | window, sides only: x 405, width 1110, full height |
+| 3 | `3-tailor-3-confirm.png` | kept 2026-11-22 (run gallery-146) | window, sides only: x 555, width 810, full height |
+| 4 | `4-tailor-4-stove.png` | refused 2026-11-22, REDO (bare legs again), refiled with Apparel_Pants | crop left 1200 px |
+| 5 | `5-tailor-5-neighbours.png` | kept 2026-11-22 (run `a04c`, gallery-5) | window, sides only: x 392, width 1135, full height |
+| 6 | `6-tailor-6-answered.png` | refused 2026-11-22, REDO (bare legs again, cloth cover her torso), refiled with Apparel_Pants | crop left 1150 px |
 
 ## Shotlist (write-shotlist, 2026-11-13, v2)
 
@@ -128,7 +126,9 @@ Sync 2026-11-18 (third, NPT part): PickleTools commit ace6816b (2026-11-17, `fac
 Sync 2026-11-19 (fourth): NSB log since 2026-11-17 holds nothing new for this mod (last commit 2372794, 2026-11-18, already read; Iori, Miel, Quo, Quaren, BiB gene renames and VALIDE rows touch no Nelim, hearth hall or animal). NPT: `docs/steps.md` and `ColonistRace/docs/catalogues` have no commit since 2026-11-18 (the Check-Status warning came from PickleTools commits on feature files: vanilla-face, metadata batches 1 to 5, none used here). Nothing used by the gallery changed; no scenario rewritten. Rules said back: all NSB free; colonist or domestic animal outside NSB and any colonist property change need her express validation; outfits free; every included animal in the gallery (this mod adds none).
 Sync 2026-11-20 (fifth): NSB log since 2026-11-19 holds one commit (6db18f8, docs migration to pickle.md, status journals dropped): nothing for this mod. PickleTools log since 2026-11-19 on docs/steps.md and ColonistRace/docs/catalogues: no commit. Nothing updated in the shotlist or scenarios by this sync (image 4 zoom 4 recomposition is the REDO, not an NSB change). Rules said back: everything in NSB is free; a colonist or domestic animal outside NSB and any change of a colonist property need her express validation; every outfit is free; every animal the mod includes must be shown (the mod includes none).
 
-Places read: 2026-11-13 Tribe read: 2026-11-17 Steps read: 2026-11-20
+Sync 2026-11-22 (sixth): NSB log since 2026-11-20 holds nothing for docs (last docs commit a1d5e87 is a status line). PickleTools: no commit on docs/steps.md or ColonistRace/docs/catalogues since 2026-11-20 (the 2026-11-21/22 commits are feature files and capture maps of other mods). Nothing used by the gallery changed. Scenario 23 edited for another reason: Nelim now also wears Apparel_Pants (images 1, 4, 6 of 2026-11-20 still showed bare legs, cause: the fixture pants are not drawn), plus a clothes-worn log step. Rules said back: everything in NSB is free; a colonist or domestic animal outside NSB and any change of a colonist property need her express validation; every outfit is free; every animal the mod includes must be shown (the mod includes none).
+
+Places read: 2026-11-13 Tribe read: 2026-11-17 Steps read: 2026-11-22
 
 | Place | Shots that use it | Changes made for the gallery | Last read |
 | --- | --- | --- | --- |
