@@ -153,3 +153,4 @@ Neither is fixed by this repository (`scripts/` belongs to the monorepo):
 | 2026-11-20 | `8e13` feature 23 image 4, set galerie | passed, 1 of 1; read: image 4 kept (cropped left 1200 px, subtitled); Inbox run deleted |
 | 2026-11-20 | `88e7`+`6a72` feature 23 images 1, 2, 3, 4, 6, set galerie (run gallery-146, read 2026-11-22) | passed, 5 of 5; read: images 2, 3 kept (window, cropped sides only); images 1, 4, 6 scored REDO (legs still bare, fixture pants not drawn); Inbox run deleted, refiled as `7dea` |
 | 2026-11-20 | `a04c` feature 24 image 5, set galerie (run gallery-5, read 2026-11-22) | passed, 1 of 1; read: image 5 kept (window, cropped sides only); Inbox run deleted |
+| 2026-11-22 | `7dea` feature 23 images 1, 4, 6, set galerie (evidence gallery-pants) | passed, 3 of 3; read: clothes-worn log has Apparel_Pants, pants drawn on all three; candidates (4.0 or more), cropped (1320, 1200, 1150 px), subtitled; run minified in Evidence/gallery-pants |

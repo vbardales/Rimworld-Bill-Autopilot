@@ -24,12 +24,12 @@ publication_changelog_review_sha: 66acf05179c23fa2e50ec48d22c044da6729dcb5
 code_review_sha: e70a6e39dea9cfba5019870b3a02288c55dca18b
 remaining:
   - open 2026-11-20, owner order: no stage move until the gallery is ready and she validates it. Image 4: take 2 (ticket 1d15, zoom 4) scored REDO 2026-11-20 (Nelim head hidden by potato pile, letter absent, decor sparse; run folder deleted), potatoes moved to (180, 117), ticket c592 green but REDO again (Nelim stood west under the bills tab, hidden), potatoes moved to (184, 116), ticket 3ed1 green but REDO (Nelim whole carrying potatoes, but decor under the tab, letter absent), furniture moved east of the stove (v5), image 4 kept 2026-11-20 (run 8e13, crop left 1200 px, subtitle burned, a candidate with known weak points: Nelim face half hidden by the potatoes she carries, armchair cut by the crop, letter outside the frame). The six images exist; owner validation of the whole gallery (gallery_validated_sha) still owed before mountPreview. Asked of Audit: replay-audit must require her gallery validation (again after any gallery change). Open for mountPreview: 10.a bis keep or redo of Preview-source, 10.b to 10.d, 10.f
-  - 2026-11-22: captures of tickets 88e7, 6a72, a04c read. Windows 2, 3, 5 kept (cropped sides only, full height, no subtitle). Images 1, 4, 6 REDO: hair Highpony is right, but legs are still bare (zoom on Nelim: teal shirt, then orange skin; the fixture pants are not drawn, seeds were loaded, AB.VPLRF in the run). Fix: scenario 23 now dresses her in `Apparel_Pants` first, then the shirt, and logs `clothes-worn`. Refiled as ticket 7dea (filter image 1, 4, 6, map wsl-deps.galerie.map, evidence Inbox/gallery-pants). On RUN_DONE: read the clothes-worn log first, open captures, zoom on her legs; if pants are in the log but not drawn, tell NPT (capture + log); else crop (1: keep left 1320 px, 4: 1200, 6: 1150), score-gallery, burn subtitles on kept images (Art/Gallery-clean + Art/Gallery), replay-audit.
+  - 2026-11-22: ticket 7dea read (log clothes-worn has Apparel_Pants, pants drawn). Images 1, 4, 6 kept: cropped (1320, 1200, 1150 px), scored candidate (4.0 or more; weak points: face and smile half hidden in 4 and 6, sparse background), subtitled from PUBLICATION.md, run minified in Evidence/gallery-pants. Windows 2, 3, 5 kept before. Six images exist; owner validation of the gallery owed.
   - open 2026-11-19, Audit rules read at resume: session accepts or refuses each image alone (no Parked for gallery takes, a REDO take is deleted with its run folder); STATUS.md migration done (Docs/PROTOCOLS-READ.md and Docs/runs/status-history.md deleted, pickle-runs.md renamed pickle.md, old dated sections dropped)  - open 2026-11-20, protocols read (f9313f96): 11.j gallery-credits (ATTRIBUTION.md section "Gallery set" for every third-party mod the gallery scenes use, or a "Not used in the captures" line; WARN at writeReleaseDocs, ERROR at publish) - ATTRIBUTION.md has no Gallery set section yet; stage moves 12.h now precede the dry-run
 session:      local_3a8a05c7-7219-41d0-8306-35bbfe80986d
 echo_review_sha: edeb39b1b134c64e175827bf6a44ea7104d79997
-updated: 2026-11-22, windows 2, 3, 5 kept, images 1, 4, 6 refiled (pants), gallery not validated by her
-protocols_read_sha: 594cd3b3900dd4d873f4145c4228f5932399c0cf
+updated: 2026-11-22, images 1, 4, 6 kept (ticket 7dea, pants drawn), six images exist, gallery not validated by her
+protocols_read_sha: ac969cb1e1b801c112953243677f1c1507c8914a
 ---
 # Bill Autopilot: status
 
@@ -92,12 +92,12 @@ Six images kept (2026-11-19), shot in the hearth hall of the Sanctuary of Nelim 
 
 | Index | File | Source run | Crop |
 | --- | --- | --- | --- |
-| 1 | `1-tailor-1-hall.png` | refused 2026-11-22, REDO (bare legs again, pants not drawn), refiled with Apparel_Pants | crop to keep left 1320 px (animals in frame) |
+| 1 | `1-tailor-1-hall.png` | kept 2026-11-22 (ticket `7dea`, pants drawn) | crop left 1320 px, subtitled |
 | 2 | `2-tailor-2-profile.png` | kept 2026-11-22 (run gallery-146) | window, sides only: x 405, width 1110, full height |
 | 3 | `3-tailor-3-confirm.png` | kept 2026-11-22 (run gallery-146) | window, sides only: x 555, width 810, full height |
-| 4 | `4-tailor-4-stove.png` | refused 2026-11-22, REDO (bare legs again), refiled with Apparel_Pants | crop left 1200 px |
+| 4 | `4-tailor-4-stove.png` | kept 2026-11-22 (ticket `7dea`, pants drawn) | crop left 1200 px, subtitled |
 | 5 | `5-tailor-5-neighbours.png` | kept 2026-11-22 (run `a04c`, gallery-5) | window, sides only: x 392, width 1135, full height |
-| 6 | `6-tailor-6-answered.png` | refused 2026-11-22, REDO (bare legs again, cloth cover her torso), refiled with Apparel_Pants | crop left 1150 px |
+| 6 | `6-tailor-6-answered.png` | kept 2026-11-22 (ticket `7dea`, pants drawn) | crop left 1150 px, subtitled |
 
 ## Shotlist (write-shotlist, 2026-11-13, v2)
 
