@@ -28,7 +28,7 @@
 #   (+1,875 ticks): she answered, the list is hers again.
 #
 # SHOTS (one line per image: place, hour, subject, composition, living things, decor, what it says, instant, how obtained)
-#   1. tailor-1-hall, story scene, WIDE (zoom 7 on the cell (184, 114): Nelim and the bench right of the tab, which covers the left
+#   1. 1-hall, story scene, WIDE (zoom 7 on the cell (184, 114): Nelim and the bench right of the tab, which covers the left
 #      third of the screen; foreground the bench and the brazier, background the four columns and the torches, both thrumbos in
 #      frame on the right). Hearth hall, 12:00, clear, warm torch and brazier light on the parquet. Subject: Nelim at the hand
 #      tailoring bench with the bills tab open: three marked automatic bills and one hand-placed bill (no mark). Says: the tab shows
@@ -41,12 +41,12 @@
 #      brightest blocks; mark width checked on the 268 px shrink, fallback zoom 5 and a tighter crop (scene 6 is then zoom 6) on the tab and the bench.
 #      Subtitle: "Nelim sews. The bench keeps its own list."
 #      Instant: she is in the middle of the next pair of pants (the hand-placed bill Make_Apparel_Pants, cloth stacked on the bench); the tab already lists what follows.
-#   2. tailor-2-profile, interface window (set aside, no subtitle): the profile window, one group open, one overridden recipe.
+#   2. 2-profile, interface window (set aside, no subtitle): the profile window, one group open, one overridden recipe.
 #      Says: "say it once" happens here, reachable with a pointer alone. Taken on window-backdrop-for-height, scale 125, HUD hidden,
 #      cropped sideways.
-#   3. tailor-3-confirm, interface window (set aside, no subtitle): the confirmation when a bench type is switched on, naming how
+#   3. 3-confirm, interface window (set aside, no subtitle): the confirmation when a bench type is switched on, naming how
 #      many recipes it takes and at what target. Taken on window-backdrop-for-height, scale 125, HUD hidden, cropped sideways.
-#   4. tailor-4-stove, story scene, MEDIUM-TIGHT (zoom 4 on the cell (183, 115) beside the stove at (181, 115), v4 of 2026-11-20 after the REDO of the zoom 3 take: Nelim cut at the frame edge, bare background; a higher zoom number is wider, so 4 keeps her whole with the shelf, pots and torches in frame). Same hall, 12:15, clear. Subject: the suspended
+#   4. 4-stove, story scene, MEDIUM-TIGHT (zoom 4 on the cell (183, 115) beside the stove at (181, 115), v4 of 2026-11-20 after the REDO of the zoom 3 take: Nelim cut at the frame edge, bare background; a higher zoom number is wider, so 4 keeps her whole with the shelf, pots and torches in frame). Same hall, 12:15, clear. Subject: the suspended
 #      bill row of a newly researched recipe (pemmican) in the stove's bills tab, with the letter that named it left out of the frame (it sits in the
 #      right-hand stack, outside the crop of this take, not a co-subject). Says: nothing is spent without an answer. Living: Nelim beside the stove (she feeds the
 #      Sanctuary), working a hand-placed meal bill while the new one waits, same teal shirt, same hair, smile, gaze toward the
@@ -58,9 +58,9 @@
 #      Legibility (j): the suspended row and its "SUSPENDED" overlay are checked on the 268 px shrink; fallback: zoom 2 and the tab row kept inside the crop.
 #      Subtitle: "A new recipe waits for her answer."
 #      Instant: a new recipe has just been announced; she goes on with the meal bill she has on, her gaze on the stove, and the new row waits (the letter stays in the right-hand stack as a trace, not a co-subject).
-#   5. tailor-5-neighbours, interface window (set aside): the settings page naming the neighbours it found (24-gallery-neighbours),
+#   5. 5-neighbours, interface window (set aside): the settings page naming the neighbours it found (24-gallery-neighbours),
 #      on window-backdrop-for-height, scale 125, HUD hidden, cropped sideways.
-#   6. tailor-6-answered, story scene, MEDIUM (zoom 5 on the stove at (181, 115), the columns and torches visible). Same hall, 12:45,
+#   6. 6-answered, story scene, MEDIUM (zoom 5 on the stove at (181, 115), the columns and torches visible). Same hall, 12:45,
 #      clear. Subject: the closing: the pemmican bill she accepted is no longer suspended and the stove has taken it up. Says: she
 #      answered once, the list is hers again. Living: Nelim at the stove cooking the accepted recipe, same look, smile. Decor in
 #      frame: FueledStove, Brazier lit at (184, 115), two PlantPot with Plant_Daylily fully grown, Shelf near (176, 114), TorchLamp

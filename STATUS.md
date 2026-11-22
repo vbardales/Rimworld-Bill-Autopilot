@@ -93,16 +93,16 @@ Six images kept (2026-11-19), shot in the hearth hall of the Sanctuary of Nelim 
 
 | Index | File | Source run | Crop |
 | --- | --- | --- | --- |
-| 1 | `1-tailor-1-hall.png` | kept 2026-11-22 (ticket `7dea`, pants drawn) | crop left 1320 px, subtitled |
-| 2 | `2-tailor-2-profile.png` | kept 2026-11-22 (run gallery-146) | window, sides only: x 405, width 1110, full height |
-| 3 | `3-tailor-3-confirm.png` | kept 2026-11-22 (run gallery-146) | window, sides only: x 555, width 810, full height |
-| 4 | `4-tailor-4-stove.png` | kept 2026-11-22 (ticket `7dea`, pants drawn) | crop left 1200 px, subtitled |
-| 5 | `5-tailor-5-neighbours.png` | kept 2026-11-22 (run `a04c`, gallery-5) | window, sides only: x 392, width 1135, full height |
-| 6 | `6-tailor-6-answered.png` | kept 2026-11-22 (ticket `7dea`, pants drawn) | crop left 1150 px, subtitled |
+| 1 | `1-hall.png` | kept 2026-11-22 (ticket `7dea`, pants drawn) | crop left 1320 px, subtitled |
+| 2 | `2-profile.png` | kept 2026-11-22 (run gallery-146) | window, sides only: x 405, width 1110, full height |
+| 3 | `3-confirm.png` | kept 2026-11-22 (run gallery-146) | window, sides only: x 555, width 810, full height |
+| 4 | `4-stove.png` | kept 2026-11-22 (ticket `7dea`, pants drawn) | crop left 1200 px, subtitled |
+| 5 | `5-neighbours.png` | kept 2026-11-22 (run `a04c`, gallery-5) | window, sides only: x 392, width 1135, full height |
+| 6 | `6-answered.png` | kept 2026-11-22 (ticket `7dea`, pants drawn) | crop left 1150 px, subtitled |
 
 ## Shotlist (write-shotlist, 2026-11-13, v2)
 
-Written in the header of `Tests/Pickle/Mod/Pickle/Features/23-gallery-vanilla.feature`; no capture of the new plan yet, so `score-gallery` rated the plan. Six images: 1 `tailor-1-hall` (wide), 2 `tailor-2-profile` (window), 3 `tailor-3-confirm` (window), 4 `tailor-4-stove` (tight), 5 `tailor-5-neighbours` (window, feature 24), 6 `tailor-6-answered` (medium, new closing scene). Story: midday of one day in the hearth hall, Nelim (canon hair, teal shirt, smile) stops rewriting her bench's list. Director pass (Opus sub-agent): kept grouped decor, Atticus asleep facing camera (animal criterion), camera off the tab, no "just finished a pair" claim, letter kept in frame, closing scene 6 and a medium shot, UI-scale request; refused moving the tailoring story off the stove (stove scene played green, run 2c7e; Nelim feeds the Sanctuary).
+Written in the header of `Tests/Pickle/Mod/Pickle/Features/23-gallery-vanilla.feature`; no capture of the new plan yet, so `score-gallery` rated the plan. Six images: 1 `1-hall` (wide), 2 `2-profile` (window), 3 `3-confirm` (window), 4 `4-stove` (tight), 5 `5-neighbours` (window, feature 24), 6 `6-answered` (medium, new closing scene). Story: midday of one day in the hearth hall, Nelim (canon hair, teal shirt, smile) stops rewriting her bench's list. Director pass (Opus sub-agent): kept grouped decor, Atticus asleep facing camera (animal criterion), camera off the tab, no "just finished a pair" claim, letter kept in frame, closing scene 6 and a medium shot, UI-scale request; refused moving the tailoring story off the stove (stove scene played green, run 2c7e; Nelim feeds the Sanctuary).
 
 | Scene | a time | b decor | c living | d pawn | e action | f composition | g subject | j mod at 268 px | Plan score |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |

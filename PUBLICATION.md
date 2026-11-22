@@ -30,7 +30,7 @@ And one that surprises people: **Steam creates every item private.** RimWorld ne
 Steam shows the first one large. That slot goes to the most demonstrative image, not the prettiest.
 
 **State on 2026-11-19:** `Art/Gallery/` holds `0-preview.png`, a byte copy of `Mod/About/Preview.png`
-(slot 0, the Preview itself, 896x504), and the six captures `1-tailor-1-hall.png` to `6-tailor-6-answered.png`
+(slot 0, the Preview itself, 896x504), and the six captures `1-hall.png` to `6-answered.png`
 (images 1, 4 and 6 cropped to the left 1100 px, 1200 px and 1150 px of 1920; windows 2, 3 and 5 cropped to the window). Six images, one story: midday of
 one day in the hearth hall of the Sanctuary of Nelim, where Nelim stops rewriting her bench's list (shotlist v2 of
 2026-11-13, header of `23-gallery-vanilla.feature`; plan scores 5, 5, 5). The captures are produced by
@@ -40,12 +40,12 @@ previous five-image plan and are gone.
 
 | # | Shotlist id | What it must show | Why this slot |
 | --- | --- | --- | --- |
-| 1 | `tailor-1-hall` (wide, 12:00) | The hall at midday, Nelim at her bench, a bills tab with auto bills marked next to a hand-placed one | The whole pitch in one image: the bench keeps its own list, and the tab shows what is left to make |
-| 2 | `tailor-2-profile` (window) | The profile window, groups collapsed except one, with an overridden recipe visible | Where the "say it once" happens, and the proof it is reachable with a pointer alone |
-| 3 | `tailor-3-confirm` (window) | The confirmation dialog when a workbench type is switched on, naming its count | The one moment a lot of production can start at once, and the mod asks first |
-| 4 | `tailor-4-stove` (tight, 12:15) | A suspended bill for a newly researched recipe (pemmican) at the stove | The point of the mod: nothing is spent without an answer |
-| 5 | `tailor-5-neighbours` (window) | The settings page, with the "Detected integrations" line naming the integrations detected | Answers "does it work with X" before anyone asks |
-| 6 | `tailor-6-answered` (medium, 12:45) | The same bill taken up after the answer: no longer suspended, Nelim working at the stove | Closes the story: she said yes, the mod did the rest |
+| 1 | `1-hall` (wide, 12:00) | The hall at midday, Nelim at her bench, a bills tab with auto bills marked next to a hand-placed one | The whole pitch in one image: the bench keeps its own list, and the tab shows what is left to make |
+| 2 | `2-profile` (window) | The profile window, groups collapsed except one, with an overridden recipe visible | Where the "say it once" happens, and the proof it is reachable with a pointer alone |
+| 3 | `3-confirm` (window) | The confirmation dialog when a workbench type is switched on, naming its count | The one moment a lot of production can start at once, and the mod asks first |
+| 4 | `4-stove` (tight, 12:15) | A suspended bill for a newly researched recipe (pemmican) at the stove | The point of the mod: nothing is spent without an answer |
+| 5 | `5-neighbours` (window) | The settings page, with the "Detected integrations" line naming the integrations detected | Answers "does it work with X" before anyone asks |
+| 6 | `6-answered` (medium, 12:45) | The same bill taken up after the answer: no longer suspended, Nelim working at the stove | Closes the story: she said yes, the mod did the rest |
 
 Rules for every one of them: no developer tools, no debug overlay, no other mod's overlay, no Pickle launcher
 panel in a corner, no column sitting on its prompt text. A window with nothing in it sells nothing. The scene
@@ -64,9 +64,9 @@ the subtitled copies are in `Art/Gallery/`.
 
 | index | file | line |
 | --- | --- | --- |
-| 1 | `1-tailor-1-hall.png` | Nelim said it once, and the bench keeps its own list. |
-| 4 | `4-tailor-4-stove.png` | A new recipe waits, suspended, until she says yes. |
-| 6 | `6-tailor-6-answered.png` | She said yes, and the stove took it up. |
+| 1 | `1-hall.png` | Nelim said it once, and the bench keeps its own list. |
+| 4 | `4-stove.png` | A new recipe waits, suspended, until she says yes. |
+| 6 | `6-answered.png` | She said yes, and the stove took it up. |
 
 ## Dependencies and DLC to declare
 
