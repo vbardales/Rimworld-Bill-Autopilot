@@ -166,8 +166,8 @@ Feature: the captures of the Workshop page, from the pass without the optional m
     When I add bill "Make_Apparel_Pants" to the "HandTailoringBench" at (181, 115)
     And Nelim's Pickle Tools: the animal "Atticus" lies at (186, 116) facing South
     And Nelim's Pickle Tools: the animal "Rain" lies at (186, 113) facing East
-    And Nelim's Pickle Tools: "Nelim" wears "Apparel_BasicShirt" dyed rgb (40, 110, 120)
-    And Nelim's Pickle Tools: "Nelim" also wears "Apparel_Pants"
+    And Nelim's Pickle Tools: "Nelim" wears "Apparel_Pants"
+    And Nelim's Pickle Tools: "Nelim" also wears "Apparel_BasicShirt" dyed rgb (40, 110, 120)
     And Nelim's Pickle Tools: "Nelim" hairstyle is "Roo_HD_Hair_Highpony"
     And Nelim's Pickle Tools: the clothes worn by "Nelim" are logged
     And Nelim's Sanctuary: Nelim has her own face
@@ -318,8 +318,8 @@ Feature: the captures of the Workshop page, from the pass without the optional m
     And Nelim's Pickle Tools: all filth is cleaned
     Then Bill Autopilot has announced "Make_Pemmican" on "FueledStove"
     When I add bill "CookMealSimple" to the "FueledStove" at (181, 115)
-    And Nelim's Pickle Tools: "Nelim" wears "Apparel_BasicShirt" dyed rgb (40, 110, 120)
-    And Nelim's Pickle Tools: "Nelim" also wears "Apparel_Pants"
+    And Nelim's Pickle Tools: "Nelim" wears "Apparel_Pants"
+    And Nelim's Pickle Tools: "Nelim" also wears "Apparel_BasicShirt" dyed rgb (40, 110, 120)
     And Nelim's Pickle Tools: "Nelim" hairstyle is "Roo_HD_Hair_Highpony"
     And Nelim's Pickle Tools: the clothes worn by "Nelim" are logged
     And Nelim's Sanctuary: Nelim has her own face
@@ -384,8 +384,8 @@ Feature: the captures of the Workshop page, from the pass without the optional m
     And Nelim's Pickle Tools: all filth is cleaned
     Then Bill Autopilot has announced "Make_Pemmican" on "FueledStove"
     When Bill Autopilot's bill for "Make_Pemmican" on the "FueledStove" at (181, 115) is unsuspended
-    And Nelim's Pickle Tools: "Nelim" wears "Apparel_BasicShirt" dyed rgb (40, 110, 120)
-    And Nelim's Pickle Tools: "Nelim" also wears "Apparel_Pants"
+    And Nelim's Pickle Tools: "Nelim" wears "Apparel_Pants"
+    And Nelim's Pickle Tools: "Nelim" also wears "Apparel_BasicShirt" dyed rgb (40, 110, 120)
     And Nelim's Pickle Tools: "Nelim" hairstyle is "Roo_HD_Hair_Highpony"
     And Nelim's Pickle Tools: the clothes worn by "Nelim" are logged
     And Nelim's Sanctuary: Nelim has her own face
