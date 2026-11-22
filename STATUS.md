@@ -31,7 +31,7 @@ remaining:
 session:      local_3a8a05c7-7219-41d0-8306-35bbfe80986d
 echo_review_sha: edeb39b1b134c64e175827bf6a44ea7104d79997
 updated: 2026-11-20, stage back to shootGallery by owner order, gallery not validated by her
-protocols_read_sha: 553fe0b2a14e0e48dcdd1031741a3d21fecbc68e
+protocols_read_sha: 594cd3b3900dd4d873f4145c4228f5932399c0cf
 ---
 # Bill Autopilot: status
 
