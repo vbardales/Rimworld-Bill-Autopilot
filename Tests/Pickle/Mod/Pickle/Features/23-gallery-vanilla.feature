@@ -370,6 +370,7 @@ Feature: the captures of the Workshop page, from the pass without the optional m
     And Nelim's Pickle Tools: I place the decor "Bookcase" near (180, 111)
     And Nelim's Pickle Tools: I place the decor "Dresser" near (182, 111)
     And Nelim's Pickle Tools: I place the decor "Stool" near (183, 112)
+    And Nelim's Pickle Tools: I place the decor "Stool" near (181, 113)
     And Bill Autopilot settings are at their defaults
     And a "FueledStove" is built at (181, 115)
     And Nelim's Pickle Tools: the building "FueledStove" at (181, 115) is fuelled
